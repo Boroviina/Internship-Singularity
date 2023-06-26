@@ -1,4 +1,4 @@
-# Tender Platform
+# Job Platform
 
 ## Quick Start
 
