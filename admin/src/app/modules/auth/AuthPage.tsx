@@ -16,16 +16,17 @@ const AuthLayout = () => {
 
   return (
     <div
-      className='d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'
+      className='d-flex flex-column flex-column-fluid overflow-hidden bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-cover bgi-attachment-fixed'
       style={{
-        backgroundImage: `url(${toAbsoluteUrl('/media/illustrations/sketchy-1/14.png')})`,
+        backgroundImage: `url(${toAbsoluteUrl('/media/illustrations/loginBack.jpg')})`,
       }}
     >
       {/* begin::Content */}
-      <div className='d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20'>
+      <div className='d-flex flex-center flex-column flex-column-fluid p-6 pb-lg-20'>
         {/* begin::Logo */}
-        <a href='#' className='mb-12'>
-          <img alt='Logo' src={toAbsoluteUrl('/media/logos/default.svg')} className='h-45px' />
+        <a href='#' className='mb-7 text-decoration-none text-dark fs-1'>
+          <img alt='Logo' src={toAbsoluteUrl('/media/logos/logo-jr.png')} className='h-100px' />
+          Job Radar
         </a>
         {/* end::Logo */}
         {/* begin::Wrapper */}
