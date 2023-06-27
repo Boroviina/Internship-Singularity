@@ -95,29 +95,12 @@ export function Registration() {
         <div className='text-gray-400 fw-bold fs-4'>
           Already have an account?
           <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
-            Forgot Password ?
+            Log in
           </Link>
         </div>
         {/* end::Link */}
       </div>
       {/* end::Heading */}
-
-      {/* begin::Action */}
-      <button type='button' className='btn btn-light-primary fw-bolder w-100 mb-10'>
-        <img
-          alt='Logo'
-          src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
-          className='h-20px me-3'
-        />
-        Sign in with Google
-      </button>
-      {/* end::Action */}
-
-      <div className='d-flex align-items-center mb-10'>
-        <div className='border-bottom border-gray-300 mw-50 w-100'></div>
-        <span className='fw-bold text-gray-400 fs-7 mx-2'>OR</span>
-        <div className='border-bottom border-gray-300 mw-50 w-100'></div>
-      </div>
 
       {formik.status && (
         <div className='mb-lg-15 alert alert-danger'>
@@ -126,9 +109,9 @@ export function Registration() {
       )}
 
       {/* begin::Form group Firstname */}
-      <div className='row fv-row mb-7'>
-        <div className='col-xl-6'>
-          <label className='class="form-label fw-bolder text-dark fs-6'>First name</label>
+      <div className='row fv-row'>
+        <div className='col-xl-6 mb-7'>
+          <label className='form-label fw-bolder text-dark fs-6'>First name</label>
           <input
             placeholder='First name'
             type='text'
@@ -152,9 +135,9 @@ export function Registration() {
             </div>
           )}
         </div>
-        <div className='col-xl-6'>
+        <div className='col-xl-6 mb-7'>
           {/* begin::Form group Lastname */}
-          <div className='fv-row mb-5'>
+          <div className='fv-row'>
             <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
             <input
               placeholder='Last name'
@@ -211,7 +194,7 @@ export function Registration() {
       {/* end::Form group */}
 
       {/* begin::Form group Password */}
-      <div className='mb-10 fv-row' data-kt-password-meter='true'>
+      <div className='mb-7 fv-row' data-kt-password-meter='true'>
         <div className='mb-1'>
           <label className='form-label fw-bolder text-dark fs-6'>Password</label>
           <div className='position-relative mb-3'>
@@ -257,7 +240,7 @@ export function Registration() {
       {/* end::Form group */}
 
       {/* begin::Form group Confirm password */}
-      <div className='fv-row mb-5'>
+      <div className='fv-row mb-7'>
         <label className='form-label fw-bolder text-dark fs-6'>Confirm Password</label>
         <input
           type='password'
@@ -285,7 +268,7 @@ export function Registration() {
       {/* end::Form group */}
 
       {/* begin::Form group */}
-      <div className='fv-row mb-10'>
+      <div className='fv-row mb-7'>
         <div className='form-check form-check-custom form-check-solid'>
           <input
             className='form-check-input'
@@ -319,7 +302,7 @@ export function Registration() {
         <button
           type='submit'
           id='kt_sign_up_submit'
-          className='btn btn-lg btn-primary w-100 mb-5'
+          className='btn btn-lg btn-primary w-100 mb-3'
           disabled={formik.isSubmitting || !formik.isValid || !formik.values.acceptTerms}
         >
           {!loading && <span className='indicator-label'>Submit</span>}
@@ -334,7 +317,7 @@ export function Registration() {
           <button
             type='button'
             id='kt_login_signup_form_cancel_button'
-            className='btn btn-lg btn-light-primary w-100 mb-5'
+            className='btn btn-lg btn-light-primary w-100 mb-3'
           >
             Cancel
           </button>
