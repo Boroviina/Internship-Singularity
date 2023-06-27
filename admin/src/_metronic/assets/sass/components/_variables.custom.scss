@@ -3,10 +3,9 @@
 // Note that this file is included first and variables defined in _variables.bootstrap.scss and _variables.custom.scss
 // are not accessible in this file but you can override any global variable as shown below:
 //
-
 // Theme colors
 // Primary
-$primary:       									#009ef7;
+$primary:       									#3da9fc; //mijenjao
 $primary-active:    								#0095e8;
 $primary-light:    								    #f1faff;
 $primary-light-dark:    							#212e48;
@@ -27,7 +26,7 @@ $info-light-dark:    								#2f264f;
 $info-inverse:  									#ffffff;
 
 // Danger
-$danger:       									    #f1416c;
+$danger:       									    #ef4565;
 $danger-active:    									#d9214e;
 $danger-light:    									#fff5f8;
 $danger-light-dark:    								#3a2434;
