@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
 import {requestPassword} from '../core/_requests'
+import './ForgotPassword.css'
 
 const initialValues = {
   email: 'admin@demo.com',
@@ -52,11 +53,11 @@ export function ForgotPassword() {
       >
         <div className='text-center mb-10'>
           {/* begin::Title */}
-          <h1 className='text-dark mb-3'>Forgot Password ?</h1>
+          <h1 className='dark-text mb-3'>Forgot Password ?</h1>
           {/* end::Title */}
 
           {/* begin::Link */}
-          <div className='text-gray-400 fw-bold fs-4'>Enter your email to reset your password.</div>
+          <div className='lead-text fw-bold fs-4'>Enter your email to reset your password.</div>
           {/* end::Link */}
         </div>
 
@@ -70,15 +71,15 @@ export function ForgotPassword() {
         )}
 
         {hasErrors === false && (
-          <div className='mb-10 bg-light-info p-8 rounded'>
-            <div className='text-info'>Sent password reset. Please check your email</div>
+          <div className='pwd-reset-bg mb-10 p-8 rounded'>
+            <div className='pwd-reset-text'>Sent password reset. Please check your email</div>
           </div>
         )}
         {/* end::Title */}
 
         {/* begin::Form group */}
         <div className='fv-row mb-10'>
-          <label className='form-label fw-bolder text-gray-900 fs-6'>Email</label>
+          <label className='form-label dark-text fw-bolder fs-6'>Email</label>
           <input
             type='email'
             placeholder=''
