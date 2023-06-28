@@ -81,7 +81,7 @@ $light: 						$gray-100 !default;
 $light-dark: 					$gray-200-dark !default; 
 $light-active: 					$gray-200 !default;
 $light-active-dark: 			$gray-300-dark !default;
-$light-light: 					gba($gray-100, 0.75) !default;
+$light-light: 					($gray-100, 0.75) !default;
 $light-inverse:					$gray-600 !default;
 $light-inverse-dark: 			$gray-600-dark !default;
 
