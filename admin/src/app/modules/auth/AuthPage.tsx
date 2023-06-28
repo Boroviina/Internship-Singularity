@@ -25,10 +25,10 @@ const AuthLayout = () => {
       {/* begin::Content */}
       <div className='d-flex flex-center flex-column justify-content-center  flex-column-fluid p-5 pb-lg-20 bg'>
         {/* begin::Logo */}
-        <a href='#' className='mb-7 text-decoration-none text-dark fs-1'>
+        <div className='mb-7 text-decoration-none text-dark fs-1'>
           <img alt='Logo' src={toAbsoluteUrl('/media/logos/logo-jr.png')} className='h-100px' />
           Job Radar
-        </a>
+        </div>
         {/* end::Logo */}
         {/* begin::Wrapper */}
         <div className={`w-lg-500px  rounded shadow-sm p-10 p-lg-15 mx-auto ${classes.card} fade-in-up`}>
