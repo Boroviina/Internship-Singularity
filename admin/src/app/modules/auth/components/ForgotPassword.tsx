@@ -53,11 +53,11 @@ export function ForgotPassword() {
       >
         <div className='text-center mb-10'>
           {/* begin::Title */}
-          <h1 className='dark-text mb-3'>Forgot Password ?</h1>
+          <h1 className='text-dark mb-3'>Forgot Password ?</h1>
           {/* end::Title */}
 
           {/* begin::Link */}
-          <div className='lead-text fw-bold fs-4'>Enter your email to reset your password.</div>
+          <div className='text-gray-600 fw-bold fs-4'>Enter your email to reset your password.</div>
           {/* end::Link */}
         </div>
 
@@ -79,7 +79,7 @@ export function ForgotPassword() {
 
         {/* begin::Form group */}
         <div className='fv-row mb-10'>
-          <label className='form-label dark-text fw-bolder fs-6'>Email</label>
+          <label className='form-label text-dark fw-bolder fs-6'>Email</label>
           <input
             type='email'
             placeholder=''

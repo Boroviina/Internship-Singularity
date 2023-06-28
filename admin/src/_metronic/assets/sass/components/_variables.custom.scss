@@ -5,18 +5,67 @@
 //
 
 // Theme colors (our colors!)
- $white:                                             #fffffe;
- $darkblue:                                          #094067;
- $blue:                                            #3da9fc;
- $lightblue:                                         #90b4ce;
- $bluebackground:                                    #d8eefe;
- $darkgrey:                                          #5f6c7b;
- $cherry:                                            #ef4565;
+$white: #fffffe;
+$darkblue: #094067;
+$buttonColor: #3da9fc;
+$lightblue: #90b4ce;
+$bluebackground: #d8eefe;
+$darkgrey: #5f6c7b;
+$cherry: #ef4565;
 //
 
 // Primary
-$primary:       									#3da9fc; //mijenjao
-$primary-active:    								#0095e8;
-$primary-light:    								    #f1faff;
-$primary-light-dark:    							#212e48;
-$primary-inverse:  									#ffffff;
+$primary: #3da9fc; //mijenjao
+$primary-active: #0095e8;
+$primary-light: #f1faff;
+$primary-light-dark: #212e48;
+$primary-inverse: #ffffff;
+
+//muted text
+$gray-600: #7E8299;
+$gray-600-dark: #9393a6;
+$text-muted: $gray-600;
+$text-muted-dark: $gray-600-dark;
+
+//form background
+$body-bg: $white;
+$body-bg-dark: $darkblue;
+$input-bg: $body-bg;
+$input-bg-dark: $body-bg-dark;
+
+//dark color
+$dark: $darkblue;
+$dark-dark: $white;
+
+
+//form solid input
+$input-solid-color-dark: #e3e1e1;
+$input-solid-bg: #e3e1e1;
+$input-solid-bg-dark: $darkgrey;
+$input-solid-placeholder-color-dark: #dad5d5;
+$input-solid-bg-focus-dark: #2a2a34;
+
+
+
+
+
+$logo-color: $darkgrey;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
