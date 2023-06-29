@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import clsx from "clsx";
 
 const EmployerRegistration = () => {
     return (
@@ -8,12 +9,9 @@ const EmployerRegistration = () => {
                 className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
                 noValidate
                 id='kt_login_signup_form'
-                // onSubmit={}
             >
                 <div className='mb-10 text-center'>
-                    {/* begin::Title */}
                     <h1 className='text-dark mb-3'>Create an Account</h1>
-                    {/* end::Title */}
 
                     {/* begin::Link */}
                     <div className='text-gray-600 fw-bold fs-4'>
@@ -26,7 +24,39 @@ const EmployerRegistration = () => {
                 </div>
                 {/* end::Heading */}
 
-                
+                <div className='row fv-row'>
+
+                    <div className='col-xl-6 mb-7'>
+                        <label className='form-label fw-bolder text-dark fs-6'>First name</label>
+                        <input
+                            placeholder='First name'
+                            type='text'
+                            autoComplete='off'
+                            className='form-control form-control-lg form-control-solid'
+                        />
+                    </div>
+
+                    <div className='col-xl-6 mb-7'>
+                            <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
+                            <input
+                                placeholder='Last name'
+                                type='text'
+                                autoComplete='off'
+                                className='form-control form-control-lg form-control-solid'
+                            />
+                    </div>
+
+                </div>
+
+                <div className='fv-row mb-7'>
+                    <label className='form-label fw-bolder text-dark fs-6'>Email</label>
+                    <input
+                        placeholder='Email'
+                        type='email'
+                        autoComplete='off'
+                        className='form-control form-control-lg form-control-solid'
+                    />
+                </div>
 
             </form>
         </div>
