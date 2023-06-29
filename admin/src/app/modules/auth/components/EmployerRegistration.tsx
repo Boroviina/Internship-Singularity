@@ -26,10 +26,10 @@ const EmployerRegistration = () => {
                     <div className='container d-flex flex-column col-md-6'>
                         <div className="row">
                             <h2 className='text-center'>User information</h2>
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='First name' placeholder='First name' type='text'/>
                             </div>
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='Last name' placeholder='Last name' type='text'/>
                             </div>
                         </div>
@@ -58,19 +58,19 @@ const EmployerRegistration = () => {
                         <InputField name='Company name' placeholder='Company name' type='text'/>
 
                         <div className="row">
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='Industry' placeholder='What do you do?' type='text'/>
                             </div>
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='No. employees' placeholder='No. of employees' type='text'/>
                             </div>
                         </div>
 
                         <div className="row">
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='City' placeholder='City' type='text'/>
                             </div>
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='Address' placeholder='Address' type='text'/>
                             </div>
                         </div>
@@ -78,10 +78,10 @@ const EmployerRegistration = () => {
                         <InputField name='Email' placeholder='Email' type='email'/>
 
                         <div className="row">
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='Phone' placeholder='Phone' type='text'/>
                             </div>
-                            <div className='col-6'>
+                            <div className='col-sm-6'>
                                 <InputField name='Fax' placeholder='Fax' type='text'/>
                             </div>
 
