@@ -92,7 +92,7 @@ export function Registration() {
         {/* end::Title */}
 
         {/* begin::Link */}
-        <div className='text-gray-400 fw-bold fs-4'>
+        <div className='text-gray-600 fw-bold fs-4'>
           Already have an account?
           <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
             Log in

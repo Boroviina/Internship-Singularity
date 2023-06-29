@@ -25,13 +25,13 @@ const AuthLayout = () => {
       {/* begin::Content */}
       <div className='d-flex flex-center flex-column justify-content-center  flex-column-fluid p-5 pb-lg-20 bg'>
         {/* begin::Logo */}
-        <div className='mb-7 text-decoration-none text-dark fs-1'>
+        <div className='mb-7 text-decoration-none text-gray-500 fw-bold fs-1'>
           <img alt='Logo' src={toAbsoluteUrl('/media/logos/logo-jr.png')} className='h-100px' />
           Job Radar
         </div>
         {/* end::Logo */}
         {/* begin::Wrapper */}
-        <div className={`w-lg-500px  rounded shadow-sm p-10 p-lg-15 mx-auto ${classes.card} fade-in-up`}>
+        <div className={`w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
           <Outlet />
         </div>
         {/* end::Wrapper */}
@@ -40,15 +40,15 @@ const AuthLayout = () => {
       {/* begin::Footer */}
       <div className='d-flex flex-center flex-column-auto p-10'>
         <div className='d-flex align-items-center fw-bold fs-6'>
-          <a href='#' className='text-gray-700 fs-2 text-hover-primary px-2'>
+          <a href='#' className='text-muted fs-2 text-hover-primary px-2'>
             About
           </a>
 
-          <a href='#' className='text-gray-700 fs-2 text-hover-primary px-2'>
+          <a href='#' className='text-muted fs-2 text-hover-primary px-2'>
             Contact
           </a>
 
-          <a href='#' className='text-gray-700 fs-2 text-hover-primary px-2'>
+          <a href='#' className='text-muted fs-2 text-hover-primary px-2'>
             Contact Us
           </a>
         </div>

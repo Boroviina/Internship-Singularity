@@ -75,18 +75,7 @@ export function Login() {
       </div>
       {/* begin::Heading */}
 
-      {formik.status ? (
-        <div className='mb-lg-15 alert alert-danger'>
-          <div className='alert-text font-weight-bold'>{formik.status}</div>
-        </div>
-      ) : (
-        <div className='mb-10 bg-light-info p-8 rounded'>
-          <div className='text-info'>
-            Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to
-            continue.
-          </div>
-        </div>
-      )}
+
 
       {/* begin::Form group */}
       <div className='fv-row mb-10'>
@@ -95,7 +84,7 @@ export function Login() {
           placeholder='Email'
           {...formik.getFieldProps('email')}
           className={clsx(
-            `form-control form-control-lg form-control-solid ${classes.inputGradient}`,
+            `form-control form-control-lg form-control-solid `,
             {'is-invalid': formik.touched.email && formik.errors.email},
             {
               'is-valid': formik.touched.email && !formik.errors.email,
@@ -136,7 +125,7 @@ export function Login() {
           autoComplete='off'
           {...formik.getFieldProps('password')}
           className={clsx(
-            `form-control form-control-lg form-control-solid ${classes.inputGradient}`,
+            `form-control form-control-lg form-control-solid`,
             {
               'is-invalid': formik.touched.password && formik.errors.password,
             },
