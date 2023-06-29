@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import clsx from "clsx";
 import InputField from "./UI/InputField";
 
 const EmployerRegistration = () => {
@@ -27,6 +26,7 @@ const EmployerRegistration = () => {
 
                     <div className='container d-flex flex-column col-md-6'>
                         <div className="row">
+                            <h2 className='text-center'>User information</h2>
                             <div className='col-6'>
                                 <InputField name='First name' placeholder='First name' type='text'/>
                             </div>
@@ -53,10 +53,10 @@ const EmployerRegistration = () => {
                     </div>
 
 
-                    <div className="container d-flex flex-column col-md-6">
+                    <div className='container d-flex flex-column col-md-6'>
 
+                        <h2 className='text-center'>Company information</h2>
                         <InputField name='Company name' placeholder='Company name' type='text'/>
-
 
                         <div className="row">
                             <div className='col-6'>
