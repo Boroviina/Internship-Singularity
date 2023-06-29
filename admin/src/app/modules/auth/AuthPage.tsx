@@ -25,7 +25,7 @@ const AuthLayout = () => {
       {/* begin::Content */}
       <div className='d-flex flex-center flex-column justify-content-center  flex-column-fluid p-5 pb-lg-20 bg'>
         {/* begin::Logo */}
-        <div className='mb-7 text-decoration-none text-dark fs-1'>
+        <div className='mb-7 text-decoration-none text-gray-500 fw-bold fs-1'>
           <img alt='Logo' src={toAbsoluteUrl('/media/logos/logo-jr.png')} className='h-100px' />
           Job Radar
         </div>
