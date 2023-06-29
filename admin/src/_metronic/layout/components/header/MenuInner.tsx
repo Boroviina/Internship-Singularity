@@ -9,7 +9,7 @@ export function MenuInner() {
     return (
         <>
 
-                <MenuItem to='/post-job' title={intl.formatMessage({id: 'MENU.POST_JOB'})}/>
+            <MenuItem to='/post-job' title={intl.formatMessage({id: 'MENU.POST_JOB'})}/>
             {/*<MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard'/>
 
             <MenuInnerWithSub
