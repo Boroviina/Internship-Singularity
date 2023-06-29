@@ -71,8 +71,8 @@ export function ForgotPassword() {
         )}
 
         {hasErrors === false && (
-          <div className='pwd-reset-bg mb-10 p-8 rounded'>
-            <div className='pwd-reset-text'>Sent password reset. Please check your email</div>
+          <div className='bg-secondary mb-10 p-8 rounded'>
+            <div className='text-info'>Sent password reset. Please check your email</div>
           </div>
         )}
         {/* end::Title */}
