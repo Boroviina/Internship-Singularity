@@ -5,6 +5,7 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {Dashboard} from '../pages/dashboard/Dashboard'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
+import { JobListings } from "../pages/jobs/JobListings";
 
 const PrivateRoutes = () => {
     //const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
@@ -16,6 +17,7 @@ const PrivateRoutes = () => {
                 <Route path='auth/*' element={<Navigate to='/dashboard'/>}/>
                 {/* Pages */}
                 <Route path='dashboard' element={<Dashboard/>}/>
+                <Route path='job-listings' element={<JobListings/>}/>
                 {/* Lazy Modules */}
                 {/*<Route
                     path='apps/user-management/*'
