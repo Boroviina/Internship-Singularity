@@ -6,6 +6,7 @@ import {ForgotPassword} from './components/ForgotPassword'
 import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import classes from './Opacity.module.css'
+import EmployerRegistration from "./components/EmployerRegistration";
 
 const AuthLayout = () => {
   useEffect(() => {
@@ -31,7 +32,7 @@ const AuthLayout = () => {
         </div>
         {/* end::Logo */}
         {/* begin::Wrapper */}
-        <div className={`w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
+        <div className={`w-lg-700px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
           <Outlet />
         </div>
         {/* end::Wrapper */}
@@ -62,7 +63,7 @@ const AuthPage = () => (
   <Routes>
     <Route element={<AuthLayout />}>
       <Route path='login' element={<Login />} />
-      <Route path='registration' element={<Registration />} />
+      <Route path='registration' element={<EmployerRegistration />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
       <Route index element={<Login />} />
     </Route>

@@ -4,7 +4,6 @@ import InputField from "./UI/InputField";
 
 const EmployerRegistration = () => {
     return (
-        <div className='w-lg-700 bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up'>
             <form
                 className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
                 noValidate
@@ -91,7 +90,6 @@ const EmployerRegistration = () => {
                     </div>
                 </div>
             </form>
-        </div>
     );
 };
 

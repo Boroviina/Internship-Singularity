@@ -3,9 +3,6 @@ import EmployerRegistration from "../../modules/auth/components/EmployerRegistra
 
 export function Dashboard() {
     return (
-        <>
             <h1>hello world</h1>
-            <EmployerRegistration/>
-        </>
     )
 }
