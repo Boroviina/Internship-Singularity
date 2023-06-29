@@ -24,11 +24,15 @@ const DUMMY_JOB_LISTINGS = [
     }
 ];
 
+
+
 export function JobListings() {
+
     const jobListings = DUMMY_JOB_LISTINGS.map((job_listing) => (
         <JobListingItem
             item={job_listing}
             key={job_listing.id}
+            hover={true}
         />
     ));
 
