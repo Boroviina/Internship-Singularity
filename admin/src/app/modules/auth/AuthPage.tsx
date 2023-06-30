@@ -6,6 +6,7 @@ import {ForgotPassword} from './components/ForgotPassword'
 import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import classes from './Opacity.module.css'
+import EmployerRegistration from "./components/EmployerRegistration";
 
 const AuthLayout = () => {
   useEffect(() => {
@@ -23,7 +24,7 @@ const AuthLayout = () => {
       }}
     >
       {/* begin::Content */}
-      <div className='d-flex flex-center flex-column justify-content-center  flex-column-fluid p-5 pb-lg-20 bg'>
+      <div className='d-flex flex-center flex-column justify-content-center flex-column-fluid p-5 pb-lg-20 bg'>
         {/* begin::Logo */}
         <div className='mb-7 text-decoration-none text-gray-500 fw-bold fs-1'>
           <img alt='Logo' src={toAbsoluteUrl('/media/logos/logo-jr.png')} className='h-100px' />
@@ -31,8 +32,8 @@ const AuthLayout = () => {
         </div>
         {/* end::Logo */}
         {/* begin::Wrapper */}
-        <div className={`w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
-          <Outlet />
+        <div className={`bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
+          <Outlet/>
         </div>
         {/* end::Wrapper */}
       </div>
@@ -62,7 +63,7 @@ const AuthPage = () => (
   <Routes>
     <Route element={<AuthLayout />}>
       <Route path='login' element={<Login />} />
-      <Route path='registration' element={<Registration />} />
+      <Route path='registration' element={<EmployerRegistration />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
       <Route index element={<Login />} />
     </Route>
