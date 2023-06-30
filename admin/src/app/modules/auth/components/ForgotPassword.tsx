@@ -4,7 +4,6 @@ import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
 import {requestPassword} from '../core/_requests'
-import './ForgotPassword.css'
 
 const initialValues = {
   email: 'admin@demo.com',
