@@ -2,15 +2,10 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import classes from './JobListingItem.module.css';
 import {KTSVG} from "../../../_metronic/helpers";
+import {JobListingModel} from "../../shared/models/job-listing.model";
 
 type JobListingItemProps = {
-    item: {
-        id: string
-        job_title: string
-        company_name: string
-        location: string
-        application_deadline: Date
-    }
+    item: JobListingModel
     hover: boolean
 }
 

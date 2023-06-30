@@ -8,6 +8,7 @@ import {WithChildren} from '../../_metronic/helpers'
 import {JobPosting} from "../pages/JobPosting";
 import {JobListings} from "../pages/jobs/JobListings";
 import {JobListingsDetails} from "../pages/jobs/JobListingDetails";
+import {JobListingsProvider} from "../shared/context/job-listings.context";
 
 const PrivateRoutes = () => {
     //const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
@@ -20,8 +21,8 @@ const PrivateRoutes = () => {
                 {/* Pages */}
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path='/post-job' element={<JobPosting/>}/>
-                <Route path='job-listings' element={<JobListings/>}/>
-                <Route path='job-listings/:id' element={<JobListingsDetails/>}/>
+                <Route path='job-listings' element={<JobListingsProvider><JobListings/></JobListingsProvider>}/>
+                <Route path='job-listings/:id' element={<JobListingsProvider><JobListingsDetails/></JobListingsProvider>}/>
                 {/* Lazy Modules */}
                 {/*<Route
                     path='apps/user-management/*'
