@@ -4,26 +4,27 @@ import InputField from "./UI/InputField";
 
 const EmployerRegistration = () => {
     return (
-            <form
-                className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
-                noValidate
-                id='kt_login_signup_form'
-            >
-                <div className='mb-10 text-center'>
-                    <h1 className='text-dark mb-3'>Create an Account</h1>
+        <form
+            className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
+            noValidate
+            id='kt_login_signup_form'
+        >
+            <div className='mb-10 text-center'>
+                <h1 className='text-dark mb-3'>Create an Account</h1>
 
-                    <div className='text-gray-600 fw-bold fs-4'>
-                        Already have an account?
-                        <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
-                            Log in
-                        </Link>
-                    </div>
-
+                <div className='text-gray-600 fw-bold fs-4'>
+                    Already have an account?
+                    <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
+                        Log in
+                    </Link>
                 </div>
 
+            </div>
+
+            <div className="container">
                 <div className='row'>
 
-                    <div className='container d-flex flex-column col-md-6'>
+                    <div className='col-md-6'>
                         <div className="row">
                             <h2 className='text-center'>User information</h2>
                             <div className='col-sm-6'>
@@ -52,7 +53,7 @@ const EmployerRegistration = () => {
                     </div>
 
 
-                    <div className='container d-flex flex-column col-md-6'>
+                    <div className='col-md-6'>
 
                         <h2 className='text-center'>Company information</h2>
                         <InputField name='Company name' placeholder='Company name' type='text'/>
@@ -84,12 +85,12 @@ const EmployerRegistration = () => {
                             <div className='col-sm-6'>
                                 <InputField name='Fax' placeholder='Fax' type='text'/>
                             </div>
-
-
                         </div>
                     </div>
+
                 </div>
-            </form>
+            </div>
+        </form>
     );
 };
 
