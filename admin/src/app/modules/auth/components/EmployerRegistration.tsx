@@ -87,7 +87,7 @@ const EmployerRegistration = () => {
                             </div>
                         </div>
                     </div>
-
+                    <button className='btn btn-primary btn-block mt-4' type='submit'>Submit</button>
                 </div>
             </div>
         </form>
