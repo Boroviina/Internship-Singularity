@@ -15,7 +15,8 @@ export const JobListings = () => {
 
     return (
         <>
-            {jobListings}
+            {!jobListings && jobListings}
+            {jobListings && <div>No job listings found.</div>}
         </>
     );
 }

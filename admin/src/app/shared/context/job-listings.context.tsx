@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {JobListingModel} from "../models/job-listing.model";
 import {WithChildren} from "../../../_metronic/helpers";
 
@@ -40,13 +40,18 @@ type JobListingsContextProps = {
 }
 
 const initJobListingsContextPropsState = {
-    jobListings: DUMMY_JOB_LISTINGS
+    jobListings: []
 }
 
 export const JobListingsContext = React.createContext<JobListingsContextProps | undefined>(initJobListingsContextPropsState);
 
 export const JobListingsProvider: React.FC<WithChildren> = ({children}) => {
-    const [jobListings, setJobListings] = useState<JobListingModel[] | undefined>(DUMMY_JOB_LISTINGS);
+    const [jobListings, setJobListings] = useState<JobListingModel[] | undefined>([]);
+
+    useEffect(() => {
+        //fetch job listings from server
+        setJobListings(DUMMY_JOB_LISTINGS);
+    }, []);
 
     return (
         <JobListingsContext.Provider value={{jobListings}}>
