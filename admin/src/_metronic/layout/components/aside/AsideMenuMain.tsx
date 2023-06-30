@@ -16,6 +16,7 @@ export function AsideMenuMain() {
                 title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
                 fontIcon='bi-app-indicator'
             />
+            <AsideMenuItem to='/post-job' title='Post Job'/>
             <AsideMenuItem
                 to='/job-listings'
                 icon='/media/icons/duotune/finance/fin006.svg'

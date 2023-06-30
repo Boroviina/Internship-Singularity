@@ -52,10 +52,18 @@ $input-solid-bg-focus-dark: #2a2a34;
 $info: $buttonColor;
 $info-dark: #6395e1;
 
+//border and card border
+$border-color: $bluebackground;
+$border-color-dark: #073050;
+$card-border-color:     							$border-color;
+$card-border-color-dark:     	    				$border-color-dark;
 
 
+//form solid select
 
-$logo-color: $darkgrey;
+$form-select-color-dark: $darkgrey;
+$form-select-color: #e3e1e1;
+
 
 
 
