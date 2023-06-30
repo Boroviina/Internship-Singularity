@@ -8,9 +8,6 @@ export function MenuInner() {
     const intl = useIntl()
     return (
         <>
-
-            <MenuItem to='/post-job' title={intl.formatMessage({id: 'MENU.POST_JOB'})}/>
-            <MenuItem title={intl.formatMessage({id: 'MENU.JOB_LISTINGS'})} to="/job-listings"/>
             {/*<MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard'/>
 
             <MenuInnerWithSub

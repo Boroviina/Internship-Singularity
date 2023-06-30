@@ -1,7 +1,6 @@
-import { BaseModel } from "./base.model";
+import {BaseModel} from "./base.model";
 
-// export class JobListingModel extends BaseModel {
-export class JobListingModel {
+export class JobListing extends BaseModel {
     id: string;
     job_title: string;
     company_name: string;
@@ -10,4 +9,9 @@ export class JobListingModel {
     description: string;
     requirements: string;
     applicationInstructions: string;
+
+    constructor(attributes?: any) {
+        super();
+        this.setAttributes(attributes);
+    }
 }

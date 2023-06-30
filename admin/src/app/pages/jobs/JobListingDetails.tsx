@@ -1,27 +1,31 @@
-import {useParams} from "react-router-dom";
-import React, {useContext} from "react";
-import {JobListingItem} from "./JobListingItem";
-import classes from './JobListingDetails.module.css';
-import {JobListingsContext} from "../../shared/context/job-listings.context";
+import React from "react";
+import {JobListing} from "../../shared/models/job-listing.model";
 
-export const JobListingsDetails = () => {
-    const {id} = useParams();
-    const jobListingContext = useContext(JobListingsContext);
-    const currentJobListing = jobListingContext.jobListings.find(jobListing => jobListing.id === id);
+type JobListingDetailsProps = {
+    jobListing: JobListing
+}
 
-    return (
-        <div className="card card-custom">
-            <JobListingItem item={currentJobListing} hover={false}/>
-            <div className={`card-body ${classes['smaller-margin']}`}>
-                <div>{currentJobListing.description}</div><hr/>
-                <div>{currentJobListing.requirements}</div><hr/>
-                <div>{currentJobListing.applicationInstructions}</div>
-            </div>
-            <div className="card-footer text-center">
-                <button type="button" className="btn btn-lg btn-light-primary w-100 mb-3">
+export const JobListingsDetails: React.FC<JobListingDetailsProps> = (props) => {
+
+    let jobListingDetailsContent = <div className="alert alert-primary text-center" role="alert">
+        No job listings found.
+    </div>;
+
+    if(props.jobListing) {
+        jobListingDetailsContent = <div className="mt-4">
+            <hr/>
+            <div>{props.jobListing.description}</div><hr/>
+            <div>{props.jobListing.requirements}</div><hr/>
+            <div>{props.jobListing.applicationInstructions}</div><hr/>
+
+            <div className="text-center">
+                <button type="button" className="btn btn-lg btn-light-primary w-100 my-3">
                     Apply now
                 </button>
             </div>
-        </div>
-    );
+        </div>;
+    }
+
+    return jobListingDetailsContent;
+
 }
