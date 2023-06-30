@@ -67,12 +67,16 @@ export function JobPosting() {
                         instructions</label>
                     <textarea className={`mb-5 form-control form-control-lg form-control-solid`}
                               placeholder='Input instructions...'></textarea>
-                    <div className='d-flex justify-content-sm-around flex-md-row flex-column'>
-                        <div className={'d-flex justify-content-start form-check fw-bold form-check-solid p-5'}>
+                    <div className='d-flex justify-content-sm-start align-items-center flex-md-row flex-column'>
+                        <div className={'col-12 col-md-6'}>
+                            <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Number of open positions</label>
+                            <input type="number" placeholder={'Insert the number of open position'} className={`form-control form-control-lg form-control-solid`}/>
+                        </div>
+                        <div className={'d-flex align-items-center justify-content-start form-check fw-bold form-check-solid p-5'}>
                             <input type="checkbox" className={`mx-3`}/>
                             <label htmlFor="" className={`text-dark fw-bold fs-3`}>CV required</label>
                         </div>
-                        <div className={'d-flex justify-content-start form-check fw-bold form-check-solid p-5'}>
+                        <div className={'d-flex justify-content-start align-items-center form-check fw-bold form-check-solid p-5'}>
                             <input type="checkbox" className={`mx-3`}/>
                             <label htmlFor="" className={`text-dark fw-bold fs-3`}>Cover letter</label>
                         </div>
