@@ -17,6 +17,12 @@ export function AsideMenuMain() {
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem to='/post-job' title='Post Job'/>
+            <AsideMenuItem
+                to='/job-listings'
+                icon='/media/icons/duotune/finance/fin006.svg'
+                title={intl.formatMessage({id: 'MENU.JOB_LISTINGS'})}
+                fontIcon='bi-app-indicator'
+            />
             {/*<div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Crafted</span>

@@ -6,6 +6,8 @@ import {Dashboard} from '../pages/dashboard/Dashboard'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 import {JobPosting} from "../pages/JobPosting";
+import {JobListings} from "../pages/jobs/JobListings";
+import {JobListingsDetails} from "../pages/jobs/JobListingDetails";
 
 const PrivateRoutes = () => {
     //const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
@@ -18,6 +20,8 @@ const PrivateRoutes = () => {
                 {/* Pages */}
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path='/post-job' element={<JobPosting/>}/>
+                <Route path='job-listings' element={<JobListings/>}/>
+                <Route path='job-listings/:id' element={<JobListingsDetails/>}/>
                 {/* Lazy Modules */}
                 {/*<Route
                     path='apps/user-management/*'
