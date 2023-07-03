@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-// const validator = require('validator');
-// const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const validator = require("validator");
 
@@ -20,11 +18,6 @@ const jobApplicationSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      validate(value) {
-        if (!validator.isMobilePhone(value, 'en-US')) {
-          throw new Error('Invalid phone number');
-        }
-      },
     },
     cv: {
       type: String,

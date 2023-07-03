@@ -3,6 +3,9 @@ const { JobApplication } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const createJobApplication = async (jobApplicationBody) => {
+  // if (await User.isEmailTaken(userBody.email)) {
+  //   throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+  // }
   return JobApplication.create(jobApplicationBody);
 };
 
@@ -31,25 +34,6 @@ const getJobApplicationById = async (id) => {
 // const getJobApplicationByJobId = async (userId) => {
 //   return JobApplication.find({ userId });
 // };
-
-const updateJobApplicationById = async (jobApplicationId, updateBody) => {
-  const jobApplication = await getJobApplicationById(jobApplicationId);
-  if (!jobApplication) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Job application not found');
-  }
-  Object.assign(jobApplication, updateBody);
-  await jobApplication.save();
-  return jobApplication;
-};
-
-const deleteJobApplicationById = async (jobApplicationId) => {
-  const jobApplication = await getJobApplicationById(jobApplicationId);
-  if (!jobApplication) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Job application not found');
-  }
-  await jobApplication.remove();
-  return jobApplication;
-};
 
 module.exports = {
   createJobApplication,
