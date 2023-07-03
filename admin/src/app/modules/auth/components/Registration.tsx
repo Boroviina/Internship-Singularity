@@ -280,7 +280,7 @@ export function Registration() {
             className='form-check-label fw-bold text-gray-700 fs-6'
             htmlFor='kt_login_toc_agree'
           >
-            I Agree the{' '}
+            I Agree to the{' '}
             <Link to='/auth/terms' className='ms-1 link-primary'>
               terms and conditions
             </Link>
