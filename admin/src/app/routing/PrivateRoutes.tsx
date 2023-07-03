@@ -5,7 +5,7 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {Dashboard} from '../pages/dashboard/Dashboard'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
-import {JobPosting} from "../pages/JobPosting";
+import {JobPosting} from "../pages/post-job/JobPosting";
 import {JobListings} from "../pages/jobs/JobListings";
 import {JobListingsDetails} from "../pages/jobs/JobListingDetails";
 

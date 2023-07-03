@@ -1,6 +1,6 @@
 import React from "react";
 import {useFormik} from "formik";
-import {getUserByToken, login} from "../modules/auth/core/_requests";
+import {getUserByToken, login} from "../../modules/auth/core/_requests";
 import * as Yup from "yup";
 
 export function JobPosting() {
@@ -28,10 +28,11 @@ export function JobPosting() {
                         <div className={`col-12 col-md-6 mb-5`}>
                             <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Education</label>
                             <input type="text" className={`form-control form-control-lg form-control-solid`}
-                                   placeholder='Input requered education...'/>
+                                   placeholder='Input required education...'/>
                         </div>
                         <div className={`col-12 col-md-6`}>
-                            <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Skills</label>
+                            <label htmlFor="" className={`form-label text-dark text-nowrap fw-bold fs-6`}>Specific
+                                skills</label>
                             <input type="text" className={`form-control form-control-lg form-control-solid`}
                                    placeholder='Type specific skills...'/>
                         </div>
@@ -40,36 +41,19 @@ export function JobPosting() {
                         className={`row d-flex justify-content-between align-items-md-center flex-column flex-md-row mb-5`}>
                         <div
                             className={`col-12 col-md-8 flex-column d-flex align-items-center justify-content-between flex-md-row `}>
-                            <div className={"col-md-7 col-12 mb-5 "}>
+                            <div className={"col-md-11 col-12 mb-5 "}>
                                 <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Language</label>
-                                <select name="languages-select"
-                                        className={`form-select form-select-solid form-select-lg`}
-                                        id="sel-lang" aria-label="Select language">
-                                    <option value="rs" defaultValue={'Choose option'}>Not Required</option>
-                                    <option value="en">English</option>
-                                    <option value="de">German</option>
-                                    <option value="fr">France</option>
-                                    <option value="rs">Russian</option>
-                                </select>
-                            </div>
-                            <div className={`col-12 col-md-3 mb-5`}>
-                                <label htmlFor="" className={`form-label text-dark fw-bold fs-6 text-nowrap`}>Language
-                                    level</label>
-                                <div>
-                                    <select disabled name="languages-select" className={`form-select form-select-solid`}
-                                            id="sel-lang" aria-label="Select language">
-                                        <option value="rs" defaultValue={'Choose option'}>Choose...</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                    </select>
-                                </div>
+                                <input type={"text"}
+                                       className={`form-control form-control-solid form-control-lg`}
+                                       placeholder={'Insert required languages...'}>
+                                </input>
                             </div>
                         </div>
                         <div
                             className={'col-4 d-flex justify-content-start align-items-center form-check fw-bold form-check-solid p-5'}>
                             <input type="checkbox" className={`mx-3`}/>
-                            <label htmlFor="" className={`text-center text-dark fw-bold fs-3`}> Driver license</label>
+                            <label htmlFor="" className={`text-center text-nowrap text-dark fw-bold fs-3`}> Driver
+                                license</label>
                         </div>
                     </div>
                 </div>
@@ -83,12 +67,16 @@ export function JobPosting() {
                         instructions</label>
                     <textarea className={`mb-5 form-control form-control-lg form-control-solid`}
                               placeholder='Input instructions...'></textarea>
-                    <div className='d-flex justify-content-sm-around flex-md-row flex-column'>
-                        <div className={'d-flex justify-content-start form-check fw-bold form-check-solid p-5'}>
+                    <div className='d-flex justify-content-sm-start align-items-center flex-md-row flex-column'>
+                        <div className={'col-12 col-md-6'}>
+                            <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Number of open positions</label>
+                            <input type="number" placeholder={'Insert the number of open position'} className={`form-control form-control-lg form-control-solid`}/>
+                        </div>
+                        <div className={'d-flex align-items-center justify-content-start form-check fw-bold form-check-solid p-5'}>
                             <input type="checkbox" className={`mx-3`}/>
                             <label htmlFor="" className={`text-dark fw-bold fs-3`}>CV required</label>
                         </div>
-                        <div className={'d-flex justify-content-start form-check fw-bold form-check-solid p-5'}>
+                        <div className={'d-flex justify-content-start align-items-center form-check fw-bold form-check-solid p-5'}>
                             <input type="checkbox" className={`mx-3`}/>
                             <label htmlFor="" className={`text-dark fw-bold fs-3`}>Cover letter</label>
                         </div>
@@ -98,7 +86,7 @@ export function JobPosting() {
                     <button
                         type='submit'
                         id='kt_post_job_submit'
-                        className='btn btn-lg btn-primary w-100 w-md-50 '
+                        className='btn btn-lg btn-primary w-100 w-md-50 w-lg-25 '
                         // disabled={formik.isSubmitting || !formik.isValid}
                     >
                         Post Job
