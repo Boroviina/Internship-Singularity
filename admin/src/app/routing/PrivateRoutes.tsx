@@ -20,8 +20,7 @@ const PrivateRoutes = () => {
                 {/* Pages */}
                 <Route path='dashboard' element={<Dashboard/>}/>
                 <Route path='/post-job' element={<JobPosting/>}/>
-                <Route path='job-listings' element={<JobListings/>}/>
-                <Route path='job-listings/:id' element={<JobListingsDetails/>}/>
+                <Route path='/job-listings' element={<JobListings/>}/>
                 {/* Lazy Modules */}
                 {/*<Route
                     path='apps/user-management/*'
