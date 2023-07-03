@@ -1,0 +1,53 @@
+const mongoose = require('mongoose');
+// const validator = require('validator');
+// const bcrypt = require('bcryptjs');
+const { toJSON, paginate } = require('./plugins');
+const validator = require("validator");
+
+const jobApplicationSchema = mongoose.Schema(
+  {
+    userId: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    jobId: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+      trim: true,
+      validate(value) {
+        if (!validator.isMobilePhone(value, 'en-US')) {
+          throw new Error('Invalid phone number');
+        }
+      },
+    },
+    cv: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    coverLetter: {
+      type: String,
+      trim: true,
+    },
+    additionalDocument: {
+      type: String,
+      trim: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+jobApplicationSchema.plugin(toJSON);
+jobApplicationSchema.plugin(paginate);
+
+const JobApplication = mongoose.model('JobApplication', jobApplicationSchema);
+
+module.exports = JobApplication;
