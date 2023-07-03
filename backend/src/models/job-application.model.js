@@ -18,6 +18,11 @@ const jobApplicationSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      validate(value) {
+        if (!validator.isMobilePhone(value)) {
+          throw new Error('Invalid phone number');
+        }
+      },
     },
     cv: {
       type: String,
