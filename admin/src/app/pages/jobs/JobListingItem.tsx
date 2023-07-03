@@ -1,33 +1,28 @@
-import React from 'react';
-import {useNavigate} from "react-router-dom";
+import React, {useState} from 'react';
 import classes from './JobListingItem.module.css';
 import {KTSVG} from "../../../_metronic/helpers";
+import {JobListing} from "../../shared/models/job-listing.model";
+import {JobListingsDetails} from "./JobListingDetails";
 
 type JobListingItemProps = {
-    item: {
-        id: string
-        job_title: string
-        company_name: string
-        location: string
-        application_deadline: Date
-    }
-    hover: boolean
+    item: JobListing
 }
 
 export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
-    const navigate = useNavigate();
+    const [detailsShown, setDetailsShown] = useState(false);
 
     const clickHandler = () => {
-        navigate(`/job-listings/${props.item.id}`);
+        setDetailsShown(!detailsShown);
     }
 
     return (
-        <div className={`card card-custom mb-3 ${props.hover && classes['hover-card']}`}  onClick={clickHandler}>
-            <div className="card-header">
+        <>
+        <div className={`card card-custom mb-3 `}>
+            <div className={`card-header ${classes['hover-card']}`} onClick={clickHandler}>
                 <h3 className="card-title">{props.item.job_title}</h3>
             </div>
             <div className="card-body">
-                <div className="card-label mt-0">{props.item.company_name}</div>
+                <div className="card-label">{props.item.company_name}</div>
                 <div className="fv-row">
                     <span>
                         <KTSVG path="/media/icons/duotune/maps/map008.svg" className="svg-icon-2 svg-icon-primary" />
@@ -42,7 +37,9 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                         </span>
                     </span>
                 </div>
+                {detailsShown && <JobListingsDetails jobListing={props.item}></JobListingsDetails>}
                 </div>
         </div>
+        </>
     );
 }
