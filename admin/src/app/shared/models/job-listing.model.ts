@@ -2,10 +2,10 @@ import {BaseModel} from "./base.model";
 
 export class JobListing extends BaseModel {
     id: string;
-    job_title: string;
-    company_name: string;
+    jobTitle: string;
+    companyName: string;
     location: string;
-    application_deadline: Date;
+    applicationDeadline: Date;
     description: string;
     requirements: string;
     applicationInstructions: string;
