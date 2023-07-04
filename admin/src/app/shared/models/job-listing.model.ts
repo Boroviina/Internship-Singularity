@@ -1,4 +1,5 @@
 import {BaseModel} from "./base.model";
+import {RequirementsModel} from "./requirements.model";
 
 export class JobListing extends BaseModel {
     id: string;
@@ -7,8 +8,11 @@ export class JobListing extends BaseModel {
     location: string;
     applicationDeadline: Date;
     description: string;
-    requirements: string;
+    requirements: RequirementsModel;
     applicationInstructions: string;
+    positionNumber: number;
+    cv: boolean;
+    coverLetter: boolean;
 
     constructor(attributes?: any) {
         super();
