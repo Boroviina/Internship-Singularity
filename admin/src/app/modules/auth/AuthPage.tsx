@@ -5,7 +5,6 @@ import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import classes from './Opacity.module.css'
 import EmployerRegistration from "./components/EmployerRegistration";
 
 const AuthLayout = () => {

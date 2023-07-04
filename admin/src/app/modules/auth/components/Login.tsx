@@ -5,9 +5,9 @@ import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
 import {getUserByToken, login} from '../core/_requests'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+// import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
-import classes from '../../auth/Opacity.module.css'
+
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -58,7 +58,7 @@ export function Login() {
 
   return (
     <form
-      className={`form w-100 ${classes.loginForm} `}
+      className={`form w-100`}
       onSubmit={formik.handleSubmit}
       noValidate
       id='kt_login_signin_form'
