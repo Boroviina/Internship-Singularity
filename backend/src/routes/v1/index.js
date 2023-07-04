@@ -2,6 +2,7 @@ const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const jobApplicationRoute = require('./job-application.route');
+const jobRoute=require('./job.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -20,6 +21,10 @@ const defaultRoutes = [
     path: '/job-applications',
     route: jobApplicationRoute,
   },
+  {
+    path:'/jobs',
+    route: jobRoute,
+  }
 ];
 
 const devRoutes = [

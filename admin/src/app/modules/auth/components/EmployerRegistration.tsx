@@ -1,6 +1,76 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import InputField from "./UI/InputField";
+import * as Yup from "yup";
+
+const initialValues = {
+    firstname: '',
+    lastname: '',
+    useremail: '',
+    password: '',
+    changepassword: '',
+    companyname: '',
+    industry: '',
+    numofemployees: '',
+    city: '',
+    address: '',
+    companyemail: '',
+    phone: '',
+    fax: ''
+}
+
+const registrationSchema = Yup.object().shape({
+    firstname: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols')
+        .required('First name is required'),
+    email: Yup.string()
+        .email('Wrong email format')
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols')
+        .required('Email is required'),
+    lastname: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols')
+        .required('Last name is required'),
+    password: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols')
+        .required('Password is required'),
+    changepassword: Yup.string()
+        .required('Password confirmation is required')
+        .when('password', {
+            is: (val: string) => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
+        }),
+    companyname: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Max 50 symbols')
+        .required('Company name is required'),
+    industry: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Max 50 symbols')
+        .required('Type of industry is required'),
+    numofemployees: Yup.number()
+        .min(1, 'Minimum one employee')
+        .max(15000000,'Too many employees'),
+    city: Yup.string()
+        .min(2, 'Minimum 2 symbols')
+        .max(50,'Max 50 symbols'),
+    address: Yup.string()
+        .min(3, 'Minimum 2 symbols')
+        .max(50,'Max 50 symbols'),
+    companyemail: Yup.string()
+        .min(3, 'Minimum 2 symbols')
+        .max(50,'Max 50 symbols')
+        .email('Wrong email format'),
+    phone: Yup.string()
+        .min(4, 'Minimum 4 symbols')
+        .max(20, 'Max 20 symbols'),
+    fax: Yup.string()
+        .min(4, 'Minimum 4 symbols')
+        .max(20, 'Max 20 symbols')
+})
 
 const EmployerRegistration = () => {
     return (
