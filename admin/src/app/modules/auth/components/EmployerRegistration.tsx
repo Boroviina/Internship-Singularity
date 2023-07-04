@@ -4,17 +4,17 @@ import InputField from "./UI/InputField";
 import * as Yup from "yup";
 
 const initialValues = {
-    firstname: '',
-    lastname: '',
-    useremail: '',
+    firstName: '',
+    lastName: '',
+    userEmail: '',
     password: '',
-    changepassword: '',
-    companyname: '',
+    changePassword: '',
+    companyName: '',
     industry: '',
-    numofemployees: '',
+    numOfEmployees: '',
     city: '',
     address: '',
-    companyemail: '',
+    companyEmail: '',
     phone: '',
     fax: ''
 }
@@ -29,7 +29,7 @@ const registrationSchema = Yup.object().shape({
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Email is required'),
-    lastname: Yup.string()
+    lastName: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Last name is required'),
@@ -37,13 +37,13 @@ const registrationSchema = Yup.object().shape({
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Password is required'),
-    changepassword: Yup.string()
+    changePassword: Yup.string()
         .required('Password confirmation is required')
         .when('password', {
             is: (val: string) => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
         }),
-    companyname: Yup.string()
+    companyName: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Company name is required'),
@@ -51,7 +51,7 @@ const registrationSchema = Yup.object().shape({
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Type of industry is required'),
-    numofemployees: Yup.number()
+    numOfEmployees: Yup.number()
         .min(1, 'Minimum one employee')
         .max(15000000,'Too many employees'),
     city: Yup.string()
@@ -60,7 +60,7 @@ const registrationSchema = Yup.object().shape({
     address: Yup.string()
         .min(3, 'Minimum 2 symbols')
         .max(50,'Max 50 symbols'),
-    companyemail: Yup.string()
+    companyEmail: Yup.string()
         .min(3, 'Minimum 2 symbols')
         .max(50,'Max 50 symbols')
         .email('Wrong email format'),
