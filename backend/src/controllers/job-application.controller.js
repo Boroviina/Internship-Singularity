@@ -11,7 +11,7 @@ const createJobApplication = catchAsync(async (req, res) => {
 });
 
 const getJobApplications = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['jobId', 'userId']);
+  const filter = pick(req.query, ['job', 'user']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await jobApplicationService.queryJobApplications(filter, options);
   res.send(result);

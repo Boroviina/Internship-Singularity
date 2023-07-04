@@ -13,8 +13,8 @@ const createJobApplication = {
 
 const getJobApplications = {
   query: Joi.object().keys({
-    userId: Joi.string(),
-    jobId: Joi.string(),
+    user: Joi.string(),
+    job: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),

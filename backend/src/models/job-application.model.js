@@ -6,7 +6,6 @@ const jobApplicationSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.SchemaTypes.ObjectId,
-      // type: Schema.Types.ObjectId,
       ref: 'User',
     },
     job: {
