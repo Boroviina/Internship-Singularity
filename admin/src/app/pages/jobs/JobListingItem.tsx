@@ -19,10 +19,10 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
         <>
         <div className={`card card-custom mb-3 `}>
             <div className={`card-header ${classes['hover-card']}`} onClick={clickHandler}>
-                <h3 className="card-title">{props.item.job_title}</h3>
+                <h3 className="card-title">{props.item.jobTitle}</h3>
             </div>
             <div className="card-body">
-                <div className="card-label">{props.item.company_name}</div>
+                <div className="card-label">{props.item.companyName}</div>
                 <div className="fv-row">
                     <span>
                         <KTSVG path="/media/icons/duotune/maps/map008.svg" className="svg-icon-2 svg-icon-primary" />
@@ -33,7 +33,7 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                     <span>
                         <KTSVG path="/media/icons/duotune/general/gen013.svg" className="svg-icon-2 svg-icon-primary" />
                         <span>
-                            {props.item.application_deadline.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
+                            {props.item.applicationDeadline.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
                         </span>
                     </span>
                 </div>
