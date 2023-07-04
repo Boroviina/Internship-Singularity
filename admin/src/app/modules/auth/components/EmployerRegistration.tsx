@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
+import clsx from "clsx";
 
 const initialValues = {
     firstName: '',
@@ -112,9 +113,24 @@ const EmployerRegistration = () => {
                                     placeholder='First name'
                                     type='text'
                                     autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
                                     {...formik.getFieldProps('firstName')}
+                                    className={clsx(
+                                        'form-control form-control-lg form-control-solid',
+                                        {
+                                            'is-invalid': formik.touched.firstName && formik.errors.firstName,
+                                        },
+                                        {
+                                            'is-valid': formik.touched.firstName && !formik.errors.firstName,
+                                        }
+                                    )}
                                 />
+                                {formik.touched.firstName && formik.errors.firstName && (
+                                    <div className='fv-plugins-message-container'>
+                                        <div className='fv-help-block'>
+                                            <span role='alert'>{formik.errors.firstName}</span>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                             <div className='col-sm-6'>
                                 <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
