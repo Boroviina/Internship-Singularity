@@ -5,7 +5,8 @@ const catchAsync = require('../utils/catchAsync');
 const { jobApplicationService } = require('../services');
 
 const createJobApplication = catchAsync(async (req, res) => {
-  const jobApplication = await jobApplicationService.createJobApplication(req.body);
+  const body = {user: req.user._id, ...req.body};
+  const jobApplication = await jobApplicationService.createJobApplication(body);
   res.status(httpStatus.CREATED).send(jobApplication);
 });
 
