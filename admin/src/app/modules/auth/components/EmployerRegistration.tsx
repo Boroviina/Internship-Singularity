@@ -37,14 +37,14 @@ const registrationSchema = Yup.object().shape({
         .max(50, 'Maximum 50 symbols')
         .required('Last name is required'),
     password: Yup.string()
-        .min(3, 'Minimum 3 symbols')
+        .min(8, 'Minimum 8 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Password is required'),
     confirmPassword: Yup.string()
         .required('Password confirmation is required')
         .when('password', {
             is: (val: string) => (val && val.length > 0 ? true : false),
-            then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
+            then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password don't match"),
         }),
 
     companyName: Yup.string()
