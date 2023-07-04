@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import clsx from "clsx";
+import InputField from "./InputField";
 
 const initialValues = {
     firstName: '',
@@ -55,16 +56,16 @@ const registrationSchema = Yup.object().shape({
         .required('Type of industry is required'),
     numOfEmployees: Yup.number()
         .min(1, 'Minimum one employee')
-        .max(15000000,'Too many employees'),
+        .max(15000000, 'Too many employees'),
     city: Yup.string()
         .min(2, 'Minimum 2 symbols')
-        .max(50,'Max 50 symbols'),
+        .max(50, 'Max 50 symbols'),
     address: Yup.string()
         .min(3, 'Minimum 2 symbols')
-        .max(50,'Max 50 symbols'),
+        .max(50, 'Max 50 symbols'),
     companyEmail: Yup.string()
         .min(3, 'Minimum 2 symbols')
-        .max(50,'Max 50 symbols')
+        .max(50, 'Max 50 symbols')
         .email('Wrong email format'),
     phone: Yup.string()
         .min(4, 'Minimum 4 symbols')
@@ -108,38 +109,17 @@ const EmployerRegistration = () => {
                         <div className="row">
                             <h2 className='text-center'>User information</h2>
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>First name</label>
-                                <input
-                                    placeholder='First name'
-                                    type='text'
-                                    autoComplete='off'
-                                    {...formik.getFieldProps('firstName')}
-                                    className={clsx(
-                                        'form-control form-control-lg form-control-solid',
-                                        {
-                                            'is-invalid': formik.touched.firstName && formik.errors.firstName,
-                                        },
-                                        {
-                                            'is-valid': formik.touched.firstName && !formik.errors.firstName,
-                                        }
-                                    )}
+                                <InputField name='First name' placeholder='First name' type='text'
+                                            formikFieldProps={formik.getFieldProps('firstName')}
+                                            formikTouched={formik.touched.firstName}
+                                            formikErrors={formik.errors.firstName}
                                 />
-                                {formik.touched.firstName && formik.errors.firstName && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.firstName}</span>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
-                                <input
-                                    placeholder='Last name'
-                                    type='text'
-                                    autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
-                                    {...formik.getFieldProps('lastName')}
+                                <InputField name='Last name' placeholder='Last name' type='text'
+                                            formikFieldProps={formik.getFieldProps('lastName')}
+                                            formikTouched={formik.touched.lastName}
+                                            formikErrors={formik.errors.lastName}
                                 />
                             </div>
                         </div>
@@ -230,14 +210,14 @@ const EmployerRegistration = () => {
                                 />
                             </div>
                             <div className='col-sm-6'>
-                                    <label className='form-label fw-bolder text-dark fs-6'>Address</label>
-                                    <input
-                                        placeholder='Address'
-                                        type='text'
-                                        autoComplete='off'
-                                        className='form-control form-control-lg form-control-solid'
-                                        {...formik.getFieldProps('address')}
-                                    />
+                                <label className='form-label fw-bolder text-dark fs-6'>Address</label>
+                                <input
+                                    placeholder='Address'
+                                    type='text'
+                                    autoComplete='off'
+                                    className='form-control form-control-lg form-control-solid'
+                                    {...formik.getFieldProps('address')}
+                                />
                             </div>
                         </div>
 
