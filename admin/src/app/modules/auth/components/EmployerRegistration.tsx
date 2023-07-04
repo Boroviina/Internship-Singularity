@@ -27,10 +27,10 @@ const registrationSchema = Yup.object().shape({
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('First name is required'),
-    email: Yup.string()
+    userEmail: Yup.string()
         .email('Wrong email format')
         .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
+        .max(50, 'Max 50 symbols')
         .required('Email is required'),
     lastName: Yup.string()
         .min(3, 'Minimum 3 symbols')
@@ -46,6 +46,7 @@ const registrationSchema = Yup.object().shape({
             is: (val: string) => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
         }),
+
     companyName: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
@@ -56,17 +57,18 @@ const registrationSchema = Yup.object().shape({
         .required('Type of industry is required'),
     numOfEmployees: Yup.number()
         .min(1, 'Minimum one employee')
-        .max(15000000, 'Too many employees'),
+        .max(15000000, 'Too many employees')
+        .typeError('Please insert a number'),
     city: Yup.string()
         .min(2, 'Minimum 2 symbols')
         .max(50, 'Max 50 symbols'),
     address: Yup.string()
-        .min(3, 'Minimum 2 symbols')
+        .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols'),
     companyEmail: Yup.string()
-        .min(3, 'Minimum 2 symbols')
-        .max(50, 'Max 50 symbols')
-        .email('Wrong email format'),
+        .email('Wrong email format')
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Max 50 symbols'),
     phone: Yup.string()
         .min(4, 'Minimum 4 symbols')
         .max(20, 'Max 20 symbols'),
@@ -104,7 +106,6 @@ const EmployerRegistration = () => {
 
             <div className="container">
                 <div className='row'>
-
                     <div className='col-md-6'>
                         <div className="row">
                             <h2 className='text-center'>User information</h2>
@@ -123,22 +124,19 @@ const EmployerRegistration = () => {
                                 />
                             </div>
                         </div>
-                        <label className='form-label fw-bolder text-dark fs-6'>Email</label>
-                        <input
-                            placeholder='Email'
-                            type='email'
-                            autoComplete='off'
-                            className='form-control form-control-lg form-control-solid'
-                            {...formik.getFieldProps('email')}
+
+                        <InputField name='Email' placeholder='Email' type='email'
+                                    formikFieldProps={formik.getFieldProps('userEmail')}
+                                    formikTouched={formik.touched.userEmail}
+                                    formikErrors={formik.errors.userEmail}
                         />
-                        <label className='form-label fw-bolder text-dark fs-6'>Password</label>
-                        <input
-                            placeholder='Password'
-                            type='password'
-                            autoComplete='off'
-                            className='form-control form-control-lg form-control-solid'
-                            {...formik.getFieldProps('password')}
+
+                        <InputField name='Password' placeholder='Password' type='password'
+                                    formikFieldProps={formik.getFieldProps('password')}
+                                    formikTouched={formik.touched.password}
+                                    formikErrors={formik.errors.password}
                         />
+
                         {/*Password meter*/}
                         <div
                             className='d-flex align-items-center my-3'
@@ -152,13 +150,11 @@ const EmployerRegistration = () => {
                         <p className='text-muted'>
                             Use 8 or more characters with a mix of letters, numbers & symbols.
                         </p>
-                        <label className='form-label fw-bolder text-dark fs-6'>Confirm password</label>
-                        <input
-                            placeholder='Password confirmation'
-                            type='password'
-                            autoComplete='off'
-                            className='form-control form-control-lg form-control-solid'
-                            {...formik.getFieldProps('confirmPassword')}
+
+                        <InputField name='Confirm password' placeholder='Password confirmation' type='password'
+                                    formikFieldProps={formik.getFieldProps('confirmPassword')}
+                                    formikTouched={formik.touched.confirmPassword}
+                                    formikErrors={formik.errors.confirmPassword}
                         />
                     </div>
 
@@ -166,88 +162,64 @@ const EmployerRegistration = () => {
                     <div className='col-md-6'>
 
                         <h2 className='text-center'>Company information</h2>
-                        <label className='form-label fw-bolder text-dark fs-6'>Company name</label>
-                        <input
-                            placeholder='Company name'
-                            type='text'
-                            autoComplete='off'
-                            className='form-control form-control-lg form-control-solid'
-                            {...formik.getFieldProps('companyName')}
+                        <InputField name='Company name' placeholder='Company name' type='text'
+                                    formikFieldProps={formik.getFieldProps('companyName')}
+                                    formikTouched={formik.touched.companyName}
+                                    formikErrors={formik.errors.companyName}
                         />
 
                         <div className="row">
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>Industry</label>
-                                <input
-                                    placeholder='What do you do?'
-                                    type='text'
-                                    autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
-                                    {...formik.getFieldProps('industry')}
+                                <InputField name='Industry' placeholder='What do you do?' type='text'
+                                            formikFieldProps={formik.getFieldProps('industry')}
+                                            formikTouched={formik.touched.industry}
+                                            formikErrors={formik.errors.industry}
                                 />
                             </div>
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>No. employees</label>
-                                <input
-                                    placeholder='No. employees'
-                                    type='text'
-                                    autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
-                                    {...formik.getFieldProps('numOfEmployees')}
+                                <InputField name='No. employees' placeholder='No. employees' type='text'
+                                            formikFieldProps={formik.getFieldProps('numOfEmployees')}
+                                            formikTouched={formik.touched.numOfEmployees}
+                                            formikErrors={formik.errors.numOfEmployees}
                                 />
                             </div>
                         </div>
 
                         <div className="row">
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>City</label>
-                                <input
-                                    placeholder='City'
-                                    type='text'
-                                    autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
-                                    {...formik.getFieldProps('city')}
+                                <InputField name='City' placeholder='City' type='text'
+                                            formikFieldProps={formik.getFieldProps('city')}
+                                            formikTouched={formik.touched.city}
+                                            formikErrors={formik.errors.city}
                                 />
                             </div>
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>Address</label>
-                                <input
-                                    placeholder='Address'
-                                    type='text'
-                                    autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
-                                    {...formik.getFieldProps('address')}
+                                <InputField name='Address' placeholder='Address' type='text'
+                                            formikFieldProps={formik.getFieldProps('address')}
+                                            formikTouched={formik.touched.address}
+                                            formikErrors={formik.errors.address}
                                 />
                             </div>
                         </div>
 
-                        <label className='form-label fw-bolder text-dark fs-6'>Email</label>
-                        <input
-                            placeholder='Email'
-                            type='email'
-                            autoComplete='off'
-                            className='form-control form-control-lg form-control-solid'
-                            {...formik.getFieldProps('companyEmail')}
+                        <InputField name='Email' placeholder='Email' type='email'
+                                    formikFieldProps={formik.getFieldProps('companyEmail')}
+                                    formikTouched={formik.touched.companyEmail}
+                                    formikErrors={formik.errors.companyEmail}
                         />
                         <div className="row">
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>Phone</label>
-                                <input
-                                    placeholder='Phone'
-                                    type='text'
-                                    autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
-                                    {...formik.getFieldProps('phone')}
+                                <InputField name='Phone' placeholder='Phone' type='text'
+                                            formikFieldProps={formik.getFieldProps('phone')}
+                                            formikTouched={formik.touched.phone}
+                                            formikErrors={formik.errors.phone}
                                 />
                             </div>
                             <div className='col-sm-6'>
-                                <label className='form-label fw-bolder text-dark fs-6'>Fax</label>
-                                <input
-                                    placeholder='Fax'
-                                    type='text'
-                                    autoComplete='off'
-                                    className='form-control form-control-lg form-control-solid'
-                                    {...formik.getFieldProps('fax')}
+                                <InputField name='Fax' placeholder='Fax' type='text'
+                                            formikFieldProps={formik.getFieldProps('fax')}
+                                            formikTouched={formik.touched.fax}
+                                            formikErrors={formik.errors.fax}
                                 />
                             </div>
                         </div>
