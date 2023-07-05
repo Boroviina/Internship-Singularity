@@ -8,9 +8,9 @@ const jobSchema = mongoose.Schema(
   {
     jobTitle: {
       type: String,
-      required: true,
-      trim: [true,'The field must be filled'],
-      maxLength: [70, 'The field must have less than or equal to 70 characters']
+      required: [true,'The field must be filled'],
+      trim: true,
+      maxLength: [50, 'The field must have less than or equal to 50 characters']
     },
     description: {
       type: String,
@@ -21,7 +21,7 @@ const jobSchema = mongoose.Schema(
     education: {
       type: String,
       trim: true,
-      maxLength: [70, 'The field must have less than or equal to 70 characters']
+      maxLength: [50, 'The field must have less than or equal to 50 characters']
     },
     skills: {
       type: String,
@@ -31,7 +31,7 @@ const jobSchema = mongoose.Schema(
     language: {
       type: String,
       trim: true,
-      maxLength: [70, 'The field must have less than or equal to 70 characters']
+      maxLength: [100, 'The field must have less than or equal to 100 characters']
     },
     driverLicence: {
       type: Boolean
@@ -48,7 +48,8 @@ const jobSchema = mongoose.Schema(
     },
     positionsNum:{
       type:Number,
-      min: [1, 'Minimal number of position is 1']
+      min: [1, 'Minimal number of position is 1'],
+      max:[1, 'Maximal positions number is 10']
     },
     cv: {
       type: Boolean
