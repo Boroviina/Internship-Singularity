@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useFormik} from "formik";
 import * as Yup from 'yup';
-
+import {createJob} from "../../shared/services/job.service";
 
 
 export function JobPosting() {
@@ -14,7 +14,7 @@ export function JobPosting() {
             skills: '',
             languages: '',
             driverLicense: false,
-            appDeadline: null,
+            appDeadline: '',
             appInstructions: '',
             numPosition: '',
             cv: false,
@@ -44,17 +44,22 @@ export function JobPosting() {
             numPosition: Yup.number()
                 .min(1, 'Must be at least 1 position')
                 .max(10, 'Can be maximum 10 open positions per job advertisement')
-                .required('Required'),
+                .required('Required')
+                .integer()
+                .positive()
         }),
-        onSubmit: async (values, {setStatus, setSubmitting}) => {
+        onSubmit: async (values,  {resetForm, setStatus, setSubmitting}) => {
             setLoading(true)
             try {
                 alert(JSON.stringify(values, null, 2));
+                await createJob(values).then();
+                console.log( createJob(values));
             } catch (error) {
-                setStatus('Check if all inputs are filled')
-                setSubmitting(false)
-                setLoading(false)
+                setStatus('Check if all inputs are filled');
+                setSubmitting(false);
+                setLoading(false);
             }
+            resetForm();
 
         },
     });
@@ -165,7 +170,7 @@ export function JobPosting() {
                            onBlur={formik.handleBlur}/>
                     {formik.touched.appDeadline && formik.errors.appDeadline ? (
                         <div
-                            className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appDeadline.toString()}</div>) : null}
+                            className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appDeadline}</div>) : null}
                 </div>
                 <div className={`fv-row mb-10`}>
                     <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
@@ -227,7 +232,7 @@ export function JobPosting() {
                     >
                         {!loading && <span className='indicator-label'>Post job</span>}
                         {loading && (
-                           <span className='indicator-progress' style={{display: 'block'}}>
+                            <span className='indicator-progress' style={{display: 'block'}}>
                           Please wait...
                         <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                          </span>
