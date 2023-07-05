@@ -3,8 +3,7 @@ const { objectId } = require('./custom.validation');
 
 const createJobApplication = {
   body: Joi.object().keys({
-    userId: Joi.string(),
-    jobId: Joi.string(),
+    job: Joi.required().custom(objectId),
     phoneNumber: Joi.string().required(),
     cv: Joi.string().required(),
     coverLetter: Joi.string().optional(),
@@ -14,8 +13,8 @@ const createJobApplication = {
 
 const getJobApplications = {
   query: Joi.object().keys({
-    userId: Joi.string(),
-    jobId: Joi.string(),
+    user: Joi.string(),
+    job: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
