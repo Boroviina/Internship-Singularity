@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode";
 import { LoginResponse } from "../../interfaces/login-response.interface";
 import {UserModel} from "../../models/user.model";
 import {LogoutResponse} from "../../interfaces/logout-response.interface";
+import { getUser } from "../user.service";
 
 const API_URL = process.env.REACT_APP_API_URL;
 const API_VERSION = process.env.REACT_APP_API_VERSION;
@@ -20,6 +21,7 @@ class AuthService {
     }
   }
 
+  // Logout user and retrieve JWT token
   async logout(refreshToken: string): Promise<LogoutResponse | null> {
     try {
       const response = await axios.post<LogoutResponse>(`${API_URL}/${API_VERSION}/auth/logout`, { refreshToken });
@@ -51,26 +53,16 @@ class AuthService {
   //   const token = this.getToken();
   //   return token !== null;
   // }
-  //
+
   // Decode the JWT token and retrieve the user information
   async getUser(): Promise<UserModel | null> {
     const token = this.getToken();
     if (token) {
       const decoded: any = jwtDecode(token);
-      const user = await this.getUserById(decoded.sub);
+      const user = getUser(decoded.sub);
       return user;
     }
     return null;
-  }
-
-  async getUserById(userId: string): Promise<UserModel | null> {
-    try {
-      const response = await axios.get<UserModel>(`${API_URL}/${API_VERSION}/users/${userId}`);
-      return response.data;
-    } catch (error) {
-      console.error("Getting user failed: ", error);
-      return null;
-    }
   }
 }
 
