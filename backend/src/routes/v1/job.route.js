@@ -6,13 +6,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(auth('manageJobs'), jobController.createJob)
-  .get(auth('getJobs'), jobController.getJobs);
+  .post(auth('manageJob'), jobController.createJob)
+  .get(auth('getJob'), jobController.getJobs);
 
 router
   .route('/:jobId')
-  .get(auth('getJobs'), jobController.getJob)
-  .patch(auth('manageJobs'), jobController.updateJob)
-  .delete(auth('removeJob'), jobController.deleteJob);
+  .get(auth('getJob'), jobController.getJob)
+  .patch(auth('manageJob'), jobController.updateJob)
+  .delete(auth('deleteJob'), jobController.deleteJob);
 
 module.exports = router;
