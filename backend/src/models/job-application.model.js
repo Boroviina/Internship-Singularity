@@ -4,15 +4,13 @@ const validator = require("validator");
 
 const jobApplicationSchema = mongoose.Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-      trim: true,
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'User',
     },
-    jobId: {
-      type: String,
-      required: true,
-      trim: true,
+    job: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Job',
     },
     phoneNumber: {
       type: String,
