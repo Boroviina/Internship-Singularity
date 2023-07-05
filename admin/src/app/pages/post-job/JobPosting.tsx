@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import {useFormik} from "formik";
+import * as Yup from 'yup';
+
 
 
 export function JobPosting() {
-
+    const [loading, setLoading] = useState(false)
     const formik = useFormik({
         initialValues: {
             jobTitle: '',
@@ -14,29 +16,68 @@ export function JobPosting() {
             driverLicense: false,
             appDeadline: null,
             appInstructions: '',
-            positionNum: '',
+            numPosition: '',
             cv: false,
             coverLetter: false,
         },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+        validationSchema: Yup.object({
+
+            jobTitle: Yup.string()
+                .max(50, 'Must be 50 characters or less')
+                .required('Required'),
+            description: Yup.string()
+                .max(200, 'Must be 200 characters or less')
+                .required('Required'),
+            education: Yup.string()
+                .max(50, 'Must be 50 characters or less'),
+            skills: Yup.string()
+                .max(100, 'Must be 100 characters or less'),
+            languages: Yup.string()
+                .max(50, 'Must be 50 characters or less'),
+            appDeadline: Yup.date()
+                .nullable()
+                .required("Please input Expiry Date")
+                .min(new Date(Date.now()), 'Must be at least tomorrow'),
+            appInstructions: Yup.string()
+                .max(200, 'Must be 200 characters or less')
+                .required('Required'),
+            numPosition: Yup.number()
+                .min(1, 'Must be at least 1 position')
+                .max(10, 'Can be maximum 10 open positions per job advertisement')
+                .required('Required'),
+        }),
+        onSubmit: async (values, {setStatus, setSubmitting}) => {
+            setLoading(true)
+            try {
+                alert(JSON.stringify(values, null, 2));
+            } catch (error) {
+                setStatus('Check if all inputs are filled')
+                setSubmitting(false)
+                setLoading(false)
+            }
+
         },
-    })
+    });
 
     return <div className={`w-lg-1024px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
-        <form action="" className={`form`} onSubmit={formik.handleSubmit}>
+        <form action=""
+              className={`form`}
+              onSubmit={formik.handleSubmit}>
             <div className={`row p-4 my-3`}>
                 <h1>Insert Job Features</h1>
             </div>
             <div className={`fv-row mb-10`}>
-                <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Job title</label>
+                <label htmlFor="jobTitle" className={`form-label text-dark fw-bold fs-6 required`}>Job title</label>
                 <input type="text"
                        className={`form-control form-control-lg form-control-solid`}
                        placeholder='Inster job title...'
                        name="jobTitle"
                        id="jobTitle"
                        onChange={formik.handleChange}
-                       value={formik.values.jobTitle}/>
+                       value={formik.values.jobTitle}
+                       onBlur={formik.handleBlur}/>
+                {formik.touched.jobTitle && formik.errors.jobTitle ? (
+                    <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.jobTitle}</div>) : null}
             </div>
             <div className={`fv-row mb-10`}>
                 <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Description</label>
@@ -46,7 +87,10 @@ export function JobPosting() {
                           onChange={formik.handleChange}
                           name="description"
                           id="description"
-                          value={formik.values.description}></textarea>
+                          value={formik.values.description}
+                          onBlur={formik.handleBlur}></textarea>
+                {formik.touched.description && formik.errors.description ? (
+                    <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.description}</div>) : null}
             </div>
             <div className={`fv-row mb-10`}>
                 <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Requerements</label>
@@ -61,6 +105,8 @@ export function JobPosting() {
                                    name="education"
                                    id="education"
                                    value={formik.values.education}/>
+                            {formik.errors.education ? (
+                                <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.education}</div>) : null}
                         </div>
                         <div className={`col-12 col-md-6`}>
                             <label htmlFor="" className={`form-label text-dark text-nowrap fw-bold fs-6`}>Specific
@@ -72,6 +118,8 @@ export function JobPosting() {
                                    name="skills"
                                    id="skills"
                                    value={formik.values.skills}/>
+                            {formik.errors.skills ? (
+                                <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.skills}</div>) : null}
                         </div>
                     </div>
                     <div
@@ -88,6 +136,8 @@ export function JobPosting() {
                                        id="languages"
                                        value={formik.values.languages}>
                                 </input>
+                                {formik.errors.languages ? (<div
+                                    className={'text-danger mt-1 fs-6 italic'}>{formik.errors.languages}</div>) : null}
                             </div>
                         </div>
                         <div
@@ -106,12 +156,16 @@ export function JobPosting() {
                 <div className={`fv-row mb-10`}>
                     <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
                         deadline</label>
-                    <input type="datetime-local"
+                    <input type="date"
                            className={`form-control form-control-lg form-control-solid`}
                            onChange={formik.handleChange}
                            name="appDeadline"
                            id="appDeadline"
-                           value={formik.values.appDeadline}/>
+                           value={formik.values.appDeadline}
+                           onBlur={formik.handleBlur}/>
+                    {formik.touched.appDeadline && formik.errors.appDeadline ? (
+                        <div
+                            className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appDeadline.toString()}</div>) : null}
                 </div>
                 <div className={`fv-row mb-10`}>
                     <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
@@ -121,18 +175,26 @@ export function JobPosting() {
                               onChange={formik.handleChange}
                               name="appInstructions"
                               id="appInstructions"
-                              value={formik.values.appInstructions}></textarea>
+                              value={formik.values.appInstructions}
+                              onBlur={formik.handleBlur}></textarea>
+                    {formik.touched.appInstructions && formik.errors.appInstructions ? (
+                        <div className={'text-danger mt-0 fs-6 italic'}>{formik.errors.appInstructions}</div>) : null}
                     <div className='d-flex justify-content-sm-start align-items-center flex-md-row flex-column'>
                         <div className={'col-12 col-md-6'}>
                             <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Number of open
                                 positions</label>
                             <input type="number"
-                                   placeholder={'Insert the number of open position'}
+                                   min={0}
+                                   placeholder={'Insert the open positions number'}
                                    className={`form-control form-control-lg form-control-solid`}
                                    onChange={formik.handleChange}
                                    name="numPosition"
                                    id="numPosition"
-                                   value={formik.values.positionNum}/>
+                                   onBlur={formik.handleBlur}
+                                   value={formik.values.numPosition}/>
+                            {formik.touched.numPosition && formik.errors.numPosition ? (
+                                <div
+                                    className={'text-danger mt-1 fs-6 italic'}>{formik.errors.numPosition}</div>) : null}
                         </div>
                         <div
                             className={'d-flex align-items-center justify-content-start form-check fw-bold form-check-solid p-5'}>
@@ -161,9 +223,15 @@ export function JobPosting() {
                         type='submit'
                         id='kt_post_job_submit'
                         className='btn btn-lg btn-primary w-100 w-md-50 w-lg-25 '
-                        // disabled={formik.isSubmitting || !formik.isValid}
+                        disabled={formik.isSubmitting || !formik.isValid}
                     >
-                        Post Job
+                        {!loading && <span className='indicator-label'>Post job</span>}
+                        {loading && (
+                           <span className='indicator-progress' style={{display: 'block'}}>
+                          Please wait...
+                        <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                         </span>
+                        )}
                     </button>
                 </div>
             </div>
