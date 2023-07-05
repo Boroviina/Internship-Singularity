@@ -5,12 +5,13 @@ const catchAsync = require('../utils/catchAsync');
 const { jobApplicationService } = require('../services');
 
 const createJobApplication = catchAsync(async (req, res) => {
-  const jobApplication = await jobApplicationService.createJobApplication(req.body);
+  const body = {user: req.user._id, ...req.body};
+  const jobApplication = await jobApplicationService.createJobApplication(body);
   res.status(httpStatus.CREATED).send(jobApplication);
 });
 
 const getJobApplications = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['jobId', 'userId']);
+  const filter = pick(req.query, ['job', 'user']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await jobApplicationService.queryJobApplications(filter, options);
   res.send(result);
