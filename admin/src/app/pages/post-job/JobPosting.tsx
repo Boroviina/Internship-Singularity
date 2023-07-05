@@ -45,8 +45,8 @@ export function JobPosting() {
                 .min(1, 'Must be at least 1 position')
                 .max(10, 'Can be maximum 10 open positions per job advertisement')
                 .required('Required')
-                .integer()
-                .positive()
+                .integer('It must be whole number')
+                .positive('It must be positive number')
         }),
         onSubmit: async (values,  {resetForm, setStatus, setSubmitting}) => {
             setLoading(true)
