@@ -24,13 +24,9 @@ const loginSchema = Yup.object().shape({
 })
 
 const initialValues = {
-  email: 'romana1@example.com',
-  password: 'password1',
+  email: 'admin@demo.com',
+  password: 'demo',
 }
-// const initialValues = {
-//   email: 'admin@demo.com',
-//   password: 'demo',
-// }
 
 /*
   Formik+YUP+Typescript:
