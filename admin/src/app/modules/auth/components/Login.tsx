@@ -4,10 +4,13 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {getUserByToken, login} from '../core/_requests'
+import {login} from '../core/_requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
 import classes from '../../auth/Opacity.module.css'
+import AuthService from "../../../shared/services/api-client/auth.service";
+
+const authService = new AuthService();
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -22,9 +25,13 @@ const loginSchema = Yup.object().shape({
 })
 
 const initialValues = {
-  email: 'admin@demo.com',
-  password: 'demo',
+  email: 'romana1@example.com',
+  password: 'password1',
 }
+// const initialValues = {
+//   email: 'admin@demo.com',
+//   password: 'demo',
+// }
 
 /*
   Formik+YUP+Typescript:
@@ -42,9 +49,9 @@ export function Login() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
       try {
-        const {data: auth} = await login(values.email, values.password)
+        const {tokens: auth} = await login(values.email, values.password)
         saveAuth(auth)
-        const {data: user} = await getUserByToken(auth.api_token)
+        const user =  await authService.getUser()
         setCurrentUser(user)
       } catch (error) {
         console.error(error)
