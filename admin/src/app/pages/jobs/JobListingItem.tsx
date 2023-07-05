@@ -22,12 +22,11 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                 <h3 className="card-title">{props.item.jobTitle}</h3>
             </div>
             <div className="card-body">
-                <div className="card-label">{props.item.companyName}</div>
+                <div className="card-label"></div>
                 <div className="fv-row">
                     <span>
                         <KTSVG path="/media/icons/duotune/maps/map008.svg" className="svg-icon-2 svg-icon-primary" />
                         <span className="me-2">
-                            {props.item.location}
                         </span>
                     </span>
                     <span>
