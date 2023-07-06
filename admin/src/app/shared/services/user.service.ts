@@ -10,7 +10,6 @@ const getUsers = () => {
 
 export const getUser = (userId: string): Promise<UserModel | null> => {
     return ApiClient.get(`${USERS_ENDPOINT}/${userId}`)
-        .then(response => {
-            return response.data;
-        })
+        .then(response => response.data)
+        .then(data =>  new UserModel(data))
 }

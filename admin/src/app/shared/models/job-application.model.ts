@@ -1,9 +1,11 @@
 import {BaseModel} from "./base.model";
+import {UserModel} from "./user.model";
+import {JobListing} from "./job-listing.model";
 
 export class JobApplication extends BaseModel {
     id: string;
-    user: string;
-    job: string;
+    user: UserModel;
+    job: JobListing;
     phoneNumber: string;
     cv: string;
     coverLetter: string;

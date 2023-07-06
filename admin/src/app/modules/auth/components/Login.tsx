@@ -23,9 +23,13 @@ const loginSchema = Yup.object().shape({
         .required('Password is required'),
 })
 
+// const initialValues = {
+//     email: 'admin@demo.com',
+//     password: 'demo',
+// }
 const initialValues = {
-    email: 'admin@demo.com',
-    password: 'demo',
+    email: 'romana1@example.com',
+    password: 'password1',
 }
 
 /*
@@ -104,33 +108,6 @@ export function Login() {
                 {formik.touched.email && formik.errors.email && (
                     <div className='fv-plugins-message-container'>
                         <span role='alert'>{formik.errors.email}</span>
-                    </div>
-                )}
-            </div>
-            {/* end::Form group */}
-
-            {/* begin::Form group */}
-            <div className='fv-row mb-10'>
-                <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
-                <input
-                    placeholder='Email'
-                    {...formik.getFieldProps('email')}
-                    className={clsx(
-                        `form-control form-control-lg form-control-solid `,
-                        {'is-invalid': formik.touched.email && formik.errors.email},
-                        {
-                            'is-valid': formik.touched.email && !formik.errors.email,
-                        }
-                    )}
-                    type='email'
-                    name='email'
-                    autoComplete='off'
-                />
-                {formik.touched.email && formik.errors.email && (
-                    <div className='fv-plugins-message-container '>
-                        <div className={'fv-help-block'}>
-                            <span role='alert'>{formik.errors.email}</span>
-                        </div>
                     </div>
                 )}
             </div>
