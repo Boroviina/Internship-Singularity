@@ -1,49 +1,53 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import InputField from "./UI/InputField";
 import * as Yup from "yup";
+import {useFormik} from "formik";
+import clsx from "clsx";
+import InputField from "./InputField";
 
 const initialValues = {
-    firstname: '',
-    lastname: '',
-    useremail: '',
+    firstName: '',
+    lastName: '',
+    userEmail: '',
     password: '',
-    changepassword: '',
-    companyname: '',
+    confirmPassword: '',
+
+    companyName: '',
     industry: '',
-    numofemployees: '',
+    numOfEmployees: '',
     city: '',
     address: '',
-    companyemail: '',
+    companyEmail: '',
     phone: '',
     fax: ''
 }
 
 const registrationSchema = Yup.object().shape({
-    firstname: Yup.string()
+    firstName: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('First name is required'),
-    email: Yup.string()
+    userEmail: Yup.string()
         .email('Wrong email format')
         .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
+        .max(50, 'Max 50 symbols')
         .required('Email is required'),
-    lastname: Yup.string()
+    lastName: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Last name is required'),
     password: Yup.string()
-        .min(3, 'Minimum 3 symbols')
+        .min(8, 'Minimum 8 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Password is required'),
-    changepassword: Yup.string()
+    confirmPassword: Yup.string()
         .required('Password confirmation is required')
         .when('password', {
             is: (val: string) => (val && val.length > 0 ? true : false),
-            then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
+            then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password don't match"),
         }),
-    companyname: Yup.string()
+
+    companyName: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Company name is required'),
@@ -51,19 +55,20 @@ const registrationSchema = Yup.object().shape({
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Type of industry is required'),
-    numofemployees: Yup.number()
+    numOfEmployees: Yup.number()
         .min(1, 'Minimum one employee')
-        .max(15000000,'Too many employees'),
+        .max(15000000, 'Too many employees')
+        .typeError('Please insert a number'),
     city: Yup.string()
         .min(2, 'Minimum 2 symbols')
-        .max(50,'Max 50 symbols'),
+        .max(50, 'Max 50 symbols'),
     address: Yup.string()
-        .min(3, 'Minimum 2 symbols')
-        .max(50,'Max 50 symbols'),
-    companyemail: Yup.string()
-        .min(3, 'Minimum 2 symbols')
-        .max(50,'Max 50 symbols')
-        .email('Wrong email format'),
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Max 50 symbols'),
+    companyEmail: Yup.string()
+        .email('Wrong email format')
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Max 50 symbols'),
     phone: Yup.string()
         .min(4, 'Minimum 4 symbols')
         .max(20, 'Max 20 symbols'),
@@ -73,10 +78,18 @@ const registrationSchema = Yup.object().shape({
 })
 
 const EmployerRegistration = () => {
+    const formik = useFormik({
+        initialValues,
+        validationSchema: registrationSchema,
+        onSubmit: () => {
+            //idi na login?
+        }
+    });
+
     return (
         <form
             className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
-            noValidate
+            onSubmit={formik.handleSubmit}
             id='kt_login_signup_form'
         >
             <div className='mb-10 text-center'>
@@ -93,19 +106,37 @@ const EmployerRegistration = () => {
 
             <div className="container">
                 <div className='row'>
-
                     <div className='col-md-6'>
                         <div className="row">
                             <h2 className='text-center'>User information</h2>
                             <div className='col-sm-6'>
-                                <InputField name='First name' placeholder='First name' type='text'/>
+                                <InputField name='First name' placeholder='First name' type='text'
+                                            formikFieldProps={formik.getFieldProps('firstName')}
+                                            formikTouched={formik.touched.firstName}
+                                            formikErrors={formik.errors.firstName}
+                                />
                             </div>
                             <div className='col-sm-6'>
-                                <InputField name='Last name' placeholder='Last name' type='text'/>
+                                <InputField name='Last name' placeholder='Last name' type='text'
+                                            formikFieldProps={formik.getFieldProps('lastName')}
+                                            formikTouched={formik.touched.lastName}
+                                            formikErrors={formik.errors.lastName}
+                                />
                             </div>
                         </div>
-                        <InputField name='Email' placeholder='Email' type='email'/>
-                        <InputField name='Password' placeholder='Password' type='password'/>
+
+                        <InputField name='Email' placeholder='Email' type='email'
+                                    formikFieldProps={formik.getFieldProps('userEmail')}
+                                    formikTouched={formik.touched.userEmail}
+                                    formikErrors={formik.errors.userEmail}
+                        />
+
+                        <InputField name='Password' placeholder='Password' type='password'
+                                    formikFieldProps={formik.getFieldProps('password')}
+                                    formikTouched={formik.touched.password}
+                                    formikErrors={formik.errors.password}
+                        />
+
                         {/*Password meter*/}
                         <div
                             className='d-flex align-items-center my-3'
@@ -119,41 +150,77 @@ const EmployerRegistration = () => {
                         <p className='text-muted'>
                             Use 8 or more characters with a mix of letters, numbers & symbols.
                         </p>
-                        <InputField name='Confirm password' placeholder='Password confirmation' type='password'/>
+
+                        <InputField name='Confirm password' placeholder='Password confirmation' type='password'
+                                    formikFieldProps={formik.getFieldProps('confirmPassword')}
+                                    formikTouched={formik.touched.confirmPassword}
+                                    formikErrors={formik.errors.confirmPassword}
+                        />
                     </div>
 
 
                     <div className='col-md-6'>
 
                         <h2 className='text-center'>Company information</h2>
-                        <InputField name='Company name' placeholder='Company name' type='text'/>
+                        <InputField name='Company name' placeholder='Company name' type='text'
+                                    formikFieldProps={formik.getFieldProps('companyName')}
+                                    formikTouched={formik.touched.companyName}
+                                    formikErrors={formik.errors.companyName}
+                        />
 
                         <div className="row">
                             <div className='col-sm-6'>
-                                <InputField name='Industry' placeholder='What do you do?' type='text'/>
+                                <InputField name='Industry' placeholder='What do you do?' type='text'
+                                            formikFieldProps={formik.getFieldProps('industry')}
+                                            formikTouched={formik.touched.industry}
+                                            formikErrors={formik.errors.industry}
+                                />
                             </div>
                             <div className='col-sm-6'>
-                                <InputField name='No. employees' placeholder='No. of employees' type='text'/>
+                                <InputField name='No. employees' placeholder='No. employees' type='text'
+                                            formikFieldProps={formik.getFieldProps('numOfEmployees')}
+                                            formikTouched={formik.touched.numOfEmployees}
+                                            formikErrors={formik.errors.numOfEmployees}
+                                />
                             </div>
                         </div>
 
                         <div className="row">
                             <div className='col-sm-6'>
-                                <InputField name='City' placeholder='City' type='text'/>
+                                <InputField name='City' placeholder='City' type='text'
+                                            formikFieldProps={formik.getFieldProps('city')}
+                                            formikTouched={formik.touched.city}
+                                            formikErrors={formik.errors.city}
+                                />
                             </div>
                             <div className='col-sm-6'>
-                                <InputField name='Address' placeholder='Address' type='text'/>
+                                <InputField name='Address' placeholder='Address' type='text'
+                                            formikFieldProps={formik.getFieldProps('address')}
+                                            formikTouched={formik.touched.address}
+                                            formikErrors={formik.errors.address}
+                                />
                             </div>
                         </div>
 
-                        <InputField name='Email' placeholder='Email' type='email'/>
-
+                        <InputField name='Email' placeholder='Email' type='email'
+                                    formikFieldProps={formik.getFieldProps('companyEmail')}
+                                    formikTouched={formik.touched.companyEmail}
+                                    formikErrors={formik.errors.companyEmail}
+                        />
                         <div className="row">
                             <div className='col-sm-6'>
-                                <InputField name='Phone' placeholder='Phone' type='text'/>
+                                <InputField name='Phone' placeholder='Phone' type='text'
+                                            formikFieldProps={formik.getFieldProps('phone')}
+                                            formikTouched={formik.touched.phone}
+                                            formikErrors={formik.errors.phone}
+                                />
                             </div>
                             <div className='col-sm-6'>
-                                <InputField name='Fax' placeholder='Fax' type='text'/>
+                                <InputField name='Fax' placeholder='Fax' type='text'
+                                            formikFieldProps={formik.getFieldProps('fax')}
+                                            formikTouched={formik.touched.fax}
+                                            formikErrors={formik.errors.fax}
+                                />
                             </div>
                         </div>
                     </div>
