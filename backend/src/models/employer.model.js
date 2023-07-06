@@ -44,7 +44,6 @@ const employerSchema = mongoose.Schema(
     },
     companyEmail: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
       lowercase: true,
@@ -56,7 +55,6 @@ const employerSchema = mongoose.Schema(
     },
     phone: {
       type: String,
-      required: true,
       trim: true,
       validate(value) {
         if (!validator.isMobilePhone(value)) {
