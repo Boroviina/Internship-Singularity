@@ -1,16 +1,20 @@
 import {BaseModel} from "./base.model";
-import {RequirementsModel} from "./requirements.model";
+// import {RequirementsModel} from "./requirements.model";
 
 export class JobListing extends BaseModel {
     id: string;
     jobTitle: string;
     // companyName: string;
     // location: string;
-    applicationDeadline: Date;
+    appDeadline: Date;
     description: string;
-    requirements: RequirementsModel;
-    applicationInstructions: string;
-    positionNumber: number;
+    // requirements: RequirementsModel;
+    education: string;
+    skills: string;
+    language: string;
+    driverLicense: boolean;
+    appInstructions: string;
+    positionsNum: number;
     cv: boolean;
     coverLetter: boolean;
 
