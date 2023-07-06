@@ -107,8 +107,8 @@ const EmployerRegistration = () => {
             <div className="container">
                 <div className='row'>
                     <div className='col-md'>
+                        <h2 className='text-center'>User information</h2>
                         <div className="row">
-                            <h2 className='text-center'>User information</h2>
                             <div className='col-sm'>
                                 <InputField name='First name' placeholder='First name' type='text'
                                             formikFieldProps={formik.getFieldProps('firstName')}
