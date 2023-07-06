@@ -45,6 +45,7 @@ const employerSchema = mongoose.Schema(
     companyEmail: {
       type: String,
       unique: true,
+      sparse: true,
       trim: true,
       lowercase: true,
       validate(value) {
