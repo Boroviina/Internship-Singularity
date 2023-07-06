@@ -9,12 +9,6 @@ const employerSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
     },
-    users: [
-      {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: 'User',
-      }
-    ],
     companyName: {
       type: String,
       required: [true, 'The field must be filled'],
@@ -27,6 +21,12 @@ const employerSchema = mongoose.Schema(
       trim: true,
       maxLength: [50, 'The field must have maximum 50 characters']
     },
+    users: [
+      {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'User',
+      }
+    ],
     numOfEmployees: {
       type: Number,
       min: 1,
@@ -44,8 +44,6 @@ const employerSchema = mongoose.Schema(
     },
     companyEmail: {
       type: String,
-      unique: true,
-      sparse: true,
       trim: true,
       lowercase: true,
       validate(value) {
