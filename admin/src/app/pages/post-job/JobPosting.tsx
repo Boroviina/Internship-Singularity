@@ -1,6 +1,5 @@
 import React from "react";
 import {useFormik} from "formik";
-import {getUserByToken, login} from "../../modules/auth/core/_requests";
 import * as Yup from "yup";
 
 export function JobPosting() {
