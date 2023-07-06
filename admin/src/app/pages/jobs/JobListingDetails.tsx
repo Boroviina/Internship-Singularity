@@ -15,7 +15,7 @@ export const JobListingsDetails: React.FC<JobListingDetailsProps> = (props) => {
         jobListingDetailsContent = <div className="mt-4">
             <hr/>
             <div>{props.jobListing.description}</div><hr/>
-            <div>{props.jobListing.requirements}</div><hr/>
+            <div>{props.jobListing.requirements.education}</div><hr/>
             <div>{props.jobListing.applicationInstructions}</div><hr/>
 
             <div className="text-center">

@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {JobListingItem} from "./JobListingItem";
 import {JobListing} from "../../shared/models/job-listing.model";
+import {RequirementsModel} from "../../shared/models/requirements.model";
 
 const DUMMY_JOB_LISTINGS: JobListing[] = [
     new JobListing({
@@ -10,8 +11,16 @@ const DUMMY_JOB_LISTINGS: JobListing[] = [
         location: "Location 1",
         applicationDeadline: new Date('2023-06-30'),
         description: 'Description 1',
-        requirements: 'Requirements 1',
-        applicationInstructions: 'Instructions 1'
+        requirements: new RequirementsModel({
+            education: "education 1",
+            skills: "skill 1",
+            language: "en",
+            driverLicense: true
+        }),
+        applicationInstructions: 'Instructions 1',
+        positionNumber: 4,
+        cv: true,
+        coverLetter: false
     }),
     new JobListing({
         id: '12',
@@ -20,8 +29,16 @@ const DUMMY_JOB_LISTINGS: JobListing[] = [
         location: "Location 2",
         applicationDeadline: new Date('2023-07-12'),
         description: 'Description 2',
-        requirements: 'Requirements 2',
-        applicationInstructions: 'Instructions 2'
+        requirements: new RequirementsModel({
+            education: "education 2",
+            skills: "skill 2",
+            language: "en",
+            driverLicense: true
+        }),
+        applicationInstructions: 'Instructions 2',
+        positionNumber: 4,
+        cv: true,
+        coverLetter: false
     }),
     new JobListing({
         id: '13',
@@ -30,8 +47,16 @@ const DUMMY_JOB_LISTINGS: JobListing[] = [
         location: "Location 3",
         applicationDeadline: new Date('2023-07-11'),
         description: 'Description 3',
-        requirements: 'Requirements 3',
-        applicationInstructions: 'Instructions 3'
+        requirements: new RequirementsModel({
+            education: "education 3",
+            skills: "skill 3",
+            language: "en",
+            driverLicense: true
+        }),
+        applicationInstructions: 'Instructions 3',
+        positionNumber: 4,
+        cv: true,
+        coverLetter: false
     })
 ];
 
@@ -47,12 +72,12 @@ export const JobListings = () => {
         No job listings found.
     </div>;
 
-    if(jobListings) {
+    if (jobListings) {
         const currentJobListings = jobListings.map(jobListing => (
-                <JobListingItem
-                    key={jobListing.id}
-                    item={jobListing}
-                />
+            <JobListingItem
+                key={jobListing.id}
+                item={jobListing}
+            />
         ));
         jobListingsContent = <div>{currentJobListings}</div>;
     }
