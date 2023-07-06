@@ -9,6 +9,10 @@ const register = {
   }),
 };
 
+const registerEmployer = {
+
+};
+
 const login = {
   body: Joi.object().keys({
     email: Joi.string().required(),
@@ -51,6 +55,7 @@ const verifyEmail = {
 
 module.exports = {
   register,
+  registerEmployer,
   login,
   logout,
   refreshTokens,
