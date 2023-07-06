@@ -23,13 +23,9 @@ const loginSchema = Yup.object().shape({
         .required('Password is required'),
 })
 
-// const initialValues = {
-//     email: 'admin@demo.com',
-//     password: 'demo',
-// }
 const initialValues = {
-    email: 'romana1@example.com',
-    password: 'password1',
+    email: 'admin@demo.com',
+    password: 'demo',
 }
 
 /*

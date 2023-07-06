@@ -6,11 +6,15 @@ export class JobListing extends BaseModel {
     jobTitle: string;
     // companyName: string;
     // location: string;
-    applicationDeadline: Date;
+    appDeadline: Date;
     description: string;
-    requirements: RequirementsModel;
-    applicationInstructions: string;
-    positionNumber: number;
+    // requirements: RequirementsModel;
+    education: string;
+    skills: string;
+    language: string;
+    driverLicence: boolean;
+    appInstructions: string;
+    positionsNum: number;
     cv: boolean;
     coverLetter: boolean;
 

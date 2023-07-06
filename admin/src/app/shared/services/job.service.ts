@@ -3,8 +3,10 @@ import {JobListing} from "../models/job-listing.model";
 
 const JOBS_ENDPOINT = '/jobs';
 
-const getJobs = () => {
-    return ApiClient.get(JOBS_ENDPOINT).then(response => response.data);
+const getJobs = (): Promise<JobListing[] | null> => {
+    return ApiClient.get(JOBS_ENDPOINT)
+        .then(response => response.data)
+        .then(data => data.results.map(job => new JobListing(job)))
 }
 
 const createJob = (job) => {

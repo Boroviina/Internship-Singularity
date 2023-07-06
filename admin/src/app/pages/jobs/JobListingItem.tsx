@@ -24,15 +24,16 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
             <div className="card-body">
                 <div className="card-label"></div>
                 <div className="fv-row">
-                    <span>
+                    <span className="me-2">
                         <KTSVG path="/media/icons/duotune/maps/map008.svg" className="svg-icon-2 svg-icon-primary" />
-                        <span className="me-2">
+                        <span className="mx-1">Location here
                         </span>
                     </span>
                     <span>
                         <KTSVG path="/media/icons/duotune/general/gen013.svg" className="svg-icon-2 svg-icon-primary" />
-                        <span>
-                            {props.item.applicationDeadline.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
+                        <span className="mx-1">
+                            {/*{props.item.appDeadline.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}*/}
+                            {(new Date(props.item.appDeadline)).toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
                         </span>
                     </span>
                 </div>
