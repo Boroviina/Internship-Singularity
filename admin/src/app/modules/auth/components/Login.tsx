@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState} from 'react'
+import React, {useState} from 'react'
 import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {getUserByToken, login} from '../core/_requests'
-// import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
+import classes from '../../auth/Opacity.module.css'
+import AuthService from "../../../shared/services/api-client/auth.service";
 
+const authService = new AuthService();
 
 const loginSchema = Yup.object().shape({
     email: Yup.string()
@@ -34,6 +36,7 @@ const initialValues = {
 
 export function Login() {
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null);
     const {saveAuth, setCurrentUser} = useAuth()
 
     const formik = useFormik({
@@ -41,13 +44,13 @@ export function Login() {
         validationSchema: loginSchema,
         onSubmit: async (values, {setStatus, setSubmitting}) => {
             setLoading(true)
+            setError(null);
             try {
-                const {data: auth} = await login(values.email, values.password)
+                const {tokens: auth, user} = await authService.login(values.email, values.password)
                 saveAuth(auth)
-                const {data: user} = await getUserByToken(auth.api_token)
                 setCurrentUser(user)
             } catch (error) {
-                console.error(error)
+                setError("The login detail is incorrect!");
                 saveAuth(undefined)
                 setStatus('The login detail is incorrect')
                 setSubmitting(false)
@@ -75,6 +78,36 @@ export function Login() {
             </div>
             {/* begin::Heading */}
 
+            {!loading && error && <div className='mb-lg-15 alert alert-danger'>
+                <div className='alert-text font-weight-bold'>
+                    {error}
+                </div>
+            </div>}
+
+            {/* begin::Form group */}
+            <div className='fv-row mb-10'>
+                <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
+                <input
+                    placeholder='Email'
+                    {...formik.getFieldProps('email')}
+                    className={clsx(
+                        `form-control form-control-lg form-control-solid `,
+                        {'is-invalid': formik.touched.email && formik.errors.email},
+                        {
+                            'is-valid': formik.touched.email && !formik.errors.email,
+                        }
+                    )}
+                    type='email'
+                    name='email'
+                    autoComplete='off'
+                />
+                {formik.touched.email && formik.errors.email && (
+                    <div className='fv-plugins-message-container'>
+                        <span role='alert'>{formik.errors.email}</span>
+                    </div>
+                )}
+            </div>
+            {/* end::Form group */}
 
             {/* begin::Form group */}
             <div className='fv-row mb-10'>
