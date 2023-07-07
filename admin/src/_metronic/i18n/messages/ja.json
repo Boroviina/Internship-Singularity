@@ -1,5 +1,6 @@
 {
   "TRANSLATOR.SELECT": "あなたが使う言語を選んでください",
+  "DATE_FORMAT": "ja-JP",
   "MENU.NEW": "新しい",
   "MENU.ACTIONS": "行動",
   "MENU.CREATE_POST": "新しい投稿を作成",
@@ -66,5 +67,13 @@
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
-  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created"
+  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
+  "JOB_LISTING.LABEL.EDUCATION": "教育",
+  "JOB_LISTING.LABEL.SKILLS": "スキル",
+  "JOB_LISTING.LABEL.LANGUAGES": "言語",
+  "JOB_LISTING.LABEL.DRIVER_LICENSE": "運転免許証が必要です",
+  "JOB_LISTING.LABEL.HOW_TO_APPLY": "適用する方法？",
+  "JOB_LISTING.LABEL.CV": "履歴書",
+  "JOB_LISTING.LABEL.COVER_LETTER": "カバーレター",
+  "JOB_LISTING.BUTTON.APPLY": "今すぐお申し込みください"
 }

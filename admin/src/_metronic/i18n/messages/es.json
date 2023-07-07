@@ -1,5 +1,6 @@
 {
   "TRANSLATOR.SELECT": "Elige tu idioma",
+  "DATE_FORMAT": "es-ES",
   "MENU.NEW": "nuevo",
   "MENU.ACTIONS": "Comportamiento",
   "MENU.CREATE_POST": "Crear nueva publicación",
@@ -66,5 +67,13 @@
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
-  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created"
+  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
+  "JOB_LISTING.LABEL.EDUCATION": "Educación",
+  "JOB_LISTING.LABEL.SKILLS": "Habilidades",
+  "JOB_LISTING.LABEL.LANGUAGES": "Idiomas",
+  "JOB_LISTING.LABEL.DRIVER_LICENSE": "Licencia de conducir necesaria",
+  "JOB_LISTING.LABEL.HOW_TO_APPLY": "¿Cómo aplicar?",
+  "JOB_LISTING.LABEL.CV": "CV",
+  "JOB_LISTING.LABEL.COVER_LETTER": "Carta de presentación",
+  "JOB_LISTING.BUTTON.APPLY": "Aplica ya"
 }

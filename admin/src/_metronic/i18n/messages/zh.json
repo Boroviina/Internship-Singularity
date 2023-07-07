@@ -1,5 +1,6 @@
 {
   "TRANSLATOR.SELECT": "选择你的语言",
+  "DATE_FORMAT": "zh-CN",
   "MENU.NEW": "新",
   "MENU.ACTIONS": "行动",
   "MENU.CREATE_POST": "创建新帖子",
@@ -66,5 +67,13 @@
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
-  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created"
+  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
+  "JOB_LISTING.LABEL.EDUCATION": "教育",
+  "JOB_LISTING.LABEL.SKILLS": "技能",
+  "JOB_LISTING.LABEL.LANGUAGES": "語言",
+  "JOB_LISTING.LABEL.DRIVER_LICENSE": "需要駕駛執照",
+  "JOB_LISTING.LABEL.HOW_TO_APPLY": "如何申請？",
+  "JOB_LISTING.LABEL.CV": "簡歷",
+  "JOB_LISTING.LABEL.COVER_LETTER": "n求職信",
+  "JOB_LISTING.BUTTON.APPLY": "現在申請"
 }

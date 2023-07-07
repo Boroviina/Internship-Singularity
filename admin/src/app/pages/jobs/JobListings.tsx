@@ -37,6 +37,18 @@ export const JobListings = () => {
     }
 
     return (
-        jobListingsContent
+        <>
+            {loading && <div>
+                <span className='indicator-progress' style={{display: 'block'}}> Please wait...
+                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                </span>
+            </div>}
+            {!loading && error && <div className='mb-lg-15 alert alert-danger text-center'>
+                <div className='alert-text font-weight-bold'>
+                    {error}
+                </div>
+            </div>}
+            {!loading && !error && jobListingsContent}
+        </>
     );
 }

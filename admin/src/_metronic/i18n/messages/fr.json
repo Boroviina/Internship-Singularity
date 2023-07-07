@@ -1,5 +1,6 @@
 {
   "TRANSLATOR.SELECT": "choisissez votre langue",
+  "DATE_FORMAT": "fr-FR",
   "MENU.NEW": "Nouveau",
   "MENU.ACTIONS": "Actes",
   "MENU.CREATE_POST": "Créer un nouveau Post",
@@ -66,5 +67,13 @@
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Le statut a été mis à jour pour les clients sélectionnés",
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Le statut des clients sélectionnés a été mis à jour avec succès",
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Le client a été mis à jour",
-  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Le client a été créé"
+  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Le client a été créé",
+  "JOB_LISTING.LABEL.EDUCATION": "Éducation",
+  "JOB_LISTING.LABEL.SKILLS": "Skills",
+  "JOB_LISTING.LABEL.LANGUAGES": "Compétences",
+  "JOB_LISTING.LABEL.DRIVER_LICENSE": "Permis de conduire nécessaire",
+  "JOB_LISTING.LABEL.HOW_TO_APPLY": "Comment s'inscrire?",
+  "JOB_LISTING.LABEL.CV": "CV",
+  "JOB_LISTING.LABEL.COVER_LETTER": "Lettre de motivation",
+  "JOB_LISTING.BUTTON.APPLY": "Appliquer maintenant"
 }

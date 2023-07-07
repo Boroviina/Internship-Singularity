@@ -1,5 +1,6 @@
 {
   "TRANSLATOR.SELECT": "Wähle deine Sprache",
+  "DATE_FORMAT": "de-DE",
   "MENU.NEW": "Neu",
   "MENU.ACTIONS": "Aktionen",
   "MENU.CREATE_POST": "Erstellen Sie einen neuen Beitrag",
@@ -67,5 +68,13 @@
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
-  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created"
+  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
+  "JOB_LISTING.LABEL.EDUCATION": "Ausbildung",
+  "JOB_LISTING.LABEL.SKILLS": "Fähigkeiten",
+  "JOB_LISTING.LABEL.LANGUAGES": "Sprachen",
+  "JOB_LISTING.LABEL.DRIVER_LICENSE": "Führerschein erforderlich",
+  "JOB_LISTING.LABEL.HOW_TO_APPLY": "Wie bewerbe ich mich?",
+  "JOB_LISTING.LABEL.CV": "Lebenslauf",
+  "JOB_LISTING.LABEL.COVER_LETTER": "Motivationsschreiben",
+  "JOB_LISTING.BUTTON.APPLY": "Jetzt bewerben"
 }
