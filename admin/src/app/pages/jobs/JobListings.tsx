@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {JobListingItem} from "./JobListingItem";
 import {getJobs} from "../../shared/services/job.service";
+import {Alert} from "../../shared/components/Alert";
+import {Spinner} from "react-bootstrap";
 
 export const JobListings = () => {
     const [jobListings, setJobListings] = useState([]);
@@ -14,17 +16,15 @@ export const JobListings = () => {
             try {
                 const jobs = await getJobs();
                 setJobListings(jobs);
-                setLoading(false);
             } catch(error) {
                 setError("Error while getting job listings.");
             }
+            setLoading(false);
         }
         fetchJobListings();
     }, []);
 
-    let jobListingsContent = <div className="alert alert-primary text-center" role="alert">
-        No job listings found.
-    </div>;
+    let jobListingsContent = <Alert state="primary" icon="icons/duotune/general/gen021.svg">No job listing found...</Alert>;
 
     if (jobListings) {
         const currentJobListings = jobListings.map(jobListing => (
@@ -38,16 +38,12 @@ export const JobListings = () => {
 
     return (
         <>
-            {loading && <div>
-                <span className='indicator-progress' style={{display: 'block'}}> Please wait...
-                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-                </span>
-            </div>}
-            {!loading && error && <div className='mb-lg-15 alert alert-danger text-center'>
-                <div className='alert-text font-weight-bold'>
-                    {error}
+            {loading &&  <div className="d-flex align-items-center justify-content-center" style={{ height: '100%' }}>
+                <div className="text-center">
+                    <Spinner animation="border"></Spinner>
                 </div>
             </div>}
+            {!loading && error && <Alert state="danger" icon="icons/duotune/general/gen040.svg">{error}</Alert>}
             {!loading && !error && jobListingsContent}
         </>
     );

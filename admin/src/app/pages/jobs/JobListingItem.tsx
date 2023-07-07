@@ -19,7 +19,6 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
     }
 
     return (
-        <>
         <div className={`card card-custom mb-3 `}>
             <div className={`card-header ${classes['hover-card']}`} onClick={clickHandler}>
                 <h3 className="card-title fw-bolder text-dark">{props.item.jobTitle}</h3>
@@ -43,6 +42,5 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                 {detailsShown && <JobListingsDetails jobListing={props.item}></JobListingsDetails>}
                 </div>
         </div>
-        </>
     );
 }

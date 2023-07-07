@@ -8,6 +8,7 @@ import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
 import classes from '../../auth/Opacity.module.css'
 import AuthService from "../../../shared/services/api-client/auth.service";
+import {Alert} from "../../../shared/components/Alert";
 
 const authService = new AuthService();
 
@@ -78,11 +79,7 @@ export function Login() {
             </div>
             {/* begin::Heading */}
 
-            {!loading && error && <div className='mb-lg-15 alert alert-danger'>
-                <div className='alert-text font-weight-bold'>
-                    {error}
-                </div>
-            </div>}
+            {!loading && error && <Alert state="danger" icon="icons/duotune/general/gen044.svg">{error}</Alert>}
 
             {/* begin::Form group */}
             <div className='fv-row mb-10'>
