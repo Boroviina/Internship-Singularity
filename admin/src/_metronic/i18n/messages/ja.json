@@ -20,6 +20,7 @@
   "AUTH.GENERAL.CONTACT": "接触",
   "AUTH.LOGIN.TITLE": "Create Account",
   "AUTH.LOGIN.BUTTON": "Sign In",
+  "AUTH.LOGIN.MESSAGE.ERROR": "ログインの詳細が間違っています。",
   "AUTH.FORGOT.TITLE": "Forgotten Password?",
   "AUTH.FORGOT.DESC": "Enter your email to reset your password",
   "AUTH.FORGOT.SUCCESS": "Your account has been successfully reset.",
@@ -75,5 +76,7 @@
   "JOB_LISTING.LABEL.HOW_TO_APPLY": "適用する方法？",
   "JOB_LISTING.LABEL.CV": "履歴書",
   "JOB_LISTING.LABEL.COVER_LETTER": "カバーレター",
-  "JOB_LISTING.BUTTON.APPLY": "今すぐお申し込みください"
+  "JOB_LISTING.BUTTON.APPLY": "今すぐお申し込みください",
+  "JOB_LISTING.MESSAGE.NO_JOB_LISTINGS": "求人情報が見つかりませんでした...",
+  "JOB_LISTING.MESSAGE.ERROR": "求人情報の取得中にエラーが発生しました。"
 }

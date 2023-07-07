@@ -20,6 +20,7 @@
   "AUTH.GENERAL.CONTACT": "Contacto",
   "AUTH.LOGIN.TITLE": "Crear una cuenta",
   "AUTH.LOGIN.BUTTON": "Registrarse",
+  "AUTH.LOGIN.MESSAGE.ERROR": "¡El detalle de inicio de sesión es incorrecto!",
   "AUTH.FORGOT.TITLE": "Contraseña olvidada?",
   "AUTH.FORGOT.DESC": "Ingrese su correo electrónico para restablecer su contraseña",
   "AUTH.FORGOT.SUCCESS": "Your account has been successfully reset.",
@@ -75,5 +76,7 @@
   "JOB_LISTING.LABEL.HOW_TO_APPLY": "¿Cómo aplicar?",
   "JOB_LISTING.LABEL.CV": "CV",
   "JOB_LISTING.LABEL.COVER_LETTER": "Carta de presentación",
-  "JOB_LISTING.BUTTON.APPLY": "Aplica ya"
+  "JOB_LISTING.BUTTON.APPLY": "Aplica ya",
+  "JOB_LISTING.MESSAGE.NO_JOB_LISTINGS": "No se ha encontrado ninguna oferta de trabajo...",
+  "JOB_LISTING.MESSAGE.ERROR": "Error al obtener listados de trabajo."
 }

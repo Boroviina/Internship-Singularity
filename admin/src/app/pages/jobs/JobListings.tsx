@@ -3,8 +3,11 @@ import {JobListingItem} from "./JobListingItem";
 import {getJobs} from "../../shared/services/job.service";
 import {Alert} from "../../shared/components/Alert";
 import {Spinner} from "react-bootstrap";
+import {useIntl} from "react-intl";
 
 export const JobListings = () => {
+    const intl = useIntl();
+
     const [jobListings, setJobListings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -24,7 +27,7 @@ export const JobListings = () => {
         fetchJobListings();
     }, []);
 
-    let jobListingsContent = <Alert state="primary" icon="icons/duotune/general/gen021.svg">No job listing found...</Alert>;
+    let jobListingsContent = <Alert state="primary" icon="icons/duotune/general/gen021.svg">{intl.formatMessage({id: 'JOB_LISTING.MESSAGE.NO_JOB_LISTINGS'})}</Alert>;
 
     if (jobListings) {
         const currentJobListings = jobListings.map(jobListing => (

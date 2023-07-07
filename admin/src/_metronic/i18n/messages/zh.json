@@ -20,6 +20,7 @@
   "AUTH.GENERAL.CONTACT": "联系",
   "AUTH.LOGIN.TITLE": "创建帐号",
   "AUTH.LOGIN.BUTTON": "签到",
+  "AUTH.LOGIN.MESSAGE.ERROR": "登錄信息不正確！",
   "AUTH.FORGOT.TITLE": "Forgotten Password?",
   "AUTH.FORGOT.DESC": "Enter your email to reset your password",
   "AUTH.FORGOT.SUCCESS": "Your account has been successfully reset.",
@@ -75,5 +76,7 @@
   "JOB_LISTING.LABEL.HOW_TO_APPLY": "如何申請？",
   "JOB_LISTING.LABEL.CV": "簡歷",
   "JOB_LISTING.LABEL.COVER_LETTER": "n求職信",
-  "JOB_LISTING.BUTTON.APPLY": "現在申請"
+  "JOB_LISTING.BUTTON.APPLY": "現在申請",
+  "JOB_LISTING.MESSAGE.NO_JOB_LISTINGS": "未找到職位列表...",
+  "JOB_LISTING.MESSAGE.ERROR": "獲取職位列表時出錯。"
 }

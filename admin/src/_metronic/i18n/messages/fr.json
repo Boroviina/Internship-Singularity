@@ -20,6 +20,7 @@
   "AUTH.GENERAL.CONTACT": "Contact",
   "AUTH.LOGIN.TITLE": "Créer un compte",
   "AUTH.LOGIN.BUTTON": "Sign In",
+  "AUTH.LOGIN.MESSAGE.ERROR": "Les informations de connexion sont incorrectes !",
   "AUTH.FORGOT.TITLE": "Forgotten Password?",
   "AUTH.FORGOT.DESC": "Enter your email to reset your password",
   "AUTH.FORGOT.SUCCESS": "Your account has been successfully reset.",
@@ -75,5 +76,7 @@
   "JOB_LISTING.LABEL.HOW_TO_APPLY": "Comment s'inscrire?",
   "JOB_LISTING.LABEL.CV": "CV",
   "JOB_LISTING.LABEL.COVER_LETTER": "Lettre de motivation",
-  "JOB_LISTING.BUTTON.APPLY": "Appliquer maintenant"
+  "JOB_LISTING.BUTTON.APPLY": "Appliquer maintenant",
+  "JOB_LISTING.MESSAGE.NO_JOB_LISTINGS": "Aucune offre d'emploi trouvée...",
+  "JOB_LISTING.MESSAGE.ERROR": "Erreur lors de l'obtention des offres d'emploi."
 }

@@ -21,6 +21,7 @@
   "AUTH.GENERAL.CONTACT": "Contact",
   "AUTH.LOGIN.TITLE": "Login Account",
   "AUTH.LOGIN.BUTTON": "Sign In",
+  "AUTH.LOGIN.MESSAGE.ERROR": "The login detail is incorrect!",
   "AUTH.FORGOT.TITLE": "Forgotten Password?",
   "AUTH.FORGOT.DESC": "Enter your email to reset your password",
   "AUTH.FORGOT.SUCCESS": "Your account has been successfully reset.",
@@ -76,5 +77,7 @@
   "JOB_LISTING.LABEL.HOW_TO_APPLY": "How to apply?",
   "JOB_LISTING.LABEL.CV": "CV",
   "JOB_LISTING.LABEL.COVER_LETTER": "Cover letter",
-  "JOB_LISTING.BUTTON.APPLY": "Apply now"
+  "JOB_LISTING.BUTTON.APPLY": "Apply now",
+  "JOB_LISTING.MESSAGE.NO_JOB_LISTINGS": "No job listing found...",
+  "JOB_LISTING.MESSAGE.ERROR": "Error while getting job listings."
 }
