@@ -1,5 +1,6 @@
 {
   "TRANSLATOR.SELECT": "Wähle deine Sprache",
+  "DATE_FORMAT": "de-DE",
   "MENU.NEW": "Neu",
   "MENU.ACTIONS": "Aktionen",
   "MENU.CREATE_POST": "Erstellen Sie einen neuen Beitrag",
@@ -20,6 +21,7 @@
   "AUTH.GENERAL.CONTACT": "Kontakt",
   "AUTH.LOGIN.TITLE": "Create Account",
   "AUTH.LOGIN.BUTTON": "Sign In",
+  "AUTH.LOGIN.MESSAGE.ERROR": "Die Anmeldedaten sind falsch!",
   "AUTH.FORGOT.TITLE": "Forgotten Password?",
   "AUTH.FORGOT.DESC": "Enter your email to reset your password",
   "AUTH.FORGOT.SUCCESS": "Your account has been successfully reset.",
@@ -67,5 +69,15 @@
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
-  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created"
+  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
+  "JOB_LISTING.LABEL.EDUCATION": "Ausbildung",
+  "JOB_LISTING.LABEL.SKILLS": "Fähigkeiten",
+  "JOB_LISTING.LABEL.LANGUAGES": "Sprachen",
+  "JOB_LISTING.LABEL.DRIVER_LICENSE": "Führerschein erforderlich",
+  "JOB_LISTING.LABEL.HOW_TO_APPLY": "Wie bewerbe ich mich?",
+  "JOB_LISTING.LABEL.CV": "Lebenslauf",
+  "JOB_LISTING.LABEL.COVER_LETTER": "Motivationsschreiben",
+  "JOB_LISTING.BUTTON.APPLY": "Jetzt bewerben",
+  "JOB_LISTING.MESSAGE.NO_JOB_LISTINGS": "Keine Stellenanzeige gefunden...",
+  "JOB_LISTING.MESSAGE.ERROR": "Beim Abrufen der Stellenangebote ist ein Fehler aufgetreten."
 }

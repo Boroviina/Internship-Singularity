@@ -8,6 +8,8 @@ import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
 import classes from '../../auth/Opacity.module.css'
 import AuthService from "../../../shared/services/api-client/auth.service";
+import {Alert} from "../../../shared/components/Alert";
+import {useIntl} from "react-intl";
 
 const authService = new AuthService();
 
@@ -35,6 +37,8 @@ const initialValues = {
 */
 
 export function Login() {
+    const intl = useIntl();
+
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null);
     const {saveAuth, setCurrentUser} = useAuth()
@@ -50,7 +54,7 @@ export function Login() {
                 saveAuth(auth)
                 setCurrentUser(user)
             } catch (error) {
-                setError("The login detail is incorrect!");
+                setError(intl.formatMessage({id: 'AUTH.LOGIN.MESSAGE.ERROR'}));
                 saveAuth(undefined)
                 setStatus('The login detail is incorrect')
                 setSubmitting(false)
@@ -78,11 +82,7 @@ export function Login() {
             </div>
             {/* begin::Heading */}
 
-            {!loading && error && <div className='mb-lg-15 alert alert-danger'>
-                <div className='alert-text font-weight-bold'>
-                    {error}
-                </div>
-            </div>}
+            {!loading && error && <Alert state="danger" icon="icons/duotune/general/gen044.svg">{error}</Alert>}
 
             {/* begin::Form group */}
             <div className='fv-row mb-10'>

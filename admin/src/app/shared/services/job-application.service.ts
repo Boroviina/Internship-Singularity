@@ -1,7 +1,8 @@
 import ApiClient from './api-client/api-client';
+import { JobApplication } from "../models/job-application.model";
 
 const USERS_ENDPOINT = '/job-applications';
 
-// const createJobApplication = (job: string, phoneNumber: string, cv: string, coverLetter: string, additionalDocument: string) => {
-//     return ApiClient.post(USERS_ENDPOINT, {job, phoneNumber, cv, coverLetter, additionalDocument})
+// const createJobApplication = (jobApplication: JobApplication) => {
+//     return ApiClient.post(USERS_ENDPOINT, {jobApplication})
 // }

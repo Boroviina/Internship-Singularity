@@ -6,4 +6,9 @@ export class UserModel extends BaseModel {
   email: string;
   role: string;
   isEmailVerified: string;
+
+  constructor(attributes?: any) {
+    super();
+    this.setAttributes(attributes);
+  }
 }

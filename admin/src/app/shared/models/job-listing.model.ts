@@ -1,5 +1,5 @@
 import {BaseModel} from "./base.model";
-// import {RequirementsModel} from "./requirements.model";
+import {RequirementsModel} from "./requirements.model";
 
 export class JobListing extends BaseModel {
     id: string;
@@ -12,7 +12,7 @@ export class JobListing extends BaseModel {
     education: string;
     skills: string;
     language: string;
-    driverLicense: boolean;
+    driverLicence: boolean;
     appInstructions: string;
     positionsNum: number;
     cv: boolean;
