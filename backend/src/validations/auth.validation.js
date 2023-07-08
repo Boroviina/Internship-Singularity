@@ -9,6 +9,23 @@ const register = {
   }),
 };
 
+const registerEmployer = {
+  body: Joi.object().keys({
+    user: Joi.object().keys({
+      email: Joi.string().required().email(),
+      password: Joi.string().required().custom(password),
+      name: Joi.string().required(),
+    }),
+    companyName: Joi.string().required(),
+    industry: Joi.string().required(),
+    numOfEmployees: Joi.number().optional().integer().min(1).max(1500000),
+    city: Joi.string().optional(),
+    address: Joi.string().optional(),
+    phone: Joi.string().optional(),
+    fax: Joi.string().optional(),
+  }),
+};
+
 const login = {
   body: Joi.object().keys({
     email: Joi.string().required(),
@@ -51,6 +68,7 @@ const verifyEmail = {
 
 module.exports = {
   register,
+  registerEmployer,
   login,
   logout,
   refreshTokens,

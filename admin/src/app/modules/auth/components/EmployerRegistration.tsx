@@ -106,17 +106,17 @@ const EmployerRegistration = () => {
 
             <div className="container">
                 <div className='row'>
-                    <div className='col-md-6'>
+                    <div className='col-md'>
+                        <h2 className='text-center'>User information</h2>
                         <div className="row">
-                            <h2 className='text-center'>User information</h2>
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='First name' placeholder='First name' type='text'
                                             formikFieldProps={formik.getFieldProps('firstName')}
                                             formikTouched={formik.touched.firstName}
                                             formikErrors={formik.errors.firstName}
                                 />
                             </div>
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='Last name' placeholder='Last name' type='text'
                                             formikFieldProps={formik.getFieldProps('lastName')}
                                             formikTouched={formik.touched.lastName}
@@ -159,7 +159,7 @@ const EmployerRegistration = () => {
                     </div>
 
 
-                    <div className='col-md-6'>
+                    <div className='col-md'>
 
                         <h2 className='text-center'>Company information</h2>
                         <InputField name='Company name' placeholder='Company name' type='text'
@@ -169,14 +169,14 @@ const EmployerRegistration = () => {
                         />
 
                         <div className="row">
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='Industry' placeholder='What do you do?' type='text'
                                             formikFieldProps={formik.getFieldProps('industry')}
                                             formikTouched={formik.touched.industry}
                                             formikErrors={formik.errors.industry}
                                 />
                             </div>
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='No. employees' placeholder='No. employees' type='text'
                                             formikFieldProps={formik.getFieldProps('numOfEmployees')}
                                             formikTouched={formik.touched.numOfEmployees}
@@ -186,14 +186,14 @@ const EmployerRegistration = () => {
                         </div>
 
                         <div className="row">
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='City' placeholder='City' type='text'
                                             formikFieldProps={formik.getFieldProps('city')}
                                             formikTouched={formik.touched.city}
                                             formikErrors={formik.errors.city}
                                 />
                             </div>
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='Address' placeholder='Address' type='text'
                                             formikFieldProps={formik.getFieldProps('address')}
                                             formikTouched={formik.touched.address}
@@ -208,7 +208,7 @@ const EmployerRegistration = () => {
                                     formikErrors={formik.errors.companyEmail}
                         />
                         <div className="row">
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='Phone' placeholder='Phone' type='text'
                                             formikFieldProps={formik.getFieldProps('phone')}
                                             formikTouched={formik.touched.phone}

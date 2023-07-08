@@ -33,7 +33,7 @@ const jobSchema = mongoose.Schema(
       trim: true,
       maxLength: [100, 'The field must have less than or equal to 100 characters']
     },
-    driverLicence: {
+    driverLicense: {
       type: Boolean
     },
     appDeadline: {
