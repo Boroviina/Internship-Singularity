@@ -1,11 +1,19 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService } = require('../services');
+const employerService = require("../services/employer.service");
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   const tokens = await tokenService.generateAuthTokens(user);
   res.status(httpStatus.CREATED).send({ user, tokens });
+});
+
+const registerEmployer = catchAsync(async (req, res) => {
+  const user = await userService.createUser(req.body.user);
+  const employerBody =  {adminUser: user.id, ...req.body};
+  const employer = await employerService.createEmployer(employerBody);
+  res.status(httpStatus.CREATED).send(employer);
 });
 
 const login = catchAsync(async (req, res) => {
@@ -49,6 +57,7 @@ const verifyEmail = catchAsync(async (req, res) => {
 
 module.exports = {
   register,
+  registerEmployer,
   login,
   logout,
   refreshTokens,
