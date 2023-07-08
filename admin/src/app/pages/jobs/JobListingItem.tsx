@@ -32,7 +32,7 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                     <span>
                         <KTSVG path="/media/icons/duotune/general/gen013.svg" className="svg-icon-2 svg-icon-primary" />
                         <span>
-                            {props.item.applicationDeadline.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
+                            {props.item.appDeadline.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'})}
                         </span>
                     </span>
                 </div>
