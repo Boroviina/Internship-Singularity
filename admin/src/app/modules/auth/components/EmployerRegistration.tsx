@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
-import clsx from "clsx";
 import InputField from "./InputField";
 import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
-import {createJob} from "../../../shared/services/job.service";
+import {registerEmployer} from "../../../shared/services/employer.service";
+import {UserModel} from "../../../shared/models/user.model";
 
 const initialValues = {
     firstName: '',
@@ -83,17 +83,29 @@ const EmployerRegistration = () => {
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchema,
-        onSubmit: () => {
-            // setLoading(true)
-            // try {
-            //     setSubmitting(false);
-            //     await registerEmployer(values);
-            // } catch (error) {
-            //     setStatus('Check if all inputs are filled');
-            //     setSubmitting(false);
-            //     setLoading(false);
-            // }
-            // resetForm();
+        onSubmit: async (values) => {
+            try {
+                const user = {
+                    name: values.firstName + " " + values.lastName,
+                    email: values.userEmail,
+                    password: values.password
+                }
+                const employer = {
+                    adminUser: user,
+                    companyName: values.companyName,
+                    industry: values.industry,
+                    numOfEmployees: values.numOfEmployees,
+                    city: values.city,
+                    address: values.address,
+                    companyEmail: values.companyEmail,
+                    phone: values.phone,
+                    fax: values.fax,
+                };
+                console.log("\n\nREGISTERED EMPLOYER:" + employer + "\n\n");
+                await registerEmployer(employer);
+            } catch (error) {
+                console.log(error);
+            }
         }
     });
 
