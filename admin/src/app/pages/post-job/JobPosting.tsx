@@ -202,7 +202,7 @@ export function JobPosting() {
                             className={'text-danger mt-1 fs-6 italic'}>{formik.errors.numPosition}</div>) : null}
                 </div>
                 <div
-                    className={'col-12 col-md-3 d-flex justify-content-start align-items-center form-check fw-bold form-check-solid pt-2'}>
+                    className={'col-12 col-md-3 d-flex justify-content-start align-items-center form-check fw-bold form-check-solid mt-5 pt-3'}>
                     <input type="checkbox"
                            className={`mx-3`}
                            onChange={formik.handleChange}
@@ -212,7 +212,7 @@ export function JobPosting() {
                     <label htmlFor="" className={`text-dark text-nowrap fw-bold fs-3`}>CV required</label>
                 </div>
                 <div
-                    className={'col-12 d-flex col-md-3 justify-content-start align-items-center  form-check fw-bold form-check-solid pt-2'}>
+                    className={'col-12 d-flex col-md-3 justify-content-start align-items-center  form-check fw-bold form-check-solid mt-5 pt-3'}>
                     <input type="checkbox"
                            className={`mx-3`}
                            onChange={formik.handleChange}
