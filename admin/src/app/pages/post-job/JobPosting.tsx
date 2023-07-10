@@ -144,10 +144,9 @@ export function JobPosting() {
                                     className={'text-danger mt-1 fs-6 italic'}>{formik.errors.languages}</div>) : null}
                             </div>
                         </div>
-                        <div
-                            className={'col-4 d-flex justify-content-start align-items-center form-check fw-bold form-check-solid p-5'}>
+                        <div className={'col-4 d-flex justify-content-start align-items-center form-check-solid fw-bold p-5'}>
                             <input type="checkbox"
-                                   className={`mx-3`}
+                                   className={`mx-3 form-check-input`}
                                    onChange={formik.handleChange}
                                    name="driverLicense"
                                    id="driverLicense"
@@ -201,9 +200,9 @@ export function JobPosting() {
                                     className={'text-danger mt-1 fs-6 italic'}>{formik.errors.numPosition}</div>) : null}
                         </div>
                         <div
-                            className={'d-flex align-items-center justify-content-start form-check fw-bold form-check-solid p-5'}>
+                            className={'d-flex align-items-center justify-content-start fw-bold form-check-solid p-5'}>
                             <input type="checkbox"
-                                   className={`mx-3`}
+                                   className={`mx-3 form-check-input`}
                                    onChange={formik.handleChange}
                                    name="cv"
                                    id="cv"
@@ -211,9 +210,9 @@ export function JobPosting() {
                             <label htmlFor="" className={`text-dark fw-bold fs-3`}>CV required</label>
                         </div>
                         <div
-                            className={'d-flex justify-content-start align-items-center form-check fw-bold form-check-solid p-5'}>
+                            className={'d-flex justify-content-start align-items-center fw-bold form-check-solid p-5'}>
                             <input type="checkbox"
-                                   className={`mx-3`}
+                                   className={`mx-3 form-check-input`}
                                    onChange={formik.handleChange}
                                    name="coverLetter"
                                    id="coverLetter"
