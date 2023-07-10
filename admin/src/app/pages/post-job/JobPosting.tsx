@@ -174,7 +174,7 @@ export function JobPosting() {
                 <div className={`fv-row mb-10`}>
                     <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
                         instructions</label>
-                    <textarea className={`mb-5 form-control form-control-lg form-control-solid`}
+                    <textarea className={`form-control form-control-lg form-control-solid`}
                               placeholder='Input instructions...'
                               onChange={formik.handleChange}
                               name="appInstructions"
@@ -182,8 +182,9 @@ export function JobPosting() {
                               value={formik.values.appInstructions}
                               onBlur={formik.handleBlur}></textarea>
                     {formik.touched.appInstructions && formik.errors.appInstructions ? (
-                        <div className={'text-danger mt-0 fs-6 italic'}>{formik.errors.appInstructions}</div>) : null}
-                    <div className='d-flex justify-content-sm-start align-items-center flex-md-row flex-column'>
+                        <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appInstructions}</div>) : null}
+
+                    <div className='d-flex justify-content-sm-start align-items-center flex-md-row flex-column mt-5'>
                         <div className={'col-12 col-md-6'}>
                             <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Number of open
                                 positions</label>
