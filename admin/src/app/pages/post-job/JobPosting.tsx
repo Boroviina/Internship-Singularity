@@ -67,8 +67,8 @@ export function JobPosting() {
               noValidate
               className={`form`}
               onSubmit={formik.handleSubmit}>
-            <div className={`row p-4 my-3`}>
-                <h1>Insert Job Features</h1>
+            <div className={`row mb-10  my-3`}>
+                <h1 className={'display-6'}>Insert Job Features</h1>
             </div>
             <div className={`fv-row mb-10`}>
                 <label htmlFor="jobTitle" className={`form-label text-dark fw-bold fs-6 required`}>Job title</label>
