@@ -24,16 +24,16 @@ const jobApplicationSchema = mongoose.Schema(
     },
     cv: {
       type: String,
-      required: true,
-      trim: true,
+      // required: true,
+      // trim: true,
     },
     coverLetter: {
       type: String,
-      trim: true,
+      // trim: true,
     },
     additionalDocument: {
       type: String,
-      trim: true,
+      // trim: true,
     },
   },
   {
