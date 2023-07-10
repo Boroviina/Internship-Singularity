@@ -1,29 +1,29 @@
 import React from 'react';
 import clsx from "clsx";
 
-const InputField = (props) => {
+const InputField = ({name, placeholder, type, formikFieldProps, formikTouched, formikErrors}) => {
     return (
         <>
-            <label className='form-label fw-bolder text-dark fs-6'>{props.name}</label>
+            <label className='form-label fw-bolder text-dark fs-6'>{name}</label>
             <input value=""
-                placeholder={props.placeholder}
-                type={props.type}
+                placeholder={placeholder}
+                type={type}
                 autoComplete='off'
-                {...props.formikFieldProps}
+                {...formikFieldProps}
                 className={clsx(
                     'form-control form-control-lg form-control-solid',
                     {
-                        'is-invalid': props.formikTouched && props.formikErrors,
+                        'is-invalid': formikTouched && formikErrors,
                     },
                     {
-                        'is-valid': props.formikTouched && !props.formikErrors && props.formikFieldProps.value !== '',
+                        'is-valid': formikTouched && !formikErrors && formikFieldProps.value !== '',
                     }
                 )}
             />
-            {props.formikTouched && props.formikErrors && (
+            {formikTouched && formikErrors && (
                 <div className='fv-plugins-message-container'>
                     <div className='fv-help-block'>
-                        <span role='alert'>{props.formikErrors}</span>
+                        <span role='alert'>{formikErrors}</span>
                     </div>
                 </div>
             )}
