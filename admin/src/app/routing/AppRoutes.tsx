@@ -10,7 +10,6 @@ import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom'
 import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Logout, AuthPage, useAuth} from '../modules/auth'
-import {About} from '../../app/modules/auth/Additional information pages/About'
 import {App} from '../App'
 
 /**

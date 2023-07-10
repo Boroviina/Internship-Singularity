@@ -7,7 +7,6 @@ import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 import {JobPosting} from "../pages/post-job/JobPosting";
 import {JobListings} from "../pages/jobs/JobListings";
-import {About} from "../modules/auth/Additional information pages/About";
 
 const PrivateRoutes = () => {
     //const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
