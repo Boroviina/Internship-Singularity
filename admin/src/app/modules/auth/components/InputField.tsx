@@ -5,7 +5,7 @@ const InputField = (props) => {
     return (
         <>
             <label className='form-label fw-bolder text-dark fs-6'>{props.name}</label>
-            <input
+            <input value=""
                 placeholder={props.placeholder}
                 type={props.type}
                 autoComplete='off'
@@ -16,7 +16,7 @@ const InputField = (props) => {
                         'is-invalid': props.formikTouched && props.formikErrors,
                     },
                     {
-                        'is-valid': props.formikTouched && !props.formikErrors,
+                        'is-valid': props.formikTouched && !props.formikErrors && props.formikFieldProps.value !== '',
                     }
                 )}
             />
