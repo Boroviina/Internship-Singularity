@@ -48,7 +48,7 @@ export function JobPosting() {
                 .integer('It must be whole number')
                 .positive('It must be positive number')
         }),
-        onSubmit: async (values,  {resetForm, setStatus, setSubmitting}) => {
+        onSubmit: async (values, {resetForm, setStatus, setSubmitting}) => {
             setLoading(true)
             try {
                 setSubmitting(false);
@@ -127,25 +127,22 @@ export function JobPosting() {
                         </div>
                     </div>
                     <div
-                        className={`row d-flex justify-content-between align-items-md-center flex-column flex-md-row mb-5`}>
-                        <div
-                            className={`col-12 col-md-8 flex-column d-flex align-items-center justify-content-between flex-md-row `}>
-                            <div className={"col-md-11 col-12 mb-5 "}>
-                                <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Languages</label>
-                                <input type={"text"}
-                                       className={`form-control form-control-solid form-control-lg`}
-                                       placeholder={'Insert required languages...'}
-                                       onChange={formik.handleChange}
-                                       name="languages"
-                                       id="languages"
-                                       value={formik.values.languages}>
-                                </input>
-                                {formik.errors.languages ? (<div
-                                    className={'text-danger mt-1 fs-6 italic'}>{formik.errors.languages}</div>) : null}
-                            </div>
+                        className={`row d-flex justify-content-between align-items-center flex-column flex-md-row mb-5`}>
+                        <div className={"col-md-8 col-12 mb-5 "}>
+                            <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Languages</label>
+                            <input type={"text"}
+                                   className={`form-control form-control-solid form-control-lg`}
+                                   placeholder={'Insert required languages...'}
+                                   onChange={formik.handleChange}
+                                   name="languages"
+                                   id="languages"
+                                   value={formik.values.languages}>
+                            </input>
+                            {formik.errors.languages ? (<div
+                                className={'text-danger mt-1 fs-6 italic'}>{formik.errors.languages}</div>) : null}
                         </div>
                         <div
-                            className={'col-4 d-flex justify-content-start align-items-center form-check fw-bold form-check-solid p-5'}>
+                            className={'col-12 col-md-4 d-flex justify-content-start mt-2 align-items-center form-check fw-bold form-check-solid pt-2'}>
                             <input type="checkbox"
                                    className={`mx-3`}
                                    onChange={formik.handleChange}
@@ -157,88 +154,91 @@ export function JobPosting() {
                         </div>
                     </div>
                 </div>
-                <div className={`fv-row mb-10`}>
-                    <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
-                        deadline</label>
-                    <input type="date"
+            </div>
+            <div className={`fv-row mb-10`}>
+                <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
+                    deadline</label>
+                <input type="date"
+                       className={`form-control form-control-lg form-control-solid`}
+                       onChange={formik.handleChange}
+                       name="appDeadline"
+                       id="appDeadline"
+                       value={formik.values.appDeadline}
+                       onBlur={formik.handleBlur}/>
+                {formik.touched.appDeadline && formik.errors.appDeadline ? (
+                    <div
+                        className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appDeadline}</div>) : null}
+            </div>
+            <div className={`fv-row mb-10`}>
+                <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
+                    instructions</label>
+                <textarea className={`form-control form-control-lg form-control-solid`}
+                          placeholder='Input instructions...'
+                          onChange={formik.handleChange}
+                          name="appInstructions"
+                          id="appInstructions"
+                          value={formik.values.appInstructions}
+                          onBlur={formik.handleBlur}></textarea>
+                {formik.touched.appInstructions && formik.errors.appInstructions ? (
+                    <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appInstructions}</div>) : null}
+            </div>
+
+
+            <div className='d-flex mb-10 justify-content-between align-items-center flex-column flex-md-row'>
+                <div className={'col-12 col-md-6'}>
+                    <label htmlFor="" className={`text-dark form-label fw-bold fs-6 required`}>Number of open
+                        positions</label>
+                    <input type="number"
+                           min={0}
+                           placeholder={'Insert the open positions number'}
                            className={`form-control form-control-lg form-control-solid`}
                            onChange={formik.handleChange}
-                           name="appDeadline"
-                           id="appDeadline"
-                           value={formik.values.appDeadline}
-                           onBlur={formik.handleBlur}/>
-                    {formik.touched.appDeadline && formik.errors.appDeadline ? (
+                           name="numPosition"
+                           id="numPosition"
+                           onBlur={formik.handleBlur}
+                           value={formik.values.numPosition}/>
+                    {formik.touched.numPosition && formik.errors.numPosition ? (
                         <div
-                            className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appDeadline}</div>) : null}
+                            className={'text-danger mt-1 fs-6 italic'}>{formik.errors.numPosition}</div>) : null}
                 </div>
-                <div className={`fv-row mb-10`}>
-                    <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
-                        instructions</label>
-                    <textarea className={`form-control form-control-lg form-control-solid`}
-                              placeholder='Input instructions...'
-                              onChange={formik.handleChange}
-                              name="appInstructions"
-                              id="appInstructions"
-                              value={formik.values.appInstructions}
-                              onBlur={formik.handleBlur}></textarea>
-                    {formik.touched.appInstructions && formik.errors.appInstructions ? (
-                        <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appInstructions}</div>) : null}
+                <div
+                    className={'col-12 col-md-3 d-flex justify-content-start align-items-center form-check fw-bold form-check-solid pt-2'}>
+                    <input type="checkbox"
+                           className={`mx-3`}
+                           onChange={formik.handleChange}
+                           name="cv"
+                           id="cv"
+                           checked={formik.values.cv}/>
+                    <label htmlFor="" className={`text-dark text-nowrap fw-bold fs-3`}>CV required</label>
+                </div>
+                <div
+                    className={'col-12 d-flex col-md-3 justify-content-start align-items-center  form-check fw-bold form-check-solid pt-2'}>
+                    <input type="checkbox"
+                           className={`mx-3`}
+                           onChange={formik.handleChange}
+                           name="coverLetter"
+                           id="coverLetter"
+                           checked={formik.values.coverLetter}/>
+                    <label htmlFor="" className={`text-dark text-nowrap fw-bold fs-3`}>Cover letter</label>
+                </div>
+            </div>
 
-                    <div className='d-flex justify-content-sm-start align-items-center flex-md-row flex-column mt-5'>
-                        <div className={'col-12 col-md-6'}>
-                            <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Number of open
-                                positions</label>
-                            <input type="number"
-                                   min={0}
-                                   placeholder={'Insert the open positions number'}
-                                   className={`form-control form-control-lg form-control-solid`}
-                                   onChange={formik.handleChange}
-                                   name="numPosition"
-                                   id="numPosition"
-                                   onBlur={formik.handleBlur}
-                                   value={formik.values.numPosition}/>
-                            {formik.touched.numPosition && formik.errors.numPosition ? (
-                                <div
-                                    className={'text-danger mt-1 fs-6 italic'}>{formik.errors.numPosition}</div>) : null}
-                        </div>
-                        <div
-                            className={'d-flex align-items-center justify-content-start form-check fw-bold form-check-solid p-5'}>
-                            <input type="checkbox"
-                                   className={`mx-3`}
-                                   onChange={formik.handleChange}
-                                   name="cv"
-                                   id="cv"
-                                   checked={formik.values.cv}/>
-                            <label htmlFor="" className={`text-dark fw-bold fs-3`}>CV required</label>
-                        </div>
-                        <div
-                            className={'d-flex justify-content-start align-items-center form-check fw-bold form-check-solid p-5'}>
-                            <input type="checkbox"
-                                   className={`mx-3`}
-                                   onChange={formik.handleChange}
-                                   name="coverLetter"
-                                   id="coverLetter"
-                                   checked={formik.values.coverLetter}/>
-                            <label htmlFor="" className={`text-dark fw-bold fs-3`}>Cover letter</label>
-                        </div>
-                    </div>
-                </div>
-                <div className={`d-flex justify-content-end mb-5`}>
-                    <button
-                        type='submit'
-                        id='kt_post_job_submit'
-                        className='btn btn-lg btn-primary w-100 w-md-50 w-lg-25 '
-                        disabled={formik.isSubmitting || !formik.isValid}
-                    >
-                        {!loading && <span className='indicator-label'>Post job</span>}
-                        {loading && (
-                            <span className='indicator-progress' style={{display: 'block'}}>
+
+            <div className={`d-flex justify-content-end mb-5`}>
+                <button
+                    type='submit'
+                    id='kt_post_job_submit'
+                    className='btn btn-lg btn-primary w-100 w-md-50 w-lg-25 '
+                    disabled={formik.isSubmitting || !formik.isValid}
+                >
+                    {!loading && <span className='indicator-label'>Post job</span>}
+                    {loading && (
+                        <span className='indicator-progress' style={{display: 'block'}}>
                           Please wait...
                         <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                          </span>
-                        )}
-                    </button>
-                </div>
+                    )}
+                </button>
             </div>
         </form>
     </div>
