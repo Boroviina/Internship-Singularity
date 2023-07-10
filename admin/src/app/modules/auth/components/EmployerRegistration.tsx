@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import clsx from "clsx";
 import InputField from "./InputField";
+import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
 
 const initialValues = {
     firstName: '',
@@ -86,6 +87,10 @@ const EmployerRegistration = () => {
         }
     });
 
+    useEffect(() => {
+        PasswordMeterComponent.bootstrap()
+    }, [])
+
     return (
         <form
             className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
@@ -131,22 +136,26 @@ const EmployerRegistration = () => {
                                     formikErrors={formik.errors.userEmail}
                         />
 
-                        <InputField name='Password' placeholder='Password' type='password'
-                                    formikFieldProps={formik.getFieldProps('password')}
-                                    formikTouched={formik.touched.password}
-                                    formikErrors={formik.errors.password}
-                        />
+                        <div data-kt-password-meter='true'>
+                            <InputField name='Password' placeholder='Password' type='password'
+                                        formikFieldProps={formik.getFieldProps('password')}
+                                        formikTouched={formik.touched.password}
+                                        formikErrors={formik.errors.password}
+                            />
 
-                        {/*Password meter*/}
-                        <div
-                            className='d-flex align-items-center my-3'
-                            data-kt-password-meter-control='highlight'
-                        >
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px'></div>
+                            {/*Password meter*/}
+                            <div
+                                className='d-flex align-items-center my-3'
+                                data-kt-password-meter-control='highlight'
+                            >
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px'></div>
+                            </div>
+                            {/*End Password meter*/}
                         </div>
+
                         <p className='text-muted'>
                             Use 8 or more characters with a mix of letters, numbers & symbols.
                         </p>
