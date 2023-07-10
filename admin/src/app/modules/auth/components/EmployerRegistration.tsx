@@ -5,6 +5,7 @@ import {useFormik} from "formik";
 import clsx from "clsx";
 import InputField from "./InputField";
 import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
+import {createJob} from "../../../shared/services/job.service";
 
 const initialValues = {
     firstName: '',
@@ -83,7 +84,16 @@ const EmployerRegistration = () => {
         initialValues,
         validationSchema: registrationSchema,
         onSubmit: () => {
-            //idi na login?
+            // setLoading(true)
+            // try {
+            //     setSubmitting(false);
+            //     await registerEmployer(values);
+            // } catch (error) {
+            //     setStatus('Check if all inputs are filled');
+            //     setSubmitting(false);
+            //     setLoading(false);
+            // }
+            // resetForm();
         }
     });
 
