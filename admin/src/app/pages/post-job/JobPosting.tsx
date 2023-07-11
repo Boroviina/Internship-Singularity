@@ -2,7 +2,9 @@ import React, {useState} from "react";
 import {useFormik} from "formik";
 import * as Yup from 'yup';
 import {createJob} from "../../shared/services/job.service";
-
+import clsx from "clsx";
+import {JobInputField} from "./JobInputField";
+import {JobTextareaField} from "./JobInputField";
 
 export function JobPosting() {
     const [loading, setLoading] = useState(false)
@@ -71,75 +73,41 @@ export function JobPosting() {
                 <h1 className={'display-6'}>Insert Job Features</h1>
             </div>
             <div className={`fv-row mb-10`}>
-                <label htmlFor="jobTitle" className={`form-label text-dark fw-bold fs-6 required`}>Job title</label>
-                <input type="text"
-                       className={`form-control form-control-lg form-control-solid`}
-                       placeholder='Inster job title...'
-                       name="jobTitle"
-                       id="jobTitle"
-                       onChange={formik.handleChange}
-                       value={formik.values.jobTitle}
-                       onBlur={formik.handleBlur}/>
-                {formik.touched.jobTitle && formik.errors.jobTitle ? (
-                    <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.jobTitle}</div>) : null}
+                <JobInputField placeholder='Inster job title...' type="text" name="Job Title"
+                               formikFieldProps={formik.getFieldProps('jobTitle')}
+                               formikTouched={formik.touched.jobTitle}
+                               formikErrors={formik.errors.jobTitle}/>
             </div>
             <div className={`fv-row mb-10`}>
-                <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Description</label>
-                <textarea cols={50} rows={4}
-                          className={`form-control form-control-lg form-control-solid`}
-                          placeholder='Type description...'
-                          onChange={formik.handleChange}
-                          name="description"
-                          id="description"
-                          value={formik.values.description}
-                          onBlur={formik.handleBlur}></textarea>
-                {formik.touched.description && formik.errors.description ? (
-                    <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.description}</div>) : null}
+                <JobTextareaField placeholder='Type description...' name="Description"
+                                  formikFieldProps={formik.getFieldProps('description')}
+                                  formikTouched={formik.touched.description}
+                                  formikErrors={formik.errors.description} cols={50} rows={4}/>
             </div>
             <div className={`fv-row mb-10`}>
                 <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Requerements</label>
                 <div className={`card card-bordered h-auto mb-10 p-5 d-flex`}>
                     <div className={`row  d-flex justify-content-md-between flex-column flex-md-row mb-5`}>
                         <div className={`col-12 col-md-6 mb-5`}>
-                            <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Education</label>
-                            <input type="text"
-                                   className={`form-control form-control-lg form-control-solid`}
-                                   placeholder='Input required education...'
-                                   onChange={formik.handleChange}
-                                   name="education"
-                                   id="education"
-                                   value={formik.values.education}/>
-                            {formik.errors.education ? (
-                                <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.education}</div>) : null}
+                            <JobInputField placeholder='Input required education...' type="text" name="Education"
+                                           formikFieldProps={formik.getFieldProps('education')}
+                                           formikTouched={formik.touched.education}
+                                           formikErrors={formik.errors.education}/>
                         </div>
                         <div className={`col-12 col-md-6`}>
-                            <label htmlFor="" className={`form-label text-dark text-nowrap fw-bold fs-6`}>Specific
-                                skills</label>
-                            <input type="text"
-                                   className={`form-control form-control-lg form-control-solid`}
-                                   placeholder='Type specific skills...'
-                                   onChange={formik.handleChange}
-                                   name="skills"
-                                   id="skills"
-                                   value={formik.values.skills}/>
-                            {formik.errors.skills ? (
-                                <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.skills}</div>) : null}
+                            <JobInputField placeholder='Type specific skills...' type="text" name="Skills"
+                                           formikFieldProps={formik.getFieldProps('skills')}
+                                           formikTouched={formik.touched.skills}
+                                           formikErrors={formik.errors.skills}/>
                         </div>
                     </div>
                     <div
                         className={`row d-flex justify-content-between align-items-center flex-column flex-md-row mb-5`}>
                         <div className={"col-md-8 col-12 mb-5 "}>
-                            <label htmlFor="" className={`form-label text-dark fw-bold fs-6`}>Languages</label>
-                            <input type={"text"}
-                                   className={`form-control form-control-solid form-control-lg`}
-                                   placeholder={'Insert required languages...'}
-                                   onChange={formik.handleChange}
-                                   name="languages"
-                                   id="languages"
-                                   value={formik.values.languages}>
-                            </input>
-                            {formik.errors.languages ? (<div
-                                className={'text-danger mt-1 fs-6 italic'}>{formik.errors.languages}</div>) : null}
+                            <JobInputField placeholder='Insert required languages...' type="text" name="Languages"
+                                           formikFieldProps={formik.getFieldProps('languages')}
+                                           formikTouched={formik.touched.languages}
+                                           formikErrors={formik.errors.languages}/>
                         </div>
                         <div
                             className={'col-12 col-md-4 d-flex justify-content-start mt-2 align-items-center form-check fw-bold form-check-solid pt-2'}>
@@ -156,50 +124,26 @@ export function JobPosting() {
                 </div>
             </div>
             <div className={`fv-row mb-10`}>
-                <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
-                    deadline</label>
-                <input type="date"
-                       className={`form-control form-control-lg form-control-solid`}
-                       onChange={formik.handleChange}
-                       name="appDeadline"
-                       id="appDeadline"
-                       value={formik.values.appDeadline}
-                       onBlur={formik.handleBlur}/>
-                {formik.touched.appDeadline && formik.errors.appDeadline ? (
-                    <div
-                        className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appDeadline}</div>) : null}
+                <JobInputField placeholder='' type="date" name="Application deadline"
+                               formikFieldProps={formik.getFieldProps('appDeadline')}
+                               formikTouched={formik.touched.appDeadline}
+                               formikErrors={formik.errors.appDeadline}/>
             </div>
             <div className={`fv-row mb-10`}>
-                <label htmlFor="" className={`form-label text-dark fw-bold fs-6 required`}>Application
-                    instructions</label>
-                <textarea className={`form-control form-control-lg form-control-solid`}
-                          placeholder='Input instructions...'
-                          onChange={formik.handleChange}
-                          name="appInstructions"
-                          id="appInstructions"
-                          value={formik.values.appInstructions}
-                          onBlur={formik.handleBlur}></textarea>
-                {formik.touched.appInstructions && formik.errors.appInstructions ? (
-                    <div className={'text-danger mt-1 fs-6 italic'}>{formik.errors.appInstructions}</div>) : null}
+                <JobTextareaField placeholder='Input instructions...' name="Application instructions"
+                                  formikFieldProps={formik.getFieldProps('appInstructions')}
+                                  formikTouched={formik.touched.appInstructions}
+                                  formikErrors={formik.errors.appInstructions}/>
             </div>
 
 
             <div className='d-flex mb-10 justify-content-between align-items-center flex-column flex-md-row'>
                 <div className={'col-12 col-md-6'}>
-                    <label htmlFor="" className={`text-dark form-label fw-bold fs-6 required`}>Number of open
-                        positions</label>
-                    <input type="number"
-                           min={0}
-                           placeholder={'Insert the open positions number'}
-                           className={`form-control form-control-lg form-control-solid`}
-                           onChange={formik.handleChange}
-                           name="numPosition"
-                           id="numPosition"
-                           onBlur={formik.handleBlur}
-                           value={formik.values.numPosition}/>
-                    {formik.touched.numPosition && formik.errors.numPosition ? (
-                        <div
-                            className={'text-danger mt-1 fs-6 italic'}>{formik.errors.numPosition}</div>) : null}
+                    <JobInputField placeholder='Insert the open positions number...' type="number"
+                                   name="Number of open positions"
+                                   formikFieldProps={formik.getFieldProps('numPosition')}
+                                   formikTouched={formik.touched.numPosition}
+                                   formikErrors={formik.errors.numPosition}/>
                 </div>
                 <div
                     className={'col-12 col-md-3 d-flex justify-content-start align-items-center form-check fw-bold form-check-solid mt-5 pt-3'}>
