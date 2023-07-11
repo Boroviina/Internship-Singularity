@@ -76,7 +76,7 @@ const registrationSchema = Yup.object().shape({
         .max(20, 'Max 20 symbols')
 });
 
-const EmployerRegistration = () => {
+const EmployerRegistration = ({onRegister}) => {
     const navigate = useNavigate();
     const [unsuccessfulMsg, setUnsuccessfulMsg] = useState('');
     const [loading, setLoading] = useState(null);
@@ -105,6 +105,7 @@ const EmployerRegistration = () => {
 
                 setSubmitting(false);
                 await registerEmployer(employer);
+                onRegister(true);
                 navigate('/auth/login');
             } catch (error) {
                 setSubmitting(false);
