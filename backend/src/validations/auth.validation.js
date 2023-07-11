@@ -21,6 +21,7 @@ const registerEmployer = {
     numOfEmployees: Joi.number().optional().integer().min(1).max(1500000),
     city: Joi.string().optional(),
     address: Joi.string().optional(),
+    companyEmail: Joi.string().email(),
     phone: Joi.string().optional(),
     fax: Joi.string().optional(),
   }),
