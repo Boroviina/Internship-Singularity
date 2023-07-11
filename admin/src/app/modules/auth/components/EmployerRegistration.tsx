@@ -6,6 +6,7 @@ import InputField from "./InputField";
 import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
 import {registerEmployer} from "../../../shared/services/employer.service";
 import {UserModel} from "../../../shared/models/user.model";
+import {Employer} from "../../../shared/models/employer.model";
 
 const initialValues = {
     firstName: '',
@@ -50,11 +51,9 @@ const registrationSchema = Yup.object().shape({
         }),
 
     companyName: Yup.string()
-        .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Company name is required'),
     industry: Yup.string()
-        .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Type of industry is required'),
     numOfEmployees: Yup.number()
@@ -62,7 +61,6 @@ const registrationSchema = Yup.object().shape({
         .max(15000000, 'Too many employees')
         .typeError('Please insert a number'),
     city: Yup.string()
-        .min(2, 'Minimum 2 symbols')
         .max(50, 'Max 50 symbols'),
     address: Yup.string()
         .min(3, 'Minimum 3 symbols')
@@ -91,17 +89,16 @@ const EmployerRegistration = () => {
                     password: values.password
                 }
                 const employer = {
-                    adminUser: user,
+                    user: user,
                     companyName: values.companyName,
                     industry: values.industry,
-                    numOfEmployees: values.numOfEmployees,
-                    city: values.city,
-                    address: values.address,
-                    companyEmail: values.companyEmail,
-                    phone: values.phone,
-                    fax: values.fax,
+                    numOfEmployees: values.numOfEmployees ? values.numOfEmployees : undefined,
+                    city: values.city ? values.city : undefined,
+                    address: values.address ? values.address : undefined,
+                    companyEmail: values.companyEmail ? values.companyEmail : undefined,
+                    phone: values.phone ? values.phone : undefined,
+                    fax: values.fax ? values.fax : undefined,
                 };
-                console.log("\n\nREGISTERED EMPLOYER:" + employer + "\n\n");
                 await registerEmployer(employer);
             } catch (error) {
                 console.log(error);
