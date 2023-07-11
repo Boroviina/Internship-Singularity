@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
@@ -78,10 +78,12 @@ const registrationSchema = Yup.object().shape({
 })
 
 const EmployerRegistration = () => {
+    const [loading, setLoading] = useState(false);
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchema,
-        onSubmit: async (values) => {
+        onSubmit: async (values, {setSubmitting, setStatus}) => {
+            setLoading(true);
             try {
                 const user = {
                     name: values.firstName + " " + values.lastName,
@@ -99,9 +101,14 @@ const EmployerRegistration = () => {
                     phone: values.phone ? values.phone : undefined,
                     fax: values.fax ? values.fax : undefined,
                 };
+
+                setSubmitting(false);
                 await registerEmployer(employer);
+
             } catch (error) {
-                console.log(error);
+                setStatus('Check if all inputs are filled');
+                setSubmitting(false);
+                setLoading(false);
             }
         }
     });
@@ -252,7 +259,16 @@ const EmployerRegistration = () => {
                             </div>
                         </div>
                     </div>
-                    <button className='btn btn-primary btn-block mt-4' type='submit'>Submit</button>
+                    <button className='btn btn-primary btn-block mt-4' type='submit'
+                            disabled={formik.isSubmitting || !formik.isValid}>
+                        {!loading && <span className='indicator-label'>Register</span>}
+                        {loading && (
+                            <span className='indicator-progress' style={{display: 'block'}}>
+                          Please wait...
+                        <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                         </span>
+                        )}
+                    </button>
                 </div>
             </div>
         </form>
