@@ -10,23 +10,19 @@ const fileSchema = mongoose.Schema(
     originalname: {
       type: String,
       required: true,
-      trim: true,
     },
     fieldname: {
       type: String,
       required: true,
-      trim: true,
     },
     size: {
       type: Number,
     },
     mimetype: {
       type: String,
-      // trim: true,
     },
     encoding: {
       type: String,
-      // trim: true,
     },
   },
   {

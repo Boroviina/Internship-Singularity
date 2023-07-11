@@ -6,8 +6,6 @@ const { jobApplicationService } = require('../services');
 
 const createJobApplication = catchAsync(async (req, res) => {
   const body = {user: req.user._id, ...req.body};
-  // console.log(req.files);
-  // const body = {user: req.user._id, cv: req.file.filename, ...req.body};
   const jobApplication = await jobApplicationService.createJobApplication(body);
   res.status(httpStatus.CREATED).send(jobApplication);
 });
