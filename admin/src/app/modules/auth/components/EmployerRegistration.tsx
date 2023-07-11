@@ -5,16 +5,17 @@ import {useFormik} from "formik";
 import InputField from "./InputField";
 import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
 import {registerEmployer} from "../../../shared/services/employer.service";
+import {Alert} from "../../../shared/components/Alert";
 
 const initialValues = {
-    firstName: '',
-    lastName: '',
-    userEmail: '',
-    password: '',
-    confirmPassword: '',
+    firstName: 'Milan',
+    lastName: 'Vlaski',
+    userEmail: 'TEST@gmail.com',
+    password: 'test1234',
+    confirmPassword: 'test1234',
 
-    companyName: '',
-    industry: '',
+    companyName: 'firma osamnaest',
+    industry: 'poljoprivreda',
     numOfEmployees: '',
     city: '',
     address: '',
@@ -73,15 +74,16 @@ const registrationSchema = Yup.object().shape({
     fax: Yup.string()
         .min(4, 'Minimum 4 symbols')
         .max(20, 'Max 20 symbols')
-})
+});
 
 const EmployerRegistration = () => {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [unsuccessfulMsg, setUnsuccessfulMsg] = useState('');
+    const [loading, setLoading] = useState(null);
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchema,
-        onSubmit: async (values, {setSubmitting, setStatus}) => {
+        onSubmit: async (values, {setSubmitting}) => {
             setLoading(true);
             try {
                 const user = {
@@ -103,11 +105,11 @@ const EmployerRegistration = () => {
 
                 setSubmitting(false);
                 await registerEmployer(employer);
-                navigate('/register');
+                navigate('/auth/login');
             } catch (error) {
                 setSubmitting(false);
-                setStatus("Couldn't log in with those credentials.");
                 setLoading(false);
+                setUnsuccessfulMsg(error.message.toString());
             }
         }
     });
@@ -125,18 +127,19 @@ const EmployerRegistration = () => {
             <div className='mb-10 text-center'>
                 <h1 className='text-dark mb-3'>Create an Account</h1>
 
-                {}
-
                 <div className='text-gray-600 fw-bold fs-4'>
                     Already have an account?
                     <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
                         Log in
                     </Link>
                 </div>
-
             </div>
 
             <div className="container">
+                {!loading && unsuccessfulMsg
+                    && <Alert state="danger" icon="icons/duotune/general/gen044.svg">
+                        {unsuccessfulMsg}
+                    </Alert>}
                 <div className='row'>
                     <div className='col-md'>
                         <h2 className='text-center'>User information</h2>
