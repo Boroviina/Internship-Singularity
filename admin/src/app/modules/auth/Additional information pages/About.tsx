@@ -6,7 +6,7 @@ export function About() {
             <h1 className={'display-4 text-gray-700 mb-5'}>
                 About
             </h1>
-            <p className={'fs-3 text-gray-700 my-5 mt-auto'}>
+            <p className={'fs-md-3 fs-lg-2 fs-sm-4 fs-6 text-gray-700 my-5 mt-auto'}>
                 Welcome to <b>Job Radar</b>,the ultimate job seeker's app! <br/> <br/> We're here to simplify your job search and connect you with a world of opportunities. <br/>
 
                 With an extensive range of job listings across various industries, including computing, medicine, and more, we provide a diverse array of choices to suit your career aspirations. <br/> <br/>
