@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import InputField from "./InputField";
 import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
 import {registerEmployer} from "../../../shared/services/employer.service";
-import {UserModel} from "../../../shared/models/user.model";
-import {Employer} from "../../../shared/models/employer.model";
 
 const initialValues = {
     firstName: '',
@@ -78,6 +76,7 @@ const registrationSchema = Yup.object().shape({
 })
 
 const EmployerRegistration = () => {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const formik = useFormik({
         initialValues,
@@ -104,10 +103,10 @@ const EmployerRegistration = () => {
 
                 setSubmitting(false);
                 await registerEmployer(employer);
-
+                navigate('/register');
             } catch (error) {
-                setStatus('Check if all inputs are filled');
                 setSubmitting(false);
+                setStatus("Couldn't log in with those credentials.");
                 setLoading(false);
             }
         }
@@ -115,7 +114,7 @@ const EmployerRegistration = () => {
 
     useEffect(() => {
         PasswordMeterComponent.bootstrap()
-    }, [])
+    }, []);
 
     return (
         <form
@@ -125,6 +124,8 @@ const EmployerRegistration = () => {
         >
             <div className='mb-10 text-center'>
                 <h1 className='text-dark mb-3'>Create an Account</h1>
+
+                {}
 
                 <div className='text-gray-600 fw-bold fs-4'>
                     Already have an account?
@@ -260,7 +261,7 @@ const EmployerRegistration = () => {
                         </div>
                     </div>
                     <button className='btn btn-primary btn-block mt-4' type='submit'
-                            disabled={formik.isSubmitting || !formik.isValid}>
+                            >
                         {!loading && <span className='indicator-label'>Register</span>}
                         {loading && (
                             <span className='indicator-progress' style={{display: 'block'}}>
