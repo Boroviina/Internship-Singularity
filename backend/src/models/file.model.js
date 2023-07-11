@@ -3,16 +3,16 @@ const { toJSON, paginate } = require('./plugins');
 
 const fileSchema = mongoose.Schema(
   {
-    fileName: {
+    filename: {
       type: String,
       required: true,
     },
-    originalName: {
+    originalname: {
       type: String,
       required: true,
       trim: true,
     },
-    fieldName: {
+    fieldname: {
       type: String,
       required: true,
       trim: true,
@@ -20,7 +20,7 @@ const fileSchema = mongoose.Schema(
     size: {
       type: Number,
     },
-    mimeType: {
+    mimetype: {
       type: String,
       // trim: true,
     },

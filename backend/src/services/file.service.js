@@ -24,35 +24,33 @@ const processUpload = catchAsync(async (req, res, next) => {
   if (!req.files) return next();
 
   for (const field in req.files) {
-    const fileBody = {};
+    let files = [];
 
-    const fieldName = req.files[field][0].fieldname;
-    fileBody.fieldName = fieldName;
+    const filePromises = req.files[field].map(async (file) => {
 
-    const originalName = req.files[field][0].originalname;
-    fileBody.originalName = originalName;
+      const { buffer, ...fileBody} = file;
+      const extension = path.extname(fileBody.originalname);
+      const filename = uuidv4() + extension;
+      fileBody.filename = filename;
 
-    const encoding = req.files[field][0].encoding;
-    fileBody.encoding = encoding;
+      const newFile = await createFile(fileBody);
+      await fs.writeFile(`/${__dirname}/../../public/uploads/${filename}`, buffer, (err) => {
+        if (err) {
+          throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while uploading additional documents');
+        }
+      });
 
-    const mimetype = req.files[field][0].mimetype;
-    fileBody.mimetype = mimetype;
-
-    const size = req.files[field][0].size;
-    fileBody.size = size;
-
-    const extension = path.extname(req.files[field][0].originalname);
-    const fileName = uuidv4() + extension;
-    fileBody.fileName = fileName;
-
-    const file = await createFile(fileBody);
-    await fs.writeFile(`/${__dirname}/../../public/uploads/${fileName}`, req.files[field][0].buffer, (err) => {
-      if (err) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while uploading additional documents');
-      }
+      return newFile._id;
     });
 
-    req.body[field] = file._id;
+    const fileId = await Promise.all(filePromises);
+    files.push(...fileId);
+
+    if(files.length === 1) {
+      req.body[field] = files[0];
+    } else {
+      req.body[field] = files;
+    }
   }
 
   next();
