@@ -3,7 +3,7 @@ const validate = require('../../middlewares/validate');
 const jobApplicationController = require('../../controllers/job-application.controller');
 const jobApplicationValidation = require("../../validations/job-application.validation");
 const auth = require("../../middlewares/auth");
-const {uploads, processUpload} = require("../../middlewares/job-application-file-upload")
+const fileService = require("../../services/file.service");
 
 const router = express.Router();
 
@@ -11,8 +11,11 @@ router
   .route('/')
   .post(
     auth('createJobApplications'),
-    uploads,
-    processUpload,
+    fileService.uploadFiles([
+      {name: "cv", maxCount: 1},
+      {name: "coverLetter", maxCount: 1}
+    ]),
+    fileService.processUpload,
     validate(jobApplicationValidation.createJobApplication),
     jobApplicationController.createJobApplication)
   .get(

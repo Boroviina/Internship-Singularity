@@ -23,17 +23,16 @@ const jobApplicationSchema = mongoose.Schema(
       },
     },
     cv: {
-      type: String,
-      // required: true,
-      // trim: true,
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'File',
     },
     coverLetter: {
-      type: String,
-      // trim: true,
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'File',
     },
     additionalDocument: {
-      type: String,
-      // trim: true,
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'File',
     },
   },
   {
