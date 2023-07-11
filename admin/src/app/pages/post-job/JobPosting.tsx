@@ -25,23 +25,23 @@ export function JobPosting() {
         validationSchema: Yup.object({
 
             jobTitle: Yup.string()
-                .max(50, 'Must be 50 characters or less')
+                .max(100, 'Must be 100 characters or less')
                 .required('Required'),
             description: Yup.string()
-                .max(200, 'Must be 200 characters or less')
+                .max(500, 'Must be 500 characters or less')
                 .required('Required'),
             education: Yup.string()
-                .max(100, 'Must be 50 characters or less'),
+                .max(200, 'Must be 200 characters or less'),
             skills: Yup.string()
-                .max(100, 'Must be 100 characters or less'),
+                .max(200, 'Must be 200 characters or less'),
             languages: Yup.string()
-                .max(50, 'Must be 50 characters or less'),
+                .max(100, 'Must be 100 characters or less'),
             appDeadline: Yup.date()
                 .nullable()
                 .required("Please input Expiry Date")
                 .min(new Date(Date.now()), 'Must be at least tomorrow'),
             appInstructions: Yup.string()
-                .max(200, 'Must be 200 characters or less')
+                .max(500, 'Must be 500 characters or less')
                 .required('Required'),
             numPosition: Yup.number()
                 .min(1, 'Must be at least 1 position')
