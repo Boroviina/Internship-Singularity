@@ -21,7 +21,7 @@ const jobSchema = mongoose.Schema(
     education: {
       type: String,
       trim: true,
-      maxLength: [50, 'The field must have less than or equal to 50 characters']
+      maxLength: [100, 'The field must have less than or equal to 100 characters']
     },
     skills: {
       type: String,
