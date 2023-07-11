@@ -55,6 +55,7 @@ export function JobPosting() {
             try {
                 setSubmitting(false);
                 await createJob(values);
+                setLoading(false);
             } catch (error) {
                 setStatus('Check if all inputs are filled');
                 setSubmitting(false);
@@ -66,7 +67,6 @@ export function JobPosting() {
 
     return <div className={`w-lg-1024px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
         <form action=""
-              noValidate
               className={`form`}
               onSubmit={formik.handleSubmit}>
             <div className={`row mb-10  my-3`}>
