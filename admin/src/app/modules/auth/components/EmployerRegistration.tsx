@@ -105,7 +105,7 @@ const EmployerRegistration = ({onRegister}) => {
 
                 setSubmitting(false);
                 await registerEmployer(employer);
-                onRegister(true);
+                onRegister();
                 navigate('/auth/login');
             } catch (error) {
                 setSubmitting(false);

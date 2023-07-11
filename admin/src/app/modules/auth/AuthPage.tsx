@@ -64,12 +64,8 @@ const AuthLayout = ({registered}) => {
 
 const AuthPage = () => {
     const [registered, setRegistered] = useState(false);
-    const handleRegister = (val) => {
-        setRegistered(val);
-        const timer = setTimeout (() => {
-            setRegistered(false);
-        }, 1000);
-        clearTimeout(timer);
+    const handleRegister = () => {
+            setRegistered(true);
     };
     return (
         <Routes>
