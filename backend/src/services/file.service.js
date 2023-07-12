@@ -34,11 +34,13 @@ const processUpload = catchAsync(async (req, res, next) => {
       fileBody.filename = filename;
 
       const newFile = await createFile(fileBody);
-      await fs.writeFile(`/${__dirname}/../../public/uploads/${filename}`, buffer, (err) => {
-        if (err) {
-          throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while uploading additional documents');
-        }
-      });
+
+      try {
+        await fs.promises.mkdir(`/${__dirname}/../../public/uploads/`, {recursive: true});
+        await fs.promises.writeFile(`/${__dirname}/../../public/uploads/${filename}`, buffer);
+      } catch (err) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while uploading file.');
+      }
 
       return newFile._id;
     });
