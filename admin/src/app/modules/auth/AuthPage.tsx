@@ -35,7 +35,7 @@ const AuthLayout = () => {
                 {/* end::Logo */}
                 {/* begin::Wrapper */}
                 {registered &&
-                     < Alert state='success' icon="icons/duotune/general/gen044.svg">
+                    < Alert state='success' icon="icons/duotune/general/gen044.svg">
                         You have registered successfully!
                     </Alert>}
                 <div className={`bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>

@@ -107,8 +107,15 @@ const EmployerRegistration = () => {
 
                 setSubmitting(false);
                 await registerEmployer(employer);
-                setRegistered(true);
                 navigate('/auth/login');
+
+                setRegistered(true);
+                const timer = setTimeout(() => {
+                    setRegistered(false);
+                }, 5000);
+                return () => {
+                    clearTimeout(timer)
+                };
             } catch (error) {
                 setSubmitting(false);
                 setLoading(false);
@@ -268,7 +275,7 @@ const EmployerRegistration = () => {
                         </div>
                     </div>
                     <button className='btn btn-primary btn-block mt-4' type='submit'
-                            >
+                    >
                         {!loading && <span className='indicator-label'>Register</span>}
                         {loading && (
                             <span className='indicator-progress' style={{display: 'block'}}>
