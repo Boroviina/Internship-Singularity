@@ -8,14 +8,14 @@ import {registerEmployer} from "../../../shared/services/employer.service";
 import {Alert} from "../../../shared/components/Alert";
 
 const initialValues = {
-    firstName: 'Milan',
-    lastName: 'Vlaski',
-    userEmail: 'TEST@gmail.com',
-    password: 'test1234',
-    confirmPassword: 'test1234',
+    firstName: '',
+    lastName: '',
+    userEmail: '',
+    password: '',
+    confirmPassword: '',
 
-    companyName: 'firma osamnaest',
-    industry: 'poljoprivreda',
+    companyName: '',
+    industry: '',
     numOfEmployees: '',
     city: '',
     address: '',
@@ -265,7 +265,7 @@ const EmployerRegistration = () => {
                                             formikErrors={formik.errors.phone}
                                 />
                             </div>
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='Fax' placeholder='Fax' type='text'
                                             formikFieldProps={formik.getFieldProps('fax')}
                                             formikTouched={formik.touched.fax}
