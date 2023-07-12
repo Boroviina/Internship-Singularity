@@ -7,13 +7,16 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import EmployerRegistration from "./components/EmployerRegistration";
 import {Alert} from "../../shared/components/Alert";
 
-const AuthLayout = ({registered}) => {
+
+const AuthLayout = () => {
+    const [registered, setRegistered] = useState(false);
     useEffect(() => {
         document.body.classList.add('bg-body')
         return () => {
             document.body.classList.remove('bg-body')
         }
     }, []);
+
 
     return (
         <div
@@ -32,11 +35,11 @@ const AuthLayout = ({registered}) => {
                 {/* end::Logo */}
                 {/* begin::Wrapper */}
                 {registered &&
-                    < Alert state='success' icon="icons/duotune/general/gen044.svg">
+                     < Alert state='success' icon="icons/duotune/general/gen044.svg">
                         You have registered successfully!
                     </Alert>}
                 <div className={`bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
-                    <Outlet/>
+                    <Outlet context={[registered, setRegistered]}/>
                 </div>
                 {/* end::Wrapper */}
             </div>
@@ -63,15 +66,11 @@ const AuthLayout = ({registered}) => {
 }
 
 const AuthPage = () => {
-    const [registered, setRegistered] = useState(false);
-    const handleRegister = () => {
-            setRegistered(true);
-    };
     return (
         <Routes>
-            <Route element={<AuthLayout registered={registered}/>}>
+            <Route element={<AuthLayout/>}>
                 <Route path='login' element={<Login/>}/>
-                <Route path='registration' element={<EmployerRegistration onRegister={handleRegister}/>}/>
+                <Route path='registration' element={<EmployerRegistration/>}/>
                 <Route path='forgot-password' element={<ForgotPassword/>}/>
                 <Route index element={<Login/>}/>
             </Route>

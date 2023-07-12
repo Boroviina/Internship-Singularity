@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useOutletContext} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import InputField from "./InputField";
@@ -76,7 +76,9 @@ const registrationSchema = Yup.object().shape({
         .max(20, 'Max 20 symbols')
 });
 
-const EmployerRegistration = ({onRegister}) => {
+const EmployerRegistration = () => {
+    // @ts-ignore
+    const [registered, setRegistered] = useOutletContext();
     const navigate = useNavigate();
     const [unsuccessfulMsg, setUnsuccessfulMsg] = useState('');
     const [loading, setLoading] = useState(null);
@@ -105,12 +107,13 @@ const EmployerRegistration = ({onRegister}) => {
 
                 setSubmitting(false);
                 await registerEmployer(employer);
-                onRegister();
+                setRegistered(true);
                 navigate('/auth/login');
             } catch (error) {
                 setSubmitting(false);
                 setLoading(false);
                 setUnsuccessfulMsg(error.message.toString());
+                setRegistered(false);
             }
         }
     });
