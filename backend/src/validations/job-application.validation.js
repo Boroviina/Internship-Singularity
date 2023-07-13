@@ -5,9 +5,9 @@ const createJobApplication = {
   body: Joi.object().keys({
     job: Joi.required().custom(objectId),
     phoneNumber: Joi.string().required(),
-    cv: Joi.string().required(),
-    coverLetter: Joi.string().optional(),
-    additionalDocument: Joi.string().optional()
+    cv: Joi.required(),
+    coverLetter: Joi.optional(),
+    additionalDocument: Joi.optional()
   }),
 };
 

@@ -30,5 +30,4 @@ const InputField = ({name, placeholder, type, formikFieldProps, formikTouched, f
         </>
     );
 };
-
 export default InputField;

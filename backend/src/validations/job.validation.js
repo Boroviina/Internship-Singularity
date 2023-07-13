@@ -3,13 +3,13 @@ const {objectId}=require('./custom.validation');
 
 const  createJob={
   body: Joi.object().keys({
-    jobTitle:Joi.string().required().max(50),
-    description:Joi.string().required().max(200),
-    education:Joi.string().optional().max(50),
-    skills:Joi.string().optional().max(100),
-    languages:Joi.string().optional().max(50),
+    jobTitle:Joi.string().required().max(100),
+    description:Joi.string().required().max(500),
+    education:Joi.string().optional().max(200),
+    skills:Joi.string().optional().max(200),
+    languages:Joi.string().optional().max(100),
     appDeadline:Joi.date().required().min(new Date(Date.now())),
-    appInstructions:Joi.string().required().max(200),
+    appInstructions:Joi.string().required().max(500),
     numPosition:Joi.number().required().max(10).min(1).integer().positive(),
     cv:Joi.boolean().optional(),
     coverLetter:Joi.boolean().optional(),
