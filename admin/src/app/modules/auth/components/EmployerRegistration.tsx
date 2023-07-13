@@ -6,22 +6,23 @@ import InputField from "./InputField";
 import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
 import {registerEmployer} from "../../../shared/services/employer.service";
 import {Alert} from "../../../shared/components/Alert";
+import {Employer, User} from "../../../shared/models/employer.model";
 
 const initialValues = {
-    firstName: '',
-    lastName: '',
-    userEmail: '',
-    password: '',
-    confirmPassword: '',
+    firstName: 'testo',
+    lastName: 'testic',
+    userEmail: 'dsa@gmail.com',
+    password: 'test1234',
+    confirmPassword: 'test1234',
 
-    companyName: '',
-    industry: '',
-    numOfEmployees: '',
-    city: '',
-    address: '',
-    companyEmail: '',
-    phone: '',
-    fax: ''
+    companyName: 'firma doo',
+    industry: 'arhitektura',
+    numOfEmployees: undefined,
+    city: undefined,
+    address: undefined,
+    companyEmail: undefined,
+    phone: undefined,
+    fax: undefined
 }
 
 const registrationSchema = Yup.object().shape({
@@ -88,24 +89,16 @@ const EmployerRegistration = () => {
         onSubmit: async (values, {setSubmitting}) => {
             setLoading(true);
             try {
-                const user = {
-                    name: values.firstName + " " + values.lastName,
-                    email: values.userEmail,
-                    password: values.password
-                }
-                const employer = {
-                    user: user,
-                    companyName: values.companyName,
-                    industry: values.industry,
-                    numOfEmployees: values.numOfEmployees ? values.numOfEmployees : undefined,
-                    city: values.city ? values.city : undefined,
-                    address: values.address ? values.address : undefined,
-                    companyEmail: values.companyEmail ? values.companyEmail : undefined,
-                    phone: values.phone ? values.phone : undefined,
-                    fax: values.fax ? values.fax : undefined,
-                };
+                const {firstName,lastName,userEmail,password,confirmPassword
+                    ,companyName,industry,numOfEmployees,city,address,companyEmail
+                    ,phone,fax} = values;
+
+                const user = new User(firstName, lastName, userEmail, password);
+                const employer = new Employer(user, companyName, industry, numOfEmployees,
+                    city, address, companyEmail, phone, fax);
 
                 setSubmitting(false);
+                console.log(employer);
                 await registerEmployer(employer);
                 navigate('/auth/login');
                 handleRegistered();
