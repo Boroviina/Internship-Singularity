@@ -2,7 +2,7 @@ import {BaseModel} from "./base.model";
 import {UserModel} from "./user.model";
 
 export class Employer extends BaseModel {
-    user: User;
+    user: UserModel;
     companyName: string;
     industry: string;
     users: [UserModel];
@@ -13,20 +13,25 @@ export class Employer extends BaseModel {
     phone: string;
     fax: string;
 
-    constructor(user?: User, companyName?: string, industry?: string, numOfEmployees?: number, city?: string,
-                address?: string, companyEmail?: string, phone?: string, fax?: string, attributes?: any) {
+    constructor(attributes?: any) {
         super();
         this.setAttributes(attributes);
-        this.user = user;
-        this.companyName = companyName;
-        this.industry = industry;
-        this.numOfEmployees = numOfEmployees;
-        this.city = city;
-        this.address = address;
-        this.companyEmail = companyEmail;
-        this.phone = phone;
-        this.fax = fax;
     }
+
+    // constructor(user?: User, companyName?: string, industry?: string, numOfEmployees?: number, city?: string,
+    //             address?: string, companyEmail?: string, phone?: string, fax?: string, attributes?: any) {
+    //     super();
+    //     this.setAttributes(attributes);
+    //     this.user = user;
+    //     this.companyName = companyName;
+    //     this.industry = industry;
+    //     this.numOfEmployees = numOfEmployees;
+    //     this.city = city;
+    //     this.address = address;
+    //     this.companyEmail = companyEmail;
+    //     this.phone = phone;
+    //     this.fax = fax;
+    // }
 }
 
 export class User {

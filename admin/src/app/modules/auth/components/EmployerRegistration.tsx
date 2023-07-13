@@ -7,6 +7,7 @@ import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components
 import {registerEmployer} from "../../../shared/services/employer.service";
 import {Alert} from "../../../shared/components/Alert";
 import {Employer, User} from "../../../shared/models/employer.model";
+import {UserModel} from "../../../shared/models/user.model";
 
 const initialValues = {
     firstName: 'testo',
@@ -89,16 +90,28 @@ const EmployerRegistration = () => {
         onSubmit: async (values, {setSubmitting}) => {
             setLoading(true);
             try {
-                const {firstName,lastName,userEmail,password,confirmPassword
-                    ,companyName,industry,numOfEmployees,city,address,companyEmail
-                    ,phone,fax} = values;
+                const {firstName, lastName, userEmail, password,
+                    companyName, industry, numOfEmployees,
+                    companyEmail, phone, fax, address, city} = values;
 
-                const user = new User(firstName, lastName, userEmail, password);
-                const employer = new Employer(user, companyName, industry, numOfEmployees,
-                    city, address, companyEmail, phone, fax);
+                const user = new UserModel({
+                    name: firstName + " " + lastName,
+                    password: password,
+                    email: userEmail
+                });
+                const employer = new Employer({
+                    user,
+                    companyName,
+                    industry,
+                    numOfEmployees,
+                    companyEmail,
+                    phone,
+                    fax,
+                    address,
+                    city
+                });
 
                 setSubmitting(false);
-                console.log(employer);
                 await registerEmployer(employer);
                 navigate('/auth/login');
                 handleRegistered();
