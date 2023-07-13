@@ -7,6 +7,7 @@ import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import EmployerRegistration from "./components/EmployerRegistration";
 import {About} from './Additional information pages/About'
+import {Contact} from './Additional information pages/Contact'
 
 const AuthLayout = () => {
   useEffect(() => {
@@ -45,11 +46,11 @@ const AuthLayout = () => {
             About
         </Link>
 
-          <a href='auth/about' className='text-muted fs-2 text-hover-primary px-2'>
+          <Link to='contact' className='text-muted fs-2 text-hover-primary px-2'>
             Contact
-          </a>
+          </Link>
 
-          <a href='#' className='text-muted fs-2 text-hover-primary px-2'>
+          <a href="mailto:jobradar@gmail.com" className='text-muted fs-2 text-hover-primary px-2'>
             Contact Us
           </a>
         </div>
@@ -66,6 +67,7 @@ const AuthPage = () => (
       <Route path='registration' element={<EmployerRegistration />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
       <Route path='about' element={<About/>}/>
+      <Route path='contact' element={<Contact/>}/>
       <Route index element={<Login />} />
     </Route>
   </Routes>

@@ -10,23 +10,23 @@ const jobSchema = mongoose.Schema(
       type: String,
       required: [true,'The field must be filled'],
       trim: true,
-      maxLength: [50, 'The field must have less than or equal to 50 characters']
+      maxLength: [100, 'The field must have less than or equal to 100 characters']
     },
     description: {
       type: String,
       required: [true,'The field must be filled'],
       trim: true,
-      maxLength: [200, 'The field must have less than or equal to 200 characters']
+      maxLength: [500, 'The field must have less than or equal to 500 characters']
     },
     education: {
       type: String,
       trim: true,
-      maxLength: [50, 'The field must have less than or equal to 50 characters']
+      maxLength: [200, 'The field must have less than or equal to 200 characters']
     },
     skills: {
       type: String,
       trim: true,
-      maxLength: [70, 'The field must have less than or equal to 70 characters']
+      maxLength: [200, 'The field must have less than or equal to 200 characters']
     },
     language: {
       type: String,
@@ -43,7 +43,7 @@ const jobSchema = mongoose.Schema(
     appInstructions: {
       type: String,
       required: [true,'The field must be filled'],
-      maxLength: [200, 'The field must have less than or equal to 200 characters'],
+      maxLength: [500, 'The field must have less than or equal to 5002 characters'],
       trim: true
     },
     positionsNum:{
