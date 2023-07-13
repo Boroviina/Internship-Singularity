@@ -17,7 +17,7 @@ const initialValues = {
     confirmPassword: '',
 
     companyName: '',
-    industry: undefined,
+    industry: '',
     numOfEmployees: undefined,
     city: undefined,
     address: undefined,
@@ -60,22 +60,28 @@ const registrationSchema = Yup.object().shape({
     numOfEmployees: Yup.number()
         .min(1, 'Minimum one employee')
         .max(15000000, 'Too many employees')
-        .typeError('Please insert a number'),
+        .typeError('Please insert a number')
+        .nullable(true),
     city: Yup.string()
-        .max(50, 'Max 50 symbols'),
+        .max(50, 'Max 50 symbols')
+        .nullable(true),
     address: Yup.string()
         .min(3, 'Minimum 3 symbols')
-        .max(50, 'Max 50 symbols'),
+        .max(50, 'Max 50 symbols')
+        .nullable(true),
     companyEmail: Yup.string()
         .email('Wrong email format')
         .min(3, 'Minimum 3 symbols')
-        .max(50, 'Max 50 symbols'),
+        .max(50, 'Max 50 symbols')
+        .nullable(true),
     phone: Yup.string()
         .min(4, 'Minimum 4 symbols')
-        .max(20, 'Max 20 symbols'),
+        .max(20, 'Max 20 symbols')
+        .nullable(true),
     fax: Yup.string()
         .min(4, 'Minimum 4 symbols')
         .max(20, 'Max 20 symbols')
+        .nullable(true)
 });
 
 const EmployerRegistration = () => {
