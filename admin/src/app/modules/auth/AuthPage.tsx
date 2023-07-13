@@ -10,6 +10,16 @@ import {Alert} from "../../shared/components/Alert";
 
 const AuthLayout = () => {
     const [registered, setRegistered] = useState(false);
+    const handleRegistered = () => {
+        setRegistered(true);
+        const timer = setTimeout(() => {
+            setRegistered(false);
+        }, 5000);
+        return () => {
+            clearTimeout(timer)
+        };
+    };
+
     useEffect(() => {
         document.body.classList.add('bg-body')
         return () => {
@@ -39,7 +49,7 @@ const AuthLayout = () => {
                         You have registered successfully!
                     </Alert>}
                 <div className={`bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
-                    <Outlet context={[registered, setRegistered]}/>
+                    <Outlet context={[handleRegistered]}/>
                 </div>
                 {/* end::Wrapper */}
             </div>

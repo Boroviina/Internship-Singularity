@@ -78,7 +78,7 @@ const registrationSchema = Yup.object().shape({
 
 const EmployerRegistration = () => {
     // @ts-ignore
-    const [registered, setRegistered] = useOutletContext();
+    const [handleRegistered] = useOutletContext();
     const navigate = useNavigate();
     const [unsuccessfulMsg, setUnsuccessfulMsg] = useState('');
     const [loading, setLoading] = useState(null);
@@ -108,19 +108,11 @@ const EmployerRegistration = () => {
                 setSubmitting(false);
                 await registerEmployer(employer);
                 navigate('/auth/login');
-
-                setRegistered(true);
-                const timer = setTimeout(() => {
-                    setRegistered(false);
-                }, 5000);
-                return () => {
-                    clearTimeout(timer)
-                };
+                handleRegistered();
             } catch (error) {
                 setSubmitting(false);
                 setLoading(false);
                 setUnsuccessfulMsg(error.message.toString());
-                setRegistered(false);
             }
         }
     });
