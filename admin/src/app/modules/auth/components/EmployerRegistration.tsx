@@ -10,14 +10,14 @@ import {Employer, User} from "../../../shared/models/employer.model";
 import {UserModel} from "../../../shared/models/user.model";
 
 const initialValues = {
-    firstName: 'testo',
-    lastName: 'testic',
-    userEmail: 'dsa@gmail.com',
-    password: 'test1234',
-    confirmPassword: 'test1234',
+    firstName: '',
+    lastName: '',
+    userEmail: '',
+    password: '',
+    confirmPassword: '',
 
-    companyName: 'firma doo',
-    industry: 'arhitektura',
+    companyName: '',
+    industry: undefined,
     numOfEmployees: undefined,
     city: undefined,
     address: undefined,

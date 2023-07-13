@@ -16,7 +16,7 @@ const InputField = ({name, placeholder, type, formikFieldProps, formikTouched, f
                         'is-invalid': formikTouched && formikErrors,
                     },
                     {
-                        'is-valid': formikTouched && !formikErrors && formikFieldProps.value !== '',
+                        'is-valid': formikTouched && !formikErrors && formikFieldProps.value,
                     }
                 )}
             />
