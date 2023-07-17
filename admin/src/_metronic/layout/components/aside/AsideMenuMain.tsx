@@ -16,6 +16,7 @@ export function AsideMenuMain() {
                 title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
                 fontIcon='bi-app-indicator'
             />
+            <hr/>
             <AsideMenuItem
                 to='/post-job'
                 title='Post Job'

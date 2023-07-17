@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link, Outlet, Route, Routes} from 'react-router-dom'
 import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
@@ -8,14 +8,28 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import EmployerRegistration from "./components/EmployerRegistration";
 import {About} from './Additional information pages/About'
 import {Contact} from './Additional information pages/Contact'
+import {Alert} from "../../shared/components/Alert";
+
 
 const AuthLayout = () => {
-  useEffect(() => {
-    document.body.classList.add('bg-body')
-    return () => {
-      document.body.classList.remove('bg-body')
-    }
-  }, [])
+    const [registered, setRegistered] = useState(false);
+    const handleRegistered = () => {
+        setRegistered(true);
+        const timer = setTimeout(() => {
+            setRegistered(false);
+        }, 5000);
+        return () => {
+            clearTimeout(timer)
+        };
+    };
+
+    useEffect(() => {
+        document.body.classList.add('bg-body')
+        return () => {
+            document.body.classList.remove('bg-body')
+        }
+    }, []);
+
 
   return (
     <div
@@ -33,8 +47,12 @@ const AuthLayout = () => {
         </div>
         {/* end::Logo */}
         {/* begin::Wrapper */}
+        {registered &&
+            < Alert state='success' icon="icons/duotune/general/gen044.svg">
+              You have registered successfully!
+            </Alert>}
         <div className={`bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
-          <Outlet/>
+          <Outlet context={[handleRegistered]}/>
         </div>
         {/* end::Wrapper */}
       </div>

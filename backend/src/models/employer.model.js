@@ -5,7 +5,7 @@ const validator = require("validator");
 const employerSchema = mongoose.Schema(
   {
     adminUser: {
-      required: true,
+      required: [true, 'The field must be filled'],
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
     },

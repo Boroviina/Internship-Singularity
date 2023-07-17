@@ -1,9 +1,13 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate, useOutletContext} from "react-router-dom";
 import * as Yup from "yup";
 import {useFormik} from "formik";
-import clsx from "clsx";
 import InputField from "./InputField";
+import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
+import {registerEmployer} from "../../../shared/services/employer.service";
+import {Alert} from "../../../shared/components/Alert";
+import {Employer, User} from "../../../shared/models/employer.model";
+import {UserModel} from "../../../shared/models/user.model";
 
 const initialValues = {
     firstName: '',
@@ -14,12 +18,12 @@ const initialValues = {
 
     companyName: '',
     industry: '',
-    numOfEmployees: '',
-    city: '',
-    address: '',
-    companyEmail: '',
-    phone: '',
-    fax: ''
+    numOfEmployees: undefined,
+    city: undefined,
+    address: undefined,
+    companyEmail: undefined,
+    phone: undefined,
+    fax: undefined
 }
 
 const registrationSchema = Yup.object().shape({
@@ -48,43 +52,86 @@ const registrationSchema = Yup.object().shape({
         }),
 
     companyName: Yup.string()
-        .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Company name is required'),
     industry: Yup.string()
-        .min(3, 'Minimum 3 symbols')
         .max(50, 'Max 50 symbols')
         .required('Type of industry is required'),
     numOfEmployees: Yup.number()
         .min(1, 'Minimum one employee')
         .max(15000000, 'Too many employees')
-        .typeError('Please insert a number'),
+        .typeError('Please insert a number')
+        .nullable(true),
     city: Yup.string()
-        .min(2, 'Minimum 2 symbols')
-        .max(50, 'Max 50 symbols'),
+        .max(50, 'Max 50 symbols')
+        .nullable(true),
     address: Yup.string()
         .min(3, 'Minimum 3 symbols')
-        .max(50, 'Max 50 symbols'),
+        .max(50, 'Max 50 symbols')
+        .nullable(true),
     companyEmail: Yup.string()
         .email('Wrong email format')
         .min(3, 'Minimum 3 symbols')
-        .max(50, 'Max 50 symbols'),
+        .max(50, 'Max 50 symbols')
+        .nullable(true),
     phone: Yup.string()
         .min(4, 'Minimum 4 symbols')
-        .max(20, 'Max 20 symbols'),
+        .max(20, 'Max 20 symbols')
+        .nullable(true),
     fax: Yup.string()
         .min(4, 'Minimum 4 symbols')
         .max(20, 'Max 20 symbols')
-})
+        .nullable(true)
+});
 
 const EmployerRegistration = () => {
+    // @ts-ignore
+    const [handleRegistered] = useOutletContext();
+    const navigate = useNavigate();
+    const [unsuccessfulMsg, setUnsuccessfulMsg] = useState('');
+    const [loading, setLoading] = useState(null);
     const formik = useFormik({
         initialValues,
         validationSchema: registrationSchema,
-        onSubmit: () => {
-            //idi na login?
+        onSubmit: async (values, {setSubmitting}) => {
+            setLoading(true);
+            try {
+                const {firstName, lastName, userEmail, password,
+                    companyName, industry, numOfEmployees,
+                    companyEmail, phone, fax, address, city} = values;
+
+                const user = new UserModel({
+                    name: firstName + " " + lastName,
+                    password: password,
+                    email: userEmail
+                });
+                const employer = new Employer({
+                    user,
+                    companyName,
+                    industry,
+                    numOfEmployees,
+                    companyEmail,
+                    phone,
+                    fax,
+                    address,
+                    city
+                });
+
+                setSubmitting(false);
+                await registerEmployer(employer);
+                navigate('/auth/login');
+                handleRegistered();
+            } catch (error) {
+                setSubmitting(false);
+                setLoading(false);
+                setUnsuccessfulMsg(error.message.toString());
+            }
         }
     });
+
+    useEffect(() => {
+        PasswordMeterComponent.bootstrap()
+    }, []);
 
     return (
         <form
@@ -101,10 +148,13 @@ const EmployerRegistration = () => {
                         Log in
                     </Link>
                 </div>
-
             </div>
 
             <div className="container">
+                {!loading && unsuccessfulMsg
+                    && <Alert state="danger" icon="icons/duotune/general/gen044.svg">
+                        {unsuccessfulMsg}
+                    </Alert>}
                 <div className='row'>
                     <div className='col-md'>
                         <h2 className='text-center'>User information</h2>
@@ -131,22 +181,26 @@ const EmployerRegistration = () => {
                                     formikErrors={formik.errors.userEmail}
                         />
 
-                        <InputField name='Password' placeholder='Password' type='password'
-                                    formikFieldProps={formik.getFieldProps('password')}
-                                    formikTouched={formik.touched.password}
-                                    formikErrors={formik.errors.password}
-                        />
+                        <div data-kt-password-meter='true'>
+                            <InputField name='Password' placeholder='Password' type='password'
+                                        formikFieldProps={formik.getFieldProps('password')}
+                                        formikTouched={formik.touched.password}
+                                        formikErrors={formik.errors.password}
+                            />
 
-                        {/*Password meter*/}
-                        <div
-                            className='d-flex align-items-center my-3'
-                            data-kt-password-meter-control='highlight'
-                        >
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px'></div>
+                            {/*Password meter*/}
+                            <div
+                                className='d-flex align-items-center my-3'
+                                data-kt-password-meter-control='highlight'
+                            >
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                                <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px'></div>
+                            </div>
+                            {/*End Password meter*/}
                         </div>
+
                         <p className='text-muted'>
                             Use 8 or more characters with a mix of letters, numbers & symbols.
                         </p>
@@ -215,7 +269,7 @@ const EmployerRegistration = () => {
                                             formikErrors={formik.errors.phone}
                                 />
                             </div>
-                            <div className='col-sm-6'>
+                            <div className='col-sm'>
                                 <InputField name='Fax' placeholder='Fax' type='text'
                                             formikFieldProps={formik.getFieldProps('fax')}
                                             formikTouched={formik.touched.fax}
@@ -224,7 +278,16 @@ const EmployerRegistration = () => {
                             </div>
                         </div>
                     </div>
-                    <button className='btn btn-primary btn-block mt-4' type='submit'>Submit</button>
+                    <button className='btn btn-primary btn-block mt-4' type='submit'
+                    >
+                        {!loading && <span className='indicator-label'>Register</span>}
+                        {loading && (
+                            <span className='indicator-progress' style={{display: 'block'}}>
+                          Please wait...
+                        <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                         </span>
+                        )}
+                    </button>
                 </div>
             </div>
         </form>
