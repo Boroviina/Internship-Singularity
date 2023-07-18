@@ -15,3 +15,8 @@
     min-height: 400px;
     background: rgba(40, 50, 100, 0.6);
 }
+
+.filter {
+    border: solid #d0cccc 0.11rem;
+    border-radius: 3px;
+}
