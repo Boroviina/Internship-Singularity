@@ -2,8 +2,10 @@ import React from 'react';
 import styles from './jobListingPage.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
+import CheckboxGroup from "./CheckboxGroup";
 
 const JobListingPage = () => {
+    const filters = ["Type 1", "Type 2", "Type 3"];
     return (
         <body>
         <header className={`mb-5 ${styles['hero']}`}>
@@ -21,31 +23,7 @@ const JobListingPage = () => {
                             <h5 className="d-inline align-baseline">Filter jobs</h5>
                         </div>
                             <div className={`container py-3 filter ${styles['filter']}`}>
-                                <h5>Job Type</h5>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" id=""/>
-                                        <label className="form-check-label" htmlFor="">
-                                            Type 1
-                                        </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" id=""/>
-                                    <label className="form-check-label" htmlFor="">
-                                        Type 2
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" id=""/>
-                                    <label className="form-check-label" htmlFor="">
-                                        Type 3
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" id=""/>
-                                    <label className="form-check-label" htmlFor="">
-                                        Type 4
-                                    </label>
-                                </div>
+                                <CheckboxGroup name="Job Type" filters={filters}/>
                             </div>
                     </div>
                 </div>
@@ -55,8 +33,7 @@ const JobListingPage = () => {
                 </div>
         </section>
 </body>
-)
-    ;
+    );
 };
 
 export default JobListingPage;
