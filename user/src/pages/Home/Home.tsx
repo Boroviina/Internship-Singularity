@@ -1,9 +1,12 @@
 import React from "react";
 import {Header} from "../Header/Header";
-export function Home(){
+import {Footer} from "../generalFooter/Footer";
+
+export function Home() {
     return (
         <>
-         <Header/>
+            <Header/>
+            <Footer/>
         </>
     )
 }
