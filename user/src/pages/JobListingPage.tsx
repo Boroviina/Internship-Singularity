@@ -37,20 +37,9 @@ const JobListingPage = () => {
                     </section>
                 <section className="col-lg-9 col-md-8">
                     <div className="row row-gap-lg-2">
-                        <article>
-                            <div className="card" style={{width: "20rem"}}>
-                                <div className="card-body">
-                                    <h4 className="card-title">Card Title</h4>
-                                    <h6 className="card-subtitle text-muted">Card subtitle</h6>
-                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Illo, quas.</p>
-                                    <a className="btn btn-outline-primary" href="src/pages/JobListingPage#">Read More</a>
-                                </div>
-                            </div>
-                        </article>
-                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
-                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
-                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
+                        <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
+                        <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
+                        <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
                     </div>
                 </section>
                 </div>
