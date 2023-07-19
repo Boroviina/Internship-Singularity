@@ -10,7 +10,7 @@ const AppRoutes: FC = () => {
         <BrowserRouter basename={PUBLIC_URL}>
             <Routes>
                 <Route element={<App/>}>
-                    <Route path='/job-applications/:id' element={<ApplyToJobListing/>}/>
+                    <Route path='/apply/:jobId' element={<ApplyToJobListing/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

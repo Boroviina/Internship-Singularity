@@ -14,6 +14,21 @@ const post = (endpoint: string, body: any, query: string = ''): Promise<AxiosRes
   return axiosInstance.post(`${endpoint}${query}`, body);
 };
 
+// const postWithFiles = (endpoint: string, body: FormData, query: string = ''): Promise<AxiosResponse> => {
+//   return axios.post(`${endpoint}${query}`, body, {
+//     headers: {
+//       'Content-Type': 'multipart/form-data'
+//     },
+//   });
+// };
+const postWithFiles = (endpoint: string, body: FormData, query: string = ''): Promise<AxiosResponse> => {
+  return axiosInstance.post(`${endpoint}${query}`, body, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+  });
+};
+
 const put = (endpoint: string, body: any, query: string = ''): Promise<AxiosResponse> => {
   return axiosInstance.put(`${endpoint}${query}`, body);
 };
@@ -22,6 +37,6 @@ const remove = (endpoint: string, query: string = ''): Promise<AxiosResponse> =>
   return axiosInstance.delete(`${endpoint}${query}`);
 };
 
-const ApiClient = {get, post, put, remove};
+const ApiClient = {get, post, postWithFiles, put, remove};
 
 export default ApiClient;
