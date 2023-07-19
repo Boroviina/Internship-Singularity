@@ -3,32 +3,16 @@ import classes from './Header.module.css';
 import {CustomLogo} from "./CustomLogo";
 
 export function Header() {
-    const [showMenu, setShowMenu] = useState(false);
-    const [showSubmenu, setShowSubmenu] = useState(false);
-    const showMenuHandler = () => {
-        if (!showMenu)
-            setShowMenu(true);
-        else
-            setShowMenu(false);
-
-    }
-    const showSubmenuHandler = () => {
-        if (!showSubmenu)
-            setShowSubmenu(true);
-        else
-            setShowSubmenu(false);
-
-    }
     return (
         <header>
             <div className={'d-block p-4 '}>
                 <div className={'d-block'}>
                     <div className={'container d-block'}>
                         <div className={'row  align-items-center'}>
-                         <div
+                            <div
                                 className={'col-lg-3 col-md-4 col-7 d-flex flex-row justify-content-between align-items-center'}>
-                           <CustomLogo/>
-                           </div>
+                                <CustomLogo/>
+                            </div>
                             <div className={'col-lg-9 col-md-9 d-flex justify-content-between .'}>
                                 <div
                                     className={'menu-wrapper col d-flex align-items-center justify-content-center mx-2'}>
@@ -37,24 +21,28 @@ export function Header() {
                                         <nav className={'d-none mt-1 d-lg-block '}>
                                             <ul id={'navigation'} className={`m-0 p-0`}>
                                                 <li className={'d-inline-block position-relative z-1 '}><a
-                                                    href="" className={'p-3 text-decoration-none fs-6 fw-bolder'}>Home</a>
+                                                    href=""
+                                                    className={'p-3 text-decoration-none fs-6 fw-bolder'}>Home</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1 '}><a
                                                     href="" className={'p-3 text-decoration-none fs-6 fw-bolder'}>Find a
                                                     Jobs</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1  '}><a
-                                                    href="" className={'p-3 text-decoration-none fs-6 fw-bolder'}>About</a>
+                                                    href=""
+                                                    className={'p-3 text-decoration-none fs-6 fw-bolder'}>About</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1  '}><a
-                                                    href="" className={'p-3 text-decoration-none fw-bolder fs-6'}>Page</a>
+                                                    href=""
+                                                    className={'p-3 text-decoration-none fw-bolder fs-6'}>Page</a>
                                                     <ul className={`${classes.submenu} position-absolute mt-4 p-0`}>
                                                         <li>
                                                             <a href=""
                                                                className={'text-decoration-none fw-bolder fs-6 '}>Blog</a>
                                                         </li>
                                                         <li>
-                                                            <a href="" className={'text-decoration-none fw-bolder fs-6'}>Blog
+                                                            <a href=""
+                                                               className={'text-decoration-none fw-bolder fs-6'}>Blog
                                                                 Details</a>
                                                         </li>
                                                         <li>
@@ -62,13 +50,15 @@ export function Header() {
                                                                className={'text-decoration-none fw-bolder fs-6'}>Elements</a>
                                                         </li>
                                                         <li>
-                                                            <a href="" className={'text-decoration-none fs-6 fw-bolder'}>Job
+                                                            <a href=""
+                                                               className={'text-decoration-none fs-6 fw-bolder'}>Job
                                                                 Details</a>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1 '}><a
-                                                    href="" className={'p-3 text-decoration-none fw-bolder fs-6'}>Contact</a>
+                                                    href=""
+                                                    className={'p-3 text-decoration-none fw-bolder fs-6'}>Contact</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -92,9 +82,7 @@ export function Header() {
                                             data-bs-target="#navbarToggleExternalContent1"
                                             aria-controls="navbarToggleExternalContent1"
                                             aria-expanded="false"
-                                            aria-label="Toggle navigation"
-                                            onClick={showMenuHandler}
-                                        >
+                                            aria-label="Toggle navigation">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -107,7 +95,7 @@ export function Header() {
                                         </button>
                                     </div>
                                 </nav>
-                                {showMenu && <div className="" id="navbarToggleExternalContent1">
+                                <div className="collapse" id="navbarToggleExternalContent1">
                                     <ul className="bg-light mx-3 d-flex flex-column list-unstyled shadow-3 py-2 px-3">
                                         <li className="btn mx-3 text-decoration-none btn-link btn-block m-0 p-2 text-start text-dark">
                                             <a
@@ -119,13 +107,18 @@ export function Header() {
                                         </li>
                                         <li className="btn  mx-3 btn-link btn-block text-decoration-none m-0 p-2 text-start text-dark">
                                             <a href="" className={`text-decoration-none fs-6 fw-bolder`}>About</a></li>
-                                        <li onClick={showSubmenuHandler}
-                                            className="btn btn-link btn-block  mx-3 text-decoration-none m-0 p-2 text-start text-dark d-flex justify-content-between align-items-center">
+                                        <li className="btn btn-link btn-block  mx-3 text-decoration-none m-0 p-2 text-start text-dark d-flex justify-content-between align-items-center">
                                             <a href="" className={`text-decoration-none fs-6 fw-bolder`}>Page</a>
-                                            <span className={'fs-4 fw-bolder'}>+</span>
+                                            <span className={'fs-4 fw-bolder btn'}
+                                                  data-bs-toggle="collapse"
+                                                  data-bs-target="#navbarToggleExternalContent2"
+                                                  aria-controls="navbarToggleExternalContent2"
+                                                  aria-expanded="false"
+                                                  aria-label="Toggle navigation">
+                                                +</span>
                                         </li>
-                                        {showSubmenu &&
-                                            <ul className="bg-light mx-3 d-flex flex-column list-unstyled shadow-3 py-2 px-3">
+                                        <div className={'collapse'} id="navbarToggleExternalContent2">
+                                            <ul className="  bg-light mx-3 d-flex flex-column list-unstyled shadow-3 py-2 px-3">
                                                 <li className="btn mx-3 text-decoration-none btn-link btn-block m-0 p-2 text-start text-dark">
                                                     <a href=""
                                                        className={`text-decoration-none text-nowrap fs-6 fw-bolder`}>Blog</a>
@@ -143,13 +136,13 @@ export function Header() {
                                                        className={`text-decoration-none text-nowrap fs-6 fw-bolder`}>Job
                                                         Details</a></li>
                                             </ul>
-                                        }
+                                        </div>
                                         <li className="btn btn-link  mx-3 btn-block text-decoration-none m-0 p-2 text-start text-dark">
                                             <a href="" className={`text-decoration-none fs-6 fw-bolder`}>Contact</a>
                                         </li>
                                     </ul>
                                 </div>
-                                }
+
                             </div>
                         </div>
                     </div>

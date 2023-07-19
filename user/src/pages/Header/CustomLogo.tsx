@@ -1,8 +1,8 @@
 import React from "react";
 
 export function CustomLogo() {
-    return <>
-        <div className={'col-3  col-md-2 col-sm-2'}>
+    return <div className={'d-flex justify-content-between align-items-center'}>
+        <div className={'col-2 col-lg-4  col-md-3 col-sm-2'}>
             <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px"
                  viewBox="0 0 30 30" version="1.1">
                 <g id="surface1">
@@ -23,13 +23,13 @@ export function CustomLogo() {
                 </g>
             </svg>
         </div>
-        <div className={'col-7 col-md-9 col-sm-9'}>
-            <label className={'col-12 text-nowrap text-start text-dark fs-4 fw-bolder'}
+        <div className={'col-8 d-none d-sm-block'}>
+            <label className={'col-12 text-nowrap text-start text-dark fs-5 fs-sm-4 fw-bolder'}
                    htmlFor="">Job
                 Radar</label><br/>
-            <label className={'text-muted text-nowrap fs-6 col-12 fw-bold '} htmlFor="">Get your
+            <label className={'text-muted text-nowrap  fs-sm-6 fs-6  col-12 fw-bold '} htmlFor="">Get your
                 dream
                 job</label>
         </div>
-    </>
+    </div>
 }
