@@ -35,11 +35,16 @@ const JobListingPage = () => {
                                 <Dropdown name="Job type 3" filters={filters3}/>
                             </div>
                     </div>
+                <div className="col-lg-9 col-md-8">
+                    <div className="row gap-lg-2">
+                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
+                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
+                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
+                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
+                    </div>
+                </div>
                 </div>
             </div>
-                <div className="col-lg-9 col-md-4">
-
-                </div>
         </section>
 </body>
     );
