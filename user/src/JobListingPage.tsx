@@ -3,10 +3,12 @@ import styles from './jobListingPage.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
 import CheckboxGroup from "./CheckboxGroup";
-import DropdownGroup from "./DropdownGroup";
+import Dropdown from "./Dropdown";
 
 const JobListingPage = () => {
-    const filters = ["Type 1", "Type 2", "Type 3"];
+    const filters1 = ["Type 1", "Type 2", "Type 3"];
+    const filters2 = ["Type 4", "Type 5", "Type 6"];
+    const filters3 = ["Type 7", "Type 8", "Type 9"];
     return (
         <body>
         <header className={`mb-5 ${styles['hero']}`}>
@@ -23,13 +25,14 @@ const JobListingPage = () => {
                                              style={{color: "#198754", height: 30}}/>
                             <h5 className="d-inline align-baseline">Filter jobs</h5>
                         </div>
-                            <div className={`container d-flex flex-column gap-3 py-3 filter ${styles['filter']}`}>
-                                <CheckboxGroup name="Job Type 1" filters={filters}/>
-                                <DropdownGroup name="Job Category 1" filters={filters} />
-                                <CheckboxGroup name="Job Type 2" filters={filters}/>
-                                <DropdownGroup name="Job Category 2" filters={filters} />
-                                <CheckboxGroup name="Job Type 3" filters={filters}/>
-                                <DropdownGroup name="Job Category 3" filters={filters} />
+                            <div className={`container d-flex flex-column gap-3 p-3 filter ${styles['filter']}`}>
+                                <CheckboxGroup name="Job Type 1" filters={filters1}/>
+                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
+                                <Dropdown name="Job type 3" filters={filters3}/>
+
+                                <CheckboxGroup name="Job Type 1" filters={filters1}/>
+                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
+                                <Dropdown name="Job type 3" filters={filters3}/>
                             </div>
                     </div>
                 </div>
