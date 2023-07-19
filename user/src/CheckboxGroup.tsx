@@ -1,6 +1,11 @@
 import React from 'react';
 
-const CheckboxGroup = ({name, filters}) => {
+/*export*/ interface FilterGroup {
+    name: string,
+    filters: string[]
+}
+
+const CheckboxGroup = ({name, filters}: FilterGroup) => {
     return (
         <>
             <h5>{name}</h5>

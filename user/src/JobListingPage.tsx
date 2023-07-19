@@ -24,6 +24,7 @@ const JobListingPage = () => {
                         </div>
                             <div className={`container py-3 filter ${styles['filter']}`}>
                                 <CheckboxGroup name="Job Type" filters={filters}/>
+                                
                             </div>
                     </div>
                 </div>
