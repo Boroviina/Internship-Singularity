@@ -1,5 +1,5 @@
 import React from 'react';
-import JobListingPage from "./JobListingPage";
+import JobListingPage from "./pages/JobListingPage";
 
 
 

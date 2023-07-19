@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './jobListingPage.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
-import CheckboxGroup from "./CheckboxGroup";
-import Dropdown from "./Dropdown";
+import CheckboxGroup from "../components/CheckboxGroup";
+import Dropdown from "../components/Dropdown";
 
 const JobListingPage = () => {
     const filters1 = ["Type 1", "Type 2", "Type 3"];
@@ -13,10 +13,10 @@ const JobListingPage = () => {
         <body>
         <header className={`mb-5 ${styles['hero']}`}>
             <div className={`text-center ${styles['overlay']}`}>
-                <h1 className='display-2 text-light pt-150' style={{paddingTop: '150px'}}>Search for jobs</h1>
+                <h1 className='display-2 text-light' style={{paddingTop: '150px'}}>Search for jobs</h1>
             </div>
         </header>
-        <section id="jobs-and-filter" className='py-120'>
+        <section id="jobs-and-filter">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3 col-md-4">
@@ -27,17 +27,27 @@ const JobListingPage = () => {
                         </div>
                             <div className={`container d-flex flex-column gap-3 p-3 filter ${styles['filter']}`}>
                                 <CheckboxGroup name="Job Type 1" filters={filters1}/>
-                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
                                 <Dropdown name="Job type 3" filters={filters3}/>
-
+                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
+                                <hr/>
                                 <CheckboxGroup name="Job Type 1" filters={filters1}/>
                                 <CheckboxGroup name="Job Type 2" filters={filters2}/>
                                 <Dropdown name="Job type 3" filters={filters3}/>
                             </div>
                     </div>
                 <div className="col-lg-9 col-md-8">
-                    <div className="row gap-lg-2">
-                        <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
+                    <div className="row row-gap-lg-2">
+                        <div className="article">
+                            <div className="card" style={{width: "20rem"}}>
+                                <div className="card-body">
+                                    <h4 className="card-title">Card Title</h4>
+                                    <h6 className="card-subtitle text-muted">Card subtitle</h6>
+                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Illo, quas.</p>
+                                    <a className="btn btn-outline-primary" href="src/pages/JobListingPage#">Read More</a>
+                                </div>
+                            </div>
+                        </div>
                         <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
                         <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
                         <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
