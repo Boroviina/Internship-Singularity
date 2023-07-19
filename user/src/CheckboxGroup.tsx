@@ -1,21 +1,21 @@
 import React from 'react';
 import Checkbox from "./Checkbox";
 
-/*export*/ interface FilterGroup {
+export interface FilterGroup {
     name: string,
     filters: string[]
 }
 
 const CheckboxGroup = ({name, filters}: FilterGroup) => {
     return (
-        <>
+        <div>
             <h5>{name}</h5>
-            {filters.map((item) => {
-                return <Checkbox name={item}
-                                 key={Math.random().toString()}
-                                 id={item.toLowerCase().replaceAll(" ", "")}/>;
+            {filters.map((filter) => {
+                return <Checkbox key={Math.random().toString()}
+                                 name={filter}
+                                 id={filter.toLowerCase().replaceAll(" ", "")}/>;
             })}
-        </>
+        </div>
     );
 };
 
