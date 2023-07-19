@@ -16,10 +16,10 @@ const JobListingPage = () => {
                 <h1 className='display-2 text-light' style={{paddingTop: '150px'}}>Search for jobs</h1>
             </div>
         </header>
-        <section id="jobs-and-filter">
+        <main id="jobs-and-filter">
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-3 col-md-4">
+                    <section className="col-lg-3 col-md-4">
                         <div className="align-items-center mb-2">
                             <FontAwesomeIcon icon={faFilter}
                                              style={{color: "#198754", height: 30}}/>
@@ -34,10 +34,10 @@ const JobListingPage = () => {
                                 <CheckboxGroup name="Job Type 2" filters={filters2}/>
                                 <Dropdown name="Job type 3" filters={filters3}/>
                             </div>
-                    </div>
-                <div className="col-lg-9 col-md-8">
+                    </section>
+                <section className="col-lg-9 col-md-8">
                     <div className="row row-gap-lg-2">
-                        <div className="article">
+                        <article>
                             <div className="card" style={{width: "20rem"}}>
                                 <div className="card-body">
                                     <h4 className="card-title">Card Title</h4>
@@ -47,15 +47,15 @@ const JobListingPage = () => {
                                     <a className="btn btn-outline-primary" href="src/pages/JobListingPage#">Read More</a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                         <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
                         <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
                         <div style={{background: "#54a", width: "100%", height: "100px"}}></div>
                     </div>
-                </div>
+                </section>
                 </div>
             </div>
-        </section>
+        </main>
 </body>
     );
 };
