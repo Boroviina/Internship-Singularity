@@ -1,0 +1,16 @@
+.logo {
+    height: 100px;
+}
+
+.page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it stays behind other elements */
+    /* Add any other styles you want for the background div */
+    background-size: cover;
+    /*background-color: #00A3FF;*/
+    overflow-y: scroll;
+}

@@ -1,11 +1,16 @@
-import React from 'react';
+import {Suspense} from 'react'
 import {Outlet} from 'react-router-dom'
+import {LayoutSplashScreen} from "./layout/core";
+import {AuthInit} from './modules/auth'
 
-function App() {
+const App = () => {
   return (
-      <Outlet/>
-  );
+      <Suspense fallback={<LayoutSplashScreen/>}>
+          <AuthInit>
+              <Outlet/>
+          </AuthInit>
+      </Suspense>
+  )
 }
 
-export default App;
-
+export {App}

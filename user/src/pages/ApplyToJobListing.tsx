@@ -7,6 +7,7 @@ import {Input} from "../shared/components/form/Input";
 import {InputFile} from "../shared/components/form/InputFile";
 import {Button} from "../shared/components/form/Button";
 import {createJobApplication} from "../shared/services/job-application.service";
+import {useAuth} from "../modules/auth";
 
 const applyForJobSchema = Yup.object().shape({
     phoneNumber: Yup.string()
@@ -53,7 +54,14 @@ export const ApplyToJobListing = () => {
         },
     })
 
+    const {currentUser, logout} = useAuth()
+
     return (
+        <>
+        <a onClick={logout} className='menu-link px-5'>
+            Sign Out
+        </a>
+
         <form
             className={`form w-100 container`}
             onSubmit={formik.handleSubmit}
@@ -108,5 +116,6 @@ export const ApplyToJobListing = () => {
                 >Continue</Button>
             </div>
         </form>
+        </>
     )
 }
