@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import clsx from 'clsx'
-import {register} from '../core/_requests'
 import {Link} from 'react-router-dom'
 import {PasswordMeterComponent} from "../../../assests/ts/components";
-import {useAuth} from '../core/Auth'
 import {Input} from "../../../shared/components/form/Input";
+import AuthService from "../../../shared/services/api-client/auth.service";
+import {Alert} from "../../../shared/components/Alert";
+const authService = new AuthService();
 
 const initialValues = {
   firstname: '',
@@ -48,30 +49,28 @@ const registrationSchema = Yup.object().shape({
 
 export function Registration() {
   const [loading, setLoading] = useState(false)
-  const {saveAuth, setCurrentUser} = useAuth()
+  const [error, setError] = useState(null);
+
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchema,
     onSubmit: async (values, {setStatus, setSubmitting}) => {
-      setLoading(true)
+      setLoading(true);
+      setError(null);
       try {
-        const {data: auth} = await register(
-          values.email,
-          values.firstname,
-          values.lastname,
-          values.password,
-          values.changepassword
+        await authService.register(
+            {
+              name: `${values.firstname} ${values.lastname}`,
+              email: values.email,
+              password: values.password
+            }
         )
-        // saveAuth(auth)
-        // const {data: user} = await getUserByToken(auth.api_token)
-        // setCurrentUser(user)
       } catch (error) {
-        console.error(error)
-        saveAuth(undefined)
-        setStatus('The registration details are incorrect')
+        setError("Registration failed:" + error)
+        setStatus('The registration failed')
         setSubmitting(false)
-        setLoading(false)
       }
+      setLoading(false)
     },
   })
 
@@ -97,11 +96,7 @@ export function Registration() {
         </div>
       </div>
 
-      {formik.status && (
-        <div className='mb-lg-15 alert alert-danger'>
-          <div className='alert-text font-weight-bold'>{formik.status}</div>
-        </div>
-      )}
+      {!loading && error && <Alert state="danger">{error}</Alert>}
 
       <Input
           formikFieldProps={formik.getFieldProps('firstname')}
