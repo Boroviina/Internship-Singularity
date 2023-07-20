@@ -31,7 +31,7 @@ export function Footer() {
                                     development resources to enhance your skills. Join our supportive community of job
                                     seekers and professionals to network and learn from others.
                                     <div className={'d-flex justify-content-end'}>
-                                        <button className={'btn btn-dark w-25 my-4'} type="button"
+                                        <button className={`btn ${classes.closeButton} text-white w-25 my-4`} type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseAbout"
                                                 aria-expanded="false" aria-controls="collapseAbout">
                                             Close
@@ -90,7 +90,7 @@ export function Footer() {
                                         href="mailto:jobradar@gmail.com">jobradar@gmail.com</a></label>
                                 </div>
                                 <div className={'d-flex justify-content-end'}>
-                                    <button className={'btn btn-dark w-50 my-4'} type="button"
+                                    <button className={`btn btn-dark w-50 my-4`} type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapseContact"
                                             aria-expanded="false" aria-controls="collapseContact">
                                         Close

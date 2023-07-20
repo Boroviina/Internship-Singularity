@@ -37,3 +37,9 @@
     color: #fff;
     border: 1px solid #fb246a;
 }
+.closeButton{
+    background-color: #010b1d;
+}
+.closeButton:hover{
+    background-color: #021538;
+}
