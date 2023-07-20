@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {PasswordMeterComponent} from "../../../assests/ts/components";
 import {Input} from "../../../shared/components/form/Input";
@@ -131,51 +130,17 @@ export function Registration() {
           label='Email'
       />
 
-      {/* begin::Form group Password */}
-      <div className='fv-row mb-3' data-kt-password-meter='true'>
-        <div className='mb-1'>
-          <label className='form-label fw-bolder text-dark fs-6'>Password</label>
-          <div className='position-relative mb-3'>
-            <input
-              type='password'
-              placeholder='Password'
-              autoComplete='off'
-              {...formik.getFieldProps('password')}
-              className={clsx(
-                'form-control form-control-lg form-control-solid',
-                {
-                  'is-invalid': formik.touched.password && formik.errors.password,
-                },
-                {
-                  'is-valid': formik.touched.password && !formik.errors.password,
-                }
-              )}
-            />
-            {formik.touched.password && formik.errors.password && (
-              <div className='fv-plugins-message-container'>
-                <div className='fv-help-block'>
-                  <span role='alert'>{formik.errors.password}</span>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* begin::Meter */}
-          <div
-            className='d-flex align-items-center mb-3'
-            data-kt-password-meter-control='highlight'
-          >
-            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
-            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px'></div>
-          </div>
-          {/* end::Meter */}
-        </div>
-        <div className='text-muted'>
-          Use 8 or more characters with a mix of letters, numbers & symbols.
-        </div>
-      </div>
-      {/* end::Form group */}
+      <Input
+          formikFieldProps={formik.getFieldProps('password')}
+          name='password'
+          type='password'
+          required={true}
+          placeholder='Password'
+          formikTouched={formik.touched.password}
+          formikError={formik.errors.password}
+          label='Password'
+          additionalDescription="Use 8 or more characters with a mix of letters, numbers & symbols."
+      />
 
       <Input
           formikFieldProps={formik.getFieldProps('changepassword')}

@@ -10,6 +10,8 @@ type InputProps = {
     name: string
     type: "text" | "email" | "password"
     required: boolean
+    id?: string
+    additionalDescription?: string
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -23,11 +25,13 @@ export const Input: React.FC<InputProps> = (props) => {
         name,
         type,
         required,
+        id,
+        additionalDescription
     } = props
 
     return (
         <div className='fv-row mb-3'>
-            {label && <label className="form-label fs-6 fw-bolder text-dark">{label}</label>}
+            {label && <label htmlFor={id} className="form-label fs-6 fw-bolder text-dark">{label}</label>}
             <input
                 {...formikFieldProps}
                 placeholder={placeholder}
@@ -40,6 +44,9 @@ export const Input: React.FC<InputProps> = (props) => {
                 name={name}
                 autoComplete='off'
             />
+            {additionalDescription && <div className='text-muted'>
+                Use 8 or more characters with a mix of letters, numbers & symbols.
+            </div>}
             {required && formikTouched && formikError && (
                 <div className="invalid-feedback">
                     {formikError}

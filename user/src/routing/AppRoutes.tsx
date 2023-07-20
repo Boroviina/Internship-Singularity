@@ -1,24 +1,3 @@
-// import {FC} from 'react'
-// import {Routes, Route, BrowserRouter} from 'react-router-dom';
-// import App from "../App";
-// import {ApplyToJobListing} from "../pages/ApplyToJobListing";
-//
-// const {PUBLIC_URL} = process.env
-//
-// const AppRoutes: FC = () => {
-//     return (
-//         <BrowserRouter basename={PUBLIC_URL}>
-//             <Routes>
-//                 <Route element={<App/>}>
-//                     <Route path='/apply/:jobId' element={<ApplyToJobListing/>}/>
-//                 </Route>
-//             </Routes>
-//         </BrowserRouter>
-//     )
-// }
-//
-// export {AppRoutes}
-
 import {FC} from 'react'
 import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom'
 import {PrivateRoutes} from './PrivateRoutes'
@@ -46,7 +25,7 @@ const AppRoutes: FC = () => {
                         <>
                             <Route path='home' element={<Home/>}/>
                             <Route path='auth/*' element={<AuthPage/>}/>
-                            <Route path='*' element={<Navigate to='/home'/>}/>
+                            <Route path='*' element={<Navigate to='/auth'/>}/>
                         </>
                     )}
                 </Route>

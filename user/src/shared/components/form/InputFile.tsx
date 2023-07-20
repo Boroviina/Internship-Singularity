@@ -22,8 +22,8 @@ export const InputFile: React.FC<InputFileProps> = (props) => {
     } = props
 
     return (
-        <div className='row mb-2'>
-            {label && <label className="form-label">{label}</label>}
+        <div className='fv-row mb-3'>
+            {label && <label className="form-label fs-6 fw-bolder text-dark">{label}</label>}
             <input
                 className={clsx(
                     `form-control `,

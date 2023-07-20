@@ -25,7 +25,6 @@ class AuthService {
   async register(user: object): Promise<LoginResponse | null> {
     try {
       const response = await axios.post<LoginResponse>(`${API_URL}/${API_VERSION}/auth/register`, { ...user });
-      console.log(response.data)
       return response.data;
     } catch (error) {
       console.error("Registration failed:", error);
