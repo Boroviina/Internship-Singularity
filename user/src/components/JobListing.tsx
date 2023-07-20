@@ -1,6 +1,6 @@
 import React from 'react';
 
-const logo = require('./logo-fb.jpg');
+const logo = require('../img/logo-fb.jpg');
 
 const Job = () => {
     return (
