@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
 import CheckboxGroup from "../components/CheckboxGroup";
 import Dropdown from "../components/Dropdown";
+import Job from "../components/Job";
 
 const JobListingPage = () => {
     const filters1 = ["Type 1", "Type 2", "Type 3"];
@@ -21,7 +22,7 @@ const JobListingPage = () => {
         <main id="jobs-and-filter">
             <div className="container">
                 <div className="row">
-                    <section className="col-lg-3 col-md-4">
+                    <section className="col-lg-3 col-md-4 order-2 order-md-1">
                         <div className="align-items-center mb-2">
                             <FontAwesomeIcon icon={faFilter}
                                              style={{color: "#198754", height: 30}}/>
@@ -39,10 +40,10 @@ const JobListingPage = () => {
                                 <Dropdown name="Job type 3" filters={filters3}/>
                             </div>
                     </section>
-                <section className="col-lg-9 col-md-8">
+                <section className="col-lg-9 col-md-8 order-1 order-md-2">
                     <div className="row row-gap-lg-2">
+                        <Job />
                         <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
-
                         <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
                         <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
                     </div>
