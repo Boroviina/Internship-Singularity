@@ -43,9 +43,10 @@ const JobListingPage = () => {
                 <section className="col-lg-9 col-md-8 order-1 order-md-2">
                     <div className="row row-gap-lg-2">
                         <Job />
-                        <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
-                        <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
-                        <div style={{background: "#54a", width: "100%", height: "120px"}}></div>
+                        <Job />
+                        <Job />
+                        <Job />
+                        <Job />
                     </div>
                 </section>
                 </div>
