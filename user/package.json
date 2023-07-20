@@ -19,7 +19,6 @@
     "popper.js": "^1.16.1",
     "react": "^18.2.0",
     "react-axios": "^2.0.6",
-    "react-bootstrap": "^2.8.0",
     "react-css-modules": "^4.7.11",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
