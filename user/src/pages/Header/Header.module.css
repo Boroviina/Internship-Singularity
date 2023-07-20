@@ -47,8 +47,6 @@ ul > li:hover > ul.submenu {
 
 .btn1 {
     background: #fb246a;
-    -moz-user-select: none;
-    cursor: pointer;
     color: #fff;
     margin-right: 5px;
     padding: 27px 27px;
