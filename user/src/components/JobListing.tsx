@@ -7,7 +7,9 @@ const Job = () => {
     return (
         <article className={`d-flex w-100 p-3 ${styles.jobCard}`}>
                 <a className="me-3" href="#employer-info">
-                    <img src={logo} style={{height: "3.5rem"}} alt={"Company Logo"}/>
+                    <img src={logo} className={`${styles.logo}`}
+                         style={{width: "3.5rem", height: "3.5 rem"}}
+                         alt={"Company Logo"}/>
                 </a>
             <div className="d-flex flex-column flex-sm-row">
                 <div className="flex-grow-1 me-sm-3">

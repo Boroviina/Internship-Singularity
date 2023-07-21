@@ -14,3 +14,8 @@
     rgba(193, 195, 217, 0.02), rgba(195, 195, 218, 0.2)
     );
 }
+.logo {
+    border: solid 1px #a2aef8;
+    border-radius: 5px;
+    padding: 3px;
+ }
