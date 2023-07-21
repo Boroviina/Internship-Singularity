@@ -1,6 +1,9 @@
 .height {
     height: 90rem;
 }
+.jobSearchHeigh{
+    height: 70rem;
+}
 @media(max-height: 2235px){
     .height{
         height: 80rem;
@@ -8,7 +11,7 @@
 }
 @media (max-width: 1932px) {
     .height{
-        height: 70rem;
+        height: 60rem;
     }
 }
 @media (max-width: 1784px) {
@@ -19,10 +22,16 @@
     .height{
         height: 50rem;
     }
+    .jobSearchHeigh{
+        height: 55rem;
+    }
 }
 @media (max-width: 1252px) {
     .height{
         height: 40rem;
+    }
+    .jobSearchHeigh{
+        height: 60rem;
     }
 }
 @media (max-width: 992px) {
@@ -34,10 +43,16 @@
     .height{
         height: 30rem;
     }
+    .jobSearchHeigh{
+        height: 50rem;
+    }
 }
 @media (max-width: 675px) {
     .height{
         height: 25rem;
+    }
+    .jobSearchHeigh{
+        height: 40rem;
     }
 }
 @media (max-width: 576px) {
@@ -48,6 +63,9 @@
 @media (max-width: 464px) {
     .height{
         height: 18rem;
+    }
+    .jobSearchHeigh{
+        height: 40rem;
     }
 }
 @media (max-width: 404px) {
@@ -63,5 +81,8 @@
 @media (max-width: 320px) {
     .height{
         height: 12rem;
+    }
+    .jobSearchHeigh{
+        height: 35rem;
     }
 }
