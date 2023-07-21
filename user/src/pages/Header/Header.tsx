@@ -2,8 +2,14 @@ import React, {useState} from "react";
 import classes from './Header.module.css';
 import {CustomLogo} from "./CustomLogo";
 import btnStyle from '../Home/GeneralButton.module.css'
+import {useNavigate} from "react-router-dom";
 
 export function Header() {
+    const navigate = useNavigate();
+    const registerClickHandle = () => {
+            navigate('/auth/registration')
+    }
+
     return (
         <header>
             <div className={'d-block p-4 '}>
@@ -66,8 +72,9 @@ export function Header() {
                                     </div>
                                 </div>
                                 <div className={'d-none d-lg-inline-flex'}>
-                                    <button className={`${btnStyle.filledButton}  d-inline-block`}>Register</button>
-                                    <button className={`${btnStyle.lightButton}  d-inline-block`}>Login</button>
+                                    <button className={`${btnStyle.filledButton}  d-inline-block`} onClick={registerClickHandle}>Register</button>
+                                    <button className={`${btnStyle.lightButton}  d-inline-block`} onClick={()=>navigate('/auth/login')} >Login
+                                    </button>
                                 </div>
                             </div>
 
