@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './SearchJob.module.css'
 import background from './bgr.jpg'
-import styles from '../Carousel/Carousel.module.css'
+import styles from '../ResponsiveControl.module.css'
 
 export function SearchJob() {
     return <div className={'card position-relative  '}>

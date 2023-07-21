@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './Carousel.module.css'
+import classes from '../ResponsiveControl.module.css'
 export function CarouselCustom(){
     return  <div id="carouselJobIndicators" className={`${classes.height} carousel slide`} data-bs-ride="carousel">
         <div className="carousel-indicators">
