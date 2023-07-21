@@ -45,7 +45,7 @@ export const Input: React.FC<InputProps> = (props) => {
                 autoComplete='off'
             />
             {additionalDescription && <div className='text-muted'>
-                Use 8 or more characters with a mix of letters, numbers & symbols.
+                {additionalDescription}
             </div>}
             {required && formikTouched && formikError && (
                 <div className="invalid-feedback">

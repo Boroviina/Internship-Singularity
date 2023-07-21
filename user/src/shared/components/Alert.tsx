@@ -16,7 +16,7 @@ export const Alert: React.FC<AlertProps & WithChildren> = (props) => {
     } = props
 
     return (
-        <div className={`alert alert-${state} d-flex align-items-center p-4 m-3`}>
+        <div className={`alert alert-${state} d-flex align-items-center p-4 my-3`}>
             {/*{icon && <KTSVG path={`/media/${icon}`} className={`svg-icon-2 svg-icon-2hx svg-icon-${state} me-4`}/>}*/}
             <div className="d-flex flex-column">
                 {title && <h5 className="mb-1">{title}</h5>}

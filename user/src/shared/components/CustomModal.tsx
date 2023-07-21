@@ -28,6 +28,8 @@ const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
                 onHide={onHide}
                 backdrop={backdrop}
                 keyboard={keyboard}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
             >
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>

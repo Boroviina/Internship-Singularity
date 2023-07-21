@@ -22,7 +22,7 @@ const loginSchema = Yup.object().shape({
 
 const initialValues = {
     email: 'user@demo.com',
-    password: 'demo',
+    password: 'password1',
 }
 
 export function Login() {
@@ -69,8 +69,6 @@ export function Login() {
 
             {!loading && error && <Alert state="danger">{error}</Alert>}
 
-            {/* begin::Form group */}
-
             <Input
                 formikFieldProps={formik.getFieldProps('email')}
                 name='email'
@@ -82,6 +80,8 @@ export function Login() {
                 label='Email'
             />
 
+            <label className="form-label fs-6 fw-bolder text-dark">Password </label>
+            {'  '}<Link to='/auth/forgot-password' className='link-primary fs-6 fw-bold'>Forgot Password ?</Link>
             <Input
                 formikFieldProps={formik.getFieldProps('password')}
                 name='password'
@@ -90,18 +90,7 @@ export function Login() {
                 placeholder='Password'
                 formikTouched={formik.touched.password}
                 formikError={formik.errors.password}
-                label='Password'
             />
-
-            <div className='d-flex justify-content-start mb-3' style={{marginTop: '-5%'}}>
-                <Link
-                    to='/auth/forgot-password'
-                    className='text-primary fs-6 fw-bold'
-
-                > Forgot Password ?
-                </Link>
-            </div>
-
 
             {/* begin::Action */}
             <div className='text-center'>
