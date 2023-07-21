@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './JobListing.module.css';
 
 const logo = require('../img/logo-fb.jpg');
 
@@ -10,7 +11,9 @@ const Job = () => {
                 </a>
             <div className="d-flex flex-column flex-sm-row">
                 <div className="flex-grow-1 me-3">
-                    <h3>Job title</h3>
+                    <a href="#" className="text-dark" style={{textDecoration: "none"}}>
+                        <h3 className={styles.title}>Job title</h3>
+                    </a>
                     <p className="fw-semibold">
                         <span>Facebook </span>
                         <span className="text-black-50">
@@ -27,7 +30,6 @@ const Job = () => {
                 </button>
             </div>
             </div>
-
         </article>
     );
 };
