@@ -1,6 +1,6 @@
 import {Route, Routes, Navigate} from 'react-router-dom'
 import {ApplyToJobListing} from "../pages/ApplyToJobListing";
-import {Home} from "../pages/Home";
+import {Home} from "../pages/Home/Home";
 
 const PrivateRoutes = () => {
     return (

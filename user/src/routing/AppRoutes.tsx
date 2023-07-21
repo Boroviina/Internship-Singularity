@@ -4,7 +4,7 @@ import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Logout, AuthPage, useAuth} from '../modules/auth'
 import {App} from '../App'
-import {Home} from "../pages/Home";
+import {Home} from "../pages/Home/Home";
 
 const {PUBLIC_URL} = process.env
 
