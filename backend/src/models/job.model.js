@@ -43,7 +43,7 @@ const jobSchema = mongoose.Schema(
     appInstructions: {
       type: String,
       required: [true,'The field must be filled'],
-      maxLength: [500, 'The field must have less than or equal to 5002 characters'],
+      maxLength: [500, 'The field must have less than or equal to 500 characters'],
       trim: true
     },
     positionsNum:{

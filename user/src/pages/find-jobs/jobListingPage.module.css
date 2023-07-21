@@ -1,0 +1,20 @@
+.hero {
+    background: rgba(40, 50, 100, 0.75) url(../../img/hero.jpg) no-repeat;
+    background-size: cover;
+
+    min-height: 400px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 400px;
+    background: rgba(40, 50, 100, 0.75);
+}
+
+.filter {
+    border: solid #d0cccc 0.11rem;
+    border-radius: 3px;
+}

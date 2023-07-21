@@ -1,0 +1,18 @@
+.title:hover {
+    color: #614ee0;
+    transition-duration: 212ms;
+}
+
+.jobCard {
+    border-radius: 30px;
+}
+
+.jobCard:hover {
+    background: rgb(249, 247, 250);
+    transition-duration: 500ms;
+}
+.logo {
+    border: solid 1px #a2aef8;
+    border-radius: 5px;
+    padding: 3px;
+ }
