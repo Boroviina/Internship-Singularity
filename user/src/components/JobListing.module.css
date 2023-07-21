@@ -8,10 +8,8 @@
 }
 
 .jobCard:hover {
-    background: linear-gradient(
-    to bottom,
-    rgba(193, 195, 217, 0.02), rgba(195, 195, 218, 0.2)
-    );
+    background: rgb(249, 247, 250);
+    transition-duration: 500ms;
 }
 .logo {
     border: solid 1px #a2aef8;
