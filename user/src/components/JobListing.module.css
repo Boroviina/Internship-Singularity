@@ -2,3 +2,15 @@
     color: #8b92dd;
     transition-duration: 212ms;
 }
+
+.jobCard {
+    border: #c3c3da;
+    border-radius: 30px;
+}
+
+.jobCard:hover {
+    background: linear-gradient(
+    to bottom,
+    rgba(193, 195, 217, 0.02), rgba(195, 195, 218, 0.2)
+    );
+}

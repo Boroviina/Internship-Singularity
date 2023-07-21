@@ -5,7 +5,7 @@ const logo = require('../img/logo-fb.jpg');
 
 const Job = () => {
     return (
-        <article className="d-flex w-100 p-3 p-lg-4">
+        <article className={`d-flex w-100 p-3 ${styles.jobCard}`}>
                 <a className="me-3" href="#employer-info">
                     <img src={logo} style={{height: "3.5rem"}} alt={"Company Logo"}/>
                 </a>
