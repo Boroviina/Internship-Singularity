@@ -41,13 +41,11 @@ const JobListingPage = () => {
                             </div>
                     </section>
                 <section className="col-lg-9 col-md-8 order-1 order-md-2">
-                    <div className="row row-gap-lg-2">
                         <Job />
                         <Job />
                         <Job />
                         <Job />
                         <Job />
-                    </div>
                 </section>
                 </div>
             </div>
