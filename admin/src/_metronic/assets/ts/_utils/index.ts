@@ -1,7 +1,7 @@
 // Types
 export * from './models/OffsetModel'
 export * from './models/ViewPortModel'
-// Helpers
+// helpers
 export * from './DomHelpers'
 export * from './_TypesHelpers'
 // Basic
