@@ -9,6 +9,7 @@ const PrivateRoutes = () => {
             <Route path='auth/*' element={<Home/>}/>
 
             <Route path='/apply/:jobId' element={<ApplyToJobListing/>}/>
+            <Route path='/home' element={<Home/>}/>
             <Route path='*' element={<Navigate to='/error/404'/>}/>
         </Routes>
     )
