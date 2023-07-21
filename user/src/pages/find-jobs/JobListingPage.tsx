@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './jobListingPage.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
-import CheckboxGroup from "../components/CheckboxGroup";
-import Dropdown from "../components/Dropdown";
-import Job from "../components/JobListing";
+import CheckboxGroup from "./components/CheckboxGroup";
+import Dropdown from "./components/Dropdown";
+import Job from "./components/JobListing";
 
 const JobListingPage = () => {
     const filters1 = ["Type 1", "Type 2", "Type 3"];
