@@ -1,0 +1,22 @@
+.footer {
+    background: #010b1d;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    bottom: 0;
+}
+
+.footer label:hover {
+    color: #fb246a;
+}
+
+.footer label {
+    color: #c5b3b8;
+}
+
+.footer label a:hover {
+    color: #fb246a;
+}
+
+.footer label a {
+    color: #c5b3b8;
+}

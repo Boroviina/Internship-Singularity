@@ -4,6 +4,7 @@ import axios from 'axios'
 import './index.css';
 import {AppRoutes} from "./routing/AppRoutes";
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap';
 import {AuthProvider, setupAxios} from "./modules/auth";
 
 setupAxios(axios)
@@ -16,5 +17,3 @@ root.render(
         <AppRoutes/>
     </AuthProvider>
 );
-
-
