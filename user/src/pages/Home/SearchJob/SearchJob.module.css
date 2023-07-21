@@ -1,0 +1,16 @@
+.searchJob {
+    background-image: url("background.jpg");
+}
+
+.buttonStyle {
+    background-color: #fb246a;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 0px;
+    border: 0;
+}
+.buttonStyle:hover{
+    color: #fb246a;
+    background-color: white;
+    border: 1px solid #fb246a;
+}
