@@ -21,6 +21,17 @@ class AuthService {
     }
   }
 
+  //register user
+  async register(user: object): Promise<LoginResponse | null> {
+    try {
+      const response = await axios.post<LoginResponse>(`${API_URL}/${API_VERSION}/auth/register`, { ...user });
+      return response.data;
+    } catch (error) {
+      throw new Error(error)
+      // return null;
+    }
+  }
+
   // Logout user and retrieve JWT token
   async logout(refreshToken: string): Promise<LogoutResponse | null> {
     try {
