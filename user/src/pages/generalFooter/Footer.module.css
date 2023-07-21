@@ -5,17 +5,6 @@
     bottom: 0;
 }
 
-.btn3 {
-    background-color: #fff;
-    padding: 27px 27px;
-    line-height: 0;
-    border-radius: 0px;
-    letter-spacing: 0.5px;
-    border: 1px solid #fb246a;
-    color: #fb246a;
-    text-align: center;
-}
-
 .footer label:hover {
     color: #fb246a;
 }
@@ -30,16 +19,4 @@
 
 .footer label a {
     color: #c5b3b8;
-}
-
-.btn3:hover {
-    background-color: #fb246a;
-    color: #fff;
-    border: 1px solid #fb246a;
-}
-.closeButton{
-    background-color: #010b1d;
-}
-.closeButton:hover{
-    background-color: #021538;
 }

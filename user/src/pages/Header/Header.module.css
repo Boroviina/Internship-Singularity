@@ -45,52 +45,6 @@ ul > li:hover > ul.submenu {
     top: 100%;
 }
 
-.btn1 {
-    background: #fb246a;
-    color: #fff;
-    margin-right: 5px;
-    padding: 27px 27px;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    line-height: 0;
-    border-radius: 0px;
-    transition: background-color 0.4s ease;
-    position: relative;
-    border: 0;
-    overflow: hidden;
-}
-
-.btn1:hover {
-    background-color: #fff;
-    color: #fb246a;
-    border: 1px solid #fb246a;
-}
-
-.btn2 {
-    background-color: #fff;
-    -moz-user-select: auto;
-    cursor: pointer;
-    margin-right: 5px;
-    padding: 27px 27px;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    line-height: 0;
-    border-radius: 0px;
-    transition: color 0.4s linear;
-    position: relative;
-    border: 1px solid #fb246a;
-    overflow: hidden;
-    color: #fb246a;
-}
-
-.btn2:hover {
-    background-color: #fb246a;
-    color: #fff;
-    border: 1px solid #fb246a;
-}
-
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .mainMenu ul li a {
         padding: 30px 13px;

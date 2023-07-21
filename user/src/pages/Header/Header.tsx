@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import classes from './Header.module.css';
 import {CustomLogo} from "./CustomLogo";
+import btnStyle from '../Home/GeneralButton.module.css'
 
 export function Header() {
     return (
@@ -65,8 +66,8 @@ export function Header() {
                                     </div>
                                 </div>
                                 <div className={'d-none d-lg-inline-flex'}>
-                                    <button className={`${classes.btn1}  d-inline-block`}>Register</button>
-                                    <button className={`${classes.btn2}  d-inline-block`}>Login</button>
+                                    <button className={`${btnStyle.filledButton}  d-inline-block`}>Register</button>
+                                    <button className={`${btnStyle.lightButton}  d-inline-block`}>Login</button>
                                 </div>
                             </div>
 

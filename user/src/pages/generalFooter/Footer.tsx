@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './Footer.module.css'
-
+import btnStyle from '../Home/GeneralButton.module.css'
 export function Footer() {
     return <div className={` position-relative ${classes.footer}`}>
         <footer className={'py-5'}>
@@ -37,7 +37,7 @@ export function Footer() {
                                         job
                                         seekers and professionals to network and learn from others.
                                         <div className={'d-flex justify-content-end'}>
-                                            <button className={`btn ${classes.closeButton} text-white w-25 my-4`}
+                                            <button className={`btn ${btnStyle.closeButton} text-white w-25 my-4`}
                                                     type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseAbout"
                                                     aria-expanded="false" aria-controls="collapseAbout">
@@ -98,7 +98,7 @@ export function Footer() {
                                             href="mailto:jobradar@gmail.com">jobradar@gmail.com</a></label>
                                     </div>
                                     <div className={'d-flex justify-content-end'}>
-                                        <button className={`btn btn-dark w-50 my-4`} type="button"
+                                        <button className={`btn ${btnStyle.closeButtonLight} text-white w-50 my-4`} type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseContact"
                                                 aria-expanded="false" aria-controls="collapseContact">
                                             Close
@@ -115,7 +115,7 @@ export function Footer() {
                             <div className={'d-flex w-100 gap-2'}>
                                 <input type="text" className={'form-control'} placeholder={'Email address'}
                                        id='newsletter'/>
-                                <button className={` ${classes.btn3}`} type={'button'}>Subscribe</button>
+                                <button className={` ${btnStyle.lightButton} overflow-visible`} type={'button'}>Subscribe</button>
                             </div>
                         </form>
                     </div>
