@@ -1,5 +1,5 @@
 import {DataUtil, getUniqueIdWithPrefix, EventHandlerUtil} from '../_utils/index'
-// Helpers
+// helpers
 import {CookieComponent} from './_CookieComponent'
 
 export interface ToggleOptions {
