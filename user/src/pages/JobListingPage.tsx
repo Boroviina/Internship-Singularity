@@ -25,7 +25,7 @@ const JobListingPage = () => {
                     <section className="col-lg-3 col-md-4 order-2 order-md-1">
                         <div className="align-items-center mb-2">
                             <FontAwesomeIcon icon={faFilter}
-                                             style={{color: "#198754", height: 30}}/>
+                                             style={{color: "#614EE0FF", height: 30}}/>
                             <h5 className="d-inline align-baseline">
                                 Filter jobs
                             </h5>
