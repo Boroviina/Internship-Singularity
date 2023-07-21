@@ -1,7 +1,7 @@
 import React from "react";
-
+import classes from './Carousel.module.css'
 export function CarouselCustom(){
-    return  <div id="carouselJobIndicators" style={{height: `40rem`}} className="carousel slide" data-bs-ride="carousel">
+    return  <div id="carouselJobIndicators" className={`${classes.height} carousel slide`} data-bs-ride="carousel">
         <div className="carousel-indicators">
             <button type="button" data-bs-target="#carouselJobIndicators" data-bs-slide-to="0"
                     className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -16,26 +16,26 @@ export function CarouselCustom(){
             <button type="button" data-bs-target="#carouselJobIndicators" data-bs-slide-to="5"
                     aria-label="Slide 6"></button>
         </div>
-        <div className="carousel-inner" style={{height: '40rem'}}>
-            <div className="carousel-item  active" style={{marginTop: '-20rem'}}>
+        <div className="carousel-inner" >
+            <div className="carousel-item  active" >
                 <img src={require(`./CarouselPhotos/job-g9c8b36671_1280.jpg`)} className={'w-100  img-fluid '} height={'auto'}
                      alt="cleaning"/>
 
             </div>
-            <div className="carousel-item" style={{marginTop: '-20rem'}}>
+            <div className="carousel-item" >
                 <img src={require(`./CarouselPhotos/it.jpg`)} className="d-block w-100 "
                      alt="it industry"/>
             </div>
-            <div className="carousel-item"  style={{marginTop: '-20rem'}}>
+            <div className="carousel-item"  >
                 <img src={require(`./CarouselPhotos/teacher.jpg`)} className="d-block w-100" alt="teacher"/>
             </div>
-            <div className="carousel-item"  style={{marginTop: '-20rem'}}>
+            <div className="carousel-item"  >
                 <img src={require(`./CarouselPhotos/welder.jpg`)} className="d-block w-100" alt="teacher"/>
             </div>
-            <div className="carousel-item"  style={{marginTop: '-15rem'}}>
+            <div className="carousel-item" >
                 <img src={require(`./CarouselPhotos/service.jpg`)} className="d-block w-100" alt="teacher"/>
             </div>
-            <div className="carousel-item"  style={{marginTop: '-15rem'}}>
+            <div className="carousel-item"  >
                 <img src={require(`./CarouselPhotos/fireman.jpg`)} className="d-block w-100" alt="teacher"/>
             </div>
         </div>
