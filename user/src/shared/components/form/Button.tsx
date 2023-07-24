@@ -5,7 +5,7 @@ import classes from './Button.module.css';
 type ButtonProps = {
     type: "button" | "submit" | "reset"
     id?: string
-    disabled: boolean
+    disabled?: boolean
     loading?: boolean
     filled?: boolean
     onClick?: () => void
