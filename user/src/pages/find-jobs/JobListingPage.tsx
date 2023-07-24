@@ -10,6 +10,7 @@ const JobListingPage = () => {
     const filters1 = ["Type 1", "Type 2", "Type 3"];
     const filters2 = ["Type 4", "Type 5", "Type 6"];
     const filters3 = ["Type 7", "Type 8", "Type 9"];
+    const categories = ["Relevance", "Date", "Pay", "Remote policy", "Working hours"];
     return (
         <body>
         <header className={`mb-5 ${styles['hero']}`}>
@@ -40,13 +41,29 @@ const JobListingPage = () => {
                                 <Dropdown name="Job type 3" filters={filters3}/>
                             </div>
                     </section>
-                <section className="col-lg-9 col-md-8 order-1 order-md-2">
-                        <Job />
-                        <Job />
-                        <Job />
-                        <Job />
-                        <Job />
-                </section>
+                    <section className="col-lg-9 col-md-8 order-1 order-md-2">
+                        <div className="px-1">
+
+                        <div className="float-start text-muted fs-5">
+                            Results: {24}
+                        </div>
+                        <div className="float-end">
+                            <div >
+                                <h5>Sort by</h5>
+                                <select className="form-select " aria-label="sortBy">
+                                    {categories.map((category) => {
+                                        return <option value={category}>{category}</option>;
+                                    })}
+                                </select>
+                            </div>
+                        </div>
+                        </div>
+                            <Job/>
+                            <Job/>
+                            <Job/>
+                            <Job/>
+                            <Job/>
+                    </section>
                 </div>
             </div>
         </main>
