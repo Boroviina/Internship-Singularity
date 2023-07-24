@@ -42,7 +42,7 @@ const JobListingPage = () => {
                             </div>
                     </section>
                     <section className="col-lg-9 col-md-8 order-1 order-md-2">
-                        <div className="d-flex align-items-center justify-content-between px-1">
+                        <div className="d-flex align-items-center justify-content-between px-2 mb-2">
                             <div className="text-muted fs-5">
                                 Results: {24}
                             </div>
