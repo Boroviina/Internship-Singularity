@@ -7,6 +7,7 @@ import Dropdown from "./components/Dropdown";
 import Job from "./components/JobListing";
 import {Header} from "../Header/Header";
 import {Footer} from "../generalFooter/Footer";
+import btnStyle from "../Home/GeneralButton.module.css";
 
 const JobListingPage = () => {
     const filters1 = ["Type 1", "Type 2", "Type 3"];
@@ -19,9 +20,18 @@ const JobListingPage = () => {
             <body>
             <header className={`mb-5 ${styles['hero']}`}>
                 <div className={`text-center ${styles['overlay']}`}>
-                    <h1 className='display-2 text-light' style={{paddingTop: '150px'}}>
-                        Search for jobs
-                    </h1>
+                    <div className="container">
+                        <h1 className='display-2 text-light' style={{paddingTop: '150px'}}>
+                            Search for jobs
+                        </h1>
+                        <div className="input-group input-group-lg mt-4">
+                            <input type="text" className="form-control"
+                                   placeholder="Job title, keywords or company" aria-label="Keyword search" />
+                                <input type="text" className="form-control"
+                                       placeholder="Address, city or country" aria-label="Location search" />
+                            <button className="btn btn-primary">Search</button>
+                        </div>
+                    </div>
                 </div>
             </header>
             <main id="jobs-and-filter">
