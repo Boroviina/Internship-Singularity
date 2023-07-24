@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
-import {useAuth} from "../modules/auth";
 import {Alert} from "../shared/components/Alert";
 import {Input} from "../shared/components/form/Input";
 import {InputFile} from "../shared/components/form/InputFile";
@@ -31,7 +30,6 @@ const initialValues = {
 
 export const ApplyToJobListing = () => {
     const {jobId} = useParams();
-    const {currentUser, logout} = useAuth()
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null);
@@ -91,8 +89,6 @@ export const ApplyToJobListing = () => {
     return (
         <>
             <Header/>
-            <a onClick={logout} className='menu-link px-5'> Sign Out </a>
-
             <form
                 className={`form w-100 container mb-5`}
                 onSubmit={formik.handleSubmit}

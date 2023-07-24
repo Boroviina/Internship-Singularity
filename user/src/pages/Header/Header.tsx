@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import classes from './Header.module.css';
 import {CustomLogo} from "./CustomLogo";
 import btnStyle from '../Home/GeneralButton.module.css'
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../modules/auth";
 
 export function Header() {
+    const {currentUser, logout} = useAuth()
     const navigate = useNavigate();
     const registerClickHandle = () => {
             navigate('/auth/registration')
@@ -71,11 +73,17 @@ export function Header() {
                                         </nav>
                                     </div>
                                 </div>
-                                <div className={'d-none d-lg-inline-flex'}>
-                                    <button className={`${btnStyle.filledButton}  d-inline-block`} onClick={registerClickHandle}>Register</button>
-                                    <button className={`${btnStyle.lightButton}  d-inline-block`} onClick={()=>navigate('/auth/login')} >Login
-                                    </button>
-                                </div>
+                                {currentUser ? (
+                                    <div className={'d-none d-lg-inline-flex'}>
+                                        <button className={`${btnStyle.filledButton}  d-inline-block`} onClick={() => navigate('/profile')}>My profile</button>
+                                        <button className={`${btnStyle.lightButton}  d-inline-block`} onClick={logout}>Logout</button>
+                                    </div>
+                                    ) : (
+                                    <div className={'d-none d-lg-inline-flex'}>
+                                        <button className={`${btnStyle.filledButton}  d-inline-block`} onClick={registerClickHandle}>Register</button>
+                                        <button className={`${btnStyle.lightButton}  d-inline-block`} onClick={()=>navigate('/auth/login')} >Login</button>
+                                    </div>
+                                )}
                             </div>
 
                             {/*mobile menu*/}
