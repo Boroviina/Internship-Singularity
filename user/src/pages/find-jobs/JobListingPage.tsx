@@ -42,11 +42,11 @@ const JobListingPage = () => {
                             </div>
                     </section>
                     <section className="col-lg-9 col-md-8 order-1 order-md-2">
-                        <div className="px-1">
-                            <div className="d-inline text-muted fs-5">
+                        <div className="d-flex align-items-center justify-content-between px-1">
+                            <div className="text-muted fs-5">
                                 Results: {24}
                             </div>
-                            <div className="float-end">
+                            <div className="sortBy">
                                 <h5>Sort by</h5>
                                 <select className="form-select" aria-label="sortBy">
                                     {categories.map((category) => {
