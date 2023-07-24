@@ -24,7 +24,7 @@ const JobListingPage = () => {
                         <h1 className='display-2 text-light' style={{paddingTop: '150px'}}>
                             Search for jobs
                         </h1>
-                        <div className="d-flex flex-column flex-sm-row flex-nowrap input-group input-group-lg mt-4">
+                        <div className="input-group input-group-lg d-flex flex-column flex-sm-row flex-nowrap mt-4">
                             <input type="text" className="form-control fs-6 w-auto"
                                    placeholder="Job title or keywords" aria-label="Keyword search" />
                                 <input type="text" className="form-control fs-6 w-auto"
