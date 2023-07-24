@@ -43,7 +43,7 @@ const JobListingPage = () => {
                     </section>
                     <section className="col-lg-9 col-md-8 order-1 order-md-2">
                         <div className="px-1">
-                            <div className="float-start text-muted fs-5">
+                            <div className="d-inline text-muted fs-5">
                                 Results: {24}
                             </div>
                             <div className="float-end">
