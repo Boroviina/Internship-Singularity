@@ -4,9 +4,11 @@ import classes from './Button.module.css';
 
 type ButtonProps = {
     type: "button" | "submit" | "reset"
-    id: string
+    id?: string
     disabled: boolean
     loading?: boolean
+    filled?: boolean
+    onClick?: () => void
 }
 
 export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
@@ -15,6 +17,8 @@ export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
         id,
         disabled,
         loading,
+        filled,
+        onClick,
         children,
     } = props
 
@@ -22,8 +26,9 @@ export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
         <button
             type={type}
             id={id}
-            className={`${classes['boxed-btn']} ${disabled && 'disabled'}`}
+            className={`${filled ? `${classes['filled-button']}` : `${classes['light-button']}`}`}
             disabled={disabled}
+            onClick={onClick ? onClick : undefined}
         >
             {!loading && <span className='indicator-label'>{children}</span>}
             {loading && ( <span className='indicator-progress' style={{display: 'block'}}>

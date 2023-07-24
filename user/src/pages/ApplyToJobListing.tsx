@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
@@ -9,6 +9,9 @@ import {InputFile} from "../shared/components/form/InputFile";
 import {Button} from "../shared/components/form/Button";
 import {createJobApplication} from "../shared/services/job-application.service";
 import CustomModal from "../shared/components/CustomModal";
+import {Header} from "./Header/Header";
+import {Footer} from "./generalFooter/Footer";
+import {getJob} from "../shared/services/job.service";
 
 const applyForJobSchema = Yup.object().shape({
     phoneNumber: Yup.string()
@@ -28,10 +31,28 @@ const initialValues = {
 
 export const ApplyToJobListing = () => {
     const {jobId} = useParams();
+    const {currentUser, logout} = useAuth()
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [jobListing, setJobListing] = useState(null);
+
+    useEffect(() => {
+        const fetchJobListing = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const job = await getJob(jobId);
+                setJobListing(job);
+            } catch(error) {
+                setError("Error while trying to apply for job listings.");
+                navigate('/error');
+            }
+            setLoading(false);
+        }
+        fetchJobListing();
+    }, [jobId, navigate]);
 
     const formik = useFormik({
         initialValues,
@@ -50,7 +71,6 @@ export const ApplyToJobListing = () => {
                 await createJobApplication(form);
 
                 openModal()
-                // navigate(`/job-listings/${jobId}`);
             } catch (error) {
                 setError(error.message);
                 setStatus('The apply for job detail is incorrect')
@@ -60,10 +80,9 @@ export const ApplyToJobListing = () => {
         },
     })
 
-    const {currentUser, logout} = useAuth()
-
     const hideModal = () => {
         setShowModal(false);
+        // navigate(`/job-listings/${jobId}`);
     }
     const openModal = () => {
         setShowModal(true);
@@ -71,10 +90,11 @@ export const ApplyToJobListing = () => {
 
     return (
         <>
+            <Header/>
             <a onClick={logout} className='menu-link px-5'> Sign Out </a>
 
             <form
-                className={`form w-100 container`}
+                className={`form w-100 container mb-5`}
                 onSubmit={formik.handleSubmit}
                 noValidate
                 id='kt_apply_for_job_form'
@@ -120,7 +140,7 @@ export const ApplyToJobListing = () => {
                     }}
                 />
 
-                <div className='text-center'>
+                <div className='text-center mt-5'>
                     <Button
                         type="submit"
                         id='kt_apply_for_job_submit'
@@ -129,6 +149,7 @@ export const ApplyToJobListing = () => {
                     >Continue</Button>
                 </div>
             </form>
+            <Footer/>
             <CustomModal title="Success" show={showModal} onHide={hideModal} backdrop="static" keyboard={false}>
                 Thank you for applying!
             </CustomModal>
