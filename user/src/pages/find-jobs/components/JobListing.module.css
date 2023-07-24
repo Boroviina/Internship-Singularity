@@ -5,14 +5,16 @@
 
 .jobCard {
     border-radius: 5px;
+    border: solid transparent 0.11rem;
 }
 
 .jobCard:hover {
     background: rgb(249, 247, 250);
     transition-duration: 500ms;
+    border: solid #9da4d2 0.11rem;
 }
 .logo {
-    border: solid 1px #a2aef8;
-    border-radius: 5px;
+    /*border: solid 1px #a2aef8;*/
+    /*border-radius: 5px;*/
     padding: 3px;
  }

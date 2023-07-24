@@ -14,7 +14,7 @@
     background: rgba(40, 50, 100, 0.75);
 }
 
-.filter {
+.filter, .jobs {
     border: solid #d0cccc 0.11rem;
     border-radius: 3px;
 }
