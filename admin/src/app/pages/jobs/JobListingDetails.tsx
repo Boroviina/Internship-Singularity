@@ -47,12 +47,6 @@ export const JobListingsDetails: React.FC<JobListingDetailsProps> = (props) => {
                     <KTSVG path="/media/icons/duotune/general/gen043.svg" className="svg-icon-2 svg-icon-success" />
                     <span className="mx-1"> {intl.formatMessage({id: 'JOB_LISTING.LABEL.COVER_LETTER'})} </span>
                 </span>}
-            </div><hr/>
-
-            <div className="text-center">
-                <button type="button" className="btn btn-lg btn-light-primary w-100 my-3">
-                    {intl.formatMessage({id: 'JOB_LISTING.BUTTON.APPLY'})}
-                </button>
             </div>
         </div>;
     }
