@@ -42,7 +42,7 @@ const JobListingPage = () => {
                             </div>
                     </section>
                     <section className="col-lg-9 col-md-8 order-1 order-md-2">
-                        <div className="d-flex align-items-center justify-content-between px-2 mb-2">
+                        <div className="d-flex align-items-center justify-content-between px-2">
                             <div className="text-muted fs-5">
                                 Results: {24}
                             </div>
@@ -55,7 +55,7 @@ const JobListingPage = () => {
                                 </select>
                             </div>
                         </div>
-                        <div>
+                        <div className="jobs py-3">
                             <Job/>
                             <Job/>
                             <Job/>
@@ -64,9 +64,7 @@ const JobListingPage = () => {
                         </div>
                         <nav aria-label="Job search pages">
                             <ul className="pagination justify-content-center">
-                                <li className="page-item disabled">
-                                    <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                                </li>
+                                <li className="page-item disabled"><a className="page-link" href="#">Previous</a></li>
                                 <li className="page-item"><a className="page-link" href="#">1</a></li>
                                 <li className="page-item"><a className="page-link" href="#">2</a></li>
                                 <li className="page-item"><a className="page-link" href="#">3</a></li>
