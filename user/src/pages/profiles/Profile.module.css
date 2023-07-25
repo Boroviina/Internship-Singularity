@@ -11,15 +11,10 @@
 .light-gray-card {
     background-color: rgb(241 245 249 / 1);
     text-decoration: none;
-    border: solid 1px lightgrey;
 }
 
 .light-gray-card:hover {
     opacity: 75%;
-}
-
-.custom-badge {
-    background-color: #010b1d;
 }
 
 .border-bottom-left-radius {

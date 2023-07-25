@@ -26,9 +26,9 @@ export const Profile = () => {
                         <Button type="button" onClick={() => navigate('/profile/settings')}>Settings</Button>
                     </div>
                 </div>
-                <div className="row grid-cols-3 md:divide-x md:divide-gray-200 dark:md:divide-gray-800 md:divide-solid border-t md:border-gray-200 dark:md:border-gray-800 m-0">
+                <div className="row grid-cols-3 md:divide-x md:divide-gray-200 dark:md:divide-gray-800 md:divide-solid border-t md:border-gray-200 dark:md:border-gray-800 m-0 border-top">
                     <div
-                       className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-6 p-2 fs-6 ${classes['light-gray-card']} ${classes['border-bottom-left-radius']}`}>
+                       className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-6 p-2 fs-6 ${classes['light-gray-card']} border-end ${classes['border-bottom-left-radius']}`}>
                         <span className="text-sm d-none d-sm-inline-block">Saved job listings</span>
                         <i className={`bi bi-bookmark-heart d-inline-block d-sm-none ${classes['icon-pink']}`}></i>
                         <span className="badge text-bg-secondary">0</span>
