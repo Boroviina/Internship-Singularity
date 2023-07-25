@@ -27,10 +27,16 @@ const JobListingPage = () => {
                             Search for jobs
                         </h1>
                         <div className="input-group input-group-lg d-flex flex-column flex-sm-row flex-nowrap mt-4">
-                            <input type="text" className="form-control fs-6 w-auto"
+                            <div className="form-floating w-auto">
+                                <input type="text" className="form-control fs-6" id="keywordSearch"
                                    placeholder="Job title or keywords" aria-label="Keyword search" />
-                                <input type="text" className="form-control fs-6 w-auto"
+                                <label htmlFor="keywordSearch">Job title or keywords</label>
+                            </div>
+                            <div className="form-floating w-auto">
+                                <input type="text" className="form-control fs-6" id="locationSearch"
                                        placeholder="Address, city or country" aria-label="Location search" />
+                                <label htmlFor="locationSearch">Job title or keywords</label>
+                            </div>
                             <button className="btn btn-primary">Search</button>
                         </div>
                     </div>
@@ -49,9 +55,9 @@ const JobListingPage = () => {
                             </div>
                             <div className={`container d-flex flex-column gap-3 p-3 filter ${styles['filter']}`}>
                                 <CheckboxGroup name="Specialization" filters={specialization}/>
+                                <Dropdown name="Remote" filters={remote} />
                                 <CheckboxGroup name="Employment type" filters={employmentType}/>
                                 <Dropdown name="Experience level" filters={experienceLevel}/>
-                                <Dropdown name="Remote" filters={remote} />
                                 <Dropdown name={"Education level"} filters={educationLevel} />
                             </div>
                         </section>
