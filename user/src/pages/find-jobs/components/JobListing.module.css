@@ -14,7 +14,11 @@
     border: solid #9da4d2 0.11rem;
 }
 .logo {
-    /*border: solid 1px #a2aef8;*/
-    /*border-radius: 5px;*/
     padding: 3px;
  }
+
+@media screen and (max-width: 767px) {
+    .alignedButtons {
+        margin-left: 5rem;
+    }
+}
