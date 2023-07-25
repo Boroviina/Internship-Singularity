@@ -5,6 +5,7 @@ import './index.css';
 import {AppRoutes} from "./routing/AppRoutes";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import {AuthProvider, setupAxios} from "./modules/auth";
 
 setupAxios(axios)

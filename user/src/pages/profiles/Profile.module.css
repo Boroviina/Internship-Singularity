@@ -4,3 +4,32 @@
     background-color: rgb(255 255 255 / 1);
 }
 
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.light-gray-card {
+    background-color: rgb(241 245 249 / 1);
+    text-decoration: none;
+    border: solid 1px lightgrey;
+}
+
+.light-gray-card:hover {
+    opacity: 75%;
+}
+
+.custom-badge {
+    background-color: #010b1d;
+}
+
+.border-bottom-left-radius {
+    border-bottom-left-radius: 0.5rem;
+}
+
+.border-bottom-right-radius {
+    border-bottom-right-radius: 0.5rem;
+}
+
+.icon-pink {
+    color: #fb246a;
+}
