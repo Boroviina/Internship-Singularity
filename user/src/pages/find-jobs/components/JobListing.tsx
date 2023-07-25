@@ -14,12 +14,12 @@ const Job = () => {
             <div className="d-flex flex-column flex-sm-row">
                 <div className="flex-grow-1 me-sm-3">
                     <a href="src/pages/find-jobs/components/JobListing#" className="text-dark" style={{textDecoration: "none"}}>
-                        <h3 className={styles.title}>Job title</h3>
+                        <h4 className={`${styles.title}`}>Job title</h4>
                     </a>
                     <div className="fw-semibold">
                         <span>Facebook </span>
                         <span className="text-black-50">
-                            . Los Angeles . 50$ - 75$ . About a week ago (week ago) . Part time . Until the end of March
+                            . Los Angeles . 50$ - 75$ . About a week ago . Part time .
                         </span>
                     </div>
                 </div>
