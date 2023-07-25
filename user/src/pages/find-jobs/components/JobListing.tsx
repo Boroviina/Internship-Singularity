@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './JobListing.module.css';
 
-const logo = require('../../../img/logo-fb.jpg');
+const logo = require('../img/logo-fb.jpg');
 
 const Job = () => {
     return (

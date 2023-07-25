@@ -1,5 +1,5 @@
 .hero {
-    background: rgba(40, 50, 100, 0.75) url(../../img/hero.jpg) no-repeat;
+    background: rgba(40, 50, 100, 0.75) url(img/hero.jpg) no-repeat;
     background-size: cover;
 
     min-height: 400px;
