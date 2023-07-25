@@ -9,10 +9,13 @@ import {Header} from "../Header/Header";
 import {Footer} from "../generalFooter/Footer";
 
 const JobListingPage = () => {
-    const filters1 = ["Type 1", "Type 2", "Type 3"];
-    const filters2 = ["Type 4", "Type 5", "Type 6"];
-    const filters3 = ["Type 7", "Type 8", "Type 9"];
-    const categories = ["Relevance", "Date", "Pay", "Remote policy", "Working hours"];
+    const specialization = ["Finance and accounting", "Legal", "Technology",
+    "Administrative & customer support", "Marketing & creative"];
+    const employmentType = ["Fulltime", "Part time", "Internship", "Contract", "Temporary"];
+    const remote = ["Remote", "Hybrid"];
+    const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
+    const educationLevel = ["Not required", "College", "Associates", "Bachelors", "Masters", "Doctorate"];
+    const sortByCategories = ["Relevance", "Date", "Pay"];
     return (
         <>
             <Header/>
@@ -45,13 +48,11 @@ const JobListingPage = () => {
                                 </h5>
                             </div>
                             <div className={`container d-flex flex-column gap-3 p-3 filter ${styles['filter']}`}>
-                                <CheckboxGroup name="Job Type 1" filters={filters1}/>
-                                <Dropdown name="Job type 3" filters={filters3}/>
-                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
-                                <hr/>
-                                <CheckboxGroup name="Job Type 1" filters={filters1}/>
-                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
-                                <Dropdown name="Job type 3" filters={filters3}/>
+                                <CheckboxGroup name="Specialization" filters={specialization}/>
+                                <CheckboxGroup name="Employment type" filters={employmentType}/>
+                                <Dropdown name="Experience level" filters={experienceLevel}/>
+                                <Dropdown name="Remote" filters={remote} />
+                                <Dropdown name={"Education level"} filters={educationLevel} />
                             </div>
                         </section>
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
@@ -62,7 +63,7 @@ const JobListingPage = () => {
                                 <div className="sortBy">
                                     <h5>Sort by</h5>
                                     <select className="form-select" aria-label="sortBy">
-                                        {categories.map((category) => {
+                                        {sortByCategories.map((category) => {
                                             return <option value={category}>{category}</option>;
                                         })}
                                     </select>
