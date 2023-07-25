@@ -31,7 +31,7 @@ export const Input: React.FC<InputProps> = (props) => {
 
     return (
         <div className='fv-row mb-3'>
-            {label && <label htmlFor={id} className="form-label fs-6 fw-bolder" style={{color: '#031345'}}>{label}</label>}
+            {label && <label htmlFor={id} className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>{label}</label>}
             <input
                 {...formikFieldProps}
                 placeholder={placeholder}

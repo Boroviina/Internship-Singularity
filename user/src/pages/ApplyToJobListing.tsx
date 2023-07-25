@@ -11,6 +11,8 @@ import CustomModal from "../shared/components/CustomModal";
 import {Header} from "./Header/Header";
 import {Footer} from "./generalFooter/Footer";
 import {getJob} from "../shared/services/job.service";
+import {HeaderCard} from "../shared/components/HeaderCard";
+import {CustomCard} from "../shared/components/layout/CustomCard";
 
 const applyForJobSchema = Yup.object().shape({
     phoneNumber: Yup.string()
@@ -89,62 +91,63 @@ export const ApplyToJobListing = () => {
     return (
         <>
             <Header/>
-            <form
-                className={`form w-100 container mb-5`}
-                onSubmit={formik.handleSubmit}
-                noValidate
-                id='kt_apply_for_job_form'
-                encType='multipart/form-data'
-            >
-                <div className='text-center m-3'>
-                    <h1 className='text-dark mb-3'>Apply for a job</h1>
-                </div>
+            <CustomCard width="96%">
+                <HeaderCard title="Apply for a job">Apply for a {jobListing && jobListing.jobTitle} position</HeaderCard>
+                <CustomCard className="shadow rounded-2">
+                    <form
+                        className={`form w-100 my-4 p-4`}
+                        onSubmit={formik.handleSubmit}
+                        noValidate
+                        id='kt_apply_for_job_form'
+                        encType='multipart/form-data'
+                    >
+                        {!loading && error && <Alert state="danger">{error}</Alert>}
 
-                {!loading && error && <Alert state="danger">{error}</Alert>}
+                        <Input
+                            label="Phone number"
+                            formikFieldProps={formik.getFieldProps('phoneNumber')}
+                            formikTouched={formik.touched.phoneNumber}
+                            formikError={formik.errors.phoneNumber}
+                            name="phoneNumber"
+                            type="text"
+                            placeholder="Enter your phone number"
+                            required={true}
+                            onChange={(event) => {console.log(event)}}
+                        />
 
-                <Input
-                    label="Phone number"
-                    formikFieldProps={formik.getFieldProps('phoneNumber')}
-                    formikTouched={formik.touched.phoneNumber}
-                    formikError={formik.errors.phoneNumber}
-                    name="phoneNumber"
-                    type="text"
-                    placeholder="Enter your phone number"
-                    required={true}
-                    onChange={(event) => {console.log(event)}}
-                />
+                        <InputFile
+                            label="CV"
+                            name="cv"
+                            required={true}
+                            formikTouched={formik.touched.cv}
+                            formikError={formik.errors.cv}
+                            formikFieldProps={formik.getFieldProps('cv')}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                formik.setFieldValue("cv", event.currentTarget.files[0]);
+                            }}
+                        />
 
-                <InputFile
-                    label="CV"
-                    name="cv"
-                    required={true}
-                    formikTouched={formik.touched.cv}
-                    formikError={formik.errors.cv}
-                    formikFieldProps={formik.getFieldProps('cv')}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        formik.setFieldValue("cv", event.currentTarget.files[0]);
-                    }}
-                />
+                        <InputFile
+                            label="Cover letter"
+                            name="coverLetter"
+                            required={false}
+                            formikFieldProps={formik.getFieldProps('cv')}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                formik.setFieldValue("coverLetter", event.currentTarget.files[0]);
+                            }}
+                        />
 
-                <InputFile
-                    label="Cover letter"
-                    name="coverLetter"
-                    required={false}
-                    formikFieldProps={formik.getFieldProps('cv')}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        formik.setFieldValue("coverLetter", event.currentTarget.files[0]);
-                    }}
-                />
-
-                <div className='text-center mt-5'>
-                    <Button
-                        type="submit"
-                        id='kt_apply_for_job_submit'
-                        disabled={formik.isSubmitting || !formik.isValid}
-                        loading={loading}
-                    >Continue</Button>
-                </div>
-            </form>
+                        <div className='text-center mt-4'>
+                            <Button
+                                type="submit"
+                                id='kt_apply_for_job_submit'
+                                disabled={formik.isSubmitting || !formik.isValid}
+                                loading={loading}
+                            >Continue</Button>
+                        </div>
+                    </form>
+                </CustomCard>
+            </CustomCard>
             <Footer/>
             <CustomModal title="Success" show={showModal} onHide={hideModal} backdrop="static" keyboard={false}>
                 Thank you for applying!

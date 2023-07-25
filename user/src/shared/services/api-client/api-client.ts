@@ -14,13 +14,6 @@ const post = (endpoint: string, body: any, query: string = ''): Promise<AxiosRes
   return axiosInstance.post(`${endpoint}${query}`, body);
 };
 
-// const postWithFiles = (endpoint: string, body: FormData, query: string = ''): Promise<AxiosResponse> => {
-//   return axios.post(`${endpoint}${query}`, body, {
-//     headers: {
-//       'Content-Type': 'multipart/form-data'
-//     },
-//   });
-// };
 const postWithFiles = (endpoint: string, body: FormData, query: string = ''): Promise<AxiosResponse> => {
   return axiosInstance.post(`${endpoint}${query}`, body, {
     headers: {
