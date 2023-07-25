@@ -35,7 +35,7 @@ const JobListingPage = () => {
                             <div className="form-floating w-auto">
                                 <input type="text" className="form-control fs-6" id="locationSearch"
                                        placeholder="Address, city or country" aria-label="Location search" />
-                                <label htmlFor="locationSearch">Job title or keywords</label>
+                                <label htmlFor="locationSearch">Country, city or region</label>
                             </div>
                             <button className="btn btn-primary">Search</button>
                         </div>
