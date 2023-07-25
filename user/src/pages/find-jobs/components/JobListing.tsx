@@ -5,9 +5,8 @@ const logo = require('../../../img/logo-fb.jpg');
 
 const Job = () => {
     return (
-        <article className={`d-flex flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
+        <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
             <div className="d-flex align-items-center">
-
                 <a className="me-3" href="src/pages/find-jobs/components/JobListing#employer-info">
                     <img src={logo} className={`${styles.logo}`}
                          style={{height: "4rem"}}
