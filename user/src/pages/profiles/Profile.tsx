@@ -32,7 +32,7 @@ export const Profile = () => {
                         <i className={`bi bi-bookmark-heart d-inline-block d-sm-none ${classes['icon-pink']}`}></i>
                         <span className="badge text-bg-secondary">0</span>
                     </div>
-                    <div className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-6 p-2 fs-6 ${classes['dark-blue-card']} ${classes['border-bottom-right-radius']}`}>
+                    <div onClick={() => navigate('/profile/applications')} className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-6 p-2 fs-6 ${classes['dark-blue-card']} ${classes['border-bottom-right-radius']}`}>
                         <span className="d-none d-sm-inline-block">My applications</span>
                         <i className={`bi bi-bag-heart d-inline-block d-sm-none ${classes['icon-pink']}`}></i>
                         <span className="badge text-bg-secondary">0</span>
@@ -47,7 +47,7 @@ export const Profile = () => {
                         <p className="mb-0">Save job listings that you find interesting, apply later</p>
                     </div>
                 </div>
-                <div className={`d-flex flex-wrap items-center col p-3 fs-6 ${classes['light-gray-card']}`}>
+                <div onClick={() => navigate('/profile/applications')} className={`d-flex flex-wrap items-center col p-3 fs-6 ${classes['light-gray-card']}`}>
                     <div>
                         <i className={`bi bi-bag-heart ${classes['icon-pink']}`} style={{fontSize: '1.3rem'}}></i>
                         <p className="mb-0 mt-1 fw-bold fs-5">My applications</p>

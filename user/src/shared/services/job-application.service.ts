@@ -9,4 +9,10 @@ const createJobApplication = (jobApplication: FormData): Promise<JobApplication 
         .then(data => new JobApplication(data))
 }
 
-export {createJobApplication}
+const getUsersJobApplications = (userId: string): Promise<JobApplication[] | null> => {
+    return ApiClient.get(JOB_APPLICATION_ENDPOINT, `user=${userId}`)
+        .then(response => response.data)
+        .then(data => data.results.map(jobApplication => new JobApplication(jobApplication)))
+}
+
+export {createJobApplication, getUsersJobApplications}
