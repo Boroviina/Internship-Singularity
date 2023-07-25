@@ -13,13 +13,14 @@ const Job = () => {
                          alt={"Company Logo"}/>
                 </a>
                 <div className="flex-grow-1 me-sm-3">
-                    <a href="src/pages/find-jobs/components/JobListing#" className="text-dark" style={{textDecoration: "none"}}>
-                        <h4 className={`${styles.title}`}>Job title</h4>
+                    <a href="src/pages/find-jobs/components/JobListing#" className="text-dark"
+                       style={{textDecoration: "none"}}>
+                        <h4 className={`${styles.title}`}>Frontend developer</h4>
                     </a>
                     <div className="fw-semibold">
-                        <span>Facebook </span>
+                        <span>Facebook</span>
                         <span className="text-black-50">
-                            . Los Angeles . 50$ - 75$ . About a week ago . Part time .
+                            . Los Angeles . 50$ - 75$ . Part time . About a week ago
                         </span>
                     </div>
                 </div>
