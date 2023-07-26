@@ -13,6 +13,11 @@
     transition-duration: 500ms;
     border: solid #bd9dd2 0.11rem;
 }
+
+.jobCard:hover .title{
+    color: #da1f5b;
+    transition-duration: 212ms;
+}
 .logo {
     padding: 3px;
  }
