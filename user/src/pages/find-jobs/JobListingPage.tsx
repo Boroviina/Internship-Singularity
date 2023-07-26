@@ -8,11 +8,12 @@ import Job from "./components/JobListing";
 import {Header} from "../Header/Header";
 import {Footer} from "../generalFooter/Footer";
 import generalBtn from "../Home/GeneralButton.module.css"
+import Search from "./components/Search";
 
 const JobListingPage = () => {
     const specialization = ["Finance and accounting", "Legal", "Technology",
     "Administrative & customer support", "Marketing & creative"];
-    const employmentType = ["Fulltime", "Part time", "Internship", "Contract", "Temporary"];
+    const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
     const remote = ["Remote", "Hybrid"];
     const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
     const educationLevel = ["Not required", "College", "Associates", "Bachelors", "Masters", "Doctorate"];
@@ -23,24 +24,7 @@ const JobListingPage = () => {
             <body>
             <header className={`mb-5 ${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
-                    <div className="container">
-                        <h1 className='display-2 text-light' style={{paddingTop: '150px'}}>
-                            Search for jobs
-                        </h1>
-                        <div className="input-group input-group-lg d-flex flex-column flex-sm-row flex-nowrap mt-4">
-                            <div className="form-floating w-auto">
-                                <input type="text" className="form-control fs-6" id="keywordSearch"
-                                   placeholder="Job title or keywords" aria-label="Keyword search" />
-                                <label htmlFor="keywordSearch">Job title or keywords</label>
-                            </div>
-                            <div className="form-floating w-auto">
-                                <input type="text" className="form-control fs-6" id="locationSearch"
-                                       placeholder="Address, city or country" aria-label="Location search" />
-                                <label htmlFor="locationSearch">Country, city or region</label>
-                            </div>
-                            <button className={generalBtn.filledButton}>Search</button>
-                        </div>
-                    </div>
+                    <Search />
                 </div>
             </header>
             <main id="jobs-and-filter">
