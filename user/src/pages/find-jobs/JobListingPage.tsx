@@ -10,6 +10,7 @@ import SortBy from "./components/SortBy";
 import Pagination from "./components/Pagination";
 import JobListing from "./components/JobListing";
 import {Button, Modal} from "react-bootstrap";
+import DetailsModal from "./components/DetailsModal";
 
 const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);
@@ -66,20 +67,7 @@ const JobListingPage = () => {
             </body>
             <Footer/>
 
-            <Modal show={showDetails} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <DetailsModal showDetails={showDetails} close={handleClose}/>
         </>
     );
 }
