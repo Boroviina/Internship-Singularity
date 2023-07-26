@@ -1,0 +1,23 @@
+.detailsHeader {
+    position: relative;
+    bottom: 1.5rem;
+}
+
+.logo {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 5px;
+    border: 2px solid #d8ccdc;
+    padding: 3px;
+    background: #fcfcfc;
+}
+
+.companyName {
+    letter-spacing: 3px;
+}
+
+.xClose {
+    position: absolute;
+    top: 17px;
+    right: 19px;
+}
