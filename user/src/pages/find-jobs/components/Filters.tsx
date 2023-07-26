@@ -1,7 +1,7 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
-import styles from "../jobListingPage.module.css";
+import styles from "../JobListingPage.module.css";
 
 const Filters = ({children}) => {
     return (

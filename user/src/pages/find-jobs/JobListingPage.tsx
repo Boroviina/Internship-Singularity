@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './jobListingPage.module.css';
+import styles from './JobListingPage.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
 import CheckboxGroup from "./components/CheckboxGroup";
