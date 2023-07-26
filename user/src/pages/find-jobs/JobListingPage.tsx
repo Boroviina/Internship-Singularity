@@ -2,15 +2,14 @@ import React, {useState} from 'react';
 import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/CheckboxGroup";
 import Dropdown from "./components/Dropdown";
-import Job from "./components/JobListing";
 import {Header} from "../Header/Header";
 import {Footer} from "../generalFooter/Footer";
 import Search from "./components/Search";
 import Filters from "./components/Filters";
 import SortBy from "./components/SortBy";
 import Pagination from "./components/Pagination";
-import {Button, Modal} from "react-bootstrap";
 import JobListing from "./components/JobListing";
+import {Button, Modal} from "react-bootstrap";
 
 const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);
