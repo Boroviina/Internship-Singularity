@@ -53,3 +53,8 @@
 .closeButton:hover{
     background-color: #021538;
 }
+
+.smallBtn {
+    padding: 18px;
+    border-radius: 4px;
+}

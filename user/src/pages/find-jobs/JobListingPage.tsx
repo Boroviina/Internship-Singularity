@@ -38,7 +38,7 @@ const JobListingPage = () => {
                                        placeholder="Address, city or country" aria-label="Location search" />
                                 <label htmlFor="locationSearch">Country, city or region</label>
                             </div>
-                            <button className={`"btn btn-primary ${generalBtn.filledButton}`}>Search</button>
+                            <button className={generalBtn.filledButton}>Search</button>
                         </div>
                     </div>
                 </div>

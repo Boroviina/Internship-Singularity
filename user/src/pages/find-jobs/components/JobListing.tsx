@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './JobListing.module.css';
+import generalBtn from "./../../Home/GeneralButton.module.css"
 
 const logo = require('../img/logo-fb.jpg');
 
@@ -26,10 +27,10 @@ const Job = () => {
                 </div>
             </div>
             <div className={`d-flex align-items-center gap-2 mt-2 mt-sm-0 ${styles.alignedButtons}`}>
-                <button type="button" className="btn btn-primary">
+                <button type="button" className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
                     Apply
                 </button>
-                <button type="button" className="btn btn-outline-primary">
+                <button type="button" className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
                     Save
                 </button>
             </div>
