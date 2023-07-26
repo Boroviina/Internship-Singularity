@@ -52,7 +52,7 @@ export const ApplyToJobListing = () => {
             setLoading(false);
         }
         fetchJobListing();
-    }, [jobId, navigate]);
+    }, [jobId]);
 
     const formik = useFormik({
         initialValues,

@@ -6,23 +6,22 @@ import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {getUsersJobApplications} from "../../shared/services/job-application.service";
 import {useAuth} from "../../modules/auth";
 import {JobApplicationItem} from "./JobApplicationItem";
+import {useNavigate} from "react-router-dom";
 
 export const JobApplications = () => {
+    const navigate = useNavigate();
     const {currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [jobApplications, setJobApplications] = useState(null)
 
     useEffect(() => {
         const fetchJobApplications = async () => {
             setLoading(true);
-            setError(null);
             try {
                 const jobApplications = await getUsersJobApplications(`${currentUser.id}`);
                 setJobApplications(jobApplications);
             } catch(error) {
-                setError("Error while trying to get your applications.");
-                // navigate('/error');
+                navigate('/error/500');
             }
             setLoading(false);
         }
@@ -32,21 +31,22 @@ export const JobApplications = () => {
     let jobApplicationsContent = <div>No job applications</div>;
 
     if (jobApplications) {
-        const usersJobApplications = jobApplications.map(jobApplication => (
+        jobApplicationsContent = jobApplications.map(jobApplication => (
             <JobApplicationItem
                 item={jobApplication}
                 key={jobApplication.id}
             ></JobApplicationItem>
         ));
-        jobApplicationsContent = <div>{usersJobApplications}</div>;
     }
 
     return (
         <>
             <Header/>
             <CustomCard width="96%">
-                <HeaderCard title="My applications">All job applications, active and expired</HeaderCard>
-                {jobApplicationsContent}
+                <HeaderCard title="My applications" className="mb-4">All job applications, active and expired</HeaderCard>
+                <div className={`row row-cols-md-3 row-cols-sm-2 mx-auto overflow-hidden my-5`}>
+                    {jobApplicationsContent}
+                </div>
             </CustomCard>
             <Footer/>
         </>

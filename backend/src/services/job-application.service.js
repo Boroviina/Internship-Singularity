@@ -17,7 +17,7 @@ const queryJobApplications = async (filter, options) => {
 };
 
 const getJobApplicationById = async (jobApplicationId) => {
-  return JobApplication.findById(jobApplicationId).populate('job').populate('user').exec();
+  return JobApplication.findById(jobApplicationId).populate(['job', 'user']).exec();
 };
 
 const updateJobApplicationById = async (jobApplicationId, updateBody) => {
