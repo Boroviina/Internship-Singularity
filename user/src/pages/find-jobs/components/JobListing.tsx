@@ -4,9 +4,13 @@ import generalBtn from "./../../Home/GeneralButton.module.css"
 
 const logo = require('../img/logo-fb.jpg');
 
-const Job = () => {
+interface JobProps {
+    showDetails(): void;
+}
+
+const JobListing = ({showDetails} : JobProps) => {
     return (
-        <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
+        <article onClick={showDetails} className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
             <div className="d-flex align-items-center">
                 <a className="float-top me-3" href="src/pages/find-jobs/components/JobListing#employer-info">
                     <img src={logo} className={`${styles.logo}`}
@@ -38,4 +42,4 @@ const Job = () => {
     );
 };
 
-export default Job;
+export default JobListing;
