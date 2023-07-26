@@ -14,6 +14,8 @@ export class JobApplication extends BaseModel {
     constructor(attributes?: any) {
         super();
         this.setAttributes(attributes);
+        this.user = new UserModel(attributes.user);
+        this.job = new JobListing(attributes.job);
     }
 }
 

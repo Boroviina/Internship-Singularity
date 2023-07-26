@@ -5,6 +5,7 @@ import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {getUsersJobApplications} from "../../shared/services/job-application.service";
 import {useAuth} from "../../modules/auth";
+import {JobApplicationItem} from "./JobApplicationItem";
 
 export const JobApplications = () => {
     const {currentUser} = useAuth();
@@ -30,14 +31,15 @@ export const JobApplications = () => {
 
     let jobApplicationsContent = <div>No job applications</div>;
 
-    // if (jobApplications) {
-    //     const usersJobApplications = jobApplications.map(jobApplication => (
-    //         <div key={jobApplication.id}>
-    //             {jobApplication.phoneNumber}
-    //         </div>
-    //     ));
-    //     jobApplicationsContent = <div>{usersJobApplications}</div>;
-    // }
+    if (jobApplications) {
+        const usersJobApplications = jobApplications.map(jobApplication => (
+            <JobApplicationItem
+                item={jobApplication}
+                key={jobApplication.id}
+            ></JobApplicationItem>
+        ));
+        jobApplicationsContent = <div>{usersJobApplications}</div>;
+    }
 
     return (
         <>

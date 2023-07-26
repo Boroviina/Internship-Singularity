@@ -7,12 +7,17 @@ const createJobApplication = async (jobApplicationBody) => {
 };
 
 const queryJobApplications = async (filter, options) => {
-  const jobApplications = await JobApplication.paginate(filter, options);
-  return jobApplications;
+  const paginatedJobApplications = await JobApplication.paginate(filter, options);
+  const jobApplications = paginatedJobApplications.results || [];
+  await JobApplication.populate(jobApplications, [
+    {path: 'user', model: 'User'},
+    {path: 'job', model: 'Job'}
+  ]);
+  return paginatedJobApplications;
 };
 
 const getJobApplicationById = async (jobApplicationId) => {
-  return JobApplication.findById(jobApplicationId);
+  return JobApplication.findById(jobApplicationId).populate('job').populate('user').exec();
 };
 
 const updateJobApplicationById = async (jobApplicationId, updateBody) => {
