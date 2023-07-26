@@ -1,0 +1,23 @@
+import React from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
+import styles from "../jobListingPage.module.css";
+
+const Filters = ({children}) => {
+    return (
+        <section className="col-lg-3 col-md-4 order-2 order-md-1">
+            <div className="align-items-center mb-2">
+                <FontAwesomeIcon icon={faFilter}
+                                 style={{color: "#fb246a", height: 30}}/>
+                <h5 className="d-inline align-baseline">
+                    Filter jobs
+                </h5>
+            </div>
+            <div className={`container d-flex flex-column gap-3 p-3 filter ${styles['filter']}`}>
+                {children}
+            </div>
+        </section>
+    );
+};
+
+export default Filters;

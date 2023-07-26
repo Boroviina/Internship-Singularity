@@ -9,6 +9,8 @@ import {Header} from "../Header/Header";
 import {Footer} from "../generalFooter/Footer";
 import generalBtn from "../Home/GeneralButton.module.css"
 import Search from "./components/Search";
+import Filters from "./components/Filters";
+import SortBy from "./components/SortBy";
 
 const JobListingPage = () => {
     const specialization = ["Finance and accounting", "Legal", "Technology",
@@ -30,35 +32,19 @@ const JobListingPage = () => {
             <main id="jobs-and-filter">
                 <div className="container">
                     <div className="row">
-                        <section className="col-lg-3 col-md-4 order-2 order-md-1">
-                            <div className="align-items-center mb-2">
-                                <FontAwesomeIcon icon={faFilter}
-                                                 style={{color: "#fb246a", height: 30}}/>
-                                <h5 className="d-inline align-baseline">
-                                    Filter jobs
-                                </h5>
-                            </div>
-                            <div className={`container d-flex flex-column gap-3 p-3 filter ${styles['filter']}`}>
-                                <CheckboxGroup name="Specialization" filters={specialization}/>
+                        <Filters>
+                            <CheckboxGroup name="Specialization" filters={specialization}/>
                                 <Dropdown name="Remote" filters={remote} />
                                 <CheckboxGroup name="Employment type" filters={employmentType}/>
                                 <Dropdown name="Experience level" filters={experienceLevel}/>
-                                <Dropdown name={"Education level"} filters={educationLevel} />
-                            </div>
-                        </section>
+                                <Dropdown name="Education level" filters={educationLevel} />
+                        </Filters>
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
                             <div className="d-flex align-items-center justify-content-between px-2">
                                 <div className="text-muted fs-5">
                                     Results: {24}
                                 </div>
-                                <div className="sortBy">
-                                    <h5>Sort by</h5>
-                                    <select className="form-select" aria-label="sortBy">
-                                        {sortByCategories.map((category) => {
-                                            return <option value={category}>{category}</option>;
-                                        })}
-                                    </select>
-                                </div>
+                                    <SortBy categories={sortByCategories}/>
                             </div>
                             <div className="jobs py-2">
                                 <Job/>
