@@ -32,13 +32,15 @@ const JobListingPage = () => {
             <main id="jobs-and-filter">
                 <div className="container">
                     <div className="row">
-                        <Filters>
-                            <CheckboxGroup name="Specialization" filters={specialization}/>
-                                <Dropdown name="Remote" filters={remote} />
-                                <CheckboxGroup name="Employment type" filters={employmentType}/>
-                                <Dropdown name="Experience level" filters={experienceLevel}/>
-                                <Dropdown name="Education level" filters={educationLevel} />
-                        </Filters>
+                        <section className="col-lg-3 col-md-4 order-2 order-md-1">
+                            <Filters>
+                                <CheckboxGroup name="Specialization" filters={specialization}/>
+                                    <Dropdown name="Remote" filters={remote} />
+                                    <CheckboxGroup name="Employment type" filters={employmentType}/>
+                                    <Dropdown name="Experience level" filters={experienceLevel}/>
+                                    <Dropdown name="Education level" filters={educationLevel} />
+                            </Filters>
+                        </section>
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
                             <div className="d-flex align-items-center justify-content-between px-2">
                                 <div className="text-muted fs-5">
@@ -46,7 +48,7 @@ const JobListingPage = () => {
                                 </div>
                                     <SortBy categories={sortByCategories}/>
                             </div>
-                            <div className="jobs py-2">
+                            <div className="jobs my-2">
                                 <Job/>
                                 <Job/>
                                 <Job/>
