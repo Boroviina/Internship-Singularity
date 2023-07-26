@@ -12,6 +12,7 @@
     background: rgb(249, 247, 250);
     transition-duration: 500ms;
     border: solid #bd9dd2 0.11rem;
+    cursor: pointer;
 }
 
 .jobCard:hover .title{
