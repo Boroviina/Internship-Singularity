@@ -11,7 +11,7 @@ import generalBtn from "../Home/GeneralButton.module.css"
 import Search from "./components/Search";
 import Filters from "./components/Filters";
 import SortBy from "./components/SortBy";
-import {Pagination} from "react-bootstrap";
+import Pagination from "./components/Pagination";
 
 class JobListingPage extends React.Component {
     render() {
