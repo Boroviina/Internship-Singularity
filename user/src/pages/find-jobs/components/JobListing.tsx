@@ -17,11 +17,8 @@ const JobListing = ({showDetails} : JobProps) => {
                          style={{height: "4rem"}}
                          alt={"Company Logo"}/>
                 </a>
-                <div className="flex-grow-1 me-sm-3">
-                    <a href="src/pages/find-jobs/components/JobListing#" className="text-dark"
-                       style={{textDecoration: "none"}}>
+                <div className="flex-grow-1">
                         <h4 className={`${styles.title}`}>Frontend developer</h4>
-                    </a>
                     <div className="fw-semibold">
                         <span>Facebook</span>
                         <span className="text-black-50">
