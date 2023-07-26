@@ -7,6 +7,7 @@ import Dropdown from "./components/Dropdown";
 import Job from "./components/JobListing";
 import {Header} from "../Header/Header";
 import {Footer} from "../generalFooter/Footer";
+import generalBtn from "../Home/GeneralButton.module.css"
 
 const JobListingPage = () => {
     const specialization = ["Finance and accounting", "Legal", "Technology",
@@ -37,7 +38,7 @@ const JobListingPage = () => {
                                        placeholder="Address, city or country" aria-label="Location search" />
                                 <label htmlFor="locationSearch">Country, city or region</label>
                             </div>
-                            <button className="btn btn-primary">Search</button>
+                            <button className={`"btn btn-primary ${generalBtn.filledButton}`}>Search</button>
                         </div>
                     </div>
                 </div>
