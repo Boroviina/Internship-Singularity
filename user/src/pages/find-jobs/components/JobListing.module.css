@@ -9,9 +9,9 @@
 }
 
 .jobCard:hover {
-    background: rgb(249, 247, 250);
+    background: #f3f5fd;
     transition-duration: 500ms;
-    border: solid #bd9dd2 0.11rem;
+    border: solid #adc8ff 0.11rem;
 }
 
 .jobCard:hover .title{
