@@ -2,13 +2,13 @@ import React from "react";
 import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 
-export const ProfileSettings = () => {
+export const ProfileOverview = () => {
 
     return (
         <>
             <CustomCard width="96%">
-                <HeaderCard title="Settings" className="mt-5">Basic settings of your account</HeaderCard>
+                <HeaderCard title="Overview" className="mt-5">Overview of users information</HeaderCard>
             </CustomCard>
         </>
-    )
+)
 }

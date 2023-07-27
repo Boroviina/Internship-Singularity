@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {Header} from "../Header/Header";
-import {Footer} from "../generalFooter/Footer";
 import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {getUsersJobApplications} from "../../shared/services/job-application.service";
@@ -41,14 +39,12 @@ export const JobApplications = () => {
 
     return (
         <>
-            <Header/>
             <CustomCard width="96%">
-                <HeaderCard title="My applications" className="mb-4">All job applications, active and expired</HeaderCard>
+                <HeaderCard title="My applications" className="mt-5">All job applications, active and expired</HeaderCard>
                 <div className={`row row-cols-md-3 row-cols-sm-2 mx-auto overflow-hidden my-5`}>
                     {jobApplicationsContent}
                 </div>
             </CustomCard>
-            <Footer/>
         </>
     )
 }
