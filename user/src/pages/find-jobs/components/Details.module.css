@@ -1,8 +1,3 @@
-.detailsHeader {
-    position: relative;
-    bottom: 1.5rem;
-}
-
 .logo {
     height: 5rem;
     width: 5rem;
@@ -26,4 +21,11 @@
     position: absolute;
     top: 30px;
     right: 60px;
+}
+
+.stickyFooterBottom {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    background: white;
 }

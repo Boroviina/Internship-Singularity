@@ -10,7 +10,7 @@ const DetailsModal = ({showDetails, close}) => {
     return (
         <Modal show={showDetails} onHide={close} size="lg">
             <Modal.Header className="mx-auto">
-                <div className={`d-flex flex-column align-items-center ${styles.detailsHeader}`}>
+                <div className={`d-flex flex-column align-items-center`}>
                     <img src={logo} className={`${styles.logo}`}
                          alt={"Company Logo"}/>
                     <h3 className={`mb-1 ${styles.companyName}`}>Facebook</h3>
@@ -26,7 +26,7 @@ const DetailsModal = ({showDetails, close}) => {
                             className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
                         Apply
                     </button>
-                    <button type="button" onClick={close}
+                    <button type="button"
                             className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
                         Save
                     </button>
@@ -64,41 +64,40 @@ const DetailsModal = ({showDetails, close}) => {
                     </div>
 
                 </div>
-                    <hr/>
-                    We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci aliquam
-                    asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi harum
-                    impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis optio,
-                    perspiciatis porro quaerat quam quod reiciendis tempore ullam voluptate voluptatum! Aperiam, illo?
-                    <br/><br/>
-                    As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt
-                    distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.
-                    <br/>
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam
-                            quas
-                            quod?
-                        </li>
-                    </ul>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet aperiam
-                    delectus eum exercitationem nemo. Dolorem odit, saepe!
-                    <hr/>
+                <hr/>
+                <div className="fw-bold">Job description:</div>
+                We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci aliquam
+                asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi harum
+                impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis optio,
+                perspiciatis porro quaerat quam quod reiciendis tempore ullam voluptate voluptatum! Aperiam, illo?
+                <br/><br/>
+                As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt
+                distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.
+                <br/>
+                <ul>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam
+                        quas
+                        quod?
+                    </li>
+                </ul>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet aperiam
+                delectus eum exercitationem nemo. Dolorem odit, saepe!
+                <hr/>
                 <div className="fw-bold">Qualifications:</div>
                 Area of expertise: Finance and accounting <br/>
                 Experience: Mid level <br/>
                 Minimum education: High school <br/>
             </Modal.Body>
-            <Modal.Footer className="d-lg-none" style={{position: "sticky",
-                bottom: 0, right: 0, background: "white"
-            }}>
+            <Modal.Footer className={`d-lg-none ${styles.stickyFooterBottom}`}>
                 <div>
                     <button type="button"
                             className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
                         Apply
                     </button>
-                    <button type="button" onClick={close}
+                    <button type="button"
                             className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
                         Save
                     </button>
