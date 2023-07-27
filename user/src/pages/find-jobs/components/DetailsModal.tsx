@@ -24,28 +24,38 @@ const DetailsModal = ({showDetails, close}) => {
                         aria-label="Close"></button>
             </Modal.Header>
             <Modal.Body>
-                <div className="d-flex flex-row gap-4 ms-3">
+                <div className="d-flex flex-column gap-4 ms-3">
 
-                <div>
-                    <div className="text-nowrap">
-
-                    <FontAwesomeIcon icon={faLocationDot} style={{color: "#8e95a4", height: "1.4rem"}}/>
-                    <span className="fw-bold fs-5 ms-2 d-inline-block mb-2">Location:</span>
-                    </div>
-                    <span className="ms-4 p-1 fw-semibold" style={{borderRadius: "3px", background: "#e3e4ec"
-                    , color: "#8e95a4"}}>
+                    <div>
+                        <div>
+                            <span style={{width: "1.6rem", height: "1.6rem"}}>
+                                <FontAwesomeIcon icon={faLocationDot} style={{color: "#7f8593", height: "1.4rem"}}/>
+                            </span>
+                            <span className="fw-bold fs-5 ms-2 d-inline-block mb-2">Location:</span>
+                        </div>
+                        <span className="ms-4 p-1 fw-semibold" style={{
+                            borderRadius: "3px", background: "#e5e6ee"
+                            , color: "#7f8593"
+                        }}>
                         Los Angeles California - Remote
-                    </span>
-                </div>
+                        </span>
+                    </div>
 
-                <div>
-                    <FontAwesomeIcon icon={faBriefcase} style={{color: "#8e95a4", height: "1.4rem"}}/>
-                    <span className="fw-bold fs-5 ms-2 d-inline-block mb-2">Employment type:</span><br/>
-                    <span className="ms-4 p-1 fw-semibold" style={{borderRadius: "3px", background: "#e3e4ec"
-                        , color: "#8e95a4"}}>
+                    <div>
+                        <div>
+                            <span style={{width: "1.6rem", height: "1.6rem"}}>
+                                <FontAwesomeIcon icon={faBriefcase} style={{color: "#7f8593", height: "1.4rem"}}/>
+                            </span>
+                            <span className="fw-bold fs-5 ms-2 d-inline-block mb-2">Employment type:</span>
+                        </div>
+                        <span className="ms-4 p-1 fw-semibold" style={{
+                            borderRadius: "3px", background: "#e5e6ee"
+                            , color: "#7f8593"
+                        }}>
                         Full time
-                    </span>
-                </div>
+                        </span>
+                    </div>
+
                 </div>
                 <hr/>
                 We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci aliquam
