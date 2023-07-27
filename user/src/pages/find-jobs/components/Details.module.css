@@ -21,3 +21,9 @@
     top: 17px;
     right: 19px;
 }
+
+.positionBtns {
+    position: absolute;
+    top: 30px;
+    right: 60px;
+}

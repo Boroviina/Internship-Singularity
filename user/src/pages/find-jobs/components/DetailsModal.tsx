@@ -4,6 +4,7 @@ import styles from './Details.module.css';
 import logo from './../img/logo-fb.jpg'
 import {faLocationDot, faBriefcase} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import generalBtn from "../../Home/GeneralButton.module.css";
 
 const DetailsModal = ({showDetails, close}) => {
     return (
@@ -20,73 +21,88 @@ const DetailsModal = ({showDetails, close}) => {
                         <div className="fs-3 fw-bold text-nowrap flex-wrap text-success">50$ - 75$</div>
                     </div>
                 </div>
+                <div className={`${styles.positionBtns} d-lg-block d-none`}>
+                    <button type="button"
+                            className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
+                        Apply
+                    </button>
+                    <button type="button" onClick={close}
+                            className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
+                        Save
+                    </button>
+                </div>
                 <button type="button" className={`btn-close ${styles.xClose}`} onClick={close}
                         aria-label="Close"></button>
             </Modal.Header>
             <Modal.Body>
-                <div className="d-flex flex-column gap-4 ms-3">
+                <div className="d-flex flex-column gap-2 ms-3">
 
                     <div>
                         <div>
-                            <span style={{width: "1.6rem", height: "1.6rem"}}>
-                                <FontAwesomeIcon icon={faLocationDot} style={{color: "#7f8593", height: "1.4rem"}}/>
-                            </span>
+                            <FontAwesomeIcon icon={faLocationDot} size="lg" style={{color: "#7f8593"}}/>
                             <span className="fw-bold fs-5 ms-2 d-inline-block mb-2">Location:</span>
                         </div>
                         <span className="ms-4 p-1 fw-semibold" style={{
                             borderRadius: "3px", background: "#e5e6ee"
                             , color: "#7f8593"
                         }}>
-                        Los Angeles California - Remote
+                            Los Angeles California - Remote
                         </span>
                     </div>
 
                     <div>
                         <div>
-                            <span style={{width: "1.6rem", height: "1.6rem"}}>
-                                <FontAwesomeIcon icon={faBriefcase} style={{color: "#7f8593", height: "1.4rem"}}/>
-                            </span>
+                            <FontAwesomeIcon icon={faBriefcase} size="lg" style={{color: "#7f8593"}}/>
                             <span className="fw-bold fs-5 ms-2 d-inline-block mb-2">Employment type:</span>
                         </div>
                         <span className="ms-4 p-1 fw-semibold" style={{
                             borderRadius: "3px", background: "#e5e6ee"
                             , color: "#7f8593"
                         }}>
-                        Full time
+                            Full time
                         </span>
                     </div>
 
                 </div>
-                <hr/>
-                We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci aliquam
-                asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi harum
-                impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis optio,
-                perspiciatis porro quaerat quam quod reiciendis tempore ullam voluptate voluptatum! Aperiam, illo?
-                <br/><br/>
-                As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt
-                distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.
-                <br/>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam quas
-                        quod?
-                    </li>
-                </ul>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet aperiam delectus eum exercitationem nemo. Dolorem odit, saepe!
-                <hr/>
-                Specialization: Finance and accounting <br/>
+                    <hr/>
+                    We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci aliquam
+                    asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi harum
+                    impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis optio,
+                    perspiciatis porro quaerat quam quod reiciendis tempore ullam voluptate voluptatum! Aperiam, illo?
+                    <br/><br/>
+                    As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt
+                    distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.
+                    <br/>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam
+                            quas
+                            quod?
+                        </li>
+                    </ul>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet aperiam
+                    delectus eum exercitationem nemo. Dolorem odit, saepe!
+                    <hr/>
+                <div className="fw-bold">Qualifications:</div>
+                Area of expertise: Finance and accounting <br/>
                 Experience: Mid level <br/>
-                Education: High school <br/>
+                Minimum education: High school <br/>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={close}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={close}>
-                    Save Changes
-                </Button>
+            <Modal.Footer className="d-lg-none" style={{position: "sticky",
+                bottom: 0, right: 0, background: "white"
+            }}>
+                <div>
+                    <button type="button"
+                            className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
+                        Apply
+                    </button>
+                    <button type="button" onClick={close}
+                            className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
+                        Save
+                    </button>
+                </div>
             </Modal.Footer>
         </Modal>
     );
