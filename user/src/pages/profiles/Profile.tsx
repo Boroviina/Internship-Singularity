@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import classes from "./Profile.module.css"
-import {Outlet, Route, Routes, useNavigate} from "react-router-dom";
+import {Navigate, Outlet, Route, Routes, useNavigate} from "react-router-dom";
 import {Header} from "../Header/Header";
 import {Footer} from "../generalFooter/Footer";
 import {Button} from "../../shared/components/form/Button";
@@ -77,6 +77,7 @@ const Profile = () => (
             <Route path='settings' element={<ProfileSettings />} />
             <Route path='applications' element={<JobApplications />} />
             <Route path='saved-listings' element={<SavedJobListings />} />
+            <Route path='*' element={<Navigate to='/error/404'/>}/>
             <Route index element={<ProfileOverview />} />
         </Route>
     </Routes>
