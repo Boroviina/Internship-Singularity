@@ -21,7 +21,25 @@ const DetailsModal = ({showDetails, close}) => {
                 <button type="button" className={`btn-close ${styles.xClose}`} onClick={close}
                         aria-label="Close"></button>
             </Modal.Header>
-            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Body>
+                Location: Los Angeles California - Remote <br/>
+                Employment type: Part time
+                <hr/>
+                We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci aliquam asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi harum impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis optio, perspiciatis porro quaerat quam quod reiciendis tempore ullam voluptate voluptatum! Aperiam, illo?
+                <br/><br/>
+                    As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.
+                <br/>
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+                        <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam quas quod?</li>
+                    </ul>
+                      <hr/>
+                Specialization: Finance and accounting <br/>
+                Experience: Mid level <br/>
+                Education: High school <br/>
+            </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={close}>
                     Close
