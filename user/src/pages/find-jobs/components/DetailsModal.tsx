@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, Modal} from "react-bootstrap";
 import styles from './Details.module.css';
 import logo from './../img/logo-fb.jpg'
+import {faLocationDot, faBriefcase} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const DetailsModal = ({showDetails, close}) => {
     return (
@@ -22,7 +24,9 @@ const DetailsModal = ({showDetails, close}) => {
                         aria-label="Close"></button>
             </Modal.Header>
             <Modal.Body>
+                <FontAwesomeIcon icon={faLocationDot} style={{color: "#8e95a4", height: "1.4rem"}}/>
                 Location: Los Angeles California - Remote <br/>
+                <FontAwesomeIcon icon={faBriefcase} style={{color: "#8e95a4", height: "1.4rem"}}/>
                 Employment type: Part time
                 <hr/>
                 We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci aliquam asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi harum impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis optio, perspiciatis porro quaerat quam quod reiciendis tempore ullam voluptate voluptatum! Aperiam, illo?
