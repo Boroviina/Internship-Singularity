@@ -1,5 +1,4 @@
 import React from "react";
-import classes from './SearchJob.module.css'
 import background from './bgr.jpg'
 import styles from '../ResponsiveControl.module.css'
 import btnStyle from '../GeneralButton.module.css'
@@ -18,13 +17,13 @@ export function SearchJob() {
                             <form action="" className={'input-group d-flex flex-column flex-md-row mt-5'}>
                                 <input type="text" placeholder={'Job title or keyword'} tabIndex={0}
                                        className={'form-control w-auto my-1  mt-md-0 col-md-4 col-12 '}/>
-                                <select className="form-select w-auto my-1 mt-md-0  col-12 col-md-4" id="floatingSelectDisabled">
+                                <select className="form-select form-control w-auto my-1 mt-md-0  col-12 col-md-4" id="floatingSelectDisabled">
                                     <option selected>Choose region</option>
                                     <option value="1">Balcan countries</option>
                                     <option value="2">Europe</option>
                                     <option value="3">Other world countries</option>
                                 </select>
-                                <button className={`my-1 mt-md-0 col-12 col-md-2 overflow-visible text-nowrap ${btnStyle.filledButton}`}>
+                                <button className={`my-1 btn btn-pink mt-md-0 col-12 col-md-2 overflow-visible text-nowrap`}>
                                     Find Job
                                 </button>
                             </form>
