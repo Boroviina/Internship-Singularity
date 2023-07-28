@@ -1,26 +1,16 @@
 import React from 'react';
-import {Button, Modal} from "react-bootstrap";
+import {Modal} from "react-bootstrap";
 import styles from './Details.module.css';
-import logo from './../img/logo-fb.jpg'
 import generalBtn from "../../Home/GeneralButton.module.css";
 import JobInfo from "./details-components/JobInfo";
+import ModalHeader from "./details-components/ModalHeader";
 
 
 const DetailsModal = ({showDetails, close}) => {
     return (
         <Modal show={showDetails} onHide={close} size="lg">
             <Modal.Header className="mx-auto">
-                <div className={`d-flex flex-column align-items-center`}>
-                    <img src={logo} className={`${styles.logo}`}
-                         alt={"Company Logo"}/>
-                    <h3 className={`mb-1 ${styles.companyName}`}>Facebook</h3>
-                    <div className={`d-flex flex-column flex-lg-row justify-content-between
-                        align-items-center text-center`}>
-                        <div className="fs-3 fw-bold">Senior developer</div>
-                        <div className={`mx-2 fs-3 fw-bold d-none d-lg-block`}>-</div>
-                        <div className="fs-3 fw-bold text-nowrap flex-wrap text-success">50$ - 75$</div>
-                    </div>
-                </div>
+                <ModalHeader />
                 <div className={`${styles.positionBtns} d-lg-block d-none`}>
                     <button type="button"
                             className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
