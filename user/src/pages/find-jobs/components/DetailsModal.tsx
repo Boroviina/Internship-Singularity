@@ -2,8 +2,8 @@ import React from 'react';
 import {Button, Modal} from "react-bootstrap";
 import styles from './Details.module.css';
 import logo from './../img/logo-fb.jpg'
-import {faLocationDot, faBriefcase} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLocationDot, faBriefcase} from "@fortawesome/free-solid-svg-icons";
 import generalBtn from "../../Home/GeneralButton.module.css";
 
 const DetailsModal = ({showDetails, close}) => {
@@ -91,7 +91,8 @@ const DetailsModal = ({showDetails, close}) => {
                 Experience: Mid level <br/>
                 Minimum education: High school <br/>
             </Modal.Body>
-            <Modal.Footer className={`d-lg-none ${styles.stickyFooterBottom}`}>
+            <Modal.Footer className="d-lg-none"
+                          style={{background: "white", position: "sticky", bottom: 0}}>
                 <div>
                     <button type="button"
                             className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>

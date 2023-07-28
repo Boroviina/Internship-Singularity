@@ -22,10 +22,3 @@
     top: 30px;
     right: 60px;
 }
-
-.stickyFooterBottom {
-    position: sticky;
-    bottom: 0;
-    right: 0;
-    background: white;
-}
