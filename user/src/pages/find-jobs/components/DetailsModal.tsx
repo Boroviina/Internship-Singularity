@@ -24,7 +24,7 @@ const JobInfo = ({icon, title, mainData, secondaryData}: JobInfoProps) => {
                 <div className="fw-bold fs-5 mb-1">{title}:</div>
                 <span className="p-1 fw-semibold" style={{
                     borderRadius: "3px", background: "#e5e6ee"
-                    , color: "#7f8593"
+                    ,color: "#7f8593"
                 }}>
                     {mainData + (secondaryData ? " - " + secondaryData : "")}
                 </span>
