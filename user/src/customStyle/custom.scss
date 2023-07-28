@@ -1,0 +1,173 @@
+//overwrite Theme vars
+@import '~bootstrap/scss/functions';
+
+$enable-dark-mode: true;
+$color-mode-type: data;
+
+//background
+$body-bg-dark: #071e4d;
+$body-bg: #ece6ff;
+//boja fonta
+$body-color: #071e4d;
+$body-color-dark: #9cc4f1;
+$form-check-min-height: 3rem;
+
+//input
+//$input-color: #a38ff1;
+//$input-color-dark: #d9c7f3;
+//$input-bg: #a38ff1;
+
+//btnstyle
+$border-radius: 0;
+$border-width: 1px;
+$btn-border-radius: $border-radius;
+
+
+$pink: #fb246a;
+$custom-colors: ("pink": #fb246a);
+
+
+[data-bs-theme='light'] {
+  --bs-bg-body: #{$body-bg};
+  --bs-body-color: #{$body-color};
+  .text-label{          //kada mi ne treba hover preko teksta
+    color: #071e4d;
+  }
+  .label {
+    color: #071e4d;
+    &:hover{
+      color: #fb246a;
+    }
+  }
+
+  .btn-pink {
+    --bs-btn-bg: #{$pink};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{#fff};
+    --bs-btn-hover-color: #{$pink};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+
+  .btn-white {
+    --bs-btn-bg: #{#fff};
+    --bs-btn-color: #{$pink};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{$pink};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+  .close-btn{
+    --bs-btn-bg: #{#6776b7};
+    --bs-btn-color: #{#fff};
+    --bs-btn-hover-bg: #{#4a5a98};
+    --bs-btn-hover-color: #{#fff};
+  }
+
+  .navbar-nav {
+    --bs-nav-link-color: #{#071e4d};
+    --bs-nav-link-hover-color: #{$pink};
+  }
+
+  .form-check-input {
+    --bs-form-check-bg: #{#a7b5f3};
+    height: 20px;
+    width: 30px;
+  }
+  .form-control{
+    background-color: #d2c4ef;
+    color: #071e4d;
+  }
+  .card-bg{
+    background-color: #474977;
+  }
+  .card{
+    --bs-card-bg: #aeb1dc;
+  }
+}
+
+
+[data-bs-theme='dark'] {
+  $dark: #a7b5f3;
+  $input-border-color: #04163a;
+
+  --bs-bg-body: #{$body-bg-dark};
+  --bs-body-color: #{$body-color-dark};
+
+  .text-label{          //kada mi ne treba hover preko teksta
+    color: #9cc4f1;
+  }
+  .label {
+    color: #9cc4f1;
+    &:hover{
+      color: #fb246a;
+    }
+  }
+
+  .btn-pink {
+    --bs-btn-bg: #{$pink};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{#fff};
+    --bs-btn-hover-color: #{$pink};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+
+  .btn-white {
+    --bs-btn-bg: #{#fff};
+    --bs-btn-color: #{$pink};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{$pink};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+  .close-btn{
+    --bs-btn-bg: #{#010b1d};
+    --bs-btn-color: #{#fff};
+    --bs-btn-hover-bg: #{#021538};
+    --bs-btn-hover-color: #{#fff};
+  }
+  .btn-carrousel{
+    --bs-btn-hover-color: #{#fff};
+  }
+  .navbar-nav {
+    --bs-nav-link-color: #{$body-color-dark};
+    --bs-nav-link-hover-color: #{$pink};
+  }
+  .form-check-input {
+    height: 20px;
+    width: 30px;
+  }
+
+  .carousel-indicator{
+      background-color: $dark;
+  }
+  .form-control{
+    background-color: #1f3e85;
+    border: 0.5px solid $input-border-color;
+  }
+  .card-bg{
+    background-color: #181c33;
+  }
+  .card{
+    --bs-card-bg: #1f3a7a;
+    --bs-card-color: #fff;
+  }
+}
+
+
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/utilities";
+
+
+@import "~bootstrap/scss/reboot";
+
+
+@import "../../node_modules/bootstrap";
