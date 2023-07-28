@@ -6,10 +6,10 @@ import {faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap} from 
 library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap);
 
 interface JobInfoProps {
-    icon: IconProp; // the fontawesome icon you want, e.g. "coffee", "location-dot"
     title: string;
     mainData: string;
     secondaryData?: string;
+    icon: IconProp; // the fontawesome icon you want, e.g. "coffee", "location-dot"
 }
 
 const JobInfo = ({icon, title, mainData, secondaryData}: JobInfoProps) => {

@@ -4,7 +4,7 @@ import styles from "../Details.module.css";
 
 const ModalHeader = () => {
     return (
-        <div className={`d-flex flex-column align-items-center`}>
+        <header className={`d-flex flex-column align-items-center`}>
             <img src={logo} className={`${styles.logo}`}
                  alt={"Company Logo"}/>
             <h3 className={`mb-1 ${styles.companyName}`}>Facebook</h3>
@@ -14,7 +14,7 @@ const ModalHeader = () => {
                 <div className={`mx-2 fs-3 fw-bold d-none d-lg-block`}>-</div>
                 <div className="fs-3 fw-bold text-nowrap flex-wrap text-success">50$ - 75$</div>
             </div>
-        </div>
+        </header>
     );
 };
 
