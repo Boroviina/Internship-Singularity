@@ -26,7 +26,18 @@
 .modalBody {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: center;
+}
+
+.jobInformation {
+    align-self: center;
+    margin: auto;
+}
+
+.qualifications {
+    margin: auto;
 }
 
 .jobDescription {
