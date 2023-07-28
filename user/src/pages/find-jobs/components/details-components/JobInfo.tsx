@@ -1,6 +1,9 @@
 import React from 'react';
-import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {IconProp, library} from '@fortawesome/fontawesome-svg-core';
+import {faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap);
 
 interface JobInfoProps {
     icon: IconProp; // the fontawesome icon you want, e.g. "coffee", "location-dot"

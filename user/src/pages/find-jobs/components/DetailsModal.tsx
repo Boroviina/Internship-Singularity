@@ -3,12 +3,8 @@ import {Button, Modal} from "react-bootstrap";
 import styles from './Details.module.css';
 import logo from './../img/logo-fb.jpg'
 import generalBtn from "../../Home/GeneralButton.module.css";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {IconProp, library} from '@fortawesome/fontawesome-svg-core';
-import {faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
 import JobInfo from "./details-components/JobInfo";
 
-library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap);
 
 const DetailsModal = ({showDetails, close}) => {
     return (
