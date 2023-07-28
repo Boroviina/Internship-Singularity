@@ -32,8 +32,7 @@
 }
 
 .jobInformation {
-    align-self: center;
-    margin: auto;
+    margin: 0 auto auto;
 }
 
 .qualifications {
