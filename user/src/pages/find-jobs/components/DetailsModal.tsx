@@ -1,9 +1,9 @@
 import React from 'react';
 import {Modal} from "react-bootstrap";
 import styles from './Details.module.css';
-import generalBtn from "../../Home/GeneralButton.module.css";
 import JobInfo from "./details-components/JobInfo";
 import ModalHeader from "./details-components/ModalHeader";
+import ApplyOrSave from "./details-components/ApplyOrSave";
 
 
 const DetailsModal = ({showDetails, close}) => {
@@ -12,14 +12,7 @@ const DetailsModal = ({showDetails, close}) => {
             <Modal.Header className="mx-auto">
                 <ModalHeader />
                 <div className={`${styles.positionBtns} d-lg-block d-none`}>
-                    <button type="button"
-                            className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
-                        Apply
-                    </button>
-                    <button type="button"
-                            className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
-                        Save
-                    </button>
+                    <ApplyOrSave />
                 </div>
                 <button type="button" className={`btn-close ${styles.xClose}`} onClick={close}
                         aria-label="Close"></button>
@@ -71,18 +64,8 @@ const DetailsModal = ({showDetails, close}) => {
                     </div>
                 </div>
             </Modal.Body>
-            <Modal.Footer className="d-lg-none"
-                          style={{position: "sticky", bottom: 0, background: "white"}}>
-                <div>
-                    <button type="button"
-                            className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
-                        Apply
-                    </button>
-                    <button type="button"
-                            className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
-                        Save
-                    </button>
-                </div>
+            <Modal.Footer className="d-lg-none" style={{position: "sticky", bottom: 0, background: "white"}}>
+                    <ApplyOrSave />
             </Modal.Footer>
         </Modal>
     );
