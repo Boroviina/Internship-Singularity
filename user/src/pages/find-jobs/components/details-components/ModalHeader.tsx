@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from "../../img/logo-fb.jpg";
-import styles from "../Details.module.css";
+import styles from "./Details.module.css";
 
 const ModalHeader = () => {
     return (

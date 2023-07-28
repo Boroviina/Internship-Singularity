@@ -9,7 +9,7 @@ import Filters from "./components/filter-components/Filters";
 import SortBy from "./components/SortBy";
 import Pagination from "./components/Pagination";
 import JobListing from "./components/JobListing";
-import DetailsModal from "./components/DetailsModal";
+import DetailsModal from "./components/details-components/DetailsModal";
 
 const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);

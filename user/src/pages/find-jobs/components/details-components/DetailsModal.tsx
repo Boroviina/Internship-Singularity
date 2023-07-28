@@ -1,10 +1,10 @@
 import React from 'react';
 import {Modal} from "react-bootstrap";
 import styles from './Details.module.css';
-import JobInfo from "./details-components/JobInfo";
-import ModalHeader from "./details-components/ModalHeader";
-import ApplyOrSave from "./details-components/ApplyOrSave";
-import JobDescriptionContent from "./details-components/JobDescriptionContent";
+import JobInfo from "./JobInfo";
+import ModalHeader from "./ModalHeader";
+import ApplyOrSave from "./ApplyOrSave";
+import JobDescriptionContent from "./JobDescriptionContent";
 
 
 const DetailsModal = ({showDetails, close}) => {
