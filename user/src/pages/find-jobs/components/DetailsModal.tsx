@@ -18,7 +18,7 @@ interface JobInfoProps {
 
 const JobInfo = ({icon, title, mainData, secondaryData}: JobInfoProps) => {
     return (
-        <div className="d-flex align-items-baseline gap-2 p-1">
+        <div className="d-flex align-items-baseline gap-2 p-1" style={{minHeight: "4rem"}}>
             <FontAwesomeIcon icon={icon} size="lg" style={{color: "#7f8593"}}/>
             <div>
                 <div className="fw-bold fs-5 mb-1">{title}:</div>
