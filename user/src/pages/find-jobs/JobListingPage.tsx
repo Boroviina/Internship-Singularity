@@ -28,12 +28,12 @@ const JobListingPage = () => {
         <>
             <Header/>
             <body>
-            <header className={`mb-5 ${styles.hero}`}>
+            <header className={`${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
                     <Search/>
                 </div>
             </header>
-            <main id="jobs-and-filter">
+            <main id="jobs-and-filter" className="my-4">
                 <div className="container">
                     <div className="row">
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
