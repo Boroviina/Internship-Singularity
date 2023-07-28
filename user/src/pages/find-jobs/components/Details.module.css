@@ -19,6 +19,28 @@
 
 .positionBtns {
     position: absolute;
-    top: 30px;
-    right: 60px;
+    top: 25px;
+    right: 57px;
+}
+
+.modalBody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem;
+}
+
+.jobDescription {
+    grid-column: span 2;
+    text-align: justify;
+}
+
+@media screen and (max-width: 576px) {
+    .jobInformation {
+        grid-column: span 2;
+    }
+
+    .qualifications {
+        grid-column: span 2;
+        order: 2;
+    }
 }
