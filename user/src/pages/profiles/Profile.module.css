@@ -1,0 +1,44 @@
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.text-dark-blue {
+    color: #010b1d;
+}
+
+.main-card {
+    width: 96%;
+    border-radius: 0.5rem;
+    background-color: rgb(255 255 255 / 1);
+}
+
+.secondary-card {
+    width: 96%;
+    background-color: rgb(241 245 249 / 1);
+}
+
+.light-gray-card {
+    background-color: rgb(241 245 249 / 1);
+    text-decoration: none;
+}
+
+.light-gray-card:hover {
+    opacity: 75%;
+}
+
+.dark-blue-card {
+    background-color: #010b1d;
+    color: #c5b3b8;
+}
+
+.dark-blue-card:hover {
+    opacity: 75%;
+}
+
+.border-bottom-left-radius {
+    border-bottom-left-radius: 0.5rem;
+}
+
+.border-bottom-right-radius {
+    border-bottom-right-radius: 0.5rem;
+}

@@ -13,3 +13,9 @@ export const getUser = (userId: string): Promise<UserModel | null> => {
         .then(response => response.data)
         .then(data =>  new UserModel(data))
 }
+
+export const updateUser = (userId: string, user): Promise<UserModel | null> => {
+    return ApiClient.patch(`${USERS_ENDPOINT}/${userId}`, user)
+        .then(response => response.data)
+        .then(data => new UserModel(data))
+}

@@ -10,10 +10,11 @@ const getJobs = (): Promise<JobListing[] | null> => {
 }
 
 const getJob = (jobId: string): Promise<JobListing | null> => {
-    return ApiClient.get(`${JOBS_ENDPOINT}/${jobId}`).then(response => {
-        return response.data;
-    })
+    return ApiClient.get(`${JOBS_ENDPOINT}/${jobId}`)
+        .then(response => response.data)
+        .then(data => new JobListing(data))
 }
+
 const createJob = (job: object): Promise<JobListing | null> => {
     return ApiClient.post(JOBS_ENDPOINT, job)
         .then(response => response.data)
@@ -25,5 +26,5 @@ const changeJob = (jobId: string): Promise<JobListing | null> => {
 const removeJob = (jobId): Promise<JobListing | null>  => {
     return ApiClient.remove(JOBS_ENDPOINT, jobId).then(response => response.data);
 }
-export {getJobs, createJob, changeJob, removeJob}
+export {getJob, getJobs, createJob, changeJob, removeJob}
 

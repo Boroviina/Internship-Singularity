@@ -1,6 +1,6 @@
 import React from 'react';
 import {WithChildren} from "../../helpers";
-import Button from 'react-bootstrap/Button';
+import {Button} from "./form/Button";
 import Modal from 'react-bootstrap/Modal';
 
 type CustomModalProps = {
@@ -38,10 +38,7 @@ const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
                     {children}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={onHide}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={onHide}>Continue</Button>
+                    <Button type="button" disabled={false} onClick={onHide} filled={true}>Continue</Button>
                 </Modal.Footer>
             </Modal>
         </>

@@ -28,10 +28,10 @@ export const InputFile: React.FC<InputFileProps> = (props) => {
 
     return (
         <div className='fv-row mb-3'>
-            {label && <label className="form-label fs-6 fw-bolder text-dark">{label}</label>}
+            {label && <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>{label}</label>}
             <input
                 className={clsx(
-                    `form-control form-control-lg form-control-solid `,
+                    `form-control form-control-solid `,
                     { 'is-invalid': required && formikTouched && formikError },
                     { 'is-valid': required && formikTouched && !formikError }
                 )}

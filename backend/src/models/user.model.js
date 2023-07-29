@@ -44,6 +44,33 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    occupation: {
+      type: String,
+    },
+    companyName: {
+      type: String,
+    },
+    phone: {
+      type: String,
+      trim: true,
+      validate(value) {
+        if (!validator.isMobilePhone(value)) {
+          throw new Error('Invalid phone number');
+        }
+      },
+    },
+    language: {
+      type: String,
+      trim: true,
+    },
+    timeZone: {
+      type: String,
+      trim: true,
+    },
+    website: {
+      type: String,
+      trim: true,
+    },
   },
   {
     timestamps: true,

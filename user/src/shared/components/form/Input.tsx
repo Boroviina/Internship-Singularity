@@ -9,7 +9,7 @@ type InputProps = {
     formikError?: string
     name: string
     type: "text" | "email" | "password"
-    required: boolean
+    required?: boolean
     id?: string
     additionalDescription?: string
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -31,12 +31,12 @@ export const Input: React.FC<InputProps> = (props) => {
 
     return (
         <div className='fv-row mb-3'>
-            {label && <label htmlFor={id} className="form-label fs-6 fw-bolder text-dark">{label}</label>}
+            {label && <label htmlFor={id} className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>{label}</label>}
             <input
                 {...formikFieldProps}
-                placeholder={placeholder}
+                placeholder={placeholder && ''}
                 className={clsx(
-                    `form-control form-control-lg form-control-solid `,
+                    `form-control form-control-solid `,
                     { 'is-invalid': required && formikTouched && formikError },
                     { 'is-valid': required && formikTouched && !formikError }
                 )}
