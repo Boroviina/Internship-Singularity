@@ -176,7 +176,7 @@ export function Registration() {
               <label
                   className='form-check-label fw-bold text-gray-700 fs-6'
                   htmlFor='kt_login_toc_agree'
-                  style={{color: '#031345'}}
+                  style={{color: '#010b1d'}}
               >
                 I Agree to the{' '}
                 <Link to='/auth/terms' className='ms-1 link-primary'>
@@ -211,15 +211,6 @@ export function Registration() {
             </span>
               )}
             </button>
-            {/*<Link to='/auth/login'>*/}
-            {/*  <button*/}
-            {/*      type='button'*/}
-            {/*      id='kt_login_signup_form_cancel_button'*/}
-            {/*      className='btn btn-lg btn-light-primary w-100'*/}
-            {/*  >*/}
-            {/*    Cancel*/}
-            {/*  </button>*/}
-            {/*</Link>*/}
           </div>
           {/* end::Form group */}
         </form>
