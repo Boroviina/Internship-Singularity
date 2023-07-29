@@ -34,7 +34,7 @@ export function Header() {
                                                     className={'p-3 text-decoration-none fs-6 fw-bolder'}>Home</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1 '}><a
-                                                    href="" className={'p-3 text-decoration-none fs-6 fw-bolder'}>Find a
+                                                    href="/find-job" className={'p-3 text-decoration-none fs-6 fw-bolder'}>Find a
                                                     Jobs</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1  '}><a

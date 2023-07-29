@@ -6,6 +6,7 @@ const Dropdown = ({name, filters}: FilterGroup) => {
         <div>
             <h5>{name}</h5>
             <select className="form-select form-select-lg" aria-label={name}>
+                <option selected>...</option>
                 {filters.map((filter) => {
                 return <option value={filter}>{filter}</option>;
                 })}

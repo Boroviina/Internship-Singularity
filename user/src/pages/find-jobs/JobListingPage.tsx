@@ -1,57 +1,74 @@
-import React from 'react';
-import styles from './jobListingPage.module.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faFilter} from "@fortawesome/free-solid-svg-icons/faFilter";
-import CheckboxGroup from "./components/CheckboxGroup";
-import Dropdown from "./components/Dropdown";
-import Job from "./components/JobListing";
+import React, {useState} from 'react';
+import styles from './JobListingPage.module.css';
+import CheckboxGroup from "./components/filter-components/CheckboxGroup";
+import Dropdown from "./components/filter-components/Dropdown";
+import {Header} from "../Header/Header";
+import {Footer} from "../generalFooter/Footer";
+import Search from "./components/Search";
+import Filters from "./components/filter-components/Filters";
+import SortBy from "./components/SortBy";
+import Pagination from "./components/Pagination";
+import JobListing from "./components/JobListing";
+import DetailsModal from "./components/details-components/DetailsModal";
 
 const JobListingPage = () => {
-    const filters1 = ["Type 1", "Type 2", "Type 3"];
-    const filters2 = ["Type 4", "Type 5", "Type 6"];
-    const filters3 = ["Type 7", "Type 8", "Type 9"];
+    const [showDetails, setShowDetails] = useState(false);
+    const handleClose = () => setShowDetails(false);
+    const handleOpen = () => setShowDetails(true);
+
+    const specialization = ["Finance and accounting", "Legal", "Technology",
+        "Administrative & customer support", "Marketing & creative"];
+    const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
+    const remote = ["Remote", "Hybrid"];
+    const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
+    const educationLevel = ["Not required", "College", "Associates", "Bachelors", "Masters", "Doctorate"];
+    const sortByCategories = ["Relevance", "Date", "Pay"];
     return (
-        <body>
-        <header className={`mb-5 ${styles['hero']}`}>
-            <div className={`text-center ${styles['overlay']}`}>
-                <h1 className='display-2 text-light' style={{paddingTop: '150px'}}>
-                    Search for jobs
-                </h1>
-            </div>
-        </header>
-        <main id="jobs-and-filter">
-            <div className="container">
-                <div className="row">
-                    <section className="col-lg-3 col-md-4 order-2 order-md-1">
-                        <div className="align-items-center mb-2">
-                            <FontAwesomeIcon icon={faFilter}
-                                             style={{color: "#614EE0FF", height: 30}}/>
-                            <h5 className="d-inline align-baseline">
-                                Filter jobs
-                            </h5>
-                        </div>
-                            <div className={`container d-flex flex-column gap-3 p-3 filter ${styles['filter']}`}>
-                                <CheckboxGroup name="Job Type 1" filters={filters1}/>
-                                <Dropdown name="Job type 3" filters={filters3}/>
-                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
-                                <hr/>
-                                <CheckboxGroup name="Job Type 1" filters={filters1}/>
-                                <CheckboxGroup name="Job Type 2" filters={filters2}/>
-                                <Dropdown name="Job type 3" filters={filters3}/>
-                            </div>
-                    </section>
-                <section className="col-lg-9 col-md-8 order-1 order-md-2">
-                        <Job />
-                        <Job />
-                        <Job />
-                        <Job />
-                        <Job />
-                </section>
+        <>
+            <Header/>
+            <body>
+            <header className={`${styles.hero}`}>
+                <div className={`text-center ${styles.overlay}`}>
+                    <Search/>
                 </div>
-            </div>
-        </main>
-</body>
+            </header>
+            <main id="jobs-and-filter" className="my-4">
+                <div className="container">
+                    <div className="row">
+                        <section className="col-lg-3 col-md-4 order-2 order-md-1">
+                            <Filters>
+                                <CheckboxGroup name="Specialization" filters={specialization}/>
+                                <Dropdown name="Remote" filters={remote}/>
+                                <CheckboxGroup name="Employment type" filters={employmentType}/>
+                                <Dropdown name="Experience level" filters={experienceLevel}/>
+                                <Dropdown name="Education level" filters={educationLevel}/>
+                            </Filters>
+                        </section>
+                        <section className="col-lg-9 col-md-8 order-1 order-md-2">
+                            <div className="d-flex align-items-center justify-content-between px-2">
+                                <div className="text-muted fs-5">
+                                    Results: {24}
+                                </div>
+                                <SortBy categories={sortByCategories}/>
+                            </div>
+                            <div className="jobs my-2">
+                                <JobListing showDetails={handleOpen}/>
+                                <JobListing showDetails={handleOpen}/>
+                                <JobListing showDetails={handleOpen}/>
+                                <JobListing showDetails={handleOpen}/>
+                                <JobListing showDetails={handleOpen}/>
+                            </div>
+                            <Pagination/>
+                        </section>
+                    </div>
+                </div>
+            </main>
+            </body>
+            <Footer/>
+
+            <DetailsModal showDetails={showDetails} close={handleClose}/>
+        </>
     );
-};
+}
 
 export default JobListingPage;
