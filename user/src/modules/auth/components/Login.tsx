@@ -80,7 +80,7 @@ export function Login() {
                 label='Email'
             />
 
-            <label className="form-label fs-6 fw-bolder text-dark">Password </label>
+            <label className="form-label fs-6 fw-bolder" style={{color: '#031345'}}>Password </label>
             {'  '}<Link to='/auth/forgot-password' className='link-primary fs-6 fw-bold'>Forgot Password ?</Link>
             <Input
                 formikFieldProps={formik.getFieldProps('password')}

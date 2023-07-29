@@ -19,7 +19,7 @@ export function SearchJob() {
                                 <input type="text" placeholder={'Job title or keyword'} tabIndex={0}
                                        className={'form-control w-auto my-1  mt-md-0 col-md-4 col-12 '}/>
                                 <select className="form-select w-auto my-1 mt-md-0  col-12 col-md-4" id="floatingSelectDisabled">
-                                    <option selected>Choose region</option>
+                                    <option value="0">Choose region</option>
                                     <option value="1">Balcan countries</option>
                                     <option value="2">Europe</option>
                                     <option value="3">Other world countries</option>

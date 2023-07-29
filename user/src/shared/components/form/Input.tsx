@@ -31,12 +31,12 @@ export const Input: React.FC<InputProps> = (props) => {
 
     return (
         <div className='fv-row mb-3'>
-            {label && <label htmlFor={id} className="form-label fs-6 fw-bolder text-dark">{label}</label>}
+            {label && <label htmlFor={id} className="form-label fs-6 fw-bolder" style={{color: '#031345'}}>{label}</label>}
             <input
                 {...formikFieldProps}
                 placeholder={placeholder}
                 className={clsx(
-                    `form-control form-control-lg form-control-solid `,
+                    `form-control form-control-solid `,
                     { 'is-invalid': required && formikTouched && formikError },
                     { 'is-valid': required && formikTouched && !formikError }
                 )}

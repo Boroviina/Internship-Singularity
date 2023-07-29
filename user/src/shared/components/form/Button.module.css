@@ -1,20 +1,75 @@
-.boxed-btn {
-    background: #fff;
-    color: #fb246a;
-    display: inline-block;
-    padding: 18px 44px;
-    font-family: "Muli",sans-serif;
+/*.boxed-btn {*/
+/*    background: #fff;*/
+/*    color: #fb246a;*/
+/*    display: inline-block;*/
+/*    padding: 18px 44px;*/
+/*    font-family: "Muli",sans-serif;*/
+/*    font-size: 14px;*/
+/*    font-weight: 400;*/
+/*    border: 1px solid #fb246a;*/
+/*    letter-spacing: 3px;*/
+/*    text-align: center;*/
+/*    text-transform: uppercase;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.boxed-btn:hover {*/
+/*    background-color: #fb246a;*/
+/*    color: #fff;*/
+/*}*/
+.filled-button {
+    background: #fb246a;
+    color: #fff;
+    margin-right: 5px;
+    padding: 27px 27px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 0;
+    border-radius: 0px;
+    transition: background-color 0.4s ease;
+    position: relative;
+    border: 0;
+    overflow: hidden;
+}
+.filled-button:hover {
+    background-color: #fff;
+    color: #fb246a;
     border: 1px solid #fb246a;
-    letter-spacing: 3px;
-    text-align: center;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.boxed-btn:hover {
+.light-button {
+    background-color: #fff;
+    -moz-user-select: auto;
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 27px 27px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 0;
+    border-radius: 0px;
+    transition: color 0.4s ease;
+    position: relative;
+    border: 1px solid #fb246a;
+    overflow: hidden;
+    color: #fb246a;
+}
+.light-button:hover {
     background-color: #fb246a;
     color: #fff;
+    border: 1px solid #fb246a;
+}
+.close-button{
+    background-color: #010b1d;
+}
+.close-button:hover{
+    background-color: #021538;
+}
+.close-buttonLight{
+    background-color: #fb246a;
+}
+.close-button:hover{
+    background-color: #021538;
 }
