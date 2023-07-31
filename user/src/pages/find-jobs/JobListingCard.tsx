@@ -10,7 +10,7 @@ interface JobProps {
     showDetails(): void;
 }
 
-const JobListingCard = ({showDetails} : JobProps) => {
+const JobListingCard = ({job, showDetails} : JobProps) => {
     return (
         <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
             <div className="d-flex align-items-center">
@@ -20,15 +20,15 @@ const JobListingCard = ({showDetails} : JobProps) => {
                          alt={"Company Logo"}/>
                 </a>
                 <div onClick={showDetails} className={`${styles.titleAndDetails} flex-grow-1`}>
-                        <h4 className={`${styles.title}`}>Frontend developer</h4>
-                    <div className="fw-semibold">
-                        <span>Facebook</span>
+                        <h4 className={`${styles.title}`}>{job.jobTitle}</h4>
+                    <div className="d-flex align-items-center gap-2 fw-semibold">
+                        <span>{job.companyName}</span>
                         <span className="text-black-50">
-                            . Los Angeles . 50$ - 75$ . Part time . About a week ago
+                                <span>{job.location}{' \u2022 '}</span>
+                                <span>{job.pay}{' \u2022 '}</span>
+                                <span>{job.employmentType}{' \u2022 '}</span>
+                                <span>Posted on: {job.datePosted}</span>
                         </span>
-                        <button type="button" className={`${generalBtn.lightButton} ${generalBtn.tinyBtn}`}>
-                            Details
-                        </button>
                     </div>
                 </div>
             </div>

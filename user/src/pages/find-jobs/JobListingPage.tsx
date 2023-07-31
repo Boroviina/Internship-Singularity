@@ -27,10 +27,12 @@ const JobListingPage = () => {
         "Master's degree", "Doctor's degree"];
     const sortByCategories = ["Relevance", "Date", "Pay"];
     const job1: JobListing = new JobListing({
+        //companyLogo: ...
         jobTitle: "Backend developer",
         companyName: "Amazon",
         location: "Sydney - Australia",
         pay: "4000 $",
+        employmentType: "Full Time",
         appDeadline: new Date("12/7/2023"),
         description: "<hr/>\n" +
             "            <strong>Job description:</strong><br/>\n" +
@@ -66,7 +68,7 @@ const JobListingPage = () => {
             specialization: "Technology",
             experience: "Mid level",
             education: "College",
-            skills: "Problem solving, Communication",
+            skills: "Problem solving, Communication", // ovo bi mogao biti niz
             language: "English, German",
         }),
 
