@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from './components/JobListing.module.css';
 import generalBtn from "../Home/GeneralButton.module.css"
+import {JobListing} from "../../shared/models/job-listing.model";
 
 const logo = require('./img/logo-fb.jpg');
 
 interface JobProps {
+    job: JobListing;
     showDetails(): void;
 }
 

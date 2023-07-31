@@ -2,7 +2,7 @@ import React from 'react';
 import DOMPurify from 'dompurify';
 
 const JobDescriptionContent = () => {
-    const description = "            <hr/>\n" +
+    const description ="<hr/>\n" +
         "            <strong>Job description:</strong><br/>\n" +
         "            We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
         "            aliquam\n" +
@@ -10,7 +10,7 @@ const JobDescriptionContent = () => {
         "            harum\n" +
         "            impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis\n" +
         "            optio,\n" +
-        "            perspiciatis porro quaerat quam quod reiciendis tempore ullam voluptate voluptatum! Aperiam,\n" +
+        "            perspiciatis porro quaerat quam quod reiciendis tempore ullam obey voluptatum! Aperiam,\n" +
         "            illo?\n" +
         "            <br/><br/>\n" +
         "            As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt\n" +

@@ -23,21 +23,56 @@ const JobListingPage = () => {
     const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
     const remote = ["Remote", "Hybrid"];
     const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
-    const educationLevel = ["Not required", "College", "Associates", "Bachelors", "Masters", "Doctorate"];
+    const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
+        "Master's degree", "Doctor's degree"];
     const sortByCategories = ["Relevance", "Date", "Pay"];
-    const job1 = new JobListing({
+    const job1: JobListing = new JobListing({
         jobTitle: "Backend developer",
         companyName: "Amazon",
         location: "Sydney - Australia",
         pay: "4000 $",
         appDeadline: new Date("12/7/2023"),
-        description: "",
+        description: "<hr/>\n" +
+            "            <strong>Job description:</strong><br/>\n" +
+            "            We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
+            "            aliquam\n" +
+            "            asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi\n" +
+            "            harum\n" +
+            "            impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis\n" +
+            "            optio,\n" +
+            "            perspiciatis porro quaerat quam quod reiciendis tempore ullam obey voluptatum! Aperiam,\n" +
+            "            illo?\n" +
+            "            <br/><br/>\n" +
+            "            As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt\n" +
+            "            distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.\n" +
+            "            <br/>\n" +
+            "            <ul>\n" +
+            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>\n" +
+            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>\n" +
+            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>\n" +
+            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam\n" +
+            "                    quas\n" +
+            "                    quod?\n" +
+            "                </li>\n" +
+            "            </ul>\n" +
+            "            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet\n" +
+            "            aperiam\n" +
+            "            delectus eum exercitationem nemo. Dolorem odit, saepe!\n" +
+            "            <hr/>",
         remote: "Remote",
-        datePosted: "string", // ustvari timestamp - korisnicko vrijeme
+        datePosted: "17/8/2023", // ustvari (timestamp - korisnicko vrijeme)
 
-        requirementsModel: RequirementsModel,
+        requirementsModel: new RequirementsModel({
+            specialization: "Technology",
+            experience: "Mid level",
+            education: "College",
+            skills: "Problem solving, Communication",
+            language: "English, German",
+        }),
 
-        appInstructions: "string",
+        appInstructions: "Please submit your thing into the proper channel and" +
+            "discuss without the necessary preconditions of your applications. We will" +
+            "contact you shortly!",
     });
     return (
         <>
@@ -72,11 +107,11 @@ const JobListingPage = () => {
                                 <SortBy categories={sortByCategories}/>
                             </div>
                             <div className="jobs my-2">
-                                <JobListingCard showDetails={handleOpen}/>
-                                <JobListingCard showDetails={handleOpen}/>
-                                <JobListingCard showDetails={handleOpen}/>
-                                <JobListingCard showDetails={handleOpen}/>
-                                <JobListingCard showDetails={handleOpen}/>
+                                <JobListingCard job={job1} showDetails={handleOpen}/>
+                                <JobListingCard job={job1} showDetails={handleOpen}/>
+                                <JobListingCard job={job1} showDetails={handleOpen}/>
+                                <JobListingCard job={job1} showDetails={handleOpen}/>
+                                <JobListingCard job={job1} showDetails={handleOpen}/>
                             </div>
                             <Pagination/>
                         </section>
