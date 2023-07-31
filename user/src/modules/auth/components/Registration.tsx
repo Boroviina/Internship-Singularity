@@ -94,7 +94,7 @@ export function Registration() {
         >
 
           <div className='text-center mb-4'>
-            <h1 className='text-dark mb-2 fs-3'>Create an Account</h1>
+            <h1 className='text-label mb-2 fs-3'>Create an Account</h1>
             <div className='text-secondary fw-bold fs-5'>
               Already have an account?{' '}
               <Link to='/auth/login' className='text-primary fw-bold'>
@@ -171,10 +171,10 @@ export function Registration() {
                   {...formik.getFieldProps('acceptTerms')}
               />
               <label
-                  className='form-check-label fw-bold text-gray-700 fs-6'
+                  className='form-check-label fw-bold text-label mx-3 fs-6'
                   htmlFor='kt_login_toc_agree'
               >
-                I Agree to the{' '}
+                {' '} I Agree to the{' '}
                 <Link to='/auth/terms' className='ms-1 link-primary'>
                   terms and conditions
                 </Link>

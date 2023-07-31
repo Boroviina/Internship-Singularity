@@ -40,6 +40,15 @@ $custom-colors: ("pink": #fb246a);
     }
   }
 
+  //predefined for auth components (CANCEL button)
+  .btn-light-primary{
+    --bs-btn-bg: #{#a390de};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{#8e78d2};
+    --bs-btn-hover-bg: #{#b2a2ee};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{#8e78d2};
+  }
   .btn-pink {
     --bs-btn-bg: #{$pink};
     --bs-btn-color: #{#fdfdff};
@@ -103,7 +112,15 @@ $custom-colors: ("pink": #fb246a);
       color: #fb246a;
     }
   }
-
+  //predefined for auth components (CANCEL button)
+  .btn-light-primary{
+    --bs-btn-bg: #{#5f81cc};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{#486ab7};
+    --bs-btn-hover-bg: #{#7a9ee8};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{#486AB7FF};
+  }
   .btn-pink {
     --bs-btn-bg: #{$pink};
     --bs-btn-color: #{#fdfdff};
