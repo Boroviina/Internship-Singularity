@@ -69,11 +69,11 @@ export function Header() {
                                         </nav>
                                     </div>
                                 </div>
-                                <div className={'d-none d-lg-inline-flex'}>
-                                    <button className={`btn btn-pink my-2 mx-1 d-inline-block`}
+                                <div className={'d-none d-lg-inline-flex col-3'}>
+                                    <button className={`btn btn-pink col-6 my-2 mx-1 d-inline-block`}
                                             onClick={registerClickHandle}>Register
                                     </button>
-                                    <button className={`btn btn-white my-2 d-inline-block`}
+                                    <button className={`btn btn-white my-2 col-6 d-inline-block`}
                                             onClick={() => navigate('/auth/login')}>Login
                                     </button>
                                 </div>
@@ -156,7 +156,7 @@ export function Header() {
                                             </ul>
                                         </div>
                                         <div className={'d-flex justify-content-between align-items-center '}>
-                                            <div className={' d-inline-flex'}>
+                                            <div className={' d-inline-flex col-4'}>
                                                 <button className={`btn btn-pink my-2 mx-1 col-6 d-inline-block`}
                                                         onClick={registerClickHandle}>Register
                                                 </button>

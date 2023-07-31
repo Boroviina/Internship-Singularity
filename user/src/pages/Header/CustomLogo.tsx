@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
+import ThemeContext from "../../theme-context/ThemeContext";
 
 export function CustomLogo() {
+    const ctx=useContext(ThemeContext);
+
+    const theme=ctx.theme;
+
     return <div className={'d-flex justify-content-between align-items-center bg-body '}>
         <div className={'col-2 col-lg-4  col-md-3 col-sm-2'}>
+            {(theme==='light') &&
             <svg xmlns="http://www.w3.org/2000/svg" width="80px" height="80px"
                  viewBox="0 0 30 30" version="1.1">
                 <g id="surface1">
@@ -21,7 +27,8 @@ export function CustomLogo() {
                         className={" stroke:none fill-rule:nonzero fill:#00A8C6 fill-opacity:1 "}
                         d="M 17.164062 16.871094 C 17.273438 17.082031 17.484375 17.59375 17.640625 18.019531 C 17.796875 18.4375 18.019531 18.929688 18.125 19.117188 C 18.539062 19.800781 19.242188 20.28125 20.171875 20.519531 C 20.644531 20.632812 21.761719 20.761719 22.398438 20.761719 C 22.691406 20.761719 22.738281 20.742188 22.738281 20.644531 C 22.738281 20.550781 22.667969 20.519531 22.339844 20.460938 C 21.457031 20.308594 21.011719 19.890625 20.417969 18.660156 C 19.78125 17.339844 19.636719 17.09375 19.265625 16.691406 L 19.085938 16.5 L 16.980469 16.5 Z M 17.164062 16.871094 "/>
                 </g>
-            </svg>
+            </svg>}
+
         </div>
         <div className={'col-8 d-none d-sm-block'}>
             <label className={'col-12 text-label text-nowrap text-start fs-5 fs-sm-4 fw-bold'}
