@@ -6,12 +6,14 @@ import {useNavigate} from "react-router-dom";
 import ReactSwitch from "react-switch";
 import Toggle from "react-bootstrap-toggle";
 import ThemeContext from "../../theme-context/ThemeContext";
+import {useAuth} from "../../modules/auth";
 
 export function Header() {
     const ctx = useContext(ThemeContext);
+    const {currentUser, logout} = useAuth()
     const navigate = useNavigate();
     const registerClickHandle = () => {
-        navigate('/auth/registration')
+            navigate('/auth/registration')
     }
 
     return (
@@ -36,8 +38,8 @@ export function Header() {
                                                     className={'p-3 nav-link text-decoration-none fs-6 fw-bold'}>Home</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1 '}><a
-                                                    href=""
                                                     className={'p-3 text-decoration-none nav-link fs-6 fw-bold'}>Find a
+                                                    href="/find-job" >Find a
                                                     Jobs</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1  '}><a
@@ -69,14 +71,18 @@ export function Header() {
                                         </nav>
                                     </div>
                                 </div>
-                                <div className={'d-none d-lg-inline-flex col-3'}>
-                                    <button className={`btn btn-pink col-6 my-2 mx-1 d-inline-block`}
-                                            onClick={registerClickHandle}>Register
-                                    </button>
-                                    <button className={`btn btn-white my-2 col-6 d-inline-block`}
-                                            onClick={() => navigate('/auth/login')}>Login
-                                    </button>
-                                </div>
+
+                                {currentUser ? (
+                                    <div className={'d-none d-lg-inline-flex col-3'}>
+                                        <button className={`btn btn-pink col-6 my-2 mx-1 d-inline-block`} onClick={() => navigate('/profile')}>My profile</button>
+                                        <button className={`btn btn-white my-2 col-6 d-inline-block`} onClick={logout}>Logout</button>
+                                    </div>
+                                ) : (
+                                    <div className={'d-none d-lg-inline-flex col-3'}>
+                                        <button className={`btn btn-pink col-6 my-2 mx-1   d-inline-block`} onClick={registerClickHandle}>Register</button>
+                                        <button className={`btn btn-white my-2 col-6  d-inline-block`} onClick={()=>navigate('/auth/login')} >Login</button>
+                                    </div>
+                                )}
                                 {/* begin::Theme mode */}
                                 <div
                                     className={'d-flex d-none d-lg-inline-flex form-check form-switch flex-column  justify-content-center align-items-center mx-3'}>
@@ -178,7 +184,6 @@ export function Header() {
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

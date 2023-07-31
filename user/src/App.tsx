@@ -1,8 +1,7 @@
-import {Suspense, useState} from 'react'
+import {Suspense} from 'react'
 import {Outlet} from 'react-router-dom'
 import {LayoutSplashScreen} from "./layout/core";
 import {AuthInit} from './modules/auth'
-
 
 const App = () => {
 

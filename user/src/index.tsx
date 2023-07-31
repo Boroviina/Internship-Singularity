@@ -5,6 +5,7 @@ import './index.css';
 import 'bootstrap/dist/js/bootstrap';
 import './customStyle/custom.scss'
 import {AppRoutes} from "./routing/AppRoutes";
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import {AuthProvider, setupAxios} from "./modules/auth";
 import {ThemeContextProvide} from "./theme-context/ThemeContext";
 
