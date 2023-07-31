@@ -1,5 +1,4 @@
 import {BaseModel} from "./base.model";
-import {RequirementsModel} from "./requirements.model";
 
 export class JobListing extends BaseModel {
     id: string;

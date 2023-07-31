@@ -24,6 +24,9 @@ const JobListing = ({showDetails} : JobProps) => {
                         <span className="text-black-50">
                             . Los Angeles . 50$ - 75$ . Part time . About a week ago
                         </span>
+                        <button type="button" className={`${generalBtn.lightButton} ${generalBtn.tinyBtn}`}>
+                            Details
+                        </button>
                     </div>
                 </div>
             </div>

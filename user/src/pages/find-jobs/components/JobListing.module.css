@@ -1,6 +1,5 @@
 .title:hover {
-    color: #da1f5b;
-    transition-duration: 212ms;
+    text-decoration: underline;
 }
 
 .jobCard {
@@ -16,7 +15,7 @@
 
 .jobCard:hover .title{
     color: #da1f5b;
-    transition-duration: 212ms;
+    transition-duration: 100ms;
 }
 
 .titleAndDetails:hover {
