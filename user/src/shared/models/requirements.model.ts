@@ -1,10 +1,12 @@
 import {BaseModel} from "./base.model";
 
 export class RequirementsModel extends BaseModel {
+    specialization: string;
+    experience: string;
     education: string;
     skills: string;
     language: string;
-    driverLicense: boolean;
+    driverLicence: boolean;
 
     constructor(attributes?: any) {
         super();

@@ -27,14 +27,17 @@ const JobListingPage = () => {
         <>
             <Header/>
             <body>
+
             <header className={`${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
                     <Search/>
                 </div>
             </header>
+
             <main id="jobs-and-filter" className="my-4">
                 <div className="container">
                     <div className="row">
+
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
                                 <CheckboxGroup name="Specialization" filters={specialization}/>
@@ -44,6 +47,7 @@ const JobListingPage = () => {
                                 <Dropdown name="Education level" filters={educationLevel}/>
                             </Filters>
                         </section>
+
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
                             <div className="d-flex align-items-center justify-content-between px-2">
                                 <div className="text-muted fs-5">
@@ -60,10 +64,12 @@ const JobListingPage = () => {
                             </div>
                             <Pagination/>
                         </section>
+
                     </div>
                 </div>
             </main>
             </body>
+
             <Footer/>
 
             <DetailsModal showDetails={showDetails} close={handleClose}/>
