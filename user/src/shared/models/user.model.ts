@@ -10,6 +10,9 @@ export class UserModel extends BaseModel {
   companyName?: string;
   phone?: string;
   language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru';
+  gender?: 'male' | 'female' | 'other';
+  country?: string;
+  birthDate?: Date;
   timeZone?: string;
   website?: 'https://keenthemes.com';
 

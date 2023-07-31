@@ -7,7 +7,7 @@ export const SavedJobListings = () => {
     return (
         <>
             <CustomCard width="96%">
-                <HeaderCard title="Saved listings" className="mt-5">Saved job listings</HeaderCard>
+                <HeaderCard title="Saved listings" className="mt-4">Saved job listings</HeaderCard>
             </CustomCard>
         </>
     )

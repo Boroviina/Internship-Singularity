@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import clsx from "clsx";
+import {format} from "date-fns";
 import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {Input} from "../../shared/components/form/Input";
@@ -9,7 +11,6 @@ import {Button} from "../../shared/components/form/Button";
 import CustomModal from "../../shared/components/CustomModal";
 import {useAuth} from "../../modules/auth";
 import {updateUser} from "../../shared/services/user.service";
-
 
 const editProfileSchema = Yup.object().shape({
     name: Yup.string()
@@ -30,6 +31,11 @@ const editProfileSchema = Yup.object().shape({
     website: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols'),
+    gender: Yup.string(),
+    country: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols'),
+    birthDate: Yup.date(),
 })
 
 export const ProfileSettings = () => {
@@ -44,6 +50,9 @@ export const ProfileSettings = () => {
         occupation: currentUser.occupation || '',
         companyName: currentUser.companyName || '',
         language: currentUser.language || '',
+        country: currentUser.country || '',
+        birthDate: format(new Date(currentUser.birthDate), "yyyy-MM-dd") || '',
+        gender: currentUser.gender || '',
         website: currentUser.website || '',
     }
 
@@ -82,7 +91,7 @@ export const ProfileSettings = () => {
 
     return (
         <>
-            <CustomCard width="96%" className="mt-5">
+            <CustomCard width="96%" className="mt-4">
                 <HeaderCard title="Settings">Basic settings of your profile</HeaderCard>
                 <CustomCard className="shadow rounded-2">
                     <form
@@ -107,6 +116,7 @@ export const ProfileSettings = () => {
                             formikError={formik.errors.phone}
                             name="phone"
                             type="text"
+                            required={formik.getFieldProps('phone').value.trim().length !== 0}
                         />
                         <Input
                             label="Occupation"
@@ -115,6 +125,7 @@ export const ProfileSettings = () => {
                             formikError={formik.errors.occupation}
                             name="occupation"
                             type="text"
+                            required={formik.getFieldProps('occupation').value.trim().length !== 0}
                         />
                         <Input
                             label="Company"
@@ -123,15 +134,56 @@ export const ProfileSettings = () => {
                             formikError={formik.errors.companyName}
                             name="companyName"
                             type="text"
+                            required={formik.getFieldProps('companyName').value.trim().length !== 0}
+                        />
+                        <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>Language </label>
+                        <select
+                            {...formik.getFieldProps('language')}
+                            className={clsx(
+                                `form-control form-control-solid mb-3 `,
+                                {'is-invalid': formik.touched.language && formik.errors.language && formik.getFieldProps('language').value.trim().length !== 0},
+                                {'is-valid': formik.touched.language && !formik.errors.language && formik.getFieldProps('language').value.trim().length !== 0}
+                            )}
+                            name="language">
+                            <option value=""></option>
+                            <option value="en">English</option>
+                            <option value="fr">French</option>
+                            <option value="es">Spanish</option>
+                            <option value="ja">Japanese</option>
+                            <option value="zh">Chinese</option>
+                        </select>
+                        <Input
+                            label="Country"
+                            formikFieldProps={formik.getFieldProps('country')}
+                            formikTouched={formik.touched.country}
+                            formikError={formik.errors.country}
+                            name="country"
+                            type="text"
+                            required={formik.getFieldProps('country').value.trim().length !== 0}
                         />
                         <Input
-                            label="Language"
-                            formikFieldProps={formik.getFieldProps('language')}
-                            formikTouched={formik.touched.language}
-                            formikError={formik.errors.language}
-                            name="language"
-                            type="text"
+                            label="Date of birth"
+                            formikFieldProps={formik.getFieldProps('birthDate')}
+                            formikTouched={formik.touched.birthDate}
+                            formikError={formik.errors.birthDate}
+                            name="birthDate"
+                            type="date"
+                            required={formik.getFieldProps('birthDate').value.trim().length !== 0}
                         />
+                        <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>Gender </label>
+                        <select
+                            {...formik.getFieldProps('gender')}
+                            className={clsx(
+                                `form-control form-control-solid mb-3 `,
+                                {'is-invalid': formik.touched.gender && formik.errors.gender && formik.getFieldProps('gender').value.trim().length !== 0},
+                                {'is-valid': formik.touched.gender && !formik.errors.gender && formik.getFieldProps('gender').value.trim().length !== 0}
+                            )}
+                            name="gender">
+                            <option value=""></option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                         <Input
                             label="Website"
                             formikFieldProps={formik.getFieldProps('website')}
@@ -139,6 +191,7 @@ export const ProfileSettings = () => {
                             formikError={formik.errors.website}
                             name="website"
                             type="text"
+                            required={formik.getFieldProps('website').value.trim().length !== 0}
                         />
 
                         <div className='text-center mt-4'>

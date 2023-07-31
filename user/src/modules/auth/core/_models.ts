@@ -61,6 +61,9 @@ export interface UserModel {
   language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru'
   timeZone?: string
   website?: 'https://keenthemes.com'
+  gender?: 'male' | 'female' | 'other'
+  country?: string
+  birthDate?: Date
   emailSettings?: UserEmailSettingsModel
   auth?: AuthModel
   communication?: UserCommunicationModel

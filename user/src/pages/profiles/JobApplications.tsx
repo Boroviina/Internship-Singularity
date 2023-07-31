@@ -39,8 +39,8 @@ export const JobApplications = () => {
 
     return (
         <CustomCard width="96%">
-            <HeaderCard title="My applications" className="mt-5">All job applications, active and expired</HeaderCard>
-            <div className={`row row-cols-md-3 row-cols-sm-2 mx-auto overflow-hidden my-5`}>
+            <HeaderCard title="My applications" className="mt-4">All job applications, active and expired</HeaderCard>
+            <div className={`row row-cols-md-3 row-cols-sm-2 mx-auto overflow-hidden my-4`}>
                 {jobApplicationsContent}
             </div>
         </CustomCard>
