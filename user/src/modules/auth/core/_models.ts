@@ -1,4 +1,5 @@
 import {Token} from "../../../shared/interfaces/login-response.interface";
+import {Language} from "../../../shared/enums/languages.enum";
 
 export interface AuthModel {
   access: Token
@@ -58,7 +59,7 @@ export interface UserModel {
   phone?: string
   roles?: Array<number>
   pic?: string
-  language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru'
+  language?: Language
   timeZone?: string
   website?: 'https://keenthemes.com'
   gender?: 'male' | 'female' | 'other'

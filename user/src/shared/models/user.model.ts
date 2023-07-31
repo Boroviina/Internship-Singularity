@@ -1,4 +1,5 @@
-import { BaseModel } from "./base.model";
+import {BaseModel} from "./base.model";
+import {Language} from "../enums/languages.enum";
 
 export class UserModel extends BaseModel {
   id: number;
@@ -9,7 +10,7 @@ export class UserModel extends BaseModel {
   occupation?: string;
   companyName?: string;
   phone?: string;
-  language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru';
+  language?: Language;
   gender?: 'male' | 'female' | 'other';
   country?: string;
   birthDate?: Date;

@@ -3,6 +3,7 @@ import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {useAuth} from "../../modules/auth";
 import {ProfileOverviewItem} from "./ProfileOverviewItem";
+import {Language} from "../../shared/enums/languages.enum";
 
 export const ProfileOverview = () => {
     const {currentUser} = useAuth();
@@ -20,7 +21,7 @@ export const ProfileOverview = () => {
                     <ProfileOverviewItem label='Gender'>{currentUser.gender}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Country'>{currentUser.country}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Occupation'>{currentUser.occupation}</ProfileOverviewItem>
-                    <ProfileOverviewItem label='Language'>{currentUser.language}</ProfileOverviewItem>
+                    <ProfileOverviewItem label='Language'>{Language[currentUser.language]}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Company name'>{currentUser.companyName}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Website'>{currentUser.website}</ProfileOverviewItem>
                 </CustomCard>

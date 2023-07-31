@@ -8,9 +8,10 @@ import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {Input} from "../../shared/components/form/Input";
 import {Button} from "../../shared/components/form/Button";
-import CustomModal from "../../shared/components/CustomModal";
+import CustomInfoModal from "../../shared/components/CustomInfoModal";
 import {useAuth} from "../../modules/auth";
 import {updateUser} from "../../shared/services/user.service";
+import {Language} from "../../shared/enums/languages.enum";
 
 const editProfileSchema = Yup.object().shape({
     name: Yup.string()
@@ -25,9 +26,7 @@ const editProfileSchema = Yup.object().shape({
     companyName: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols'),
-    language: Yup.string()
-        .min(2, 'Minimum 2 symbols')
-        .max(50, 'Maximum 50 symbols'),
+    language: Yup.string(),
     website: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols'),
@@ -136,7 +135,7 @@ export const ProfileSettings = () => {
                             type="text"
                             required={formik.getFieldProps('companyName').value.trim().length !== 0}
                         />
-                        <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>Language </label>
+                        <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}} htmlFor="language">Language </label>
                         <select
                             {...formik.getFieldProps('language')}
                             className={clsx(
@@ -144,13 +143,11 @@ export const ProfileSettings = () => {
                                 {'is-invalid': formik.touched.language && formik.errors.language && formik.getFieldProps('language').value.trim().length !== 0},
                                 {'is-valid': formik.touched.language && !formik.errors.language && formik.getFieldProps('language').value.trim().length !== 0}
                             )}
-                            name="language">
+                            name="language" id="language">
                             <option value=""></option>
-                            <option value="en">English</option>
-                            <option value="fr">French</option>
-                            <option value="es">Spanish</option>
-                            <option value="ja">Japanese</option>
-                            <option value="zh">Chinese</option>
+                            {Object.entries(Language).map(([key, value]) => (
+                                <option key={key} value={key}>{value}</option>
+                                ))}
                         </select>
                         <Input
                             label="Country"
@@ -205,9 +202,9 @@ export const ProfileSettings = () => {
                     </form>
                 </CustomCard>
             </CustomCard>
-            <CustomModal title="Success" show={showModal} onHide={hideModal} backdrop="static" keyboard={false}>
+            <CustomInfoModal title="Success" show={showModal} onHide={hideModal}>
                 You successfully updated your profile!
-            </CustomModal>
+            </CustomInfoModal>
         </>
     )
 }
