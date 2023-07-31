@@ -54,8 +54,13 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                     </section>
 
                     <section className={styles.jobDescription}>
-                        <JobDescriptionContent />
-                        {job.appInstructions}
+                        {job.description
+                            && <JobDescriptionContent description={job.description}/>}
+                        {job.appInstructions
+                            && <div>
+                                <h4>Application instructions:</h4>
+                                {job.appInstructions}
+                            </div>}
                     </section>
                 </main>
             </Modal.Body>

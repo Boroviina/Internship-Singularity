@@ -34,9 +34,7 @@ const JobListingPage = () => {
         pay: "4000 $",
         employmentType: "Full Time",
         appDeadline: new Date("12/7/2023"),
-        description: "<hr/>\n" +
-            "            <strong>Job description:</strong><br/>\n" +
-            "            We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
+        description:"     We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
             "            aliquam\n" +
             "            asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi\n" +
             "            harum\n" +
