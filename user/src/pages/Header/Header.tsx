@@ -1,10 +1,7 @@
-import React, {useState, useContext} from "react";
+import React, { useContext} from "react";
 import classes from './Header.module.css';
 import {CustomLogo} from "./CustomLogo";
-import btnStyle from '../Home/GeneralButton.module.css'
 import {useNavigate} from "react-router-dom";
-import ReactSwitch from "react-switch";
-import Toggle from "react-bootstrap-toggle";
 import ThemeContext from "../../theme-context/ThemeContext";
 import {useAuth} from "../../modules/auth";
 
@@ -34,13 +31,12 @@ export function Header() {
                                         <nav className={'d-none nav navbar navbar-nav mt-1 d-lg-block '}>
                                             <ul id={'navigation'} className={`m-0 p-0`}>
                                                 <li className={'d-inline-block position-relative z-1 '}><a
-                                                    href=""
+                                                    href="/home"
                                                     className={'p-3 nav-link text-decoration-none fs-6 fw-bold'}>Home</a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1 '}><a
-                                                    className={'p-3 text-decoration-none nav-link fs-6 fw-bold'}>Find a
-                                                    href="/find-job" >Find a
-                                                    Jobs</a>
+                                                    className={'p-3 text-decoration-none nav-link fs-6 fw-bold'} href="/find-job">Find a Job
+                                                    </a>
                                                 </li>
                                                 <li className={'d-inline-block position-relative z-1  '}><a
                                                     href=""
