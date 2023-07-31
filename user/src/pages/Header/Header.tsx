@@ -94,7 +94,7 @@ export function Header() {
                                 <nav className=" navbar bg-transparent">
                                     <div className="container-fluid justify-content-end">
                                         <button
-                                            className="navbar-toggler btn"
+                                            className="navbar-toggler "
                                             type="button"
                                             data-bs-toggle="collapse"
                                             data-bs-target="#navbarToggleExternalContent1"
