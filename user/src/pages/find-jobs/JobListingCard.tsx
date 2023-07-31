@@ -8,7 +8,7 @@ interface JobProps {
     showDetails(): void;
 }
 
-const JobListing = ({showDetails} : JobProps) => {
+const JobListingCard = ({showDetails} : JobProps) => {
     return (
         <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
             <div className="d-flex align-items-center">
@@ -42,4 +42,4 @@ const JobListing = ({showDetails} : JobProps) => {
     );
 };
 
-export default JobListing;
+export default JobListingCard;

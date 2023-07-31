@@ -8,8 +8,10 @@ import Search from "./components/Search";
 import Filters from "./components/filter-components/Filters";
 import SortBy from "./components/SortBy";
 import Pagination from "./components/Pagination";
-import JobListing from "./JobListing";
+import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
+import {JobListing} from "../../shared/models/job-listing.model";
+import {RequirementsModel} from "../../shared/models/requirements.model";
 
 const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);
@@ -23,6 +25,20 @@ const JobListingPage = () => {
     const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
     const educationLevel = ["Not required", "College", "Associates", "Bachelors", "Masters", "Doctorate"];
     const sortByCategories = ["Relevance", "Date", "Pay"];
+    const job1 = new JobListing({
+        jobTitle: "Backend developer",
+        companyName: "Amazon",
+        location: "Sydney - Australia",
+        monthlyPay: 4000,
+        appDeadline: new Date("12/7/2023"),
+        description: "",
+        remote: "Remote",
+        datePosted: "string", // ustvari timestamp - korisnicko vrijeme
+
+        requirementsModel: RequirementsModel,
+
+        appInstructions: "string",
+    });
     return (
         <>
             <Header/>
@@ -56,11 +72,11 @@ const JobListingPage = () => {
                                 <SortBy categories={sortByCategories}/>
                             </div>
                             <div className="jobs my-2">
-                                <JobListing showDetails={handleOpen}/>
-                                <JobListing showDetails={handleOpen}/>
-                                <JobListing showDetails={handleOpen}/>
-                                <JobListing showDetails={handleOpen}/>
-                                <JobListing showDetails={handleOpen}/>
+                                <JobListingCard showDetails={handleOpen}/>
+                                <JobListingCard showDetails={handleOpen}/>
+                                <JobListingCard showDetails={handleOpen}/>
+                                <JobListingCard showDetails={handleOpen}/>
+                                <JobListingCard showDetails={handleOpen}/>
                             </div>
                             <Pagination/>
                         </section>

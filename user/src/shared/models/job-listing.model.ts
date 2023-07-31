@@ -10,6 +10,7 @@ export class JobListing extends BaseModel {
     appDeadline: Date;
     description: string;
     remote: string;
+    datePosted: string;
 
     requirementsModel: RequirementsModel;
 
