@@ -1,9 +1,19 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {IconProp, library} from '@fortawesome/fontawesome-svg-core';
-import {faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
+import {
+    faLocationDot,
+    faBriefcase,
+    faUserTie,
+    faGlasses,
+    faGraduationCap,
+    faPencil,
+    faCarSide,
+    faEarthAmericas
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap);
+library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap
+, faPencil, faCarSide, faEarthAmericas);
 
 interface JobInfoProps {
     title: string;

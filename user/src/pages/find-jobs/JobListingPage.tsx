@@ -70,6 +70,7 @@ const JobListingPage = () => {
             education: "College",
             skills: "Problem solving, Communication", // ovo bi mogao biti niz
             language: "English, German",
+            driverLicence: true
         }),
 
         appInstructions: "Please submit your thing into the proper channel and" +
@@ -125,7 +126,7 @@ const JobListingPage = () => {
 
             <Footer/>
 
-            <DetailsModal showDetails={showDetails} close={handleClose}/>
+            <DetailsModal job={job1} showDetails={showDetails} close={handleClose}/>
         </>
     );
 }
