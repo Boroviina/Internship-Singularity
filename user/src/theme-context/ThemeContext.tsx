@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 const ThemeContext = React.createContext({
     theme: 'light',
@@ -8,9 +8,20 @@ const ThemeContext = React.createContext({
 
 export const ThemeContextProvide = (props) => {
     const [theme, setTheme] = useState('light');
+
+    useEffect(() => {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        }
+    }, []);
     const setThemeHandler = () => {
-        setTheme((curr) => (curr === 'light' ? 'dark' : 'light'));
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+
+        localStorage.setItem('theme', newTheme);
     };
+
 
     return <ThemeContext.Provider value={{theme: theme, setTheme: setThemeHandler}}>
         <div data-bs-theme={theme}>
