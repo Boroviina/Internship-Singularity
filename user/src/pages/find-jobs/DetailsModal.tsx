@@ -43,14 +43,14 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                             && <JobInfo title="Area of expertise" mainData={requirements.specialization} icon="user-tie"/>}
                         {requirements.experience
                             && <JobInfo title="Experience" mainData={requirements.experience} icon="glasses"/>}
-                        {requirements.education &&
-                        <JobInfo title="Education" mainData={requirements.education} icon="graduation-cap" />}
-                        {requirements.skills &&
-                            <JobInfo title="Skills" mainData={requirements.skills} icon="pencil" />}
-                        {requirements.driverLicence &&
-                            <JobInfo title="Driving license" mainData={requirements.driverLicence ? "Required" : "Not required"} icon="car-side" />}
-                        {requirements.language &&
-                            <JobInfo title="Language" mainData={requirements.language} icon="earth-americas" />}
+                        {requirements.education
+                            && <JobInfo title="Education" mainData={requirements.education} icon="graduation-cap" />}
+                        {requirements.skills
+                            && <JobInfo title="Skills" mainData={requirements.skills} icon="pencil" />}
+                        {requirements.driverLicence
+                            && <JobInfo title="Driving license" mainData={requirements.driverLicence ? "Required" : "Not required"} icon="car-side" />}
+                        {requirements.language
+                            && <JobInfo title="Language" mainData={requirements.language} icon="earth-americas" />}
                     </section>
 
                     <section className={styles.jobDescription}>

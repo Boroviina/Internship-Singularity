@@ -21,15 +21,15 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                 </a>
                 <div onClick={showDetails} className={`${styles.titleAndDetails} flex-grow-1`}>
                         <h4 className={`${styles.title}`}>{job.jobTitle}</h4>
-                    <div className="d-flex align-items-center gap-2 fw-semibold">
+                    <span className="fw-semibold">
                         <span>{job.companyName}</span>
                         <span className="text-black-50">
-                                <span>{job.location}{' \u2022 '}</span>
-                                <span>{job.pay}{' \u2022 '}</span>
-                                <span>{job.employmentType}{' \u2022 '}</span>
-                                <span>Posted on: {job.datePosted}</span>
+                                <span>{job.location && ' \u2022 ' + job.location}</span>
+                                <span>{job.pay && ' \u2022 ' + job.pay}</span>
+                                <span>{job.employmentType && ' \u2022 ' + job.employmentType}</span>
+                                <span>{job.datePosted && " \u2022 Posted on: " + job.datePosted}</span>
                         </span>
-                    </div>
+                    </span>
                 </div>
             </div>
             <div className={`d-flex align-items-center gap-2 mt-2 mt-sm-0 ${styles.alignedButtons}`}>
