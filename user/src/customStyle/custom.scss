@@ -9,8 +9,9 @@ $body-bg-dark: #071e4d;
 $body-bg: #ece6ff;
 //boja fonta
 $body-color: #071e4d;
-$body-color-dark: #9cc4f1;
+$body-color-dark: #a1c7f1;
 $form-check-min-height: 3rem;
+
 
 //input
 //$input-color: #a38ff1;
@@ -30,6 +31,8 @@ $custom-colors: ("pink": #fb246a);
 [data-bs-theme='light'] {
   --bs-bg-body: #{$body-bg};
   --bs-body-color: #{$body-color};
+
+
   .text-label{          //kada mi ne treba hover preko teksta
     color: #071e4d;
   }
@@ -37,6 +40,7 @@ $custom-colors: ("pink": #fb246a);
     color: #071e4d;
     &:hover{
       color: #fb246a;
+      transition-duration: 212ms;
     }
   }
 
@@ -79,9 +83,14 @@ $custom-colors: ("pink": #fb246a);
   }
 
   .form-check-input {
-    --bs-form-check-bg: #{#a7b5f3};
     height: 20px;
-    width: 30px;
+    width: 20px;
+    --bs-form-check-bg: #{#ac96ee};
+
+    &:checked {
+      background-color: #{#8f75e7};
+      border-color: #{#6d57b4};
+    }
   }
   .form-control{
     background-color: #d2c4ef;
@@ -91,7 +100,20 @@ $custom-colors: ("pink": #fb246a);
     background-color: #474977;
   }
   .card{
-    --bs-card-bg: #aeb1dc;
+    cursor: pointer;
+    --bs-card-bg: #d2c4ef;
+    --bs-card-border-width: 0.11rem;
+    --bs-card-border-radius: 5px;
+    --bs-card-border-color: transparent;
+    &:hover{
+      --bs-card-bg: #f3f5fd;
+      transition-duration: 500ms;
+      border: solid #adc8ff 0.11rem;
+    }
+    &:hover h4{
+      color: $pink;
+      transition-duration: 212ms;
+    }
   }
 }
 
@@ -110,6 +132,7 @@ $custom-colors: ("pink": #fb246a);
     color: #9cc4f1;
     &:hover{
       color: #fb246a;
+      transition-duration: 212ms;
     }
   }
   //predefined for auth components (CANCEL button)
@@ -153,8 +176,16 @@ $custom-colors: ("pink": #fb246a);
   }
   .form-check-input {
     height: 20px;
-    width: 30px;
+    width: 20px;
+    --bs-form-check-bg: #{#5190dc};
+
+    &:checked {
+      background-color: #{#328eef};
+      border-color: #{#7fa7d5};
+    }
   }
+
+
 
   .carousel-indicator{
       background-color: $dark;
@@ -167,9 +198,22 @@ $custom-colors: ("pink": #fb246a);
     background-color: #181c33;
   }
   .card{
-    --bs-card-bg: #1f3a7a;
-    --bs-card-color: #fff;
+    cursor: pointer;
+    --bs-card-bg: #294588;
+    --bs-card-border-width: 0.11rem;
+    --bs-card-border-radius: 5px;
+    --bs-card-border-color: transparent;
+    &:hover{
+      --bs-card-bg: #f9fbfd;
+      transition-duration: 500ms;
+      border: solid #2f65d7 0.11rem;
+    }
+    &:hover h4{
+      color: $pink;
+      transition-duration: 212ms;
+    }
   }
+
 }
 
 

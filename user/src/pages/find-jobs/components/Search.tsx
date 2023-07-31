@@ -18,7 +18,7 @@ const Search = () => {
                            placeholder="Address, city or country" aria-label="Location search" />
                     <label htmlFor="locationSearch">Country, city or region</label>
                 </div>
-                <button className={generalBtn.filledButton}>Search</button>
+                <button className={'btn btn-pink d-inline-block overflow-visible'}>Search</button>
             </div>
         </div>
     );

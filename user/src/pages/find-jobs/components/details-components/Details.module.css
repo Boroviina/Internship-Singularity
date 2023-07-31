@@ -3,7 +3,6 @@
     width: 5rem;
     border-radius: 5px;
     border: 2px solid #d8ccdc;
-    padding: 3px;
     background: #fcfcfc;
 }
 
@@ -12,36 +11,19 @@
 }
 
 .xClose {
-    position: absolute;
     top: 17px;
     right: 19px;
 }
 
 .positionBtns {
-    position: absolute;
     top: 86px;
     right: 40px;
 }
 
-.modalBody {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    justify-content: center;
-}
-
-.jobInformation {
-    margin: 0 auto auto;
-}
-
-.qualifications {
-    margin: auto;
-}
 
 .jobDescription {
     grid-column: span 2;
-    text-align: justify;
+
 }
 
 @media screen and (max-width: 576px) {
