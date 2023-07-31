@@ -29,7 +29,7 @@ const JobListingPage = () => {
         jobTitle: "Backend developer",
         companyName: "Amazon",
         location: "Sydney - Australia",
-        monthlyPay: 4000,
+        pay: "4000 $",
         appDeadline: new Date("12/7/2023"),
         description: "",
         remote: "Remote",

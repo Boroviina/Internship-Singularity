@@ -6,7 +6,7 @@ export class JobListing extends BaseModel {
     jobTitle: string;
     companyName: string;
     location: string;
-    monthlyPay: number;
+    pay: string;
     appDeadline: Date;
     description: string;
     remote: string;
