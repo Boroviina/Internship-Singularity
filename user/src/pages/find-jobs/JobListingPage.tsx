@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
-import {Header} from "../Header/Header";
-import {Footer} from "../generalFooter/Footer";
 import Search from "./components/Search";
 import Filters from "./components/filter-components/Filters";
 import SortBy from "./components/SortBy";
@@ -25,7 +23,6 @@ const JobListingPage = () => {
     const sortByCategories = ["Relevance", "Date", "Pay"];
     return (
         <>
-            <Header/>
             <body>
             <header className={`${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
@@ -64,7 +61,6 @@ const JobListingPage = () => {
                 </div>
             </main>
             </body>
-            <Footer/>
 
             <DetailsModal showDetails={showDetails} close={handleClose}/>
         </>

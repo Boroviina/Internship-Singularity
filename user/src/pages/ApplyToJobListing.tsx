@@ -8,8 +8,6 @@ import {InputFile} from "../shared/components/form/InputFile";
 import {Button} from "../shared/components/form/Button";
 import {createJobApplication} from "../shared/services/job-application.service";
 import CustomInfoModal from "../shared/components/CustomInfoModal";
-import {Header} from "./Header/Header";
-import {Footer} from "./generalFooter/Footer";
 import {getJob} from "../shared/services/job.service";
 import {HeaderCard} from "../shared/components/HeaderCard";
 import {CustomCard} from "../shared/components/layout/CustomCard";
@@ -90,7 +88,6 @@ export const ApplyToJobListing = () => {
 
     return (
         <>
-            <Header/>
             <CustomCard width="96%">
                 <HeaderCard title="Apply for a job">Apply for a {jobListing && jobListing.jobTitle} position</HeaderCard>
                 <CustomCard className="shadow rounded-2">
@@ -148,7 +145,6 @@ export const ApplyToJobListing = () => {
                     </form>
                 </CustomCard>
             </CustomCard>
-            <Footer/>
             <CustomInfoModal title="Success" show={showModal} onHide={hideModal}>
                 Thank you for applying!
             </CustomInfoModal>

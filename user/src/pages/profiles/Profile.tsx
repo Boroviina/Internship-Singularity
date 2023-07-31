@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import classes from "./Profile.module.css"
 import {Navigate, Outlet, Route, Routes, useNavigate} from "react-router-dom";
-import {Header} from "../Header/Header";
-import {Footer} from "../generalFooter/Footer";
 import {Button} from "../../shared/components/form/Button";
 import {useAuth} from "../../modules/auth";
 import {getUsersJobApplications} from "../../shared/services/job-application.service";
@@ -33,7 +31,6 @@ const ProfileLayout = () => {
 
     return (
         <>
-            <Header/>
             <div className={`mx-auto shadow overflow-hidden ${classes['main-card']} pt-1 mb-1`}>
                 <div className="d-flex flex-wrap align-items-center align-content-between p-4">
                     <div className="d-flex flex-wrap items-center">
@@ -65,7 +62,6 @@ const ProfileLayout = () => {
                 </div>
             </div>
             <Outlet/>
-            <Footer/>
         </>
     )
 }
