@@ -155,16 +155,26 @@ export function Header() {
                                                         Details</a></li>
                                             </ul>
                                         </div>
-                                        {/* end::Theme mode */}
-                                        <div
-                                            className={'d-flex form-check form-switch flex-row  justify-content-start align-items-center mx-3'}>
-                                            <input className={'row form-check-input '} type={'checkbox'} checked={null}
-                                                   onChange={ctx.setTheme}/>
-                                            <label className={'label mx-4'}
-                                                   htmlFor="">{ctx.theme === 'light' ? "Light Mode" : "Dark Mode"}</label>
+                                        <div className={'d-flex justify-content-between align-items-center '}>
+                                            <div className={' d-inline-flex'}>
+                                                <button className={`btn btn-pink my-2 mx-1 col-6 d-inline-block`}
+                                                        onClick={registerClickHandle}>Register
+                                                </button>
+                                                <button className={`btn btn-white col-6 my-2 d-inline-block`}
+                                                        onClick={() => navigate('/auth/login')}>Login
+                                                </button>
+                                            </div>
+                                            {/* end::Theme mode */}
+                                            <div
+                                                className={'d-flex form-check form-switch flex-row  justify-content-start align-items-center mx-3'}>
+                                                <input className={'row form-check-input '} type={'checkbox'}
+                                                       checked={null}
+                                                       onChange={ctx.setTheme}/>
+                                                <label className={'label mx-4'}
+                                                       htmlFor="">{ctx.theme === 'light' ? "Light Mode" : "Dark Mode"}</label>
+                                            </div>
+                                            {/* end::Theme mode */}
                                         </div>
-                                        {/* end::Theme mode */}
-
                                     </ul>
                                 </div>
                             </div>
