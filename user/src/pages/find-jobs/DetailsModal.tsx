@@ -20,7 +20,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
         <Modal show={showDetails} onHide={close} size="lg">
 
             <Modal.Header className="mx-auto">
-                <ModalHeader companyName={job.companyName} jobTitle={job.jobTitle} pay={job.pay}/>
+                <ModalHeader companyName={job.companyName} jobTitle={job.jobTitle} pay={job.salary}/>
 
                 <div className={`${styles.positionBtns} d-none d-lg-block`}>
                     <ApplyOrSave/>

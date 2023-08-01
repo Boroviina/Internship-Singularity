@@ -25,13 +25,13 @@ const JobListingPage = () => {
     const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
     const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
         "Master's degree", "Doctor's degree"];
-    const sortByCategories = ["Relevance", "Date", "Pay"];
+    const sortByCategories = ["Relevance", "Date", "Salary"];
     const job1: JobListing = new JobListing({
         //companyLogo: ...
         jobTitle: "Backend developer",
         companyName: "Amazon",
         location: "Sydney - Australia",
-        pay: "4000 $",
+        salary: "4000 $",
         employmentType: "Full Time",
         description: DESCRIPTION,
         remote: "Remote",

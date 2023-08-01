@@ -31,7 +31,7 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                     <span className="fw-semibold">
                         <span>{job.companyName}</span>
                         <span className="text-black-50">
-                            {writeCardInfo([job.location, job.pay, job.employmentType, TimeAgo(job.datePosted)])}
+                            {writeCardInfo([job.location, job.salary, job.employmentType, TimeAgo(job.datePosted)])}
                         </span>
                     </span>
                 </div>
