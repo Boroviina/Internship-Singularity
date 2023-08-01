@@ -17,10 +17,7 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
             return <span>{el && ' \u2022 ' + el}</span>;
         }));
     };
-    const postedTime = job.datePosted ? job.datePosted.toLocaleDateString('en-us', {
-        month:"long",
-        day:"numeric"}
-    ) : null;
+
     return (
         <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
             <div className="d-flex align-items-center">

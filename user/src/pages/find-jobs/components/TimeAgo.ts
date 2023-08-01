@@ -1,4 +1,7 @@
 function TimeAgo(postDate: Date) {
+    if(postDate === null || postDate === undefined) {
+        return null;
+    }
     const currentTime = new Date();
     const timeDifference = currentTime.getTime() - postDate.getTime();
 
