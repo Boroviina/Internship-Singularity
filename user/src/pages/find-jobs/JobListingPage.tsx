@@ -47,6 +47,7 @@ const JobListingPage = () => {
         }),
 
         appDeadline: new Date(2023, 8, 23),
+        positionsNum: 7,
         cv: true,
         coverLetter: true,
         appInstructions: "Please submit your thing into the proper channel and" +

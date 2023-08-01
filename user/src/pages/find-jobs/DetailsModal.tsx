@@ -36,6 +36,23 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                             && <JobInfo title="Location" mainData={job.location} secondaryData={job.remote || ""} icon="location-dot"/>}
                         {job.employmentType
                             && <JobInfo title="Employment type" mainData={job.employmentType} icon="briefcase"/>}
+                        <hr/>
+                        <div style={{position: "relative", bottom: 0}}>
+                            {job.appDeadline
+                                && <div className="text-muted">
+                                    {"Application deadline: "
+                                        + job.appDeadline.toLocaleDateString('en-us', {month: "long", day: "numeric"})}
+                                </div>}
+                            {job.cv !== undefined && job.cv
+                                && <div className="text-muted">{"CV: " + (job.cv ? "Required" : "Not required")}</div>}
+                            {job.coverLetter !== undefined && job.coverLetter
+                                && <div className="text-muted">{"Cover letter: " + (job.coverLetter ? "Required" : "Not required")}</div>}
+                            {job.positionsNum
+                                && <div className="text-muted">{"Positions left: " + job.positionsNum}</div>}
+                        </div>
+
+
+
                     </section>
 
                     <section className={styles.qualifications}>
