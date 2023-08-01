@@ -9,11 +9,15 @@ import {
     faGraduationCap,
     faPencil,
     faCarSide,
-    faEarthAmericas
+    faEarthAmericas,
+    faHourglassHalf,
+    faImagePortrait,
+    faEnvelopeOpenText,
+    faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap
-, faPencil, faCarSide, faEarthAmericas);
+, faPencil, faCarSide, faEarthAmericas, faHourglassHalf, faImagePortrait, faEnvelopeOpenText, faUserGroup);
 
 interface JobInfoProps {
     title: string;

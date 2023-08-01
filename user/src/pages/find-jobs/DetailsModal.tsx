@@ -10,6 +10,7 @@ import {JobListing} from "../../shared/models/job-listing.model";
 interface DetailsProps {
     job: JobListing;
     showDetails: boolean;
+
     close(): void;
 }
 
@@ -19,10 +20,10 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
         <Modal show={showDetails} onHide={close} size="lg">
 
             <Modal.Header className="mx-auto">
-                <ModalHeader companyName={job.companyName} jobTitle={job.jobTitle} pay={job.pay} />
+                <ModalHeader companyName={job.companyName} jobTitle={job.jobTitle} pay={job.pay}/>
 
                 <div className={`${styles.positionBtns} d-none d-lg-block`}>
-                    <ApplyOrSave />
+                    <ApplyOrSave/>
                 </div>
                 <button type="button" onClick={close}
                         className={`btn-close ${styles.xClose}`} aria-label="Close">
@@ -33,41 +34,45 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                 <main className={styles.modalBody}>
                     <section className={styles.jobInformation}>
                         {job.location
-                            && <JobInfo title="Location" mainData={job.location} secondaryData={job.remote || ""} icon="location-dot"/>}
+                            && <JobInfo title="Location" mainData={job.location} secondaryData={job.remote || ""}
+                                        icon="location-dot"/>}
                         {job.employmentType
                             && <JobInfo title="Employment type" mainData={job.employmentType} icon="briefcase"/>}
                         <hr/>
-                        <div style={{position: "relative", bottom: 0}}>
                             {job.appDeadline
-                                && <div className="text-muted">
-                                    {"Application deadline: "
-                                        + job.appDeadline.toLocaleDateString('en-us', {month: "long", day: "numeric"})}
-                                </div>}
+                                && <JobInfo title="Application deadline"
+                                            mainData={job.appDeadline.toLocaleDateString('en-us', {
+                                                month: "long",
+                                                day: "numeric"
+                                            })}
+                                            icon="hourglass-half"/>}
                             {job.cv !== undefined && job.cv
-                                && <div className="text-muted">{"CV: " + (job.cv ? "Required" : "Not required")}</div>}
+                                && <JobInfo title="CV" mainData={job.cv ? "Required" : "Not required"}
+                                            icon="image-portrait"/>}
                             {job.coverLetter !== undefined && job.coverLetter
-                                && <div className="text-muted">{"Cover letter: " + (job.coverLetter ? "Required" : "Not required")}</div>}
-                            {job.positionsNum
-                                && <div className="text-muted">{"Positions left: " + job.positionsNum}</div>}
-                        </div>
-
-
-
+                                && <JobInfo title="Cover letter" mainData={job.coverLetter ? "Required" : "Not required"}
+                                         icon="envelope-open-text"/>}
+                            {job.positionsNum // ovo ne radi sa && :'D
+                                ? <JobInfo title="Open positions" mainData={job.positionsNum.toString() + " left"}
+                                            icon="user-group" /> : null}
                     </section>
 
                     <section className={styles.qualifications}>
                         {requirements.specialization
-                            && <JobInfo title="Area of expertise" mainData={requirements.specialization} icon="user-tie"/>}
+                            &&
+                            <JobInfo title="Area of expertise" mainData={requirements.specialization} icon="user-tie"/>}
                         {requirements.experience
                             && <JobInfo title="Experience" mainData={requirements.experience} icon="glasses"/>}
                         {requirements.education
-                            && <JobInfo title="Education" mainData={requirements.education} icon="graduation-cap" />}
+                            && <JobInfo title="Education" mainData={requirements.education} icon="graduation-cap"/>}
                         {requirements.skills
-                            && <JobInfo title="Skills" mainData={requirements.skills} icon="pencil" />}
+                            && <JobInfo title="Skills" mainData={requirements.skills} icon="pencil"/>}
                         {requirements.driverLicence
-                            && <JobInfo title="Driving license" mainData={requirements.driverLicence ? "Required" : "Not required"} icon="car-side" />}
+                            && <JobInfo title="Driving license"
+                                        mainData={requirements.driverLicence ? "Required" : "Not required"}
+                                        icon="car-side"/>}
                         {requirements.language
-                            && <JobInfo title="Language" mainData={requirements.language} icon="earth-americas" />}
+                            && <JobInfo title="Language" mainData={requirements.language} icon="earth-americas"/>}
                     </section>
 
                     <section className={styles.jobDescription}>
@@ -83,7 +88,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
             </Modal.Body>
 
             <Modal.Footer className="d-lg-none" style={{position: "sticky", bottom: 0, background: "white"}}>
-                    <ApplyOrSave />
+                <ApplyOrSave/>
             </Modal.Footer>
 
         </Modal>
