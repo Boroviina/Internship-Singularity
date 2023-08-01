@@ -29,7 +29,8 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                     <span className="fw-semibold">
                         <span>{job.companyName}</span>
                         <span className="text-black-50">
-                            {writeCardInfo([job.location, job.pay, job.employmentType, job.datePosted])}
+                            {writeCardInfo([job.location, job.pay, job.employmentType,
+                                job.datePosted.toLocaleDateString('en-us', {month:"long", day:"numeric"})])}
                         </span>
                     </span>
                 </div>
