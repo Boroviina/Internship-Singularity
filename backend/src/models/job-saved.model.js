@@ -20,6 +20,8 @@ const jobSavedSchema = mongoose.Schema(
 jobSavedSchema.plugin(toJSON);
 jobSavedSchema.plugin(paginate);
 
+jobSavedSchema.index({job: 1, user: 1}, {unique: true});
+
 const JobSaved = mongoose.model('JobSaved', jobSavedSchema);
 
 module.exports = JobSaved;

@@ -1,18 +1,30 @@
 import ApiClient from './api-client/api-client';
-import { JobListing } from "../models/job-listing.model";
+import {SavedJob} from "../models/job-saved.model";
 
 const SAVED_JOB_ENDPOINT = '/saved-jobs';
 
-const createSavedJob = (savedJob): Promise<JobListing | null> => {
+const createSavedJob = (savedJob): Promise<SavedJob | null> => {
     return ApiClient.post(SAVED_JOB_ENDPOINT, savedJob)
         .then(response => response.data)
-        .then(data => new JobListing(data))
+        .then(data => new SavedJob(data))
 }
 
-const getUsersSavedJobs = (userId: string): Promise<JobListing[] | null> => {
+const getSavedJob = (savedJobId: string): Promise<SavedJob | null> => {
+    return ApiClient.get(`${SAVED_JOB_ENDPOINT}/${savedJobId}`)
+        .then(response => response.data)
+        .then(data => new SavedJob(data))
+}
+
+const getUsersSavedJobs = (userId: string): Promise<SavedJob[] | null> => {
     return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}`)
         .then(response => response.data)
-        .then(data => data.results.map(savedJob => new JobListing(savedJob.job)))
+        .then(data => data.results.map(savedJob => new SavedJob(savedJob)))
 }
 
-export {createSavedJob, getUsersSavedJobs}
+const getUsersSavedJobsByJobId = (userId: string, jobId: string): Promise<SavedJob[] | null> => {
+    return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}&job=${jobId}`)
+        .then(response => response.data)
+        .then(data => data.results.map(savedJob => new SavedJob(savedJob)))
+}
+
+export {createSavedJob, getSavedJob, getUsersSavedJobs, getUsersSavedJobsByJobId}
