@@ -33,12 +33,14 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
             <Modal.Body>
                 <main className={styles.modalBody}>
                     <section className={styles.jobInformation}>
-                        {job.location
-                            && <JobInfo title="Location" mainData={job.location} secondaryData={job.remote || ""}
-                                        icon="location-dot"/>}
-                        {job.employmentType
-                            && <JobInfo title="Employment type" mainData={job.employmentType} icon="briefcase"/>}
-                        <hr/>
+                        <div className="mostImportantInfo">
+                            {job.location
+                                && <JobInfo title="Location" mainData={job.location} secondaryData={job.remote || ""}
+                                            icon="location-dot"/>}
+                            {job.employmentType
+                                && <JobInfo title="Employment type" mainData={job.employmentType} icon="briefcase"/>}
+                            <hr/>
+                        </div>
                         {job.appDeadline
                             && <JobInfo title="Application deadline"
                                         mainData={job.appDeadline.toLocaleDateString('en-us', {
@@ -55,6 +57,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                         {job.positionsNum // ovo ne radi sa && :'D
                             ? <JobInfo title="Open positions" mainData={job.positionsNum.toString() + " left"}
                                        icon="user-group"/> : null}
+
                     </section>
 
                     {requirements
@@ -78,9 +81,10 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
 
                     <section className={styles.jobDescription}>
                         {job.description
-                            && <JobDescriptionContent description={job.description}/>}
+                            &&  (<JobDescriptionContent description={job.description}/>)}
                         {job.appInstructions
                             && <div>
+                                <hr/>
                                 <h4>Application instructions:</h4>
                                 {job.appInstructions}
                             </div>}
