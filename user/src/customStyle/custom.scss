@@ -9,7 +9,7 @@ $body-bg-dark: #071e4d;
 $body-bg: #ece6ff;
 //boja fonta
 $body-color: #071e4d;
-$body-color-dark: #a1c7f1;
+$body-color-dark: #b5d2f8;
 $form-check-min-height: 3rem;
 
 
@@ -95,9 +95,15 @@ $custom-colors: ("pink": #fb246a);
   .form-control{
     background-color: #d2c4ef;
     color: #071e4d;
+    &::file-selector-button {
+      background-color: #ccb3ec;
+    }
+    &:hover:not(:disabled):not([readonly])::file-selector-button {
+      background-color: #d5c2ee;
+    }
   }
   .card-bg{
-    background-color: #474977;
+    background-color: rgba(185, 173, 227, 0.5);
   }
   .card{
     cursor: pointer;
@@ -126,10 +132,10 @@ $custom-colors: ("pink": #fb246a);
   --bs-body-color: #{$body-color-dark};
 
   .text-label{          //kada mi ne treba hover preko teksta
-    color: #9cc4f1;
+    color: #B5D2F8FF;
   }
   .label {
-    color: #9cc4f1;
+    color: #B5D2F8FF;
     &:hover{
       color: #fb246a;
       transition-duration: 212ms;
@@ -184,18 +190,21 @@ $custom-colors: ("pink": #fb246a);
       border-color: #{#7fa7d5};
     }
   }
-
-
-
   .carousel-indicator{
       background-color: $dark;
   }
   .form-control{
     background-color: #1f3e85;
     border: 0.5px solid $input-border-color;
+    &::file-selector-button {
+      background-color: #093185;
+    }
+    &:hover:not(:disabled):not([readonly])::file-selector-button {
+      background-color: #2c5ec7;
+    }
   }
   .card-bg{
-    background-color: #181c33;
+    background-color: rgba(71, 101, 211, 0.5);
   }
   .card{
     cursor: pointer;

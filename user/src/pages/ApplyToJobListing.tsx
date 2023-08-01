@@ -93,7 +93,7 @@ export const ApplyToJobListing = () => {
             <Header/>
             <CustomCard width="96%">
                 <HeaderCard title="Apply for a job">Apply for a {jobListing && jobListing.jobTitle} position</HeaderCard>
-                <CustomCard className="shadow rounded-2">
+                <CustomCard className="shadow rounded-2 ">
                     <form
                         className={`form w-100 my-4 p-4`}
                         onSubmit={formik.handleSubmit}

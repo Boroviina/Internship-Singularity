@@ -26,7 +26,8 @@ export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
         <button
             type={type}
             id={id}
-            className={`${filled ? `${classes['filled-button']}` : `${classes['light-button']}`}`}
+            className={`${filled ? `btn btn-pink` : `btn btn-white`}`}
+            style={{width:'150px', height: '60px'}}
             disabled={disabled}
             onClick={onClick ? onClick : undefined}
         >
