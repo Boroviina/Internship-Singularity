@@ -33,34 +33,9 @@ const JobListingPage = () => {
         location: "Sydney - Australia",
         pay: "4000 $",
         employmentType: "Full Time",
-        appDeadline: new Date("12/7/2023"),
-        description:"     We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
-            "            aliquam\n" +
-            "            asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi\n" +
-            "            harum\n" +
-            "            impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis\n" +
-            "            optio,\n" +
-            "            perspiciatis porro quaerat quam quod reiciendis tempore ullam obey voluptatum! Aperiam,\n" +
-            "            illo?\n" +
-            "            <br/><br/>\n" +
-            "            As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt\n" +
-            "            distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.\n" +
-            "            <br/>\n" +
-            "            <ul>\n" +
-            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>\n" +
-            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>\n" +
-            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>\n" +
-            "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam\n" +
-            "                    quas\n" +
-            "                    quod?\n" +
-            "                </li>\n" +
-            "            </ul>\n" +
-            "            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet\n" +
-            "            aperiam\n" +
-            "            delectus eum exercitationem nemo. Dolorem odit, saepe!\n" +
-            "            <hr/>",
+        description: DESCRIPTION,
         remote: "Remote",
-        datePosted: "17/8/2023", // ustvari (timestamp - korisnicko vrijeme)
+        datePosted: new Date(2023, 7, 12), // ustvari (timestamp - korisnicko vrijeme)
 
         requirementsModel: new RequirementsModel({
             specialization: "Technology",
@@ -71,6 +46,9 @@ const JobListingPage = () => {
             driverLicence: true
         }),
 
+        appDeadline: new Date(2023, 8, 23),
+        cv: true,
+        coverLetter: true,
         appInstructions: "Please submit your thing into the proper channel and" +
             "discuss without the necessary preconditions of your applications. We will" +
             "contact you shortly!",
@@ -130,3 +108,29 @@ const JobListingPage = () => {
 }
 
 export default JobListingPage;
+
+
+const DESCRIPTION = "     We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
+    "            aliquam\n" +
+    "            asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi\n" +
+    "            harum\n" +
+    "            impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis\n" +
+    "            optio,\n" +
+    "            perspiciatis porro quaerat quam quod reiciendis tempore ullam obey voluptatum! Aperiam,\n" +
+    "            illo?\n" +
+    "            <br/><br/>\n" +
+    "            As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt\n" +
+    "            distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.\n" +
+    "            <br/>\n" +
+    "            <ul>\n" +
+    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>\n" +
+    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>\n" +
+    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>\n" +
+    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam\n" +
+    "                    quas\n" +
+    "                    quod?\n" +
+    "                </li>\n" +
+    "            </ul>\n" +
+    "            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet\n" +
+    "            aperiam\n" +
+    "            delectus eum exercitationem nemo. Dolorem odit, saepe!\n";
