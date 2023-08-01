@@ -3,6 +3,9 @@
 
 $enable-dark-mode: true;
 $color-mode-type: data;
+$badge-border-radius: 7px;
+$border-radius: 0.5rem;
+$box-shadow: 0 .8rem 1rem rgba(#000, .40);
 
 //background
 $body-bg-dark: #071e4d;
@@ -11,12 +14,6 @@ $body-bg: #ece6ff;
 $body-color: #071e4d;
 $body-color-dark: #b5d2f8;
 $form-check-min-height: 3rem;
-
-
-//input
-//$input-color: #a38ff1;
-//$input-color-dark: #d9c7f3;
-//$input-bg: #a38ff1;
 
 //btnstyle
 $border-radius: 0;
@@ -33,19 +30,21 @@ $custom-colors: ("pink": #fb246a);
   --bs-body-color: #{$body-color};
 
 
-  .text-label{          //kada mi ne treba hover preko teksta
+  .text-label { //kada mi ne treba hover preko teksta
     color: #071e4d;
   }
+
   .label {
     color: #071e4d;
-    &:hover{
+
+    &:hover {
       color: #fb246a;
       transition-duration: 212ms;
     }
   }
 
   //predefined for auth components (CANCEL button)
-  .btn-light-primary{
+  .btn-light-primary {
     --bs-btn-bg: #{#a390de};
     --bs-btn-color: #{#fdfdff};
     --bs-btn-border-color: #{#8e78d2};
@@ -53,6 +52,7 @@ $custom-colors: ("pink": #fb246a);
     --bs-btn-hover-color: #{#fff};
     --bs-btn-hover-border-color: #{#8e78d2};
   }
+
   .btn-pink {
     --bs-btn-bg: #{$pink};
     --bs-btn-color: #{#fdfdff};
@@ -70,7 +70,8 @@ $custom-colors: ("pink": #fb246a);
     --bs-btn-hover-color: #{#fff};
     --bs-btn-hover-border-color: #{$pink};
   }
-  .close-btn{
+
+  .close-btn {
     --bs-btn-bg: #{#6776b7};
     --bs-btn-color: #{#fff};
     --bs-btn-hover-bg: #{#4a5a98};
@@ -92,37 +93,44 @@ $custom-colors: ("pink": #fb246a);
       border-color: #{#6d57b4};
     }
   }
-  .form-control{
+
+  .form-control {
     background-color: #d2c4ef;
     color: #071e4d;
+
     &::file-selector-button {
       background-color: #ccb3ec;
     }
+
     &:hover:not(:disabled):not([readonly])::file-selector-button {
       background-color: #d5c2ee;
     }
   }
-  .card-bg{
+
+  .card-bg {
     background-color: rgba(185, 173, 227, 0.5);
+    border-radius: 0.5rem;
   }
-  .card{
+
+  .card {
     cursor: pointer;
     --bs-card-bg: #d2c4ef;
     --bs-card-border-width: 0.11rem;
     --bs-card-border-radius: 5px;
     --bs-card-border-color: transparent;
-    &:hover{
+
+    &:hover {
       --bs-card-bg: #f3f5fd;
       transition-duration: 500ms;
       border: solid #adc8ff 0.11rem;
     }
-    &:hover h4{
+
+    &:hover h4 {
       color: $pink;
       transition-duration: 212ms;
     }
   }
 }
-
 
 [data-bs-theme='dark'] {
   $dark: #a7b5f3;
@@ -205,6 +213,7 @@ $custom-colors: ("pink": #fb246a);
   }
   .card-bg{
     background-color: rgba(71, 101, 211, 0.5);
+    border-radius: 0.5rem;
   }
   .card{
     cursor: pointer;

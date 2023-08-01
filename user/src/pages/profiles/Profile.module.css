@@ -2,14 +2,9 @@
     gap: 0.5rem;
 }
 
-.text-dark-blue {
-    color: #010b1d;
-}
-
 .main-card {
     width: 96%;
     border-radius: 0.5rem;
-    background-color: rgb(255 255 255 / 1);
 }
 
 .secondary-card {

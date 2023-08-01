@@ -15,7 +15,7 @@ export const HeaderCard: React.FC<HeaderCardProps & WithChildren> = (props) => {
     } = props
 
     return (
-        <div className={`mx-auto shadow overflow-hidden card-bg ${classes['header-card']} p-4 mb-1 ${className}`}>
+        <div className={`mx-auto shadow overflow-hidden card-bg p-4 mb-1 ${className}`}>
             <div className="d-flex flex-wrap align-items-center align-content-between">
                 <div>
                     <p className="fw-bold text-label text-muted opacity-75 fs-5 mb-0">{title}</p>

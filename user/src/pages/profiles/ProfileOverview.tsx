@@ -11,8 +11,8 @@ export const ProfileOverview = () => {
         <>
             <CustomCard width="96%">
                 <HeaderCard title="Overview" className="mt-5 mb-4">Overview of users information</HeaderCard>
-                <CustomCard className="shadow rounded mb-4">
-                    <div className="fs-4 border-bottom p-3 fw-bold mb-3" style={{color: '#010b1d'}}>Profile details</div>
+                <CustomCard className="shadow card-bg border-radius mb-4">
+                    <div className="fs-4 border-bottom p-3 fw-bold mb-3 text-label">Profile details</div>
                     <ProfileOverviewItem label='Full name'>{currentUser.name}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Email'>{currentUser.email}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Contact phone'>{currentUser.phone}</ProfileOverviewItem>

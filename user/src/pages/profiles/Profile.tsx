@@ -34,13 +34,13 @@ const ProfileLayout = () => {
     return (
         <>
             <Header/>
-            <div className={`mx-auto shadow overflow-hidden ${classes['main-card']} pt-1 mb-1`}>
+            <div className={`mx-auto shadow overflow-hidden ${classes['main-card']} card-bg pt-1 mb-1`}>
                 <div className="d-flex flex-wrap align-items-center align-content-between p-4">
                     <div className="d-flex flex-wrap items-center">
-                        <div className={`${classes['text-dark-blue']}`}>
-                            <p className="fs-5 mb-0">It is good to see you in Job Radar world...</p>
-                            <p className="fw-bold fs-5 mb-0">{currentUser.name}</p>
-                            <p className="">{currentUser.email}</p>
+                        <div >
+                            <p className="fs-5 text-label mb-0">It is good to see you in Job Radar world...</p>
+                            <p className="fw-bold text-label fs-5 mb-0">{currentUser.name}</p>
+                            <p className="text-label">{currentUser.email}</p>
                         </div>
                     </div>
                     <div className="ms-auto">
