@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './components/JobListing.module.css';
 import generalBtn from "../Home/GeneralButton.module.css"
 import {JobListing} from "../../shared/models/job-listing.model";
+import TimeAgo from "./components/TimeAgo";
 
 const logo = require('./img/logo-fb.jpg');
 
@@ -33,7 +34,7 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                     <span className="fw-semibold">
                         <span>{job.companyName}</span>
                         <span className="text-black-50">
-                            {writeCardInfo([job.location, job.pay, job.employmentType, postedTime])}
+                            {writeCardInfo([job.location, job.pay, job.employmentType, TimeAgo(job.datePosted)])}
                         </span>
                     </span>
                 </div>

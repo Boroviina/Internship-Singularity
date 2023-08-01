@@ -35,7 +35,7 @@ const JobListingPage = () => {
         employmentType: "Full Time",
         description: DESCRIPTION,
         remote: "Remote",
-        datePosted: new Date(2023, 7, 12), // ustvari (timestamp - korisnicko vrijeme)
+        datePosted: new Date(2023, 6, 12), // MJESECE BROJI OD 0 DO 11
 
         requirementsModel: new RequirementsModel({
             specialization: "Technology",
