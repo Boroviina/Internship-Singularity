@@ -11,6 +11,11 @@ interface JobProps {
 }
 
 const JobListingCard = ({job, showDetails} : JobProps) => {
+    const writeCardInfo = (args: any[]) => {
+        return (args.map((el) => {
+            return <span>{el && ' \u2022 ' + el}</span>;
+        }));
+    };
     return (
         <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
             <div className="d-flex align-items-center">
@@ -24,10 +29,7 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                     <span className="fw-semibold">
                         <span>{job.companyName}</span>
                         <span className="text-black-50">
-                                <span>{job.location && ' \u2022 ' + job.location}</span>
-                                <span>{job.pay && ' \u2022 ' + job.pay}</span>
-                                <span>{job.employmentType && ' \u2022 ' + job.employmentType}</span>
-                                <span>{job.datePosted && " \u2022 Posted on: " + job.datePosted}</span>
+                            {writeCardInfo([job.location, job.pay, job.employmentType, job.datePosted])}
                         </span>
                     </span>
                 </div>
