@@ -6,3 +6,4 @@ module.exports.jobApplicationService = require('./job-application.service');
 module.exports.jobService = require('./job.service');
 module.exports.employerService = require('./employer.service');
 module.exports.fileService = require('./file.service');
+module.exports.jobSavedService = require('./job-saved.service')
