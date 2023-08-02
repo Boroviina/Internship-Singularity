@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { JobApplication } = require('../models');
+const {JobApplication} = require('../models');
 const ApiError = require('../utils/ApiError');
 const emailService = require('./email.service');
 
@@ -9,17 +9,19 @@ const createJobApplication = async (jobApplicationBody, email, name) => {
 };
 
 const queryJobApplications = async (filter, options) => {
-  const paginatedJobApplications = await JobApplication.paginate(filter, options);
-  const jobApplications = paginatedJobApplications.results || [];
-  await JobApplication.populate(jobApplications, [
-    {path: 'user', model: 'User'},
-    {path: 'job', model: 'Job'}
-  ]);
-  return paginatedJobApplications;
+  const jobApplications = await JobApplication.paginate(filter, options);
+  return jobApplications;
 };
 
-const getJobApplicationById = async (jobApplicationId) => {
-  return JobApplication.findById(jobApplicationId).populate(['job', 'user']).exec();
+const getJobApplicationById = async (jobApplicationId, populate) => {
+  const populateBy = [];
+  if(populate) {
+    populate.split(',').forEach((populateOption) => {
+      populateBy.push(populateOption)
+    })
+    return JobApplication.findById(jobApplicationId).populate(populateBy).exec();
+  }
+  return JobApplication.findById(jobApplicationId);
 };
 
 const updateJobApplicationById = async (jobApplicationId, updateBody) => {

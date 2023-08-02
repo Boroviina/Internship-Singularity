@@ -16,6 +16,7 @@ const getJobApplications = {
     user: Joi.string(),
     job: Joi.string(),
     sortBy: Joi.string(),
+    populate: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
   }),
@@ -24,6 +25,9 @@ const getJobApplications = {
 const getJobApplication = {
   params: Joi.object().keys({
     jobApplicationId: Joi.string().custom(objectId),
+  }),
+  query: Joi.object().keys({
+    populate: Joi.string(),
   }),
 };
 
