@@ -71,9 +71,9 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                                 && <JobInfo title="Education" mainData={requirements.education} icon="graduation-cap"/>}
                             {requirements.skills
                                 && <JobInfo title="Skills" mainData={requirements.skills} icon="pencil"/>}
-                            {requirements.driverLicence
+                            {requirements.drivingLicense
                                 && <JobInfo title="Driving license"
-                                            mainData={requirements.driverLicence ? "Required" : "Not required"}
+                                            mainData={requirements.drivingLicense ? "Required" : "Not required"}
                                             icon="car-side"/>}
                             {requirements.language
                                 && <JobInfo title="Language" mainData={requirements.language} icon="earth-americas"/>}

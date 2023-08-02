@@ -41,7 +41,7 @@ const JobListingPage = () => {
             education: "College",
             skills: "Problem solving, Communication", // ovo bi mogao biti niz
             language: "English, German",
-            driverLicence: true
+            drivingLicense: true
         }),
 
         appDeadline: new Date(2023, 8, 23),
