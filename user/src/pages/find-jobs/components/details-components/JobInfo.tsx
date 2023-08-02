@@ -1,9 +1,23 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {IconProp, library} from '@fortawesome/fontawesome-svg-core';
-import {faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap} from '@fortawesome/free-solid-svg-icons';
+import {
+    faLocationDot,
+    faBriefcase,
+    faUserTie,
+    faGlasses,
+    faGraduationCap,
+    faPencil,
+    faCarSide,
+    faEarthAmericas,
+    faHourglassHalf,
+    faImagePortrait,
+    faEnvelopeOpenText,
+    faUserGroup
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap);
+library.add(faLocationDot, faBriefcase, faUserTie, faGlasses, faGraduationCap
+, faPencil, faCarSide, faEarthAmericas, faHourglassHalf, faImagePortrait, faEnvelopeOpenText, faUserGroup);
 
 interface JobInfoProps {
     title: string;

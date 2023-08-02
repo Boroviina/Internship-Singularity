@@ -1,30 +1,40 @@
 import React from 'react';
-import styles from './JobListing.module.css';
-import generalBtn from "./../../Home/GeneralButton.module.css"
+import styles from './components/JobListing.module.css';
+import generalBtn from "../Home/GeneralButton.module.css"
+import {JobListing} from "../../shared/models/job-listing.model";
+import TimeAgo from "./components/TimeAgo";
 
-const logo = require('../img/logo-fb.jpg');
+const logo = require('./img/logo-fb.jpg');
 
 interface JobProps {
+    job: JobListing;
     showDetails(): void;
 }
 
 const  JobListing = ({showDetails} : JobProps) => {
+const JobListingCard = ({job, showDetails} : JobProps) => {
+    const writeCardInfo = (args: any[]) => {
+        return (args.map((el) => {
+            return <span>{el && ' \u2022 ' + el}</span>;
+        }));
+    };
+
     return (
         <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 mb-1 card`}>
             <div className="d-flex align-items-center">
-                <a className="me-3" href="#">
+                <a className="me-3" href="src/pages/find-jobs/JobListing#">
                     <img src={logo} className={`p-1`}
                          style={{height: "4rem"}}
                          alt={"Company Logo"}/>
                 </a>
                 <div onClick={showDetails} className={`pointer flex-grow-1`}>
-                        <h4 className={`label`}>Frontend developer</h4>
-                    <div className="fw-semibold">
-                        <span>Facebook</span>
+                        <h4 className={`label`}>{job.jobTitle}</h4>
+                    <span className="fw-semibold">
+                        <span>{job.companyName}</span>
                         <span className="text-black-50">
-                            . Los Angeles . 50$ - 75$ . Part time . About a week ago
+                            {writeCardInfo([job.location, job.salary, job.employmentType, TimeAgo(job.datePosted)])}
                         </span>
-                    </div>
+                    </span>
                 </div>
             </div>
             <div className={`d-flex align-items-center gap-2 mt-2 mt-sm-0 mx-3`}>
@@ -39,4 +49,4 @@ const  JobListing = ({showDetails} : JobProps) => {
     );
 };
 
-export default JobListing;
+export default JobListingCard;

@@ -40,6 +40,9 @@ const updateUser = {
       companyName: Joi.string(),
       language: Joi.string(),
       website: Joi.string(),
+      gender: Joi.string(),
+      country: Joi.string(),
+      birthDate: Joi.date(),
     })
     .min(1),
 };

@@ -5,6 +5,7 @@ import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Logout, AuthPage, useAuth} from '../modules/auth'
 import {App} from '../App'
 import {Home} from "../pages/Home/Home";
+import {MasterLayout} from "../layout/MasterLayout";
 
 const {PUBLIC_URL} = process.env
 
@@ -18,14 +19,18 @@ const AppRoutes: FC = () => {
                     <Route path='logout' element={<Logout/>}/>
                     {currentUser ? (
                         <>
-                            <Route path='/*' element={<PrivateRoutes/>}/>
-                            <Route index element={<Home/>}/>
+                            <Route element={<MasterLayout/>}>
+                                <Route path='/*' element={<PrivateRoutes/>}/>
+                                <Route index element={<Home/>}/>
+                            </Route>
                         </>
                     ) : (
                         <>
-                            <Route path='home' element={<Home/>}/>
+                            <Route element={<MasterLayout/>}>
+                                <Route path='home' element={<Home/>}/>
+                                <Route path='*' element={<Navigate to='/home'/>}/>
+                            </Route>
                             <Route path='auth/*' element={<AuthPage/>}/>
-                            <Route path='*' element={<Navigate to='/home'/>}/>
                         </>
                     )}
                 </Route>

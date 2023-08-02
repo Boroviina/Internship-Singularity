@@ -15,7 +15,7 @@ const Error404: FC = () => {
           <h1> Oops! The page you're looking for doesn't exist.</h1>
           <p className="fs-4">Let's get you back on track.</p>
         </div>
-        <Link to='/' className='btn btn-outline-primary mx-5'>
+        <Link to='/home' className='btn btn-outline-primary mx-5'>
           Return Home
         </Link>
       </div>

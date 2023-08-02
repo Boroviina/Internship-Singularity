@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {Input} from "../../../shared/components/form/Input";
 import AuthService from "../../../shared/services/api-client/auth.service";
 import {Alert} from "../../../shared/components/Alert";
-import CustomModal from "../../../shared/components/CustomModal";
+import CustomInfoModal from "../../../shared/components/CustomInfoModal";
 const authService = new AuthService();
 
 const initialValues = {
@@ -215,9 +215,9 @@ export function Registration() {
           {/* end::Form group */}
         </form>
 
-        <CustomModal title="Success" show={showModal} onHide={hideModal} backdrop="static" keyboard={false}>
+        <CustomInfoModal title="Success" show={showModal} onHide={hideModal}>
           Your registration was successful! You can now log in!
-        </CustomModal>
+        </CustomInfoModal>
       </>
   )
 }

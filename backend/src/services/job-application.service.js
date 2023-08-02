@@ -1,8 +1,10 @@
 const httpStatus = require('http-status');
 const { JobApplication } = require('../models');
 const ApiError = require('../utils/ApiError');
+const emailService = require('./email.service');
 
-const createJobApplication = async (jobApplicationBody) => {
+const createJobApplication = async (jobApplicationBody, email, name) => {
+  await emailService.sendSuccessfulJobApplicationEmail(email, name);
   return JobApplication.create(jobApplicationBody);
 };
 

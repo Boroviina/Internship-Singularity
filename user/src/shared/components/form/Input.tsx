@@ -8,7 +8,7 @@ type InputProps = {
     formikTouched?: boolean
     formikError?: string
     name: string
-    type: "text" | "email" | "password"
+    type: "text" | "email" | "password" | "date"
     required?: boolean
     id?: string
     additionalDescription?: string

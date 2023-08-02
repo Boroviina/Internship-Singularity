@@ -7,17 +7,17 @@ type CustomModalProps = {
     title: string
     show: boolean
     onHide: () => void
-    backdrop: boolean | "static"
-    keyboard: boolean
+    backdrop?: boolean | "static"
+    keyboard?: boolean
 }
 
-const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
+const CustomInfoModal: React.FC<CustomModalProps & WithChildren> = (props) => {
     const {
         title,
         show,
         onHide,
-        backdrop,
-        keyboard,
+        backdrop = "static",
+        keyboard = false,
         children,
     } = props
 
@@ -45,4 +45,4 @@ const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
     );
 }
 
-export default CustomModal ;
+export default CustomInfoModal ;
