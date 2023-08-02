@@ -16,10 +16,11 @@ if (config.env !== 'test') {
  * @param {string} to
  * @param {string} subject
  * @param {string} text
+ * @param {string} html (optional)
  * @returns {Promise}
  */
-const sendEmail = async (to, subject, text) => {
-  const msg = { from: config.email.from, to, subject, text };
+const sendEmail = async (to, subject, text, html = undefined) => {
+  const msg = { from: config.email.from, to, subject, text, html: html ? `<div>${html}</div>` : undefined };
   await transport.sendMail(msg);
 };
 
@@ -55,9 +56,23 @@ If you did not create an account, then ignore this email.`;
   await sendEmail(to, subject, text);
 };
 
+const sendSuccessfulJobApplicationEmail = async (to, name) => {
+  const subject = "Job application submitted";
+  const text = `Dear ${name}, your job application has been successfully submitted.`;
+  const html = `
+    <div>
+      <p>Dear <b>${name}</b>,</p>
+      <p>Your job application has been successfully submitted.</p>
+      <p>Thank you for applying.</p>
+    </div>
+  `;
+  await sendEmail(to, subject, text, html);
+};
+
 module.exports = {
   transport,
   sendEmail,
   sendResetPasswordEmail,
   sendVerificationEmail,
+  sendSuccessfulJobApplicationEmail,
 };
