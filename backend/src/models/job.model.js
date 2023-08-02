@@ -46,6 +46,28 @@ const jobSchema = mongoose.Schema(
       trim: true,
       maxLength: [30, 'The field must be less than 10,000 characters long']
     },
+    appInstructions: {
+      type: String,
+      required: [true,'The field must be filled'],
+      maxLength: [500, 'The field must have less than or equal to 500 characters'],
+      trim: true
+    },
+    positionsNum:{
+      type:Number,
+      min: [1, 'Minimal number of position is 1'],
+      max:[50, 'Maximal positions number is 10']
+    },
+    cv: {
+      type: Boolean
+    },
+    coverLetter: {
+      type: Boolean
+    },
+    requirements: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Requirements',
+    },
+
     education: {
       type: String,
       trim: true,
@@ -64,23 +86,6 @@ const jobSchema = mongoose.Schema(
     driverLicense: {
       type: Boolean
     },
-    appInstructions: {
-      type: String,
-      required: [true,'The field must be filled'],
-      maxLength: [500, 'The field must have less than or equal to 500 characters'],
-      trim: true
-    },
-    positionsNum:{
-      type:Number,
-      min: [1, 'Minimal number of position is 1'],
-      max:[1, 'Maximal positions number is 10']
-    },
-    cv: {
-      type: Boolean
-    },
-    coverLetter: {
-      type: Boolean
-    }
   },
   {
     timestamp: true
