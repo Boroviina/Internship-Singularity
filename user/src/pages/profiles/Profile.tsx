@@ -25,7 +25,7 @@ const ProfileLayout = () => {
                 setJobApplicationNumber(jobApplications.length);
                 const savedJobs = await getUsersSavedJobs(`${currentUser.id}`);
                 setSavedJobsNumber(savedJobs.length);
-            } catch(error) {
+            } catch (error) {
                 navigate('/error/500');
             }
             setLoading(false);
@@ -35,13 +35,13 @@ const ProfileLayout = () => {
 
     return (
         <>
-            <div className={`mx-auto shadow overflow-hidden ${classes['main-card']} pt-1 mb-1`}>
+            <div className={`mx-auto shadow overflow-hidden ${classes['main-card']} card-bg pt-1 mb-1`}>
                 <div className="d-flex flex-wrap align-items-center align-content-between p-4">
                     <div className="d-flex flex-wrap items-center">
-                        <div className={`${classes['text-dark-blue']}`}>
-                            <p className="fs-5 mb-0">It is good to see you in Job Radar world...</p>
-                            <p className="fw-bold fs-5 mb-0">{currentUser.name}</p>
-                            <p className="">{currentUser.email}</p>
+                        <div >
+                            <p className="fs-5 text-label mb-0">It is good to see you in Job Radar world...</p>
+                            <p className="fw-bold text-label fs-5 mb-0">{currentUser.name}</p>
+                            <p className="text-label">{currentUser.email}</p>
                         </div>
                     </div>
                     <div className="ms-auto">
@@ -49,16 +49,19 @@ const ProfileLayout = () => {
                     </div>
                 </div>
                 <div className="row border-top">
-                    <div onClick={() => navigate('/profile/overview')} className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-4 p-2 fs-6 ${classes['dark-blue-card']} border-end ${classes['border-bottom-left-radius']}`}>
+                    <div onClick={() => navigate('/profile/overview')}
+                         className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-4 p-2 fs-6 ${classes['dark-blue-card']} border-end ${classes['border-bottom-left-radius']}`}>
                         <span className="d-none d-sm-inline-block">Overview</span>
                         <i className="bi bi-person-lines-fill d-inline-block d-sm-none" style={{color: '#fb246a'}}></i>
                     </div>
-                    <div onClick={() => navigate('/profile/applications')} className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-4 p-2 fs-6 ${classes['dark-blue-card']} border-end`}>
+                    <div onClick={() => navigate('/profile/applications')}
+                         className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-4 p-2 fs-6 ${classes['dark-blue-card']} border-end`}>
                         <span className="d-none d-sm-inline-block">My applications</span>
                         <i className="bi bi-bag-heart d-inline-block d-sm-none" style={{color: '#fb246a'}}></i>
                         <span className="badge text-bg-secondary">{jobApplicationsNumber}</span>
                     </div>
-                    <div onClick={() => navigate('/profile/saved-listings')} className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-4 p-2 fs-6 ${classes['dark-blue-card']} ${classes['border-bottom-right-radius']}`}>
+                    <div onClick={() => navigate('/profile/saved-listings')}
+                         className={`d-flex flex-wrap align-items-center justify-content-center ${classes['gap-2']} col-4 p-2 fs-6 ${classes['dark-blue-card']} ${classes['border-bottom-right-radius']}`}>
                         <span className="d-none d-sm-inline-block">Saved job listings</span>
                         <i className="bi bi-bookmark-heart d-inline-block d-sm-none" style={{color: '#fb246a'}}></i>
                         <span className="badge text-bg-secondary">{savedJobsNumber}</span>
@@ -72,13 +75,13 @@ const ProfileLayout = () => {
 
 const Profile = () => (
     <Routes>
-        <Route element={<ProfileLayout />}>
-            <Route path='overview' element={<ProfileOverview />} />
-            <Route path='settings' element={<ProfileSettings />} />
-            <Route path='applications' element={<JobApplications />} />
-            <Route path='saved-listings' element={<SavedJobListings />} />
+        <Route element={<ProfileLayout/>}>
+            <Route path='overview' element={<ProfileOverview/>}/>
+            <Route path='settings' element={<ProfileSettings/>}/>
+            <Route path='applications' element={<JobApplications/>}/>
+            <Route path='saved-listings' element={<SavedJobListings/>}/>
             <Route path='*' element={<Navigate to='/error/404'/>}/>
-            <Route index element={<ProfileOverview />} />
+            <Route index element={<ProfileOverview/>}/>
         </Route>
     </Routes>
 )

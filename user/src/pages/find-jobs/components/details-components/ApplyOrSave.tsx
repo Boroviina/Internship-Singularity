@@ -1,13 +1,12 @@
 import React from 'react';
-import generalBtn from "../../../Home/GeneralButton.module.css";
 
 const ApplyOrSave = () => {
     return (
         <>
-            <button type="button" className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
+            <button type="button" className={`btn btn-pink text-white`}>
                 Apply
             </button>
-            <button type="button" className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
+            <button type="button" className={`btn btn-white`}>
                 Save
             </button>
         </>
