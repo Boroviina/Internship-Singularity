@@ -147,7 +147,7 @@ export const ProfileSettings = () => {
                             <option value=""></option>
                             {Object.entries(Language).map(([key, value]) => (
                                 <option key={key} value={key}>{value}</option>
-                                ))}
+                            ))}
                         </select>
                         <Input
                             label="Country"
