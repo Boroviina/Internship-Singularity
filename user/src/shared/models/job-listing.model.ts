@@ -4,12 +4,13 @@ import {RequirementsModel} from "./requirements.model";
 export class JobListing extends BaseModel {
     id: string;
     jobTitle: string;
+    //companyLogo: img?
     companyName: string;
     location: string;
     salary: string;
     employmentType: string;
-    appDeadline: Date;
     description: string;
+    appDeadline: Date;
     remote: string;
     datePosted: Date;
 
