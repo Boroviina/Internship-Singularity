@@ -62,7 +62,7 @@ export const ApplyToJobListing = () => {
                 const form = new FormData();
                 form.append('phoneNumber', values.phoneNumber);
                 form.append('cv', values.cv);
-                if(values.coverLetter !== '') {
+                if(values.coverLetter) {
                     form.append('coverLetter', values.coverLetter);
                 }
                 form.append('job', jobId);
