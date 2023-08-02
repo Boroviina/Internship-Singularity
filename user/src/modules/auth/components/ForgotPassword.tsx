@@ -51,7 +51,7 @@ export function ForgotPassword() {
         onSubmit={formik.handleSubmit}
       >
         <div className='text-center mb-4'>
-          <h1 className='text-dark mb-2 fs-3'>Forgot Password ?</h1>
+          <h1 className='text-label mb-2 fs-3'>Forgot Password ?</h1>
           <div className='text-secondary fw-bold fs-5'>Enter your email to reset your password.</div>
         </div>
 

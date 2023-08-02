@@ -11,7 +11,7 @@ interface HeaderProps {
 const ModalHeader = ({companyName, jobTitle, pay}: HeaderProps) => {
     return (
         <header className={`d-flex flex-column align-items-center`}>
-            <img src={logo} className={`${styles.logo}`} alt={"Company Logo"}/>
+            <img src={logo} className={`${styles.logo} p-1`} alt={"Company Logo"}/>
             <h3 className={`mb-1 ${styles.companyName}`}>{companyName}</h3>
 
             <div className={`d-flex flex-column flex-lg-row justify-content-between align-items-center text-center`}>

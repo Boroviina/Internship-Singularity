@@ -1,0 +1,252 @@
+//overwrite Theme vars
+@import '~bootstrap/scss/functions';
+
+$enable-dark-mode: true;
+$color-mode-type: data;
+$badge-border-radius: 7px;
+$border-radius: 0.5rem;
+$box-shadow: 0 .8rem 1rem rgba(#000, .40);
+
+//background
+$body-bg-dark: #071e4d;
+$body-bg: #ece6ff;
+//boja fonta
+$body-color: #071e4d;
+$body-color-dark: #b5d2f8;
+$form-check-min-height: 3rem;
+
+//btnstyle
+$border-radius: 0;
+$border-width: 1px;
+$btn-border-radius: $border-radius;
+
+
+$pink: #fb246a;
+$custom-colors: ("pink": #fb246a);
+
+
+[data-bs-theme='light'] {
+  --bs-bg-body: #{$body-bg};
+  --bs-body-color: #{$body-color};
+
+
+  .text-label { //kada mi ne treba hover preko teksta
+    color: #071e4d;
+  }
+
+  .label {
+    color: #071e4d;
+
+    &:hover {
+      color: #fb246a;
+      transition-duration: 212ms;
+    }
+  }
+
+  //predefined for auth components (CANCEL button)
+  .btn-light-primary {
+    --bs-btn-bg: #{#a390de};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{#8e78d2};
+    --bs-btn-hover-bg: #{#b2a2ee};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{#8e78d2};
+  }
+
+  .btn-pink {
+    --bs-btn-bg: #{$pink};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{#fff};
+    --bs-btn-hover-color: #{$pink};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+
+  .btn-white {
+    --bs-btn-bg: #{#fff};
+    --bs-btn-color: #{$pink};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{$pink};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+
+  .close-btn {
+    --bs-btn-bg: #{#6776b7};
+    --bs-btn-color: #{#fff};
+    --bs-btn-hover-bg: #{#4a5a98};
+    --bs-btn-hover-color: #{#fff};
+  }
+
+  .navbar-nav {
+    --bs-nav-link-color: #{#071e4d};
+    --bs-nav-link-hover-color: #{$pink};
+  }
+
+  .form-check-input {
+    height: 20px;
+    width: 20px;
+    --bs-form-check-bg: #{#ac96ee};
+
+    &:checked {
+      background-color: #{#8f75e7};
+      border-color: #{#6d57b4};
+    }
+  }
+
+  .form-control {
+    background-color: #d2c4ef;
+    color: #071e4d;
+
+    &::file-selector-button {
+      background-color: #ccb3ec;
+    }
+
+    &:hover:not(:disabled):not([readonly])::file-selector-button {
+      background-color: #d5c2ee;
+    }
+  }
+
+  .card-bg {
+    background-color: rgba(185, 173, 227, 0.5);
+    border-radius: 0.5rem;
+  }
+
+  .card {
+    cursor: pointer;
+    --bs-card-bg: #d2c4ef;
+    --bs-card-border-width: 0.11rem;
+    --bs-card-border-radius: 5px;
+    --bs-card-border-color: transparent;
+
+    &:hover {
+      --bs-card-bg: #f3f5fd;
+      transition-duration: 500ms;
+      border: solid #adc8ff 0.11rem;
+    }
+
+    &:hover h4 {
+      color: $pink;
+      transition-duration: 212ms;
+    }
+  }
+}
+
+[data-bs-theme='dark'] {
+  $dark: #a7b5f3;
+  $input-border-color: #04163a;
+
+  --bs-bg-body: #{$body-bg-dark};
+  --bs-body-color: #{$body-color-dark};
+
+  .text-label{          //kada mi ne treba hover preko teksta
+    color: #B5D2F8FF;
+  }
+  .label {
+    color: #B5D2F8FF;
+    &:hover{
+      color: #fb246a;
+      transition-duration: 212ms;
+    }
+  }
+  //predefined for auth components (CANCEL button)
+  .btn-light-primary{
+    --bs-btn-bg: #{#5f81cc};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{#486ab7};
+    --bs-btn-hover-bg: #{#7a9ee8};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{#486AB7FF};
+  }
+  .btn-pink {
+    --bs-btn-bg: #{$pink};
+    --bs-btn-color: #{#fdfdff};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{#fff};
+    --bs-btn-hover-color: #{$pink};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+
+  .btn-white {
+    --bs-btn-bg: #{#fff};
+    --bs-btn-color: #{$pink};
+    --bs-btn-border-color: #{$pink};
+    --bs-btn-hover-bg: #{$pink};
+    --bs-btn-hover-color: #{#fff};
+    --bs-btn-hover-border-color: #{$pink};
+  }
+  .close-btn{
+    --bs-btn-bg: #{#010b1d};
+    --bs-btn-color: #{#fff};
+    --bs-btn-hover-bg: #{#021538};
+    --bs-btn-hover-color: #{#fff};
+  }
+  .btn-carrousel{
+    --bs-btn-hover-color: #{#fff};
+  }
+  .navbar-nav {
+    --bs-nav-link-color: #{$body-color-dark};
+    --bs-nav-link-hover-color: #{$pink};
+  }
+  .form-check-input {
+    height: 20px;
+    width: 20px;
+    --bs-form-check-bg: #{#5190dc};
+
+    &:checked {
+      background-color: #{#328eef};
+      border-color: #{#7fa7d5};
+    }
+  }
+  .carousel-indicator{
+      background-color: $dark;
+  }
+  .form-control{
+    background-color: #1f3e85;
+    border: 0.5px solid $input-border-color;
+    &::file-selector-button {
+      background-color: #093185;
+    }
+    &:hover:not(:disabled):not([readonly])::file-selector-button {
+      background-color: #2c5ec7;
+    }
+  }
+  .card-bg{
+    background-color: rgba(71, 101, 211, 0.5);
+    border-radius: 0.5rem;
+  }
+  .card{
+    cursor: pointer;
+    --bs-card-bg: #294588;
+    --bs-card-border-width: 0.11rem;
+    --bs-card-border-radius: 5px;
+    --bs-card-border-color: transparent;
+    &:hover{
+      --bs-card-bg: #f9fbfd;
+      transition-duration: 500ms;
+      border: solid #2f65d7 0.11rem;
+    }
+    &:hover h4{
+      color: $pink;
+      transition-duration: 212ms;
+    }
+  }
+
+}
+
+
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/utilities";
+
+
+@import "~bootstrap/scss/reboot";
+
+
+@import "../../node_modules/bootstrap";
