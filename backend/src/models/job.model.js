@@ -17,6 +17,10 @@ const jobSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Employer',
     },
+    requirements: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Requirements',
+    },
     location: {
       type: String,
       trim: true,
@@ -61,29 +65,6 @@ const jobSchema = mongoose.Schema(
       type: Boolean
     },
     coverLetter: {
-      type: Boolean
-    },
-    requirements: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Requirements',
-    },
-
-    education: {
-      type: String,
-      trim: true,
-      maxLength: [200, 'The field must have less than or equal to 200 characters']
-    },
-    skills: {
-      type: String,
-      trim: true,
-      maxLength: [200, 'The field must have less than or equal to 200 characters']
-    },
-    language: {
-      type: String,
-      trim: true,
-      maxLength: [100, 'The field must have less than or equal to 100 characters']
-    },
-    driverLicense: {
       type: Boolean
     },
   },
