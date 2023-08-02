@@ -1,6 +1,4 @@
 import React from 'react';
-import styles from './components/JobListing.module.css';
-import generalBtn from "../Home/GeneralButton.module.css"
 import {JobListing} from "../../shared/models/job-listing.model";
 import TimeAgo from "./components/TimeAgo";
 
@@ -11,7 +9,6 @@ interface JobProps {
     showDetails(): void;
 }
 
-const  JobListing = ({showDetails} : JobProps) => {
 const JobListingCard = ({job, showDetails} : JobProps) => {
     const writeCardInfo = (args: any[]) => {
         return (args.map((el) => {
