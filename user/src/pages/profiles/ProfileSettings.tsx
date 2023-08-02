@@ -50,7 +50,7 @@ export const ProfileSettings = () => {
         companyName: currentUser.companyName || '',
         language: currentUser.language || '',
         country: currentUser.country || '',
-        birthDate: format(new Date(currentUser.birthDate), "yyyy-MM-dd") || '',
+        birthDate: currentUser.birthDate ? format(new Date(currentUser.birthDate), "yyyy-MM-dd") : '',
         gender: currentUser.gender || '',
         website: currentUser.website || '',
     }

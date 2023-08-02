@@ -12,13 +12,13 @@ const createSavedJob = catchAsync(async (req, res) => {
 
 const getSavedJobs = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['job', 'user']);
-  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate']);
   const result = await jobSavedService.querySavedJobs(filter, options);
   res.send(result);
 });
 
 const getSavedJob = catchAsync(async (req, res) => {
-  const savedJob = await jobSavedService.getSavedJobById(req.params.savedJobId);
+  const savedJob = await jobSavedService.getSavedJobById(req.params.savedJobId, req.query.populate);
   if (!savedJob) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Saved job not found');
   }

@@ -10,7 +10,7 @@ const createJobApplication = (jobApplication: FormData): Promise<JobApplication 
 }
 
 const getUsersJobApplications = (userId: string): Promise<JobApplication[] | null> => {
-    return ApiClient.get(JOB_APPLICATION_ENDPOINT, `user=${userId}`)
+    return ApiClient.get(JOB_APPLICATION_ENDPOINT, `user=${userId}&populate=job,user`)
         .then(response => response.data)
         .then(data => data.results.map(jobApplication => new JobApplication(jobApplication)))
 }
