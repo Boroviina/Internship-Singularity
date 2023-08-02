@@ -17,7 +17,12 @@ export const ProfileOverview = () => {
                     <ProfileOverviewItem label='Full name'>{currentUser.name}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Email'>{currentUser.email}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Contact phone'>{currentUser.phone}</ProfileOverviewItem>
-                    {/*<ProfileOverviewItem label='Date of birth'>{(new Date(currentUser.birthDate)).toLocaleString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</ProfileOverviewItem>*/}
+                    {currentUser.birthDate && <ProfileOverviewItem
+                        label='Date of birth'>{(new Date(currentUser.birthDate)).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })}</ProfileOverviewItem>}
                     <ProfileOverviewItem label='Gender'>{currentUser.gender}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Country'>{currentUser.country}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Occupation'>{currentUser.occupation}</ProfileOverviewItem>
