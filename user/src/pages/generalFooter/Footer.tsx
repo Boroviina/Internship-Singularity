@@ -115,7 +115,7 @@ export function Footer() {
                             <div className={'d-flex w-100 gap-2'}>
                                 <input type="text" className={'form-control'} placeholder={'Email address'}
                                        id='newsletter'/>
-                                <button className={` btn btn-white overflow-visible`} type={'button'}>Subscribe</button>
+                                <button className={` btn btn-white overflow-visible`} type={'button'} style={{height:'50px'}}>Subscribe</button>
                             </div>
                         </form>
                     </div>

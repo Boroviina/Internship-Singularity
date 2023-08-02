@@ -2,8 +2,15 @@ import React from "react";
 import background from './bgr.jpg'
 import styles from '../ResponsiveControl.module.css'
 import btnStyle from '../GeneralButton.module.css'
+import {useAuth} from "../../../modules/auth";
+import {useNavigate} from "react-router-dom";
 
 export function SearchJob() {
+    const {currentUser, logout} = useAuth()
+    const navigate = useNavigate();
+    const FindJobClickHandle = () => {
+        navigate('/find-job')
+    }
     return <div className={'card position-relative  '}>
         <div className={`bgi-no-repeat bgi-position-center d-flex justify-content-end ${styles.jobSearchHeigh}`}
              style={{backgroundImage: `url(${background})`, backgroundSize: 'cover'}}>
@@ -17,15 +24,23 @@ export function SearchJob() {
                             <form action="" className={'input-group d-flex flex-column flex-md-row mt-5'}>
                                 <input type="text" placeholder={'Job title or keyword'} tabIndex={0}
                                        className={'form-control w-auto my-1  mt-md-0 col-md-4 col-12 '}/>
-                                <select className="form-select form-control w-auto my-1 mt-md-0  col-12 col-md-4" id="floatingSelectDisabled">
+                                <select className="form-select form-control w-auto my-1 mt-md-0  col-12 col-md-4"
+                                        id="floatingSelectDisabled">
                                     <option value="0">Choose region</option>
                                     <option value="1">Balcan countries</option>
                                     <option value="2">Europe</option>
                                     <option value="3">Other world countries</option>
                                 </select>
-                                <button className={`my-1 btn btn-pink mt-md-0 col-12 col-md-2 overflow-visible text-nowrap`}>
+                                {currentUser ? (<button
+                                    className={`my-1 btn btn-pink mt-md-0 col-12 col-md-2 overflow-visible text-nowrap`}
+                                    style={{height: '50px'}} onClick={FindJobClickHandle}>
                                     Find Job
-                                </button>
+                                </button>) : (<button
+                                    className={`my-1 btn btn-pink mt-md-0 col-12 col-md-2 overflow-visible text-nowrap`}
+                                    style={{height: '50px'}} onClick={()=>navigate('/auth/login')}
+                               >
+                                    Find Job
+                                </button>)}
                             </form>
                         </div>
                     </div>
