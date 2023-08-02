@@ -6,20 +6,20 @@ export class JobListing extends BaseModel {
     jobTitle: string;
     //companyLogo: img?
     companyName: string;
+    requirementsModel: RequirementsModel;
     location: string;
-    salary: string;
+    salary: number;
     employmentType: string;
     description: string;
     appDeadline: Date;
     remote: string;
     datePosted: Date;
-
-    requirementsModel: RequirementsModel;
-
     appInstructions: string;
     positionsNum: number;
     cv: boolean;
     coverLetter: boolean;
+
+
 
     constructor(attributes?: any) {
         super();
