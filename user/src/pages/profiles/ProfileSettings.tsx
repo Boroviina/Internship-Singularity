@@ -50,7 +50,7 @@ export const ProfileSettings = () => {
         companyName: currentUser.companyName || '',
         language: currentUser.language || '',
         country: currentUser.country || '',
-        birthDate: format(new Date(currentUser.birthDate), "yyyy-MM-dd") || '',
+        // birthDate: format(new Date(currentUser.birthDate), "yyyy-MM-dd") || '',
         gender: currentUser.gender || '',
         website: currentUser.website || '',
     }
@@ -158,15 +158,15 @@ export const ProfileSettings = () => {
                             type="text"
                             required={formik.getFieldProps('country').value.trim().length !== 0}
                         />
-                        <Input
-                            label="Date of birth"
-                            formikFieldProps={formik.getFieldProps('birthDate')}
-                            formikTouched={formik.touched.birthDate}
-                            formikError={formik.errors.birthDate}
-                            name="birthDate"
-                            type="date"
-                            required={formik.getFieldProps('birthDate').value.trim().length !== 0}
-                        />
+                        {/*<Input*/}
+                        {/*    label="Date of birth"*/}
+                        {/*    formikFieldProps={formik.getFieldProps('birthDate')}*/}
+                        {/*    formikTouched={formik.touched.birthDate}*/}
+                        {/*    formikError={formik.errors.birthDate}*/}
+                        {/*    name="birthDate"*/}
+                        {/*    type="date"*/}
+                        {/*    required={formik.getFieldProps('birthDate').value.trim().length !== 0}*/}
+                        {/*/>*/}
                         <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>Gender </label>
                         <select
                             {...formik.getFieldProps('gender')}
