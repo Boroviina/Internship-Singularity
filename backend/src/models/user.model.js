@@ -3,6 +3,8 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
+const { languages } = require('../config/languages');
+const { gender } = require('../config/gender');
 
 const userSchema = mongoose.Schema(
   {
@@ -61,7 +63,8 @@ const userSchema = mongoose.Schema(
     },
     language: {
       type: String,
-      trim: true,
+      enum: languages,
+      default: "en"
     },
     timeZone: {
       type: String,
@@ -71,6 +74,17 @@ const userSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
+    gender: {
+      type: String,
+      enum: gender
+    },
+    country: {
+      type: String,
+      trim: true
+    },
+    birthDate: {
+      type: Date
+    }
   },
   {
     timestamps: true,

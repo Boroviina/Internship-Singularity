@@ -22,7 +22,7 @@ const Error500: FC = () => {
               Please try again later.
             </div>
             <div className='text-center'>
-              <Link to='/' className='btn btn-lg btn-primary fw-bolder'>
+              <Link to='/home' className='btn btn-lg btn-primary fw-bolder'>
                 Go to homepage
               </Link>
             </div>

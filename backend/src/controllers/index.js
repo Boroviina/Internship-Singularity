@@ -3,3 +3,4 @@ module.exports.userController = require('./user.controller');
 module.exports.jobApplicationController = require('./job-application.controller');
 module.exports.jobController = require('./job.controller');
 module.exports.employerController = require('./employer.controller');
+module.exports.jobSavedController = require('./job-saved.controller');
