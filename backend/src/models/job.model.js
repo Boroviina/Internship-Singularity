@@ -69,7 +69,7 @@ const jobSchema = mongoose.Schema(
     },
   },
   {
-    timestamp: true
+    timestamps: true
   }
 );
 
