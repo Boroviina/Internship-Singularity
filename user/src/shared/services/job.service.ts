@@ -1,4 +1,4 @@
-import ApiClient from "./api-client/api-client";
+ import ApiClient from "./api-client/api-client";
 import {JobListing} from "../models/job-listing.model";
 
 const JOBS_ENDPOINT = '/jobs';
