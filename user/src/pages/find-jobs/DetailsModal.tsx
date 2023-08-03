@@ -92,7 +92,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                 </main>
             </Modal.Body>
 
-            <Modal.Footer className="d-lg-none" style={{position: "sticky", bottom: 0, background: "white"}}>
+            <Modal.Footer className="d-lg-none card-bg position-sticky">
                 <ApplyOrSave/>
             </Modal.Footer>
 
