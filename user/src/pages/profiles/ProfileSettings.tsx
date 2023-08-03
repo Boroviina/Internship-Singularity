@@ -135,7 +135,7 @@ export const ProfileSettings = () => {
                             type="text"
                             required={formik.getFieldProps('companyName').value.trim().length !== 0}
                         />
-                        <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}} htmlFor="language">Language </label>
+                        <label className="form-label text-label fs-6 fw-bolder" htmlFor="language">Language </label>
                         <select
                             {...formik.getFieldProps('language')}
                             className={clsx(
@@ -167,7 +167,7 @@ export const ProfileSettings = () => {
                             type="date"
                             required={formik.getFieldProps('birthDate').value.trim().length !== 0}
                         />
-                        <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>Gender </label>
+                        <label className="form-label fs-6 fw-bolder text-label">Gender </label>
                         <select
                             {...formik.getFieldProps('gender')}
                             className={clsx(
