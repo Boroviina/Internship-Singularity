@@ -25,5 +25,5 @@ const changeJob = (jobId: string): Promise<JobListing | null> => {
 const removeJob = (jobId): Promise<JobListing | null>  => {
     return ApiClient.remove(JOBS_ENDPOINT, jobId).then(response => response.data);
 }
-export {getJobs, createJob, changeJob, removeJob}
+export {getJobs, getJob,  createJob, changeJob, removeJob}
 
