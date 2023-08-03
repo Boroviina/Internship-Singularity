@@ -12,13 +12,13 @@ const createJobApplication = catchAsync(async (req, res) => {
 
 const getJobApplications = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['job', 'user']);
-  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate']);
   const result = await jobApplicationService.queryJobApplications(filter, options);
   res.send(result);
 });
 
 const getJobApplication = catchAsync(async (req, res) => {
-  const jobApplication = await jobApplicationService.getJobApplicationById(req.params.jobApplicationId);
+  const jobApplication = await jobApplicationService.getJobApplicationById(req.params.jobApplicationId, req.query.populate);
   if (!jobApplication) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Job application not found');
   }

@@ -1,6 +1,4 @@
 import React from 'react';
-import styles from './components/JobListing.module.css';
-import generalBtn from "../Home/GeneralButton.module.css"
 import {JobListing} from "../../shared/models/job-listing.model";
 import TimeAgo from "./components/TimeAgo";
 
@@ -19,15 +17,15 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
     };
 
     return (
-        <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 ${styles.jobCard}`}>
+        <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 mb-1 card`}>
             <div className="d-flex align-items-center">
                 <a className="me-3" href="src/pages/find-jobs/JobListing#">
-                    <img src={logo} className={`${styles.logo}`}
+                    <img src={logo} className={`p-1`}
                          style={{height: "4rem"}}
                          alt={"Company Logo"}/>
                 </a>
-                <div onClick={showDetails} className={`${styles.titleAndDetails} flex-grow-1`}>
-                        <h4 className={`${styles.title}`}>{job.jobTitle}</h4>
+                <div onClick={showDetails} className={`pointer flex-grow-1`}>
+                        <h4 className={`label`}>{job.jobTitle}</h4>
                     <span className="fw-semibold">
                         <span>{job.companyName}</span>
                         <span className="text-black-50">
@@ -36,11 +34,11 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                     </span>
                 </div>
             </div>
-            <div className={`d-flex align-items-center gap-2 mt-2 mt-sm-0 ${styles.alignedButtons}`}>
-                <button type="button" className={`${generalBtn.filledButton} ${generalBtn.smallBtn}`}>
+            <div className={`d-flex align-items-center gap-2 mt-2 mt-sm-0 mx-3`}>
+                <button type="button" className={`btn btn-pink`}>
                     Apply
                 </button>
-                <button type="button" className={`${generalBtn.lightButton} ${generalBtn.smallBtn}`}>
+                <button type="button" className={`btn btn-white`}>
                     Save
                 </button>
             </div>

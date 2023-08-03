@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { JobSaved } = require('../models');
+const {JobSaved} = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const createSavedJob = async (savedJobBody) => {
@@ -7,17 +7,19 @@ const createSavedJob = async (savedJobBody) => {
 };
 
 const querySavedJobs = async (filter, options) => {
-  const paginatedSavedJobs = await JobSaved.paginate(filter, options);
-  const savedJobs = paginatedSavedJobs.results || [];
-  await JobSaved.populate(savedJobs, [
-    // {path: 'user', model: 'User'},
-    {path: 'job', model: 'Job'}
-  ]);
-  return paginatedSavedJobs;
+  const savedJobs = await JobSaved.paginate(filter, options);
+  return savedJobs;
 };
 
-const getSavedJobById = async (savedJobId) => {
-  return JobSaved.findById(savedJobId).populate(['job']).exec();
+const getSavedJobById = async (savedJobId, populate) => {
+  const populateBy = [];
+  if(populate) {
+    populate.split(',').forEach((populateOption) => {
+      populateBy.push(populateOption)
+    })
+    return JobSaved.findById(savedJobId).populate(populateBy).exec();
+  }
+  return JobSaved.findById(savedJobId);
 };
 
 // const updateSavedJobById = async (savedJobId, updateBody) => {

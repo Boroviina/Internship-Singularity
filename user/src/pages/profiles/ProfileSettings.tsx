@@ -50,7 +50,7 @@ export const ProfileSettings = () => {
         companyName: currentUser.companyName || '',
         language: currentUser.language || '',
         country: currentUser.country || '',
-        birthDate: format(new Date(currentUser.birthDate), "yyyy-MM-dd") || '',
+        birthDate: currentUser.birthDate ? format(new Date(currentUser.birthDate), "yyyy-MM-dd") : '',
         gender: currentUser.gender || '',
         website: currentUser.website || '',
     }
@@ -147,7 +147,7 @@ export const ProfileSettings = () => {
                             <option value=""></option>
                             {Object.entries(Language).map(([key, value]) => (
                                 <option key={key} value={key}>{value}</option>
-                                ))}
+                            ))}
                         </select>
                         <Input
                             label="Country"

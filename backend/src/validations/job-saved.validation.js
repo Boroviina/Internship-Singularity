@@ -12,6 +12,7 @@ const getSavedJobs = {
     user: Joi.string(),
     job: Joi.string(),
     sortBy: Joi.string(),
+    populate: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
   }),
@@ -20,6 +21,9 @@ const getSavedJobs = {
 const getSavedJob = {
   params: Joi.object().keys({
     savedJobId: Joi.string().custom(objectId),
+  }),
+  query: Joi.object().keys({
+    populate: Joi.string(),
   }),
 };
 

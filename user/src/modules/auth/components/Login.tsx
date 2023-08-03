@@ -58,8 +58,8 @@ export function Login() {
             id='kt_login_signin_form'
         >
             <div className='text-center mb-4'>
-                <h1 className='text-dark mb-2 fs-3'>Sign In to Job Radar</h1>
-                <div className='text-secondary fw-bold fs-5'>
+                <h1 className='text-label mb-2 fs-3'>Sign In to Job Radar</h1>
+                <div className='text-muted fw-bold fs-5'>
                     New Here?{' '}
                     <Link to='/auth/registration' className='text-primary fw-bold'>
                         Create an Account
@@ -80,7 +80,7 @@ export function Login() {
                 label='Email'
             />
 
-            <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>Password </label>
+            <label className="form-label fs-6 fw-bolder text-label">Password </label>
             {'  '}<Link to='/auth/forgot-password' className='link-primary fs-6 fw-bold'>Forgot Password ?</Link>
             <Input
                 formikFieldProps={formik.getFieldProps('password')}

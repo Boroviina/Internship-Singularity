@@ -24,16 +24,16 @@ export const InputFile: React.FC<InputFileProps> = (props) => {
     } = props
 
     const formikProps = formikFieldProps || {};
-    const { onChange: formikFieldOnChange, value, ...rest } = formikProps;
+    const {onChange: formikFieldOnChange, value, ...rest} = formikProps;
 
     return (
         <div className='fv-row mb-3'>
-            {label && <label className="form-label fs-6 fw-bolder" style={{color: '#010b1d'}}>{label}</label>}
+            {label && <label className="form-label text-label fs-6 fw-bolder">{label}</label>}
             <input
                 className={clsx(
                     `form-control form-control-solid `,
-                    { 'is-invalid': required && formikTouched && formikError },
-                    { 'is-valid': required && formikTouched && !formikError }
+                    {'is-invalid': required && formikTouched && formikError},
+                    {'is-valid': required && formikTouched && !formikError}
                 )}
                 type="file"
                 name={name}

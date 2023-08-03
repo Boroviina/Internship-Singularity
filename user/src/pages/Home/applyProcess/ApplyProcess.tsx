@@ -9,7 +9,7 @@ export function ApplyProcess() {
         <div className={'container mt-5'}>
             <div className={'row text-center mb-5 '}>
                 <span className={'fs-4'} style={{color: '#fb246a'}}>APPLY PROCESS</span>
-                <h2 className={'display-2 '}>How it works</h2>
+                <h2 className={'display-2 text-label '}>How it works</h2>
             </div>
         </div>
         <div className={'py-5 align-items-center d-flex justify-content-center bgi-no-repeat bgi-position-center'}
@@ -17,8 +17,7 @@ export function ApplyProcess() {
             <div
                 className={'container position-relative d-flex flex-column flex-md-row justify-content-center align-items-center my-3 '}>
                 <div className={'row d-flex justify-content-center'}>
-                    <div className={'col-lg-4 mt-3 mt-lg-0  col-xl-4 col-md-3  d-flex flex-row flex-md-column justify-content-center w-auto  py-lg-4 py-xl-5'}
-                         style={{backgroundColor: '#181c33'}}>
+                    <div className={'col-lg-4 card-bg mt-3 mt-lg-0  col-xl-4 col-md-3  d-flex flex-row flex-md-column justify-content-center w-auto  py-lg-4 py-xl-5'}>
                         <div className={' text-center w-auto mb-3 my-4 w-auto'}>
                             <div className={'my-3'}>
                                     <span>
@@ -33,8 +32,7 @@ export function ApplyProcess() {
                             </div>
                         </div>
                     </div>
-                    <div className={'col-lg-4 mt-3 mt-lg-0  mx-4 w-auto col-xl-4 col-md-3  py-lg-4 py-xl-5'}
-                         style={{backgroundColor: '#181c33'}}>
+                    <div className={'col-lg-4 card-bg mt-3 mt-lg-0  mx-4 w-auto col-xl-4 col-md-3  py-lg-4 py-xl-5'}>
                         <div className={' text-center w-auto mb-3 my-4 w-auto'}>
                             <div className={'my-3'}>
                                     <span>
@@ -49,8 +47,7 @@ export function ApplyProcess() {
                             </div>
                         </div>
                     </div>
-                    <div className={'col-lg-4 col-xl-4 mt-3 mt-lg-0  w-auto col-md-12  py-lg-4 py-xl-5'}
-                         style={{backgroundColor: '#181c33'}}>
+                    <div className={'col-lg-4 card-bg col-xl-4 mt-3 mt-lg-0  w-auto col-md-12  py-lg-4 py-xl-5'}>
                         <div className={' text-center w-auto mb-3 my-5 w-auto'}>
                             <div className={'my-3'}>
                                     <span>

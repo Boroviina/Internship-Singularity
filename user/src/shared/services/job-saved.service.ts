@@ -16,7 +16,7 @@ const getSavedJob = (savedJobId: string): Promise<SavedJob | null> => {
 }
 
 const getUsersSavedJobs = (userId: string): Promise<SavedJob[] | null> => {
-    return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}`)
+    return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}&populate=job`)
         .then(response => response.data)
         .then(data => data.results.map(savedJob => new SavedJob(savedJob)))
 }

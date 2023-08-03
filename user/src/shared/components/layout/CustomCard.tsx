@@ -14,6 +14,6 @@ export const CustomCard: React.FC<CustomCardProps & WithChildren> = (props) => {
     } = props
 
     return (
-        <div className={`mx-auto ${className && className}`} style={width && {width: width}}>{children}</div>
+        <div className={`mx-auto  ${className && className} `} style={width && {width: width }}>{children}</div>
     );
 }
