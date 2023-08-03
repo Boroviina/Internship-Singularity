@@ -2,11 +2,14 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const {jobService, userService} = require('../services');
+const {jobService, requirementsService} = require('../services');
 
 
 const createJob = catchAsync(async (req, res) => {
-  const job = await jobService.createJob(req.body);
+  const {requirements, ...jobData} = req.body;
+  const requirementsInstance = await requirementsService.createRequirements(requirements);
+  const body = {employer: req.user._id, requirements: requirementsInstance._id, ...jobData};
+  const job = await jobService.createJob(body);
   res.status(httpStatus.CREATED).send(job);
 });
 
