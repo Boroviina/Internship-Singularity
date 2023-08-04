@@ -126,32 +126,3 @@ const DESCRIPTION = "     We offer Lorem ipsum dolor sit amet, consectetur adipi
     "            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet\n" +
     "            aperiam\n" +
     "            delectus eum exercitationem nemo. Dolorem odit, saepe!\n";
-
-const job1: JobListing = new JobListing({
-    jobTitle: "Backend developer",
-    employer: new Employer({
-        companyName: "Google"
-    }),
-    requirementsModel: new RequirementsModel({
-        specialization: "Technology",
-        experience: "Mid level",
-        education: "College",
-        skills: "Problem solving, Communication", // ovo bi mogao biti niz
-        language: "English, German",
-        drivingLicense: true
-    }),
-    location: "Sydney - Australia",
-    salary: 4000,
-    employmentType: "Full Time",
-    description: DESCRIPTION,
-    appDeadline: new Date(2023, 8, 23),
-    remote: "Remote",
-    appInstructions: "Please submit your thing into the proper channel and" +
-        "discuss without the necessary preconditions of your applications. We will" +
-        "contact you shortly!",
-    positionsNum: 7,
-    cv: true,
-    coverLetter: true,
-    createdAt: new Date(2023, 6, 12), // MJESECE BROJI OD 0 DO 11
-});
-
