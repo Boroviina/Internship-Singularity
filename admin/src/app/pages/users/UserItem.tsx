@@ -11,8 +11,19 @@ export const UserItem: React.FC<JUserItemProps> = (props) => {
     } = props
 
     return (
-        <div>
-            {user.name}
-        </div>
+        <tr className="fw-semibold text-gray-800 align-middle">
+            <td>{user.name}</td>
+            <td>{user.role}</td>
+            {user.active ?
+                <td><span className="badge badge-light-success">active</span></td> :
+                <td><span className="badge badge-light-danger">not active</span></td> }
+            <td>
+                <button className="btn btn-active-light-primary">edit</button>
+                <button className="btn btn-active-light-primary">delete</button>
+                {user.active ?
+                    <button className="btn btn-active-light-danger">deactivate</button> :
+                    <button className="btn btn-active-light-success">activate</button>}
+            </td>
+        </tr>
     )
 }
