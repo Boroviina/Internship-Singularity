@@ -49,22 +49,20 @@ const userSchema = mongoose.Schema(
     occupation: {
       type: String,
     },
-    companyName: {
-      type: String,
-    },
     phone: {
       type: String,
       trim: true,
       validate(value) {
-        if (!validator.isMobilePhone(value)) {
-          throw new Error('Invalid phone number');
+        if(value !== '') {
+          if (!validator.isMobilePhone(value)) {
+            throw new Error('Invalid phone number');
+          }
         }
       },
     },
     language: {
       type: String,
       enum: languages,
-      default: "en"
     },
     timeZone: {
       type: String,
@@ -84,6 +82,10 @@ const userSchema = mongoose.Schema(
     },
     birthDate: {
       type: Date
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   {

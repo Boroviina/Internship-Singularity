@@ -7,6 +7,7 @@ import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 import {JobPosting} from "../pages/post-job/JobPosting";
 import {JobListings} from "../pages/jobs/JobListings";
+import {Users} from "../pages/users/Users";
 import {ApplicationsReview} from "../pages/applicationsReview/ApplicationsReview";
 
 const PrivateRoutes = () => {
@@ -22,6 +23,7 @@ const PrivateRoutes = () => {
                 <Route path='/post-job' element={<JobPosting/>}/>
                 <Route path='/job-listings' element={<JobListings/>}/>
                 <Route path='/applications-review/:id' element={<ApplicationsReview/>}/>
+                <Route path='/users' element={<Users/>}/>
                 {/*<Route path='/about' element={<About/>}/>*/}
                 {/* Lazy Modules */}
                 {/*<Route

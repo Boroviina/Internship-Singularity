@@ -55,7 +55,6 @@ export interface UserModel {
   last_name?: string
   name: string
   occupation?: string
-  companyName?: string
   phone?: string
   roles?: Array<number>
   pic?: string
@@ -63,6 +62,7 @@ export interface UserModel {
   timeZone?: string
   website?: 'https://keenthemes.com'
   gender?: 'male' | 'female' | 'other'
+  active?: boolean
   country?: string
   birthDate?: Date
   emailSettings?: UserEmailSettingsModel
