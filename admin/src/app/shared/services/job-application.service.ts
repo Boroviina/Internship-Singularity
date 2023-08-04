@@ -7,8 +7,9 @@ const JOB_APP_ENDPOINT = '/job-applications';
 //     return ApiClient.post(USERS_ENDPOINT, {jobApplication})
 // }
 
-const getApplications = (jobId: string): Promise<JobApplication[] | null> => {
-    return ApiClient.get(JOB_APP_ENDPOINT, `job=${jobId}&populate=user,files`).then(response => {
-        return response.data;
-    }).then(data => data.results.map(jobApplication => new JobApplication(jobApplication)))
+const getApplicationsPerJob = (jobId: string): Promise<JobApplication[] | null> => {
+    return ApiClient.get(JOB_APP_ENDPOINT, `job=${jobId}&populate=user,files`).then(response => response.data)
+        .then(data => data.results.map(jobApplication => new JobApplication(jobApplication)))
 }
+
+export {getApplicationsPerJob}
