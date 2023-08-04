@@ -6,7 +6,7 @@ const SortBy = ({categories}) => {
             <h5>Sort by</h5>
             <select className="form-select" aria-label="sortBy">
                 {categories.map((category) => {
-                    return <option value={category}>{category}</option>;
+                    return <option value={category} key={category}>{category}</option>;
                 })}
             </select>
         </div>

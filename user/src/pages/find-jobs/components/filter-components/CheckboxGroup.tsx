@@ -11,7 +11,7 @@ const CheckboxGroup = ({name, filters}: FilterGroup) => {
         <div>
             <h5>{name}</h5>
             {filters.map((filter) => {
-                return <Checkbox key={Math.random().toString()}
+                return <Checkbox key={filter}
                                  name={filter}
                                  id={filter.toLowerCase().replaceAll(" ", "")}/>;
             })}
