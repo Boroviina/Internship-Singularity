@@ -1,31 +1,89 @@
 import React, {useEffect, useState} from "react";
-import {getUsers} from "../../shared/services/user.service";
-import {Alert} from "../../shared/components/Alert";
+import {useFormik} from 'formik'
+import * as Yup from 'yup'
+import {getUsersWithPages} from "../../shared/services/user.service";
 import {UserItem} from "./UserItem";
+import CustomModal from "../../shared/components/CustomModal";
+import {Input} from "../../shared/components/form/Input";
+import {Button} from "../../shared/components/form/Button";
+import clsx from "clsx";
+import {Role} from "../../shared/enums/roles.enum";
+import {createUser} from "../../shared/services/user.service";
+
+const addUserSchema = Yup.object().shape({
+    name: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols')
+        .required('Full name is required'),
+    email: Yup.string()
+        .email('Wrong email format')
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols')
+        .required('Email is required'),
+    role: Yup.string()
+        .min(3, 'Minimum 3 symbols')
+        .max(50, 'Maximum 50 symbols')
+        .required('Role is required'),
+})
+
+const initialValues = {
+    name: '',
+    email: '',
+    role: '',
+}
 
 export const Users = () => {
     const [users, setUsers] = useState([]);
+    const [newUser, setNewUser] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
 
     useEffect(() => {
-        const fetchJobListings = async () => {
-
+        const fetchUsers = async () => {
             try {
-                const userList = await getUsers();
-                setUsers(userList);
+                const response = await getUsersWithPages(page);
+                const {results, totalPages} = response;
+                setUsers(results);
+                setTotalPages(totalPages);
             } catch(error) {
-                console.log("Error while getting job listings.");
+                console.log("Error while getting users.");
             }
         }
-        fetchJobListings();
-    }, []);
+        fetchUsers();
+    }, [page, newUser]);
 
-    const alert = <Alert state="primary" icon="icons/duotune/general/gen021.svg">No users</Alert>;
+    const formik = useFormik({
+        initialValues,
+        validationSchema: addUserSchema,
+        onSubmit: async (values, {setStatus, setSubmitting, resetForm}) => {
+            setLoading(true)
+            try {
+                const addedUser = await createUser({password: "password1", ...values});
+                setNewUser(addedUser)
+                resetForm();
+                hideModal()
+            } catch (error) {
+                setStatus('User detail is invalid')
+                setSubmitting(false)
+            }
+            setLoading(false)
+        },
+    })
+
+    const hideModal = () => {
+        setShowModal(false);
+    }
+    const openModal = () => {
+        setShowModal(true);
+    };
 
     return (
         <>
             <div className="d-flex flex-row justify-content-between align-items-center mb-2">
                 <div className="fs-1">User list</div>
-                <button className="btn btn-active-light-primary">Create user</button>
+                <button className="btn btn-active-light-primary" onClick={openModal}>Add user</button>
             </div>
             <div className={`w-lg-1024px bg-body rounded shadow-sm p-5 p-lg-5 mx-auto fade-in-up`}>
                 <div className="table-responsive">
@@ -43,10 +101,88 @@ export const Users = () => {
                         </tbody>
                     </table>
                 </div>
-
-
-
             </div>
+            <ul className="pagination mt-3">
+                <li className={`page-item previous ${page === 1 && 'disabled'}`}>
+                    <button onClick={() => setPage(page - 1)} className="page-link">
+                        <i className="previous"></i>
+                    </button>
+                </li>
+                {Array.from({ length: totalPages }).map((_, index) => (
+                    <li key={index} className={`page-item ${page === index + 1 ? 'active' : ''}`}>
+                        <button
+                            className="page-link"
+                            onClick={() => setPage(index + 1)}
+                        >
+                            {index + 1}
+                        </button>
+                    </li>
+                ))}
+                <li className={`page-item next ${page === totalPages && 'disabled'}`}>
+                    <button
+                        onClick={() => setPage(page + 1)} className="page-link"
+                        disabled={page === totalPages}
+                    >
+                        <i className="next"></i>
+                    </button>
+                </li>
+            </ul>
+
+
+            <CustomModal title="Add user" show={showModal} onHide={hideModal}>
+                <form
+                    className={`form w-100 my-4 p-4`}
+                    onSubmit={formik.handleSubmit}
+                    noValidate
+                    id='kt_edit_profile_form'
+                >
+                    <Input
+                        label="Name"
+                        formikFieldProps={formik.getFieldProps('name')}
+                        formikTouched={formik.touched.name}
+                        formikError={formik.errors.name}
+                        name="name"
+                        type="text"
+                        required={true}
+                        requiredStar={true}
+                    />
+                    <Input
+                        label="Email"
+                        formikFieldProps={formik.getFieldProps('email')}
+                        formikTouched={formik.touched.email}
+                        formikError={formik.errors.email}
+                        name="email"
+                        type="text"
+                        required={true}
+                        requiredStar={true}
+                    />
+                    <div className='fv-row mb-3'>
+                        <label htmlFor="role" className="form-label fs-6 fw-bolder text-label">Role<span className="text-danger">*</span></label>
+                        <select
+                            {...formik.getFieldProps('language')}
+                            className={clsx(
+                                `form-control form-control-solid mb-3 `,
+                                {'is-invalid': formik.touched.role && formik.errors.role},
+                                {'is-valid': formik.touched.role && !formik.errors.role}
+                            )}
+                            name="role" id="role">
+                            <option value=""></option>
+                            {Object.entries(Role).map(([key, value]) => (
+                                <option key={key} value={key}>{value}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className='text-center mt-4'>
+                        <Button
+                            type="submit"
+                            id='kt_edit_profile_submit'
+                            disabled={formik.isSubmitting || !formik.isValid}
+                            loading={loading}
+                        >Continue</Button>
+                    </div>
+                </form>
+            </CustomModal>
         </>
     );
 }
