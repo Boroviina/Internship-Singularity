@@ -6,13 +6,18 @@ const logo = require('./img/logo-fb.jpg');
 
 interface JobProps {
     job: JobListing;
-    showDetails(): void;
+    showDetails(job: JobListing): void;
 }
 
 const JobListingCard = ({job, showDetails} : JobProps) => {
+
+    const clickHandler = (e) => {
+      showDetails(job);
+    };
+
     const writeCardInfo = (args: any[]) => {
         return (args.map((el) => {
-            return <span>{el && ' \u2022 ' + el}</span>;
+            return <span key={Math.random().toString()}>{el && ' \u2022 ' + el}</span>;
         }));
     };
 
@@ -24,7 +29,7 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                          style={{height: "4rem"}}
                          alt={"Company Logo"}/>
                 </a>
-                <div onClick={showDetails} className={`pointer flex-grow-1`}>
+                <div onClick={clickHandler} className={`pointer flex-grow-1`}>
                         <h4 className={`label`}>{job.jobTitle}</h4>
                     <span className="fw-semibold">
                         <span>{job.employer.companyName}</span>

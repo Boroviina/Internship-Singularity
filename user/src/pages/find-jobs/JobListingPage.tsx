@@ -16,12 +16,9 @@ import {getJobs} from "../../shared/services/job.service";
 const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);
     const handleClose = () => setShowDetails(false);
-    const handleOpen = () => setShowDetails(true);
+    const handleOpen = (job: JobListing) => setShowDetails(true);
 
     const [jobs, setJobs] = useState(null);
-
-
-
     useEffect(() => {
         fetchJobs();
     }, /*filter, search...*/[]);
@@ -29,7 +26,6 @@ const JobListingPage = () => {
 const fetchJobs = async () => {
     try {
         const jobs = await getJobs();
-        console.log(jobs);
         setJobs(jobs);
     } catch (error) {
         console.log(error);
@@ -39,7 +35,7 @@ const fetchJobs = async () => {
 
     if (jobs) {
         jobsContent = jobs.map(job => {
-            return <JobListingCard job={job} showDetails={handleOpen}/>;
+            return <JobListingCard job={job} showDetails={handleOpen} key={job.id}/>;
         });
     }
 
@@ -76,11 +72,6 @@ const fetchJobs = async () => {
                             </div>
                             <div className="jobs my-2">
                                 {jobsContent}
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
                             </div>
                             <Pagination/>
                         </section>
