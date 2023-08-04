@@ -14,9 +14,13 @@ import {Employer} from "../../shared/models/employer.model";
 import {getJobs} from "../../shared/services/job.service";
 
 const JobListingPage = () => {
+    const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
     const handleClose = () => setShowDetails(false);
-    const handleOpen = (job: JobListing) => setShowDetails(true);
+    const handleOpen = (job: JobListing) => {
+        setShownJob(job);
+        setShowDetails(true)
+    };
 
     const [jobs, setJobs] = useState(null);
     useEffect(() => {
@@ -81,7 +85,7 @@ const fetchJobs = async () => {
             </main>
             </body>
 
-            <DetailsModal job={job1} showDetails={showDetails} close={handleClose}/>
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}/>}
         </>
     );
 }

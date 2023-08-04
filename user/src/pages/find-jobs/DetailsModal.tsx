@@ -42,7 +42,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                         </div>
                         {job.appDeadline
                             && <JobInfo title="Application deadline"
-                                        mainData={job.appDeadline.toLocaleDateString('en-us', {
+                                        mainData={new Date(job.appDeadline).toLocaleDateString('en-us', {
                                             month: "long",
                                             day: "numeric"
                                         })}

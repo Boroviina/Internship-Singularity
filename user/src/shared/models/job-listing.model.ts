@@ -11,19 +11,15 @@ export class JobListing extends BaseModel {
     salary: number;
     employmentType: string;
     description: string;
-    appDeadline: Date;
+    appDeadline: string;
     remote: string;
     appInstructions: string;
     positionsNum: number;
     cv: boolean;
     coverLetter: boolean;
-    createdAt: Date;
-
-
 
     constructor(attributes?: any) {
         super();
         this.setAttributes(attributes);
-
     }
 }
