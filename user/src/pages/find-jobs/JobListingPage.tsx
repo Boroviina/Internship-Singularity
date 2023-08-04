@@ -10,6 +10,7 @@ import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
 import {RequirementsModel} from "../../shared/models/requirements.model";
+import {Employer} from "../../shared/models/employer.model";
 
 const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);
@@ -25,16 +26,10 @@ const JobListingPage = () => {
         "Master's degree", "Doctor's degree"];
     const sortByCategories = ["Relevance", "Date", "Salary"];
     const job1: JobListing = new JobListing({
-        //companyLogo: ...
         jobTitle: "Backend developer",
-        companyName: "Amazon",
-        location: "Sydney - Australia",
-        salary: 4000,
-        employmentType: "Full Time",
-        description: DESCRIPTION,
-        remote: "Remote",
-        datePosted: new Date(2023, 6, 12), // MJESECE BROJI OD 0 DO 11
-
+        employer: new Employer({
+            companyName: "Google"
+        }),
         requirementsModel: new RequirementsModel({
             specialization: "Technology",
             experience: "Mid level",
@@ -43,14 +38,19 @@ const JobListingPage = () => {
             language: "English, German",
             drivingLicense: true
         }),
-
+        location: "Sydney - Australia",
+        salary: 4000,
+        employmentType: "Full Time",
+        description: DESCRIPTION,
         appDeadline: new Date(2023, 8, 23),
-        positionsNum: 7,
-        cv: true,
-        coverLetter: true,
+        remote: "Remote",
         appInstructions: "Please submit your thing into the proper channel and" +
             "discuss without the necessary preconditions of your applications. We will" +
             "contact you shortly!",
+        positionsNum: 7,
+        cv: true,
+        coverLetter: true,
+        createdAt: new Date(2023, 6, 12), // MJESECE BROJI OD 0 DO 11
     });
     return (
         <>

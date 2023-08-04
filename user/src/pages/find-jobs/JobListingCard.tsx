@@ -27,9 +27,9 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                 <div onClick={showDetails} className={`pointer flex-grow-1`}>
                         <h4 className={`label`}>{job.jobTitle}</h4>
                     <span className="fw-semibold">
-                        <span>{job.companyName}</span>
+                        <span>{job.employer.companyName}</span>
                         <span className="text-black-50">
-                            {writeCardInfo([job.location, job.salary, job.employmentType, TimeAgo(job.datePosted)])}
+                            {writeCardInfo([job.location, job.salary, job.employmentType, TimeAgo(job.createdAt)])}
                         </span>
                     </span>
                 </div>
