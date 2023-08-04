@@ -30,7 +30,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
             </Modal.Header>
 
             <Modal.Body>
-                <main className={styles.modalBody}>
+                <main className={`${styles.modalBody}`}>
                     <section className={styles.jobInformation}>
                         <div className="mostImportantInfo">
                             {job.location
@@ -91,7 +91,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                 </main>
             </Modal.Body>
 
-            <Modal.Footer className="d-lg-none card-bg position-sticky">
+            <Modal.Footer className="d-lg-none card-bg sticky-bottom" style={{background: "var(--bs-body-bg)"}}>
                 <ApplyOrSave/>
             </Modal.Footer>
 
