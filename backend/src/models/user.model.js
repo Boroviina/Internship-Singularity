@@ -49,9 +49,6 @@ const userSchema = mongoose.Schema(
     occupation: {
       type: String,
     },
-    companyName: {
-      type: String,
-    },
     phone: {
       type: String,
       trim: true,
@@ -85,6 +82,10 @@ const userSchema = mongoose.Schema(
     },
     birthDate: {
       type: Date
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   },
   {

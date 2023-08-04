@@ -37,7 +37,6 @@ const updateUser = {
       name: Joi.string(),
       phone: Joi.string().allow(''),
       occupation: Joi.string().allow(''),
-      companyName: Joi.string().allow(''),
       language: Joi.string().allow(''),
       website: Joi.string().allow(''),
       gender: Joi.string().allow(''),

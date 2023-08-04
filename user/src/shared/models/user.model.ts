@@ -8,10 +8,10 @@ export class UserModel extends BaseModel {
   role: string;
   isEmailVerified: string;
   occupation?: string;
-  companyName?: string;
   phone?: string;
   language?: Language;
   gender?: 'male' | 'female' | 'other';
+  active?: boolean;
   country?: string;
   birthDate?: Date;
   timeZone?: string;

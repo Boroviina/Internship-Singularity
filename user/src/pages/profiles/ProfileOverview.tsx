@@ -27,7 +27,6 @@ export const ProfileOverview = () => {
                     <ProfileOverviewItem label='Country'>{currentUser.country}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Occupation'>{currentUser.occupation}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Language'>{Language[currentUser.language]}</ProfileOverviewItem>
-                    <ProfileOverviewItem label='Company name'>{currentUser.companyName}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Website'>{currentUser.website}</ProfileOverviewItem>
                 </CustomCard>
             </CustomCard>
