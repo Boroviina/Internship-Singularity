@@ -1,11 +1,11 @@
 import {BaseModel} from "./base.model";
 import {RequirementsModel} from "./requirements.model";
+import {Employer} from "./employer.model";
 
 export class JobListing extends BaseModel {
     id: string;
     jobTitle: string;
-    //companyLogo: img?
-    companyName: string;
+    employer: Employer;
     requirementsModel: RequirementsModel;
     location: string;
     salary: number;
@@ -13,16 +13,17 @@ export class JobListing extends BaseModel {
     description: string;
     appDeadline: Date;
     remote: string;
-    datePosted: Date;
     appInstructions: string;
     positionsNum: number;
     cv: boolean;
     coverLetter: boolean;
+    createdAt: Date;
 
 
 
     constructor(attributes?: any) {
         super();
         this.setAttributes(attributes);
+
     }
 }
