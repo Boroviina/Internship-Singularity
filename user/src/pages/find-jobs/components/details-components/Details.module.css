@@ -22,6 +22,9 @@
     right: 40px;
 }
 
+.modalBody {
+    display: grid;
+}
 
 .jobDescription {
     grid-column: span 2;

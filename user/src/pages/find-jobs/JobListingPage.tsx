@@ -39,6 +39,7 @@ const fetchJobs = async () => {
 
     if (jobs) {
         jobsContent = jobs.map(job => {
+            console.log(job);
             return <JobListingCard job={job} showDetails={handleOpen} key={job.id}/>;
         });
     }

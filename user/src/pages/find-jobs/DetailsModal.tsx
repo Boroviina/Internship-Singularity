@@ -59,23 +59,23 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
 
                     </section>
 
-                    {job.requirementsModel
+                    {job.requirements
                         && <section className={styles.qualifications}>
-                            {job.requirementsModel.specialization
-                                && <JobInfo title="Area of expertise" mainData={job.requirementsModel.specialization}
+                            {job.requirements.specialization
+                                && <JobInfo title="Area of expertise" mainData={job.requirements.specialization}
                                             icon="user-tie"/>}
-                            {job.requirementsModel.experience
-                                && <JobInfo title="Experience" mainData={job.requirementsModel.experience} icon="glasses"/>}
-                            {job.requirementsModel.education
-                                && <JobInfo title="Education" mainData={job.requirementsModel.education} icon="graduation-cap"/>}
-                            {job.requirementsModel.skills
-                                && <JobInfo title="Skills" mainData={job.requirementsModel.skills} icon="pencil"/>}
-                            {job.requirementsModel.drivingLicense
+                            {job.requirements.experience
+                                && <JobInfo title="Experience" mainData={job.requirements.experience} icon="glasses"/>}
+                            {job.requirements.education
+                                && <JobInfo title="Education" mainData={job.requirements.education} icon="graduation-cap"/>}
+                            {job.requirements.skills
+                                && <JobInfo title="Skills" mainData={job.requirements.skills} icon="pencil"/>}
+                            {job.requirements.drivingLicense
                                 && <JobInfo title="Driving license"
-                                            mainData={job.requirementsModel.drivingLicense ? "Required" : "Not required"}
+                                            mainData={job.requirements.drivingLicense ? "Required" : "Not required"}
                                             icon="car-side"/>}
-                            {job.requirementsModel.language
-                                && <JobInfo title="Language" mainData={job.requirementsModel.language} icon="earth-americas"/>}
+                            {job.requirements.language
+                                && <JobInfo title="Language" mainData={job.requirements.language} icon="earth-americas"/>}
                         </section>}
 
                     <section className={styles.jobDescription}>

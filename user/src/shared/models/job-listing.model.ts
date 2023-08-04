@@ -6,7 +6,7 @@ export class JobListing extends BaseModel {
     id: string;
     jobTitle: string;
     employer: Employer;
-    requirementsModel: RequirementsModel;
+    requirements: RequirementsModel;
     location: string;
     salary: number;
     employmentType: string;
