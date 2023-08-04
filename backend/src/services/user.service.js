@@ -60,6 +60,23 @@ const updateUserById = async (userId, updateBody) => {
   if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
+
+  // const unsetFields = {};
+  // for (const key in updateBody) {
+  //     if (updateBody[key] === "") {
+  //       delete user[key];
+  //       delete updateBody[key];
+  //       unsetFields[key] = 1;
+  //     } else {
+  //       user[key] = updateBody[key];
+  //     }
+  // }
+  //
+  // if (Object.keys(unsetFields).length > 0) {
+  //   console.log(unsetFields.length)
+  //   await User.updateOne({ _id: userId }, { $unset: unsetFields });
+  // }
+
   Object.assign(user, updateBody);
   await user.save();
   return user;

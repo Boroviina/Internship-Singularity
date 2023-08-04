@@ -23,9 +23,6 @@ const editProfileSchema = Yup.object().shape({
     occupation: Yup.string()
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols'),
-    companyName: Yup.string()
-        .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols'),
     language: Yup.string(),
     website: Yup.string()
         .min(3, 'Minimum 3 symbols')
@@ -47,7 +44,6 @@ export const ProfileSettings = () => {
         name: currentUser.name,
         phone: currentUser.phone || '',
         occupation: currentUser.occupation || '',
-        companyName: currentUser.companyName || '',
         language: currentUser.language || '',
         country: currentUser.country || '',
         birthDate: currentUser.birthDate ? format(new Date(currentUser.birthDate), "yyyy-MM-dd") : '',
@@ -61,14 +57,7 @@ export const ProfileSettings = () => {
         onSubmit: async (values, {setStatus, setSubmitting}) => {
             setLoading(true)
             try {
-                const user = {};
-                for (const value in values) {
-                    if(values[value]) {
-                        user[value] = values[value];
-                    }
-                }
-
-                const updatedUser = await updateUser(`${currentUser.id}`, user)
+                const updatedUser = await updateUser(`${currentUser.id}`, values)
                 setCurrentUser(updatedUser)
 
                 openModal()
@@ -82,7 +71,7 @@ export const ProfileSettings = () => {
 
     const hideModal = () => {
         setShowModal(false);
-        navigate('/profile/overview')
+        navigate('/profile')
     }
     const openModal = () => {
         setShowModal(true);
@@ -125,15 +114,6 @@ export const ProfileSettings = () => {
                             name="occupation"
                             type="text"
                             required={formik.getFieldProps('occupation').value.trim().length !== 0}
-                        />
-                        <Input
-                            label="Company"
-                            formikFieldProps={formik.getFieldProps('companyName')}
-                            formikTouched={formik.touched.companyName}
-                            formikError={formik.errors.companyName}
-                            name="companyName"
-                            type="text"
-                            required={formik.getFieldProps('companyName').value.trim().length !== 0}
                         />
                         <label className="form-label text-label fs-6 fw-bolder" htmlFor="language">Language </label>
                         <select
