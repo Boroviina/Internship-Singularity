@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
@@ -11,47 +11,38 @@ import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
 import {RequirementsModel} from "../../shared/models/requirements.model";
 import {Employer} from "../../shared/models/employer.model";
+import {getJobs} from "../../shared/services/job.service";
 
 const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);
     const handleClose = () => setShowDetails(false);
     const handleOpen = () => setShowDetails(true);
 
-    const specialization = ["Finance and accounting", "Legal", "Technology",
-        "Administrative & customer support", "Marketing & creative"];
-    const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
-    const remote = ["Remote", "Hybrid"];
-    const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
-    const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
-        "Master's degree", "Doctor's degree"];
-    const sortByCategories = ["Relevance", "Date", "Salary"];
-    const job1: JobListing = new JobListing({
-        jobTitle: "Backend developer",
-        employer: new Employer({
-            companyName: "Google"
-        }),
-        requirementsModel: new RequirementsModel({
-            specialization: "Technology",
-            experience: "Mid level",
-            education: "College",
-            skills: "Problem solving, Communication", // ovo bi mogao biti niz
-            language: "English, German",
-            drivingLicense: true
-        }),
-        location: "Sydney - Australia",
-        salary: 4000,
-        employmentType: "Full Time",
-        description: DESCRIPTION,
-        appDeadline: new Date(2023, 8, 23),
-        remote: "Remote",
-        appInstructions: "Please submit your thing into the proper channel and" +
-            "discuss without the necessary preconditions of your applications. We will" +
-            "contact you shortly!",
-        positionsNum: 7,
-        cv: true,
-        coverLetter: true,
-        createdAt: new Date(2023, 6, 12), // MJESECE BROJI OD 0 DO 11
-    });
+    const [jobs, setJobs] = useState(null);
+
+
+
+    useEffect(() => {
+        fetchJobs();
+    }, /*filter, search...*/[]);
+
+const fetchJobs = async () => {
+    try {
+        const jobs = await getJobs();
+        console.log(jobs);
+        setJobs(jobs);
+    } catch (error) {
+        console.log(error);
+    }
+}
+    let jobsContent = <div>No jobs could be found.</div>;
+
+    if (jobs) {
+        jobsContent = jobs.map(job => {
+            return <JobListingCard job={job} showDetails={handleOpen}/>;
+        });
+    }
+
     return (
         <>
             <body>
@@ -84,6 +75,7 @@ const JobListingPage = () => {
                                 <SortBy categories={sortByCategories}/>
                             </div>
                             <div className="jobs my-2">
+                                {jobsContent}
                                 <JobListingCard job={job1} showDetails={handleOpen}/>
                                 <JobListingCard job={job1} showDetails={handleOpen}/>
                                 <JobListingCard job={job1} showDetails={handleOpen}/>
@@ -105,6 +97,14 @@ const JobListingPage = () => {
 
 export default JobListingPage;
 
+const specialization = ["Finance and accounting", "Legal", "Technology",
+    "Administrative & customer support", "Marketing & creative"];
+const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
+const remote = ["Remote", "Hybrid"];
+const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
+const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
+    "Master's degree", "Doctor's degree"];
+const sortByCategories = ["Relevance", "Date", "Salary"];
 
 const DESCRIPTION = "     We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
     "            aliquam\n" +
@@ -130,3 +130,32 @@ const DESCRIPTION = "     We offer Lorem ipsum dolor sit amet, consectetur adipi
     "            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet\n" +
     "            aperiam\n" +
     "            delectus eum exercitationem nemo. Dolorem odit, saepe!\n";
+
+const job1: JobListing = new JobListing({
+    jobTitle: "Backend developer",
+    employer: new Employer({
+        companyName: "Google"
+    }),
+    requirementsModel: new RequirementsModel({
+        specialization: "Technology",
+        experience: "Mid level",
+        education: "College",
+        skills: "Problem solving, Communication", // ovo bi mogao biti niz
+        language: "English, German",
+        drivingLicense: true
+    }),
+    location: "Sydney - Australia",
+    salary: 4000,
+    employmentType: "Full Time",
+    description: DESCRIPTION,
+    appDeadline: new Date(2023, 8, 23),
+    remote: "Remote",
+    appInstructions: "Please submit your thing into the proper channel and" +
+        "discuss without the necessary preconditions of your applications. We will" +
+        "contact you shortly!",
+    positionsNum: 7,
+    cv: true,
+    coverLetter: true,
+    createdAt: new Date(2023, 6, 12), // MJESECE BROJI OD 0 DO 11
+});
+
