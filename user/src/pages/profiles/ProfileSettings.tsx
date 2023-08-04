@@ -61,14 +61,7 @@ export const ProfileSettings = () => {
         onSubmit: async (values, {setStatus, setSubmitting}) => {
             setLoading(true)
             try {
-                const user = {};
-                for (const value in values) {
-                    if(values[value]) {
-                        user[value] = values[value];
-                    }
-                }
-
-                const updatedUser = await updateUser(`${currentUser.id}`, user)
+                const updatedUser = await updateUser(`${currentUser.id}`, values)
                 setCurrentUser(updatedUser)
 
                 openModal()
@@ -82,7 +75,7 @@ export const ProfileSettings = () => {
 
     const hideModal = () => {
         setShowModal(false);
-        navigate('/profile/overview')
+        navigate('/profile')
     }
     const openModal = () => {
         setShowModal(true);
