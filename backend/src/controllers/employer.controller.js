@@ -20,7 +20,13 @@ const getEmployer = catchAsync(async (req, res) => {
   res.send(employer);
 });
 
+const deleteEmployer = catchAsync(async (req, res) => {
+  await employerService.deleteEmployerById(req.params.employerId);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
 module.exports = {
   getEmployers,
-  getEmployer
+  getEmployer,
+  deleteEmployer,
 };
