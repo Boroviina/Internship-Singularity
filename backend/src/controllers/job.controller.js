@@ -9,9 +9,9 @@ const mongoose = require("mongoose");
 
 const createJob = catchAsync(async (req, res) => {
   const session = await mongoose.startSession();
-  session.startTransaction();
-  // because if some data is incorrect, we dont want requirements to get created
+  // because if some data is incorrect, we don't want requirements to get created
   // as a side effect
+  session.startTransaction();
   try {
     const {requirements, ...jobData} = req.body;
     const requirementsInstance = await requirementsService.createRequirements(requirements);
