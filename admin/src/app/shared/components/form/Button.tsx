@@ -2,7 +2,7 @@ import React from 'react';
 import {WithChildren} from "../../../../_metronic/helpers";
 
 type ButtonProps = {
-    type: "button" | "submit" | "reset"
+    type?: "button" | "submit" | "reset"
     state?: "success" | "danger" | "primary" | "warning" | "info" | "dark"
     light?: boolean
     active?: boolean
@@ -15,7 +15,7 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
     const {
-        type,
+        type = "button",
         state = "primary",
         light = true,
         active = true,
@@ -28,21 +28,18 @@ export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
     } = props
 
     return (
-        <div className="d-grid">
-            <button
-                type={type}
-                id={id}
-                className={`btn btn-${active && 'active-'}${light && 'light-'}${state} ${classes && classes}`}
-                disabled={disabled}
-                onClick={onClick ? onClick : undefined}
-            >
-                {!loading && <span className='indicator-label'>{children}</span>}
-                {loading && ( <span className='indicator-progress' style={{display: 'block'}}>
+        <button
+            type={type}
+            id={id}
+            className={`btn btn-${active && 'active-'}${light && 'light-'}${state} ${classes && classes}`}
+            disabled={disabled}
+            onClick={onClick ? onClick : undefined}
+        >
+            {!loading && <span className='indicator-label'>{children}</span>}
+            {loading && ( <span className='indicator-progress' style={{display: 'block'}}>
                     Please wait...<span className='spinner-border spinner-border-sm align-middle ms-2'></span>
             </span>
-                )}
-            </button>
-        </div>
-
+            )}
+        </button>
     );
 }

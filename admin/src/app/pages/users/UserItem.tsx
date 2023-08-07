@@ -7,13 +7,12 @@ import CustomModal from "../../shared/components/CustomModal";
 import {Role} from "../../shared/enums/roles.enum";
 import {Button} from "../../shared/components/form/Button";
 import {Select} from "../../shared/components/form/Select";
-
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 type UserItemProps = {
     user: UserModel;
-    updateUserRole: (userId: string, newRole: string) => void;
-    updateUserActive: (userId: string, newActive: boolean) => void;
-    onDeleteUser: () => void;
+    updateUsers: () => void;
 }
 
 const editUserSchema = Yup.object().shape({
@@ -26,9 +25,7 @@ const editUserSchema = Yup.object().shape({
 export const UserItem: React.FC<UserItemProps> = (props) => {
     const {
         user,
-        updateUserRole,
-        updateUserActive,
-        onDeleteUser
+        updateUsers,
     } = props
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -55,13 +52,16 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
         },
     })
 
-    const removeUser = () => {
-        openDeleteModal()
-    };
     const confirmRemovingUser = async () => {
-        await deleteUser(`${user.id}`);
-        onDeleteUser();
-        hideDeleteModal()
+        setLoading(true)
+        try {
+            await deleteUser(`${user.id}`);
+            updateUsers();
+            hideDeleteModal()
+        } catch (error) {
+            console.log(error)
+        }
+        setLoading(false)
     };
     const hideDeleteModal = () => {
         setShowDeleteModal(false);
@@ -70,13 +70,16 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
         setShowDeleteModal(true);
     };
 
-    const editUser = () => {
-        openEditModal()
-    };
     const confirmChangesToUser = async (updatedUser) => {
-        await updateUser(`${user.id}`, updatedUser)
-        updateUserRole(`${user.id}`, updatedUser.role);
-        hideEditModal()
+        setLoading(true)
+        try {
+            await updateUser(`${user.id}`, updatedUser)
+            updateUsers();
+            hideEditModal()
+        } catch (error) {
+            console.log(error)
+        }
+        setLoading(false)
     };
     const hideEditModal = () => {
         setShowEditModal(false);
@@ -85,13 +88,16 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
         setShowEditModal(true);
     };
 
-    const activateDeactivateUser = async () => {
-        openActivationModal()
-    };
     const confirmUserActivation = async () => {
-        await updateUser(`${user.id}`, {active: !user.active})
-        updateUserActive(`${user.id}`, !user.active);
-        hideActivationModal()
+        setLoading(true)
+        try {
+            await updateUser(`${user.id}`, {active: !user.active})
+            updateUsers();
+            hideActivationModal()
+        } catch (error) {
+            console.log(error)
+        }
+        setLoading(false)
     };
     const hideActivationModal = () => {
         setShowActivationModal(false);
@@ -108,18 +114,23 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                 <td><span className="badge badge-light-success">active</span></td> :
                 <td><span className="badge badge-light-danger">not active</span></td> }
             <td>
-                <button onClick={editUser} className="btn btn-active-light-primary">change role</button>
-                <button onClick={removeUser} className="btn btn-active-light-primary">delete</button>
-                {user.active ?
-                    <button onClick={activateDeactivateUser} className="btn btn-active-light-danger">deactivate</button> :
-                    <button onClick={activateDeactivateUser} className="btn btn-active-light-success">activate</button>}
+                <DropdownButton
+                    id={`dropdown-button-drop`}
+                    size="sm"
+                    variant="secondary"
+                    title="Actions"
+                >
+                    <Dropdown.Item onClick={openEditModal}>change role</Dropdown.Item>
+                    <Dropdown.Item onClick={openDeleteModal}>delete</Dropdown.Item>
+                    <Dropdown.Item onClick={openActivationModal}>{user.active ? 'deactivate' : 'activate'}</Dropdown.Item>
+                </DropdownButton>
             </td>
             <CustomModal
                 show={showDeleteModal}
                 onHide={hideDeleteModal}
                 footer={
                     <div className="d-flex flex-row">
-                        <Button type="button" onClick={confirmRemovingUser} state="success">Continue</Button>
+                        <Button type="button" onClick={confirmRemovingUser} state="success">Delete</Button>
                         <Button type="button" onClick={hideDeleteModal} state="danger">Cancel</Button>
                     </div>
                 }
@@ -145,7 +156,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                         options={Object.entries(Role).map(([key, value]) => ({value: key, label: value,}))}
                     />
 
-                    <div className='text-center mt-4'>
+                    <div className='text-center mt-4 d-grid'>
                         <Button
                             state="success"
                             type="submit"
@@ -161,7 +172,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                 onHide={hideActivationModal}
                 footer={
                 <div className="d-flex flex-row">
-                    <Button type="button" onClick={confirmUserActivation} state="success">Continue</Button>
+                    <Button type="button" onClick={confirmUserActivation} state="success">{user.active ? 'Deactivate account' : 'Activate account'}</Button>
                     <Button type="button" onClick={hideActivationModal} state="danger">Cancel</Button>
                 </div>
                 }

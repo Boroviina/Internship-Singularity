@@ -9,6 +9,7 @@ import {Button} from "../../shared/components/form/Button";
 import {Role} from "../../shared/enums/roles.enum";
 import {createUser} from "../../shared/services/user.service";
 import {Select} from "../../shared/components/form/Select";
+import {Pagination} from "../../shared/components/Pagination";
 
 const addUserSchema = Yup.object().shape({
     name: Yup.string()
@@ -40,18 +41,19 @@ export const Users = () => {
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await getUsersWithPages(page);
-                const {results, totalPages} = response;
-                setUsers(results);
-                setTotalPages(totalPages);
-            } catch(error) {
-                console.log("Error while getting users.");
-            }
+    const fetchUsers = async () => {
+        try {
+            const response = await getUsersWithPages(page);
+            const {results, totalPages} = response;
+            setUsers(results);
+            setTotalPages(totalPages);
+        } catch(error) {
+            console.log("Error while getting users.");
         }
-        fetchUsers();
+    }
+
+    useEffect(() => {
+        fetchUsers()
     }, [page, newUser]);
 
     const formik = useFormik({
@@ -79,36 +81,6 @@ export const Users = () => {
         setShowModal(true);
     };
 
-    const updateUserRole = (userId: string, newRole: string) => {
-        const updatedUsers = users.map(user => {
-            if (user.id === userId) {
-                return { ...user, role: newRole };
-            }
-            return user;
-        });
-        setUsers(updatedUsers);
-    };
-    const updateUserActive = (userId: string, newActive: boolean) => {
-        const updatedUsers = users.map(user => {
-            if (user.id === userId) {
-                return { ...user, active: newActive };
-            }
-            return user;
-        });
-        setUsers(updatedUsers);
-    };
-    const fetchUsers = async () => {
-        try {
-            const response = await getUsersWithPages(page);
-            const {results, totalPages} = response;
-            setUsers(results);
-            setTotalPages(totalPages);
-        } catch(error) {
-            console.log("Error while getting users.");
-        }
-    }
-
-
     return (
         <>
             <div className="d-flex flex-row justify-content-between align-items-center mb-2">
@@ -127,37 +99,16 @@ export const Users = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {users && users.map(user => (<UserItem key={user.id} user={user} updateUserRole={updateUserRole} updateUserActive={updateUserActive} onDeleteUser={fetchUsers}></UserItem>))}
+                        {users && users.map(user => (<UserItem key={user.id} user={user} updateUsers={fetchUsers}></UserItem>))}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <ul className="pagination mt-3">
-                <li className={`page-item previous ${page === 1 && 'disabled'}`}>
-                    <button onClick={() => setPage(page - 1)} className="page-link">
-                        <i className="previous"></i>
-                    </button>
-                </li>
-                {Array.from({ length: totalPages }).map((_, index) => (
-                    <li key={index} className={`page-item ${page === index + 1 ? 'active' : ''}`}>
-                        <button
-                            className="page-link"
-                            onClick={() => setPage(index + 1)}
-                        >
-                            {index + 1}
-                        </button>
-                    </li>
-                ))}
-                <li className={`page-item next ${page === totalPages && 'disabled'}`}>
-                    <button
-                        onClick={() => setPage(page + 1)} className="page-link"
-                        disabled={page === totalPages}
-                    >
-                        <i className="next"></i>
-                    </button>
-                </li>
-            </ul>
-
+            <Pagination
+                page={page}
+                totalPages={totalPages}
+                onPageChange={newPage => setPage(newPage)}
+            />
 
             <CustomModal
                 title="Add user"

@@ -1,5 +1,6 @@
 import ApiClient from './api-client/api-client';
 import {UserModel} from "../models/user.model";
+import {UsersResponse} from "../models/user.model";
 
 const USERS_ENDPOINT = '/users';
 
@@ -9,10 +10,9 @@ export const getUsers = (): Promise<UserModel[] | null> => {
         .then(data => data.results.map(user => new UserModel(user)))
 }
 
-export const getUsersWithPages = (page: number) => {
+export const getUsersWithPages = (page: number): Promise<UsersResponse | null> => {
     return ApiClient.get(USERS_ENDPOINT, `page=${page}`)
-        .then(response => response.data)
-        // .then(data => data.results.map(user => new UserModel(user)))
+        .then(response => new UsersResponse(response.data))
 }
 
 export const getUser = (userId: string): Promise<UserModel | null> => {

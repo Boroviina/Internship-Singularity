@@ -23,3 +23,17 @@ export class UserModel extends BaseModel {
     this.setAttributes(attributes);
   }
 }
+
+export class UsersResponse extends BaseModel {
+  results: UserModel[];
+  page: number;
+  limit: number;
+  totalPages: number;
+  totalResults: number;
+
+  constructor(attributes?: any) {
+    super();
+    this.setAttributes(attributes);
+    this.results = attributes.results.map(user => new UserModel(user));
+  }
+}
