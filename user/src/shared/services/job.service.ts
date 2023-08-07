@@ -7,7 +7,6 @@ const JOBS_ENDPOINT = '/jobs';
      return ApiClient.get(JOBS_ENDPOINT, '&populate=employer,requirements')
          .then(response => response.data)
          .then(data => {
-             console.log(data);
              return data.results.map(job => new JobListing(job));
          })
          .catch((err) => {

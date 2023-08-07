@@ -3,16 +3,25 @@ import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
 import Search from "./components/Search";
-import Filters from "./components/filter-components/Filters";
 import SortBy from "./components/SortBy";
 import Pagination from "./components/Pagination";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
+import Filters from "./components/filter-components/Filters";
+
+export class JobFilters {
+    specialization: string[];
+    remote: string;
+    employmentType: string[];
+    experienceLevel: string;
+    educationLevel: string;
+}
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState(null);
+    const [filters, setFilters] = useState(null);
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
 
@@ -37,7 +46,6 @@ const fetchJobs = async () => {
 
     if (jobs) {
         jobsContent = jobs.map(job => {
-            console.log(job);
             return <JobListingCard job={job} showDetails={handleOpen} key={job.id}/>;
         });
     }
@@ -58,11 +66,11 @@ const fetchJobs = async () => {
 
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
-                                <CheckboxGroup name="Specialization" filters={specialization}/>
-                                <Dropdown name="Remote" filters={remote}/>
-                                <CheckboxGroup name="Employment type" filters={employmentType}/>
-                                <Dropdown name="Experience level" filters={experienceLevel}/>
-                                <Dropdown name="Education level" filters={educationLevel}/>
+                                <CheckboxGroup name="Specialization" filters={Object.values(Specialization)}/>
+                                <Dropdown name="Remote" filters={Object.values(Remote)}/>
+                                <CheckboxGroup name="Employment type" filters={Object.values(EmploymentType)}/>
+                                <Dropdown name="Experience level" filters={Object.values(ExperienceLevel)}/>
+                                <Dropdown name="Education level" filters={Object.values(EducationLevel)}/>
                             </Filters>
                         </section>
 
@@ -91,11 +99,49 @@ const fetchJobs = async () => {
 
 export default JobListingPage;
 
-const specialization = ["Finance and accounting", "Legal", "Technology",
-    "Administrative & customer support", "Marketing & creative"];
-const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
-const remote = ["Remote", "Hybrid"];
-const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
-const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
-    "Master's degree", "Doctor's degree"];
+enum Specialization {
+    FinanceAndAccounting = "Finance and accounting",
+    Legal = "Legal",
+    Technology = "Technology",
+    AdministrativeAndCustomerSupport = "Administrative & customer support",
+    MarketingAndCreative = "Marketing & creative",
+}
+
+enum EmploymentType {
+    FullTime = "Full time",
+    PartTime = "Part time",
+    Internship = "Internship",
+    Contract = "Contract",
+    Temporary = "Temporary",
+}
+
+enum Remote {
+    Remote = "Remote",
+    Hybrid = "Hybrid",
+}
+
+enum ExperienceLevel {
+    NoExperience = "No experience",
+    EntryLevel = "Entry level",
+    MidLevel = "Mid level",
+    SeniorLevel = "Senior level",
+}
+
+enum EducationLevel {
+    NotRequired = "Not required",
+    College = "College",
+    AssociatesDegree = "Associate's degree",
+    BachelorsDegree = "Bachelor's degree",
+    MastersDegree = "Master's degree",
+    DoctorsDegree = "Doctor's degree",
+}
+
 const sortByCategories = ["Relevance", "Date", "Salary"];
+
+// const specialization = ["Finance and accounting", "Legal", "Technology",
+//     "Administrative & customer support", "Marketing & creative"];
+// const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
+// const remote = ["Remote", "Hybrid"];
+// const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
+// const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
+//     "Master's degree", "Doctor's degree"];
