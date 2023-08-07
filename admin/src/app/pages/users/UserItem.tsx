@@ -9,6 +9,7 @@ import {Button} from "../../shared/components/form/Button";
 import {Select} from "../../shared/components/form/Select";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+// import {getEmployers, deleteEmployer} from "../../shared/services/employer.service";
 
 type UserItemProps = {
     user: UserModel;
@@ -55,6 +56,13 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
     const confirmRemovingUser = async () => {
         setLoading(true)
         try {
+            // if(user.role === Role.employer) {
+            //     const employer = await getEmployers(`${user.id}`);
+            //     console.log(employer)
+            //     if(employer) {
+            //         await deleteEmployer(employer.id)
+            //     }
+            // }
             await deleteUser(`${user.id}`);
             updateUsers();
             hideDeleteModal()
@@ -91,7 +99,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
     const confirmUserActivation = async () => {
         setLoading(true)
         try {
-            await updateUser(`${user.id}`, {active: !user.active})
+            await updateUser(`${user.id}`, {active: !user.active});
             updateUsers();
             hideActivationModal()
         } catch (error) {
