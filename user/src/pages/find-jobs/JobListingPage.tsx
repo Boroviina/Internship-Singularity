@@ -12,27 +12,27 @@ import {JobListing} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
 
 const JobListingPage = () => {
+    const [jobs, setJobs] = useState(null);
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
+
     const handleClose = () => setShowDetails(false);
     const handleOpen = (job: JobListing) => {
         setShownJob(job);
         setShowDetails(true)
     };
 
-    const [jobs, setJobs] = useState(null);
+    // TODO jobs should really come as a prop!
+    // and fetchJobs should be a callback that takes optional parameters
+    // sortBy, filters and search options
     useEffect(() => {
         fetchJobs();
     }, /*filter, search...*/[]);
 
 const fetchJobs = async () => {
-    try {
-        const jobs = await getJobs();
-        setJobs(jobs);
-    } catch (error) {
-        console.log(error);
-    }
-}
+    const jobs = await getJobs();
+    setJobs(jobs);
+};
     let jobsContent = <div>No jobs could be found.</div>;
 
     if (jobs) {
