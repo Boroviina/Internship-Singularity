@@ -6,9 +6,9 @@ import {UserItem} from "./UserItem";
 import CustomModal from "../../shared/components/CustomModal";
 import {Input} from "../../shared/components/form/Input";
 import {Button} from "../../shared/components/form/Button";
-import clsx from "clsx";
 import {Role} from "../../shared/enums/roles.enum";
 import {createUser} from "../../shared/services/user.service";
+import {Select} from "../../shared/components/form/Select";
 
 const addUserSchema = Yup.object().shape({
     name: Yup.string()
@@ -52,7 +52,6 @@ export const Users = () => {
             }
         }
         fetchUsers();
-    // }, [page, users]);
     }, [page, newUser]);
 
     const formik = useFormik({
@@ -98,6 +97,17 @@ export const Users = () => {
         });
         setUsers(updatedUsers);
     };
+    const fetchUsers = async () => {
+        try {
+            const response = await getUsersWithPages(page);
+            const {results, totalPages} = response;
+            setUsers(results);
+            setTotalPages(totalPages);
+        } catch(error) {
+            console.log("Error while getting users.");
+        }
+    }
+
 
     return (
         <>
@@ -117,7 +127,7 @@ export const Users = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {users && users.map(user => (<UserItem key={user.id} user={user} updateUserRole={updateUserRole} updateUserActive={updateUserActive}></UserItem>))}
+                        {users && users.map(user => (<UserItem key={user.id} user={user} updateUserRole={updateUserRole} updateUserActive={updateUserActive} onDeleteUser={fetchUsers}></UserItem>))}
                         </tbody>
                     </table>
                 </div>
@@ -149,7 +159,11 @@ export const Users = () => {
             </ul>
 
 
-            <CustomModal title="Add user" show={showModal} onHide={hideModal}>
+            <CustomModal
+                title="Add user"
+                show={showModal}
+                onHide={hideModal}
+            >
                 <form
                     className={`form w-100 my-4 p-4`}
                     onSubmit={formik.handleSubmit}
@@ -176,25 +190,20 @@ export const Users = () => {
                         required={true}
                         requiredStar={true}
                     />
-                    <div className='fv-row mb-3'>
-                        <label htmlFor="role" className="form-label fs-6 fw-bolder text-label">Role<span className="text-danger">*</span></label>
-                        <select
-                            {...formik.getFieldProps('role')}
-                            className={clsx(
-                                `form-control form-control-solid mb-3 `,
-                                {'is-invalid': formik.touched.role && formik.errors.role},
-                                {'is-valid': formik.touched.role && !formik.errors.role}
-                            )}
-                            name="role" id="role">
-                            <option value=""></option>
-                            {Object.entries(Role).map(([key, value]) => (
-                                <option key={key} value={key}>{value}</option>
-                            ))}
-                        </select>
-                    </div>
-
+                    <Select
+                        label="Role"
+                        formikFieldProps={formik.getFieldProps('role')}
+                        formikTouched={formik.touched.role}
+                        formikError={formik.errors.role}
+                        name="role"
+                        id="role"
+                        required={true}
+                        requiredStar={true}
+                        options={Object.entries(Role).map(([key, value]) => ({value: key, label: value,}))}
+                    />
                     <div className='text-center mt-4'>
                         <Button
+                            state="success"
                             type="submit"
                             id='kt_edit_profile_submit'
                             disabled={formik.isSubmitting || !formik.isValid}

@@ -3,20 +3,26 @@ import {WithChildren} from "../../../../_metronic/helpers";
 
 type ButtonProps = {
     type: "button" | "submit" | "reset"
+    state?: "success" | "danger" | "primary" | "warning" | "info" | "dark"
+    light?: boolean
+    active?: boolean
     id?: string
     disabled?: boolean
     loading?: boolean
-    filled?: boolean
+    classes?: string
     onClick?: () => void
 }
 
 export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
     const {
         type,
+        state = "primary",
+        light = true,
+        active = true,
         id,
         disabled,
         loading,
-        filled,
+        classes,
         onClick,
         children,
     } = props
@@ -26,8 +32,7 @@ export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
             <button
                 type={type}
                 id={id}
-                // className={`${filled ? `btn btn-white` : `btn btn-pink`}`}
-                className="btn btn-active-light-success"
+                className={`btn btn-${active && 'active-'}${light && 'light-'}${state} ${classes && classes}`}
                 disabled={disabled}
                 onClick={onClick ? onClick : undefined}
             >

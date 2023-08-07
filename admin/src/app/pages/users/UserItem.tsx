@@ -1,19 +1,19 @@
 import React, {useState} from "react";
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import clsx from "clsx";
 import {UserModel} from "../../shared/models/user.model";
 import {deleteUser, updateUser} from "../../shared/services/user.service";
 import CustomModal from "../../shared/components/CustomModal";
-import {Input} from "../../shared/components/form/Input";
 import {Role} from "../../shared/enums/roles.enum";
 import {Button} from "../../shared/components/form/Button";
+import {Select} from "../../shared/components/form/Select";
 
 
 type UserItemProps = {
     user: UserModel;
     updateUserRole: (userId: string, newRole: string) => void;
     updateUserActive: (userId: string, newActive: boolean) => void;
+    onDeleteUser: () => void;
 }
 
 const editUserSchema = Yup.object().shape({
@@ -23,16 +23,15 @@ const editUserSchema = Yup.object().shape({
         .required('Role is required'),
 })
 
-
-
 export const UserItem: React.FC<UserItemProps> = (props) => {
     const {
         user,
         updateUserRole,
-        updateUserActive
+        updateUserActive,
+        onDeleteUser
     } = props
 
-    const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showActivationModal, setShowActivationModal] = useState(false);
     const [loading, setLoading] = useState(false)
@@ -47,8 +46,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
         onSubmit: async (values, {setStatus, setSubmitting}) => {
             setLoading(true)
             try {
-                confirmChangesToUser(values);
-                // hideModal()
+                await confirmChangesToUser(values);
             } catch (error) {
                 setStatus('User detail is invalid')
                 setSubmitting(false)
@@ -57,21 +55,22 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
         },
     })
 
-    const removeUser = async () => {
-        openModal()
+    const removeUser = () => {
+        openDeleteModal()
     };
     const confirmRemovingUser = async () => {
         await deleteUser(`${user.id}`);
-        hideModal()
+        onDeleteUser();
+        hideDeleteModal()
     };
-    const hideModal = () => {
-        setShowModal(false);
+    const hideDeleteModal = () => {
+        setShowDeleteModal(false);
     }
-    const openModal = () => {
-        setShowModal(true);
+    const openDeleteModal = () => {
+        setShowDeleteModal(true);
     };
 
-    const editUser = async () => {
+    const editUser = () => {
         openEditModal()
     };
     const confirmChangesToUser = async (updatedUser) => {
@@ -116,12 +115,14 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                     <button onClick={activateDeactivateUser} className="btn btn-active-light-success">activate</button>}
             </td>
             <CustomModal
-                title="title"
-                show={showModal}
-                onHide={hideModal}
-                buttonFooter={true}
-                buttonFooterText="Yes"
-                onClickButtonFooter={confirmRemovingUser}
+                show={showDeleteModal}
+                onHide={hideDeleteModal}
+                footer={
+                    <div className="d-flex flex-row">
+                        <Button type="button" onClick={confirmRemovingUser} state="success">Continue</Button>
+                        <Button type="button" onClick={hideDeleteModal} state="danger">Cancel</Button>
+                    </div>
+                }
             >
                 Are you sure you want to delete {user.name}?
             </CustomModal>
@@ -132,25 +133,21 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                     noValidate
                     id='kt_edit_profile_form'
                 >
-                    <div className='fv-row mb-3'>
-                        <label htmlFor="role" className="form-label fs-6 fw-bolder text-label">Role<span className="text-danger">*</span></label>
-                        <select
-                            {...formik.getFieldProps('role')}
-                            className={clsx(
-                                `form-control form-control-solid mb-3 `,
-                                {'is-invalid': formik.touched.role && formik.errors.role},
-                                {'is-valid': formik.touched.role && !formik.errors.role}
-                            )}
-                            name="role" id="role">
-                            <option value=""></option>
-                            {Object.entries(Role).map(([key, value]) => (
-                                <option key={key} value={key}>{value}</option>
-                            ))}
-                        </select>
-                    </div>
+                    <Select
+                        label="Role"
+                        formikFieldProps={formik.getFieldProps('role')}
+                        formikTouched={formik.touched.role}
+                        formikError={formik.errors.role}
+                        name="role"
+                        id="role"
+                        required={true}
+                        requiredStar={true}
+                        options={Object.entries(Role).map(([key, value]) => ({value: key, label: value,}))}
+                    />
 
                     <div className='text-center mt-4'>
                         <Button
+                            state="success"
                             type="submit"
                             id='kt_edit_profile_submit'
                             disabled={formik.isSubmitting || !formik.isValid}
@@ -160,12 +157,14 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                 </form>
             </CustomModal>
             <CustomModal
-                title="title"
                 show={showActivationModal}
                 onHide={hideActivationModal}
-                buttonFooter={true}
-                buttonFooterText="Yes"
-                onClickButtonFooter={confirmUserActivation}
+                footer={
+                <div className="d-flex flex-row">
+                    <Button type="button" onClick={confirmUserActivation} state="success">Continue</Button>
+                    <Button type="button" onClick={hideActivationModal} state="danger">Cancel</Button>
+                </div>
+                }
             >
                 Are you sure you want to {user.active ? 'deactivate' : 'activate'} {user.name}'s account?
             </CustomModal>

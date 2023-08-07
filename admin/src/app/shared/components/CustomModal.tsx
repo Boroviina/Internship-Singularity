@@ -3,14 +3,12 @@ import {WithChildren} from "../../../_metronic/helpers";
 import Modal from 'react-bootstrap/Modal';
 
 type CustomModalProps = {
-    title: string
+    title?: string
     show: boolean
     onHide: () => void
     backdrop?: boolean | "static"
     keyboard?: boolean
-    buttonFooter?: boolean
-    buttonFooterText?: string
-    onClickButtonFooter?: () => void
+    footer?: React.ReactNode
 }
 
 const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
@@ -20,9 +18,7 @@ const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
         onHide,
         backdrop = "static",
         keyboard = false,
-        buttonFooter,
-        buttonFooterText,
-        onClickButtonFooter,
+        footer,
         children,
     } = props
 
@@ -37,13 +33,13 @@ const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>{title}</Modal.Title>
+                    {title && <Modal.Title>{title}</Modal.Title>}
                 </Modal.Header>
                 <Modal.Body>
                     {children}
                 </Modal.Body>
-                {buttonFooter && <Modal.Footer>
-                    <button onClick={onClickButtonFooter}>{buttonFooterText}</button>
+                {footer && <Modal.Footer>
+                    {footer}
                 </Modal.Footer>}
             </Modal>
         </>
