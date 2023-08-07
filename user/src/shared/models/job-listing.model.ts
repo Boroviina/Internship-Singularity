@@ -4,7 +4,7 @@ import {Employer} from "./employer.model";
 
 export class JobListing extends BaseModel {
     id: string;
-    jobTitle: string;
+    title: string;
     employer: Employer;
     requirements: RequirementsModel;
     location: string;

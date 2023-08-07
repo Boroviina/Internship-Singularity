@@ -22,7 +22,7 @@ export const JobApplicationItem: React.FC<JobApplicationItemProps> = (props) => 
                     <i className="bi bi-bag-heart text-success" style={{fontSize: '1.3rem'}}></i>
                     <span className="badge text-bg-success">active</span>
                 </span>}
-                <p className="mb-0 mt-1 fw-bold text-label fs-5">{item.job.jobTitle}</p>
+                <p className="mb-0 mt-1 fw-bold text-label fs-5">{item.job.title}</p>
                 <span className={'text-label'}>
                     <i className={`bi bi-clock-history ${expired ? 'text-danger' : 'text-success'}`}></i>
                     {' '}{(new Date(item.job.appDeadline)).toLocaleString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}

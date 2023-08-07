@@ -30,7 +30,7 @@ const JobListingCard = ({job, showDetails} : JobProps) => {
                          alt={"Company Logo"}/>
                 </a>
                 <div onClick={clickHandler} className={`pointer flex-grow-1`}>
-                        <h4 className={`label`}>{job.jobTitle}</h4>
+                        <h4 className={`label`}>{job.title}</h4>
                     <span className="fw-semibold">
                         <span>{job.employer.companyName}</span>
                         <span className="text-black-50">
