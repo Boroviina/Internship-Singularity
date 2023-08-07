@@ -32,3 +32,8 @@ export const createUser = (user): Promise<UserModel | null> => {
         .then(response => response.data)
         .then(data => new UserModel(data))
 }
+
+export const deleteUser = (userId: string): Promise<any> => {
+    return ApiClient.remove(`${USERS_ENDPOINT}/${userId}`)
+        .then(response => response.data)
+}

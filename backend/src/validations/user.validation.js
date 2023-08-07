@@ -42,6 +42,8 @@ const updateUser = {
       gender: Joi.string().allow(''),
       country: Joi.string().allow(''),
       birthDate: Joi.date().allow(''),
+      role: Joi.string().allow(''),
+      active: Joi.boolean(),
     })
     .min(1),
 };

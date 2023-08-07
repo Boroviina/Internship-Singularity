@@ -8,6 +8,9 @@ type CustomModalProps = {
     onHide: () => void
     backdrop?: boolean | "static"
     keyboard?: boolean
+    buttonFooter?: boolean
+    buttonFooterText?: string
+    onClickButtonFooter?: () => void
 }
 
 const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
@@ -17,6 +20,9 @@ const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
         onHide,
         backdrop = "static",
         keyboard = false,
+        buttonFooter,
+        buttonFooterText,
+        onClickButtonFooter,
         children,
     } = props
 
@@ -36,9 +42,9 @@ const CustomModal: React.FC<CustomModalProps & WithChildren> = (props) => {
                 <Modal.Body>
                     {children}
                 </Modal.Body>
-                {/*<Modal.Footer>*/}
-                {/*    <button onClick={onHide}>Continue</button>*/}
-                {/*</Modal.Footer>*/}
+                {buttonFooter && <Modal.Footer>
+                    <button onClick={onClickButtonFooter}>{buttonFooterText}</button>
+                </Modal.Footer>}
             </Modal>
         </>
     );

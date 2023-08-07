@@ -52,6 +52,7 @@ export const Users = () => {
             }
         }
         fetchUsers();
+    // }, [page, users]);
     }, [page, newUser]);
 
     const formik = useFormik({
@@ -79,6 +80,25 @@ export const Users = () => {
         setShowModal(true);
     };
 
+    const updateUserRole = (userId: string, newRole: string) => {
+        const updatedUsers = users.map(user => {
+            if (user.id === userId) {
+                return { ...user, role: newRole };
+            }
+            return user;
+        });
+        setUsers(updatedUsers);
+    };
+    const updateUserActive = (userId: string, newActive: boolean) => {
+        const updatedUsers = users.map(user => {
+            if (user.id === userId) {
+                return { ...user, active: newActive };
+            }
+            return user;
+        });
+        setUsers(updatedUsers);
+    };
+
     return (
         <>
             <div className="d-flex flex-row justify-content-between align-items-center mb-2">
@@ -97,7 +117,7 @@ export const Users = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {users && users.map(user => (<UserItem key={user.id} user={user}></UserItem>))}
+                        {users && users.map(user => (<UserItem key={user.id} user={user} updateUserRole={updateUserRole} updateUserActive={updateUserActive}></UserItem>))}
                         </tbody>
                     </table>
                 </div>
@@ -159,7 +179,7 @@ export const Users = () => {
                     <div className='fv-row mb-3'>
                         <label htmlFor="role" className="form-label fs-6 fw-bolder text-label">Role<span className="text-danger">*</span></label>
                         <select
-                            {...formik.getFieldProps('language')}
+                            {...formik.getFieldProps('role')}
                             className={clsx(
                                 `form-control form-control-solid mb-3 `,
                                 {'is-invalid': formik.touched.role && formik.errors.role},
