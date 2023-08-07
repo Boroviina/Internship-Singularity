@@ -5,7 +5,7 @@ const REGISTER_EMPLOYER_ENDPOINT = '/employers';
 
 const registerEmployer = (employer: object): Promise<Employer | null> => {
     console.log(employer);
-    return ApiClient.post('/register-employer', employer)
+    return ApiClient.post('/auth/register-employer', employer)
         .then(response => new Employer(response.data));
 }
 
