@@ -2,7 +2,7 @@ import {BaseModel} from "./base.model";
 import {UserModel} from "./user.model";
 
 export class Employer extends BaseModel {
-    id: string;
+    // id: string;
     user: UserModel;
     companyName: string;
     industry: string;
