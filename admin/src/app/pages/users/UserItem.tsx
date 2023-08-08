@@ -7,9 +7,8 @@ import CustomModal from "../../shared/components/CustomModal";
 import {Role} from "../../shared/enums/roles.enum";
 import {Button} from "../../shared/components/form/Button";
 import {Select} from "../../shared/components/form/Select";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import {getEmployers, deleteEmployer} from "../../shared/services/employer.service";
+import {CustomItemsDropdown} from "../../shared/components/CustomItemsDropdown";
 
 type UserItemProps = {
     user: UserModel;
@@ -121,16 +120,11 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                 <td><span className="badge badge-light-success">approved</span></td> :
                 <td><span className="badge badge-light-danger">pending</span></td> }
             <td>
-                <DropdownButton
-                    id={`dropdown-button-drop`}
-                    size="sm"
-                    variant="primary"
-                    title="Actions"
-                >
-                    {/*<Dropdown.Item onClick={openEditModal}>change role</Dropdown.Item>*/}
-                    <Dropdown.Item onClick={openDeleteModal}>delete</Dropdown.Item>
-                    <Dropdown.Item onClick={openActivationModal}>{user.active ? 'deactivate' : 'activate'}</Dropdown.Item>
-                </DropdownButton>
+                <CustomItemsDropdown options={[
+                    // {label: 'change role', onClick: openEditModal},
+                    {label: 'delete', onClick: openDeleteModal},
+                    {label: user.active ? 'deactivate' : 'activate', onClick: openActivationModal},
+                ]}/>
             </td>
             <CustomModal
                 show={showDeleteModal}
