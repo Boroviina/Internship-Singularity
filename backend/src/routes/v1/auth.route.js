@@ -9,6 +9,7 @@ const router = express.Router();
 router.post('/register-employer', validate(authValidation.registerEmployer), authController.registerEmployer);
 router.post('/register', validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
+router.post('/login-user', validate(authValidation.login), authController.loginUser);
 router.post('/logout', validate(authValidation.logout), authController.logout);
 router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
