@@ -53,6 +53,5 @@ export function ApplicationsReview() {
         <div className={'container d-flex flex-column mt-5'}>
             {jobAppContent}
         </div>
-
     </div>;
 }
