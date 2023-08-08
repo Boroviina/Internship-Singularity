@@ -152,7 +152,7 @@ export const Users = () => {
                         requiredStar={true}
                         options={Object.entries(Role).map(([key, value]) => ({value: key, label: value,}))}
                     />
-                    <div className='text-center mt-4'>
+                    <div className='text-center mt-4 d-grid'>
                         <Button
                             state="success"
                             type="submit"

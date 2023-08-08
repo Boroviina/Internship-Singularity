@@ -6,7 +6,7 @@ const {employerService} = require("../services");
 
 
 const getEmployers = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['industry', 'numOfEmployees']);
+  const filter = pick(req.query, ['industry', 'numOfEmployees', 'adminUser']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await employerService.queryEmployers(filter, options);
   res.send(result);
