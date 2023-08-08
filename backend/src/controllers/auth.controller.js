@@ -17,6 +17,13 @@ const registerEmployer = catchAsync(async (req, res) => {
 
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
+  const user = await authService.loginAdminWithEmailAndPassword(email, password);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ user, tokens });
+});
+
+const loginUser = catchAsync(async (req, res) => {
+  const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
   res.send({ user, tokens });
@@ -58,6 +65,7 @@ module.exports = {
   register,
   registerEmployer,
   login,
+  loginUser,
   logout,
   refreshTokens,
   forgotPassword,
