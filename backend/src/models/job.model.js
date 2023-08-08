@@ -12,33 +12,43 @@ const jobSchema = mongoose.Schema(
       trim: true,
       maxLength: [100, 'The field must have less than or equal to 100 characters']
     },
+    employer: {
+      required: [true, 'The field must be filled'],
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Employer',
+    },
+    requirements: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Requirements',
+    },
+    location: {
+      type: String,
+      trim: true,
+      maxLength: [100, 'The field must be less than a 100 characters long']
+    },
+    salary: {
+      type: String,
+      trim: true,
+      maxLength: [20, 'The field must be less than 20 characters long']
+    },
+    employmentType: {
+      type: String,
+      trim: true,
+      maxLength: [30, 'The field must be less than 30 characters long']
+    },
     description: {
       type: String,
       required: [true,'The field must be filled'],
       trim: true,
-      maxLength: [500, 'The field must have less than or equal to 500 characters']
-    },
-    education: {
-      type: String,
-      trim: true,
-      maxLength: [200, 'The field must have less than or equal to 200 characters']
-    },
-    skills: {
-      type: String,
-      trim: true,
-      maxLength: [200, 'The field must have less than or equal to 200 characters']
-    },
-    language: {
-      type: String,
-      trim: true,
-      maxLength: [100, 'The field must have less than or equal to 100 characters']
-    },
-    driverLicense: {
-      type: Boolean
+      maxLength: [10000, 'The field must be less than 10,000 characters long']
     },
     appDeadline: {
       type: Date,
-      required: true
+    },
+    remote: {
+      type: String,
+      trim: true,
+      maxLength: [30, 'The field must be less than 10,000 characters long']
     },
     appInstructions: {
       type: String,
@@ -49,17 +59,17 @@ const jobSchema = mongoose.Schema(
     positionsNum:{
       type:Number,
       min: [1, 'Minimal number of position is 1'],
-      max:[1, 'Maximal positions number is 10']
+      max:[50, 'Maximal positions number is 10']
     },
     cv: {
       type: Boolean
     },
     coverLetter: {
       type: Boolean
-    }
+    },
   },
   {
-    timestamp: true
+    timestamps: true
   }
 );
 

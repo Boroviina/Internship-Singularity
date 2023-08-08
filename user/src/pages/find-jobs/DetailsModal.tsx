@@ -15,12 +15,11 @@ interface DetailsProps {
 }
 
 const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
-    const requirements = job.requirementsModel ? job.requirementsModel : null;
     return (
         <Modal show={showDetails} onHide={close} size="lg">
 
             <Modal.Header className="mx-auto">
-                <ModalHeader companyName={job.companyName} jobTitle={job.jobTitle} pay={job.salary}/>
+                <ModalHeader companyName={job.employer.companyName} jobTitle={job.jobTitle} salary={job.salary + " €"}/>
 
                 <div className={`${styles.positionBtns} d-none d-lg-block`}>
                     <ApplyOrSave/>
@@ -31,7 +30,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
             </Modal.Header>
 
             <Modal.Body>
-                <main className={styles.modalBody}>
+                <main className={`${styles.modalBody}`}>
                     <section className={styles.jobInformation}>
                         <div className="mostImportantInfo">
                             {job.location
@@ -43,7 +42,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                         </div>
                         {job.appDeadline
                             && <JobInfo title="Application deadline"
-                                        mainData={job.appDeadline.toLocaleDateString('en-us', {
+                                        mainData={new Date(job.appDeadline).toLocaleDateString('en-us', {
                                             month: "long",
                                             day: "numeric"
                                         })}
@@ -60,23 +59,23 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
 
                     </section>
 
-                    {requirements
+                    {job.requirements
                         && <section className={styles.qualifications}>
-                            {requirements.specialization
-                                && <JobInfo title="Area of expertise" mainData={requirements.specialization}
+                            {job.requirements.specialization
+                                && <JobInfo title="Area of expertise" mainData={job.requirements.specialization}
                                             icon="user-tie"/>}
-                            {requirements.experience
-                                && <JobInfo title="Experience" mainData={requirements.experience} icon="glasses"/>}
-                            {requirements.education
-                                && <JobInfo title="Education" mainData={requirements.education} icon="graduation-cap"/>}
-                            {requirements.skills
-                                && <JobInfo title="Skills" mainData={requirements.skills} icon="pencil"/>}
-                            {requirements.driverLicence
+                            {job.requirements.experience
+                                && <JobInfo title="Experience" mainData={job.requirements.experience} icon="glasses"/>}
+                            {job.requirements.education
+                                && <JobInfo title="Education" mainData={job.requirements.education} icon="graduation-cap"/>}
+                            {job.requirements.skills
+                                && <JobInfo title="Skills" mainData={job.requirements.skills} icon="pencil"/>}
+                            {job.requirements.drivingLicense
                                 && <JobInfo title="Driving license"
-                                            mainData={requirements.driverLicence ? "Required" : "Not required"}
+                                            mainData={job.requirements.drivingLicense ? "Required" : "Not required"}
                                             icon="car-side"/>}
-                            {requirements.language
-                                && <JobInfo title="Language" mainData={requirements.language} icon="earth-americas"/>}
+                            {job.requirements.language
+                                && <JobInfo title="Language" mainData={job.requirements.language} icon="earth-americas"/>}
                         </section>}
 
                     <section className={styles.jobDescription}>
@@ -92,7 +91,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                 </main>
             </Modal.Body>
 
-            <Modal.Footer className="d-lg-none card-bg position-sticky">
+            <Modal.Footer className="d-lg-none card-bg sticky-bottom" style={{background: "var(--bs-body-bg)"}}>
                 <ApplyOrSave/>
             </Modal.Footer>
 

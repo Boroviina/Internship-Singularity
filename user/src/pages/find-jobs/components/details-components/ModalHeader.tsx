@@ -5,10 +5,10 @@ import styles from "./Details.module.css";
 interface HeaderProps {
     companyName: string;
     jobTitle: string;
-    pay?: string;
+    salary?: string;
 }
 
-const ModalHeader = ({companyName, jobTitle, pay}: HeaderProps) => {
+const ModalHeader = ({companyName, jobTitle, salary}: HeaderProps) => {
     return (
         <header className={`d-flex flex-column align-items-center`}>
             <img src={logo} className={`${styles.logo} p-1`} alt={"Company Logo"}/>
@@ -17,7 +17,7 @@ const ModalHeader = ({companyName, jobTitle, pay}: HeaderProps) => {
             <div className={`d-flex flex-column flex-lg-row justify-content-between align-items-center text-center`}>
                 <div className="fs-3 fw-bold">{jobTitle}</div>
                 <div className={`mx-2 fs-3 fw-bold d-none d-lg-block`}>-</div>
-                {pay && <div className="fs-3 fw-bold text-nowrap flex-wrap text-success">{pay}</div>}
+                {salary && <div className="fs-3 fw-bold text-nowrap flex-wrap text-success">{salary}</div>}
             </div>
         </header>
     );
