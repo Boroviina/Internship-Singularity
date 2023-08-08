@@ -6,7 +6,7 @@ export class RequirementsModel extends BaseModel {
     education: string;
     skills: string;
     language: string;
-    driverLicence: boolean;
+    drivingLicense: boolean;
 
     constructor(attributes?: any) {
         super();

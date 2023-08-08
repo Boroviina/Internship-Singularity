@@ -11,19 +11,23 @@
 }
 
 .xClose {
+    position: absolute;
     top: 17px;
     right: 19px;
 }
 
 .positionBtns {
+    position: absolute;
     top: 86px;
     right: 40px;
 }
 
+.modalBody {
+    display: grid;
+}
 
 .jobDescription {
     grid-column: span 2;
-
 }
 
 @media screen and (max-width: 576px) {
