@@ -15,6 +15,17 @@ export const getUsersWithPages = (page: number): Promise<UsersResponse | null> =
         .then(response => new UsersResponse(response.data))
 }
 
+export const getFilteredUsersWithPages = (page: number, filter): Promise<UsersResponse | null> => {
+    let query = '';
+    for (const key in filter) {
+        if (filter[key] !== '') {
+            query += `&${key}=${filter[key]}`
+        }
+    }
+    return ApiClient.get(USERS_ENDPOINT, `page=${page}${query}`)
+        .then(response => new UsersResponse(response.data))
+}
+
 export const getUser = (userId: string): Promise<UserModel | null> => {
     return ApiClient.get(`${USERS_ENDPOINT}/${userId}`)
         .then(response => response.data)

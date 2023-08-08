@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import {getUsersWithPages} from "../../shared/services/user.service";
+import {KTSVG} from "../../../_metronic/helpers";
+import {getFilteredUsersWithPages} from "../../shared/services/user.service";
 import {UserItem} from "./UserItem";
 import CustomModal from "../../shared/components/CustomModal";
 import {Input} from "../../shared/components/form/Input";
@@ -10,6 +11,7 @@ import {Role} from "../../shared/enums/roles.enum";
 import {createUser} from "../../shared/services/user.service";
 import {Select} from "../../shared/components/form/Select";
 import {Pagination} from "../../shared/components/Pagination";
+import {CustomDropdown} from "../../shared/components/CustomDropdown";
 
 const addUserSchema = Yup.object().shape({
     name: Yup.string()
@@ -26,10 +28,18 @@ const addUserSchema = Yup.object().shape({
         .max(50, 'Maximum 50 symbols')
         .required('Role is required'),
 })
-
-const initialValues = {
+const initialValuesAddUser = {
     name: '',
     email: '',
+    role: '',
+}
+
+const filterSchema = Yup.object().shape({
+    role: Yup.string(),
+    active: Yup.string()
+})
+const initialValuesFilter = {
+    active: '',
     role: '',
 }
 
@@ -38,12 +48,14 @@ export const Users = () => {
     const [newUser, setNewUser] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(1)
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [roleFilter, setRoleFilter] = useState('');
+    const [activeFilter, setActiveFilter] = useState('');
 
     const fetchUsers = async () => {
         try {
-            const response = await getUsersWithPages(page);
+            const response = await getFilteredUsersWithPages(page, {role: roleFilter, active: activeFilter});
             const {results, totalPages} = response;
             setUsers(results);
             setTotalPages(totalPages);
@@ -54,10 +66,10 @@ export const Users = () => {
 
     useEffect(() => {
         fetchUsers()
-    }, [page, newUser]);
+    }, [page, newUser, roleFilter, activeFilter]);
 
     const formik = useFormik({
-        initialValues,
+        initialValues: initialValuesAddUser,
         validationSchema: addUserSchema,
         onSubmit: async (values, {setStatus, setSubmitting, resetForm}) => {
             setLoading(true)
@@ -74,6 +86,23 @@ export const Users = () => {
         },
     })
 
+    const formikFilter = useFormik({
+        initialValues: initialValuesFilter,
+        validationSchema: filterSchema,
+        onSubmit: async (values, {setStatus, setSubmitting}) => {
+            setLoading(true)
+            try {
+                setRoleFilter(values.role)
+                setActiveFilter(values.active)
+                setPage(1)
+            } catch (error) {
+                setStatus('Filter detail is invalid')
+                setSubmitting(false)
+            }
+            setLoading(false)
+        },
+    })
+
     const hideModal = () => {
         setShowModal(false);
     }
@@ -84,8 +113,53 @@ export const Users = () => {
     return (
         <>
             <div className="d-flex flex-row justify-content-between align-items-center mb-2">
-                <div className="fs-1">User list</div>
-                <button className="btn btn-active-light-primary" onClick={openModal}>Add user</button>
+                <div className="fs-1 d-none d-sm-block">Users list</div>
+                <div className="d-flex flex-row">
+                    <CustomDropdown options={[
+                        { content:  <form
+                                className={`form w-100 my-4 p-4`}
+                                onSubmit={formikFilter.handleSubmit}
+                                noValidate
+                                id='kt_filter_form'
+                            >
+                                <Select
+                                    label="Role"
+                                    formikFieldProps={formikFilter.getFieldProps('role')}
+                                    formikTouched={formikFilter.touched.role}
+                                    formikError={formikFilter.errors.role}
+                                    name="role"
+                                    id="role"
+                                    options={Object.entries(Role).map(([key, value]) => ({value: key, label: value,}))}
+                                />
+                                <Select
+                                    label="Status"
+                                    formikFieldProps={formikFilter.getFieldProps('active')}
+                                    formikTouched={formikFilter.touched.active}
+                                    formikError={formikFilter.errors.active}
+                                    name="active"
+                                    id="active"
+                                    options={[{value: 'true', label: 'approved'}, {value: 'false', label: 'pending'}]}
+                                />
+                                <div className='text-center mt-4 d-grid'>
+                                    <Button
+                                        state="primary"
+                                        type="submit"
+                                        id='kt_filter_submit'
+                                        disabled={formikFilter.isSubmitting || !formikFilter.isValid}
+                                        loading={loading}
+                                    >Continue</Button>
+                                </div>
+                                <div className='text-center mt-4 d-grid'>
+                                    <Button
+                                        state="primary"
+                                        type="button"
+                                        onClick={() => {formikFilter.resetForm(); setRoleFilter(''); setActiveFilter(''); setPage(1)}}
+                                    >Clear</Button>
+                                </div>
+                            </form>},
+                    ]}></CustomDropdown>
+                    <button className="btn btn-light-primary ms-2" onClick={openModal}><KTSVG path="/media/icons/duotune/abstract/abs011.svg" className="svg-icon-muted svg-icon" />Add user</button>
+                </div>
             </div>
             <div className={`w-lg-1024px bg-body rounded shadow-sm p-5 p-lg-5 mx-auto fade-in-up`}>
                 <div className="table-responsive">

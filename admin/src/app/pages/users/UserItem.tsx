@@ -118,8 +118,8 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
             <td>{user.name}</td>
             <td>{user.role}</td>
             {user.active ?
-                <td><span className="badge badge-light-success">active</span></td> :
-                <td><span className="badge badge-light-danger">not active</span></td> }
+                <td><span className="badge badge-light-success">approved</span></td> :
+                <td><span className="badge badge-light-danger">pending</span></td> }
             <td>
                 <DropdownButton
                     id={`dropdown-button-drop`}
@@ -127,7 +127,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                     variant="primary"
                     title="Actions"
                 >
-                    <Dropdown.Item onClick={openEditModal}>change role</Dropdown.Item>
+                    {/*<Dropdown.Item onClick={openEditModal}>change role</Dropdown.Item>*/}
                     <Dropdown.Item onClick={openDeleteModal}>delete</Dropdown.Item>
                     <Dropdown.Item onClick={openActivationModal}>{user.active ? 'deactivate' : 'activate'}</Dropdown.Item>
                 </DropdownButton>
