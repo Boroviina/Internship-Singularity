@@ -9,6 +9,7 @@ import {Button} from "../../shared/components/form/Button";
 import {Select} from "../../shared/components/form/Select";
 import {getEmployers, deleteEmployer} from "../../shared/services/employer.service";
 import {CustomItemsDropdown} from "../../shared/components/CustomItemsDropdown";
+import {useNavigate} from "react-router-dom";
 
 type UserItemProps = {
     user: UserModel;
@@ -32,6 +33,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [showActivationModal, setShowActivationModal] = useState(false);
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
 
     const initialValues = {
         role: user.role || '',
@@ -114,7 +116,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
 
     return (
         <tr className="fw-semibold text-gray-800 align-middle">
-            <td>{user.name}</td>
+            <td><span onClick={() => navigate(`/users/${user.id}`)} className="cursor-pointer">{user.name}</span></td>
             <td>{user.role}</td>
             {user.active ?
                 <td><span className="badge badge-light-success">approved</span></td> :
@@ -122,6 +124,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
             <td>
                 <CustomItemsDropdown options={[
                     // {label: 'change role', onClick: openEditModal},
+                    {label: 'view profile', onClick: () => navigate(`/users/${user.id}`)},
                     {label: 'delete', onClick: openDeleteModal},
                     {label: user.active ? 'deactivate' : 'activate', onClick: openActivationModal},
                 ]}/>

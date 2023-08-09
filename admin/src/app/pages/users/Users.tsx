@@ -24,8 +24,6 @@ const addUserSchema = Yup.object().shape({
         .max(50, 'Maximum 50 symbols')
         .required('Email is required'),
     role: Yup.string()
-        .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
         .required('Role is required'),
 })
 const initialValuesAddUser = {
