@@ -12,16 +12,36 @@ import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
 
 export class JobFilters {
-    specialization: string[];
-    remote: string;
-    employmentType: string[];
-    experienceLevel: string;
-    educationLevel: string;
+    private _specialization: string[] = [];
+    private _remote: string | null = null;
+    private _employmentType: string[] = [];
+    private _experienceLevel: string | null = null;
+    private _educationLevel: string | null = null;
+
+    set specialization(value: string[]) {
+        this._specialization = value;
+    }
+
+    set remote(value: string | null) {
+        this._remote = value;
+    }
+
+    set employmentType(value: string[]) {
+        this._employmentType = value;
+    }
+
+    set experienceLevel(value: string | null) {
+        this._experienceLevel = value;
+    }
+
+    set educationLevel(value: string | null) {
+        this._educationLevel = value;
+    }
+
 }
 
 const JobListingPage = () => {
-    const [jobs, setJobs] = useState(null);
-    const [filters, setFilters] = useState(null);
+    const [jobs, setJobs] = useState(null)
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
 
@@ -100,7 +120,7 @@ const fetchJobs = async () => {
 export default JobListingPage;
 
 enum Specialization {
-    FinanceAndAccounting = "Finance and accounting",
+    FinanceAndAccounting = "Finance & accounting",
     Legal = "Legal",
     Technology = "Technology",
     AdministrativeAndCustomerSupport = "Administrative & customer support",
@@ -137,11 +157,3 @@ enum EducationLevel {
 }
 
 const sortByCategories = ["Relevance", "Date", "Salary"];
-
-// const specialization = ["Finance and accounting", "Legal", "Technology",
-//     "Administrative & customer support", "Marketing & creative"];
-// const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
-// const remote = ["Remote", "Hybrid"];
-// const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
-// const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
-//     "Master's degree", "Doctor's degree"];
