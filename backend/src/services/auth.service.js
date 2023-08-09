@@ -16,6 +16,20 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   if (!user || !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
+  if(!user.active || user.role !== 'user') {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Not approved');
+  }
+  return user;
+};
+
+const loginAdminWithEmailAndPassword = async (email, password) => {
+  const user = await userService.getUserByEmail(email);
+  if (!user || !(await user.isPasswordMatch(password))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
+  }
+  if(!user.active || user.role === 'user') {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Not approved');
+  }
   return user;
 };
 
@@ -92,6 +106,7 @@ const verifyEmail = async (verifyEmailToken) => {
 
 module.exports = {
   loginUserWithEmailAndPassword,
+  loginAdminWithEmailAndPassword,
   logout,
   refreshAuth,
   resetPassword,
