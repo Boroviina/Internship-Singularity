@@ -7,6 +7,7 @@ import {deleteEmployer, getEmployers} from "../../../shared/services/employer.se
 import CustomModal from "../../../shared/components/CustomModal";
 import {Button} from "../../../shared/components/form/Button";
 import {ProfileOverview} from "./ProfileOverview";
+import {EmployerDetails} from "./EmployerDetails";
 
 export const Profile = () => {
     const [user, setUser] = useState(null);
@@ -114,6 +115,7 @@ export const Profile = () => {
                 </div>}
             </div>
             <ProfileOverview user={user}/>
+            {user.role === Role.employer && <EmployerDetails user={user}/>}
             <CustomModal
                 show={showDeleteModal}
                 onHide={hideDeleteModal}
