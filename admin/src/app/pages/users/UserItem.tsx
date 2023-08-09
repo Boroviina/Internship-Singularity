@@ -1,27 +1,18 @@
 import React, {useState} from "react";
-import {useFormik} from 'formik'
-import * as Yup from 'yup'
 import {UserModel} from "../../shared/models/user.model";
 import {deleteUser, updateUser} from "../../shared/services/user.service";
 import CustomModal from "../../shared/components/CustomModal";
 import {Role} from "../../shared/enums/roles.enum";
 import {Button} from "../../shared/components/form/Button";
-import {Select} from "../../shared/components/form/Select";
 import {getEmployers, deleteEmployer} from "../../shared/services/employer.service";
 import {CustomItemsDropdown} from "../../shared/components/CustomItemsDropdown";
 import {useNavigate} from "react-router-dom";
+import {ChangeUserRole} from "./ChangeUserRole";
 
 type UserItemProps = {
     user: UserModel;
     updateUsers: () => void;
 }
-
-const editUserSchema = Yup.object().shape({
-    role: Yup.string()
-        .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
-        .required('Role is required'),
-})
 
 export const UserItem: React.FC<UserItemProps> = (props) => {
     const {
@@ -34,25 +25,6 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
     const [showActivationModal, setShowActivationModal] = useState(false);
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-
-    const initialValues = {
-        role: user.role || '',
-    }
-
-    const formik = useFormik({
-        initialValues,
-        validationSchema: editUserSchema,
-        onSubmit: async (values, {setStatus, setSubmitting}) => {
-            setLoading(true)
-            try {
-                await confirmChangesToUser(values);
-            } catch (error) {
-                setStatus('User detail is invalid')
-                setSubmitting(false)
-            }
-            setLoading(false)
-        },
-    })
 
     const confirmRemovingUser = async () => {
         setLoading(true)
@@ -138,38 +110,9 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                         <Button type="button" onClick={hideDeleteModal} state="danger">Cancel</Button>
                     </div>
                 }
-            >
-                Are you sure you want to delete {user.name}?
-            </CustomModal>
+            >Are you sure you want to delete {user.name}?</CustomModal>
             <CustomModal title="Edit user" show={showEditModal} onHide={hideEditModal}>
-                <form
-                    className={`form w-100 my-4 p-4`}
-                    onSubmit={formik.handleSubmit}
-                    noValidate
-                    id='kt_edit_profile_form'
-                >
-                    <Select
-                        label="Role"
-                        formikFieldProps={formik.getFieldProps('role')}
-                        formikTouched={formik.touched.role}
-                        formikError={formik.errors.role}
-                        name="role"
-                        id="role"
-                        required={true}
-                        requiredStar={true}
-                        options={Object.entries(Role).map(([key, value]) => ({value: key, label: value,}))}
-                    />
-
-                    <div className='text-center mt-4 d-grid'>
-                        <Button
-                            state="success"
-                            type="submit"
-                            id='kt_edit_profile_submit'
-                            disabled={formik.isSubmitting || !formik.isValid}
-                            loading={loading}
-                        >Continue</Button>
-                    </div>
-                </form>
+                <ChangeUserRole userRole={user.role} confirmChangesToUser={confirmChangesToUser}/>
             </CustomModal>
             <CustomModal
                 show={showActivationModal}
@@ -180,9 +123,7 @@ export const UserItem: React.FC<UserItemProps> = (props) => {
                     <Button type="button" onClick={hideActivationModal} state="danger">Cancel</Button>
                 </div>
                 }
-            >
-                Are you sure you want to {user.active ? 'deactivate' : 'activate'} {user.name}'s account?
-            </CustomModal>
+            >Are you sure you want to {user.active ? 'deactivate' : 'activate'} {user.name}'s account?</CustomModal>
         </tr>
     )
 }

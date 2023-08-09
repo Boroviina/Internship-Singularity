@@ -4,9 +4,12 @@ import {useIntl} from 'react-intl'
 import {KTSVG} from '../../../helpers'
 import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
 import {AsideMenuItem} from './AsideMenuItem'
+import {useAuth} from "../../../../app/modules/auth";
+import {Role} from "../../../../app/shared/enums/roles.enum";
 
 export function AsideMenuMain() {
     const intl = useIntl()
+    const {currentUser} = useAuth();
 
     return (
         <>
@@ -30,12 +33,12 @@ export function AsideMenuMain() {
                 fontIcon='bi-app-indicator'
             />
             <hr/>
-            <AsideMenuItem
+            {currentUser.role === Role.admin && <AsideMenuItem
                 to='/users'
                 icon='/media/icons/duotune/communication/com005.svg'
                 title={intl.formatMessage({id: 'MENU.USERS'})}
                 fontIcon='bi-app-indicator'
-            />
+            />}
             {/*<div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Crafted</span>
