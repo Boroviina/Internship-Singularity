@@ -184,17 +184,23 @@ export function JobPosting() {
             </div>
             <div className={`row  d-flex justify-content-md-between flex-column flex-md-row mb-5`}>
                 <div className={`fv-row col-12 col-md-6 mb-10`}>
-                    <JobInputField placeholder='Input location/adress' type="text" name="Employment type"
+                    <JobInputField placeholder='Input employment type' type="text" name="Employment type"
                                    formikFieldProps={formik.getFieldProps('employmentType')}
                                    formikTouched={formik.touched.employmentType}
                                    formikErrors={formik.errors.employmentType}/>
                 </div>
                 <div className={`fv-row col-12 col-md-6 mb-10`}>
-                    <JobInputField placeholder='Input location/adress' type="text" name="Remote"
+                    <JobInputField placeholder='Input job type' type="text" name="Remote"
                                    formikFieldProps={formik.getFieldProps('remote')}
                                    formikTouched={formik.touched.remote}
                                    formikErrors={formik.errors.remote}/>
                 </div>
+            </div>
+            <div className={`fv-row col-12 mb-10`}>
+                <JobInputField placeholder='Input amount...' type="text" name="Salary"
+                               formikFieldProps={formik.getFieldProps('salary')}
+                               formikTouched={formik.touched.salary}
+                               formikErrors={formik.errors.salary}/>
             </div>
 
 
