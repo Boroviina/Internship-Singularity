@@ -6,6 +6,9 @@ const Dropdown = ({name, filters}: FilterGroup) => {
     const handleChange = (e) => {
         setSelectedItem(e.target.value);
     };
+    useEffect(() => {
+        console.log(selectedItem);
+    }, [selectedItem]);
     return (
         <div>
             <h5>{name}</h5>

@@ -12,32 +12,44 @@ import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
 
 export class JobFilters {
-    private _specialization: string[] = [];
-    private _remote: string | null = null;
-    private _employmentType: string[] = [];
-    private _experienceLevel: string | null = null;
-    private _educationLevel: string | null = null;
+    specialization: string[] = [];
+    remote: string[] = [];
+    employmentType: string[] = [];
+    experience: string[] = [];
+    education: string[] = [];
 
-    set specialization(value: string[]) {
-        this._specialization = value;
+
+    constructor(specialization: string[], remote: string[], employmentType: string[], experienceLevel: string[], educationLevel: string[]) {
+        this.specialization = specialization;
+        this.remote = remote;
+        this.employmentType = employmentType;
+        this.experience = experienceLevel;
+        this.education = educationLevel;
     }
+}
 
-    set remote(value: string | null) {
-        this._remote = value;
+export function filterJobs(jobs: JobListing[], filters: JobFilters) {
+    const filteredJobs = jobs.filter(job => (
+        matchesAnyFilter(job.requirements.specialization, filters.specialization)
+        && matchesAnyFilter(job.remote, filters.remote)
+        && matchesAnyFilter(job.employmentType, filters.employmentType)
+        && matchesAnyFilter(job.requirements.experience, filters.experience)
+        && matchesAnyFilter(job.requirements.education, filters.education))
+    );
+    return filteredJobs;
+};
+
+function matchesAnyFilter(jobAttribute: string, filterItems: string[]) {
+    if (filterItems.length === 0) {
+        return true;
+    } else {
+        for (let i = 0; i < filterItems.length; i++) {
+            if (filterItems[i] === jobAttribute) {
+                return true;
+            }
+        }
+        return false;
     }
-
-    set employmentType(value: string[]) {
-        this._employmentType = value;
-    }
-
-    set experienceLevel(value: string | null) {
-        this._experienceLevel = value;
-    }
-
-    set educationLevel(value: string | null) {
-        this._educationLevel = value;
-    }
-
 }
 
 const JobListingPage = () => {
@@ -50,22 +62,21 @@ const JobListingPage = () => {
         setShownJob(job);
         setShowDetails(true)
     };
-
-    // TODO jobs should really come as a prop!
-    // and fetchJobs should be a callback that takes optional parameters
-    // sortBy, filters and search options
     useEffect(() => {
         fetchJobs();
     }, /*filter, search...*/[]);
 
 const fetchJobs = async () => {
     const jobs = await getJobs();
+    // const filteredJobs = filterJobs(jobs, new JobFilters([], [], [], [], []));
     setJobs(jobs);
 };
+
     let jobsContent = <div>No jobs could be found.</div>;
 
     if (jobs) {
         jobsContent = jobs.map(job => {
+            console.log(job);
             return <JobListingCard job={job} showDetails={handleOpen} key={job.id}/>;
         });
     }

@@ -4,6 +4,7 @@ import Checkbox from "./Checkbox";
 export interface FilterGroup {
     name: string,
     filters: string[]
+    updateFilters?(filters: string[]): void;
 }
 
 const CheckboxGroup = ({name, filters}: FilterGroup) => {
