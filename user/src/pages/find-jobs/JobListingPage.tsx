@@ -17,7 +17,7 @@ export function filterJobs(jobs: JobListing[], filters: JobFilters) {
 };
 
 const JobListingPage = () => {
-    const [jobs, setJobs] = useState(null)
+    const [jobs, setJobs] = useState(null);
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
 
@@ -35,6 +35,7 @@ const fetchJobs = async () => {
     const filteredJobs = filterJobs(jobs, new JobFilters([], [], [], [], []));
     setJobs(filteredJobs);
 };
+
 
     let jobsContent = <div>No jobs could be found.</div>;
 

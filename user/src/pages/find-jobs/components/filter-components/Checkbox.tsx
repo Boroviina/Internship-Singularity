@@ -8,17 +8,9 @@ interface FilterItem {
 
 const Checkbox = ({name, id, onChange}: FilterItem) => {
     const [checked, setChecked] = useState(false);
-    const onSelect = () => {
-        setChecked(!checked);
-    };
+    const onSelect = () => setChecked(!checked);
 
-    useEffect(() => {
-        if(checked) {
-            onChange(name, true);
-        } else {
-            onChange(name, false);
-        }
-    }, [checked]);
+    useEffect(() => onChange(name, checked), [checked]);
 
     return (
         <div className="form-check d-flex align-items-center">

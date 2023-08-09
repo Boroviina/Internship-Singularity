@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {FilterGroup} from "./CheckboxGroup";
+import {Filter} from "./CheckboxGroup";
 
-const Dropdown = ({name, filters}: FilterGroup) => {
+const Dropdown = ({name, filters}: Filter) => {
     const [selectedItem, setSelectedItem] = useState(null);
-    const handleChange = (e) => {
-        setSelectedItem(e.target.value);
-    };
-    useEffect(() => {
-        console.log(selectedItem);
-    }, [selectedItem]);
+    const handleChange = (e) => setSelectedItem(e.target.value);
+
     return (
         <div>
             <h5>{name}</h5>

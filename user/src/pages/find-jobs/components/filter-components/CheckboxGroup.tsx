@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Checkbox from "./Checkbox";
 
-export interface FilterGroup {
+export interface Filter {
     name: string,
     filters: string[]
     updateFilters?(filters: string[]): void;
 }
 
-const CheckboxGroup = ({name, filters}: FilterGroup) => {
+const CheckboxGroup = ({name, filters}: Filter) => {
     const [currentFilters, updateFilters] = useState([]);
+
     const handleFilterItemChanged = (item: string, checked: boolean) => {
         if(checked && !currentFilters.includes(item)) {
             updateFilters([...currentFilters, item]);
@@ -17,6 +18,7 @@ const CheckboxGroup = ({name, filters}: FilterGroup) => {
             updateFilters(filterWithoutItem);
         }
     };
+
     return (
         <div>
             <h5>{name}</h5>
