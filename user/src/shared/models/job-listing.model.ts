@@ -29,26 +29,26 @@ export class JobListing extends BaseModel {
      * - filtering them. Filters must all apply for the Job to be considered matching.
      * @param filters
      */
-    matchesFilters(filters: JobFilters) {
-        return this.matchesAnyFilter(this.requirements.specialization, filters.specialization)
-        && this.matchesAnyFilter(this.remote, filters.remote)
-        && this.matchesAnyFilter(this.employmentType, filters.employmentType)
-        && this.matchesAnyFilter(this.requirements.experience, filters.experience)
-        && this.matchesAnyFilter(this.requirements.education, filters.education);
+    matches(filters: JobFilters) {
+        return this.matchesAnyItem(this.requirements.specialization, filters.specialization)
+        && this.matchesAnyItem(this.remote, filters.remote)
+        && this.matchesAnyItem(this.employmentType, filters.employmentType)
+        && this.matchesAnyItem(this.requirements.experience, filters.experience)
+        && this.matchesAnyItem(this.requirements.education, filters.education);
     }
 
     /**
      * A filter can have multiple filter items within it, and a job is considered matching if it matches at least one
      * of the items in the group.
      * @param jobAttribute
-     * @param filterItems
+     * @param filter
      */
-    matchesAnyFilter(jobAttribute: string, filterItems: string[]) {
-        if (filterItems.length === 0) {
+    matchesAnyItem(jobAttribute: string, filter: string[]) {
+        if (filter.length === 0) {
             return true;
         } else {
-            for (let i = 0; i < filterItems.length; i++) {
-                if (filterItems[i] === jobAttribute) {
+            for (let i = 0; i < filter.length; i++) {
+                if (filter[i] === jobAttribute) {
                     return true;
                 }
             }

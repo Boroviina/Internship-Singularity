@@ -13,8 +13,7 @@ import Filters from "./components/filter-components/Filters";
 import {JobFilters} from "../../shared/models/JobFilters";
 
 export function filterJobs(jobs: JobListing[], filters: JobFilters) {
-
-    return jobs.filter(job => (job.matchesFilters(filters)));
+    return jobs.filter(job => (job.matches(filters)));
 };
 
 const JobListingPage = () => {
