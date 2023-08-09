@@ -11,14 +11,22 @@ export function JobPosting() {
     const formik = useFormik({
         initialValues: {
             jobTitle: '',
+            requirements: {
+                specialization: '',
+                experience: '',
+                education: '',
+                skills: '',
+                language: '',
+                drivingLicense: false,
+            },
+            location: '',
+            salary: '',
+            employmentType: '',
             description: '',
-            education: '',
-            skills: '',
-            languages: '',
-            driverLicense: false,
             appDeadline: '',
             appInstructions: '',
-            numPosition: '',
+            positionsNum: '',
+            remote: '',
             cv: false,
             coverLetter: false,
         },
@@ -27,15 +35,26 @@ export function JobPosting() {
             jobTitle: Yup.string()
                 .max(100, 'Must be 100 characters or less')
                 .required('Required'),
+
+            requirements: Yup.object().shape({
+                specialization: Yup.string()
+                    .max(100, 'Must be 100 characters or less'),
+                experience: Yup.string()
+                    .max(100, 'Must be 100 characters or less'),
+                education: Yup.string()
+                    .max(30, 'Must be 30 characters or less'),
+                skills: Yup.string()
+                    .max(100, 'Must be 100 characters or less'),
+                language: Yup.string()
+                    .max(30, 'Must be 30 characters or less'),
+            }),
+            location: Yup.string().max(100, 'Must be 100 characters or less'),
+            salary: Yup.string().max(20, 'Must be 20 characters or less').required('Required'),
+            employmentType: Yup.string().max(30, 'Must be 30 characters or less'),
+            remote: Yup.string().max(30, 'Must be 30 characters or less'),
             description: Yup.string()
-                .max(500, 'Must be 500 characters or less')
+                .max(10000, 'Must be 10000 characters or less')
                 .required('Required'),
-            education: Yup.string()
-                .max(200, 'Must be 200 characters or less'),
-            skills: Yup.string()
-                .max(200, 'Must be 200 characters or less'),
-            languages: Yup.string()
-                .max(100, 'Must be 100 characters or less'),
             appDeadline: Yup.date()
                 .nullable()
                 .required("Please input Expiry Date")
@@ -43,7 +62,7 @@ export function JobPosting() {
             appInstructions: Yup.string()
                 .max(500, 'Must be 500 characters or less')
                 .required('Required'),
-            numPosition: Yup.number()
+            positionsNum: Yup.number()
                 .min(1, 'Must be at least 1 position')
                 .max(10, 'Can be maximum 10 open positions per job advertisement')
                 .required('Required')
@@ -65,6 +84,7 @@ export function JobPosting() {
         },
     });
 
+    console.log(formik);
     return <div className={`w-lg-1024px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
         <form action=""
               className={`form`}
@@ -90,24 +110,24 @@ export function JobPosting() {
                     <div className={`row  d-flex justify-content-md-between flex-column flex-md-row mb-5`}>
                         <div className={`col-12 col-md-6 mb-5`}>
                             <JobInputField placeholder='Input required education...' type="text" name="Education"
-                                           formikFieldProps={formik.getFieldProps('education')}
-                                           formikTouched={formik.touched.education}
-                                           formikErrors={formik.errors.education}/>
+                                           formikFieldProps={formik.getFieldProps('requirements.education')}
+                                           formikTouched={formik.touched.requirements && formik.touched.requirements.education}
+                                           formikErrors={formik.errors.requirements && formik.errors.requirements.education}/>
                         </div>
                         <div className={`col-12 col-md-6`}>
                             <JobInputField placeholder='Type specific skills...' type="text" name="Skills"
-                                           formikFieldProps={formik.getFieldProps('skills')}
-                                           formikTouched={formik.touched.skills}
-                                           formikErrors={formik.errors.skills}/>
+                                           formikFieldProps={formik.getFieldProps('requirements.skills')}
+                                           formikTouched={formik.touched.requirements && formik.touched.requirements.skills}
+                                           formikErrors={formik.errors.requirements && formik.errors.requirements.skills}/>
                         </div>
                     </div>
                     <div
                         className={`row d-flex justify-content-between align-items-center flex-column flex-md-row mb-5`}>
                         <div className={"col-md-8 col-12 mb-5 "}>
                             <JobInputField placeholder='Insert required languages...' type="text" name="Languages"
-                                           formikFieldProps={formik.getFieldProps('languages')}
-                                           formikTouched={formik.touched.languages}
-                                           formikErrors={formik.errors.languages}/>
+                                           formikFieldProps={formik.getFieldProps('requirements.languages')}
+                                           formikTouched={formik.touched.requirements && formik.touched.requirements.language}
+                                           formikErrors={formik.errors.requirements && formik.errors.requirements.language}/>
                         </div>
                         <div
                             className={'form-check-solid col-12 col-md-4 d-flex justify-content-start mt-2 align-items-center fw-bold pt-2'}>
@@ -116,9 +136,28 @@ export function JobPosting() {
                                    onChange={formik.handleChange}
                                    name="driverLicense"
                                    id="driverLicense"
-                                   checked={formik.values.driverLicense}/>
+                                   checked={formik.values.requirements.drivingLicense}/>
                             <label htmlFor="" className={`text-center text-nowrap text-dark fw-bold fs-3`}> Driver
                                 license</label>
+                        </div>
+                    </div>
+                    <div
+                        className={`row d-flex justify-content-between align-items-center flex-column flex-md-row mb-5`}>
+                        <div className={"col-12 mb-5 "}>
+                            <JobInputField placeholder='Insert required specialization...' type="text"
+                                           name="Specialization"
+                                           formikFieldProps={formik.getFieldProps('requirements.specialization')}
+                                           formikTouched={formik.touched.requirements && formik.touched.requirements.specialization}
+                                           formikErrors={formik.errors.requirements && formik.errors.requirements.specialization}/>
+                        </div>
+                    </div>
+                    <div
+                        className={`row d-flex justify-content-between align-items-center flex-column flex-md-row mb-5`}>
+                        <div className={"col-12 mb-5 "}>
+                            <JobInputField placeholder='Insert required specialization...' type="text" name="Experience"
+                                           formikFieldProps={formik.getFieldProps('requirements.experience')}
+                                           formikTouched={formik.touched.requirements && formik.touched.requirements.experience}
+                                           formikErrors={formik.errors.requirements && formik.errors.requirements.experience}/>
                         </div>
                     </div>
                 </div>
@@ -135,6 +174,28 @@ export function JobPosting() {
                                   formikTouched={formik.touched.appInstructions}
                                   formikErrors={formik.errors.appInstructions}/>
             </div>
+            <div>
+                <div className={`fv-row mb-10`}>
+                    <JobInputField placeholder='Input location/adress' type="text" name="Location"
+                                   formikFieldProps={formik.getFieldProps('location')}
+                                   formikTouched={formik.touched.location}
+                                   formikErrors={formik.errors.location}/>
+                </div>
+            </div>
+            <div className={`row  d-flex justify-content-md-between flex-column flex-md-row mb-5`}>
+                <div className={`fv-row col-12 col-md-6 mb-10`}>
+                    <JobInputField placeholder='Input location/adress' type="text" name="Employment type"
+                                   formikFieldProps={formik.getFieldProps('employmentType')}
+                                   formikTouched={formik.touched.employmentType}
+                                   formikErrors={formik.errors.employmentType}/>
+                </div>
+                <div className={`fv-row col-12 col-md-6 mb-10`}>
+                    <JobInputField placeholder='Input location/adress' type="text" name="Remote"
+                                   formikFieldProps={formik.getFieldProps('remote')}
+                                   formikTouched={formik.touched.remote}
+                                   formikErrors={formik.errors.remote}/>
+                </div>
+            </div>
 
 
             <div className='d-flex mb-10 justify-content-between align-items-center flex-column flex-md-row'>
@@ -142,8 +203,8 @@ export function JobPosting() {
                     <JobInputField placeholder='Insert the open positions number...' type="number"
                                    name="Number of open positions"
                                    formikFieldProps={formik.getFieldProps('numPosition')}
-                                   formikTouched={formik.touched.numPosition}
-                                   formikErrors={formik.errors.numPosition}/>
+                                   formikTouched={formik.touched.positionsNum}
+                                   formikErrors={formik.errors.positionsNum}/>
                 </div>
                 <div
                     className={'form-check-solid col-12 col-md-3 d-flex justify-content-start align-items-center fw-bold mt-5 pt-3'}>

@@ -24,6 +24,7 @@ const PrivateRoutes = () => {
                 <Route path='/job-listings' element={<JobListings/>}/>
                 <Route path='/applications-review/:id' element={<ApplicationsReview/>}/>
                 <Route path='/users' element={<Users/>}/>
+                <Route path='/edit-job/:id' element={<JobPosting/>}/>
                 {/*<Route path='/about' element={<About/>}/>*/}
                 {/* Lazy Modules */}
                 {/*<Route

@@ -18,12 +18,19 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
     const clickHandler = () => {
         setDetailsShown(!detailsShown);
     }
-
+    console.log(props.item);
     return (
         <div className={`card card-custom mb-3 `}>
             <div className={`card-header d-flex ${classes['hover-card']}`} onClick={clickHandler}>
                 <h3 className="card-title fw-bolder text-dark">{props.item.jobTitle}</h3>
-                <button className={'btn btn-primary m-5'} onClick={()=>navigate(`/applications-review/${props.item.id}`)}> See applications</button>
+                <div>
+                    <button className={'btn btn-primary m-5'}
+                            onClick={() => navigate(`/applications-review/${props.item.id}`)}> See applications
+                    </button>
+                    <button className={'btn btn-primary m-5'}
+                            onClick={() => navigate(`/edit-job/${props.item.id}`)}>Edit job details
+                    </button>
+                </div>
             </div>
             <div className="card-body">
                 <label className='form-label fw-bolder text-dark fs-6 mb-2'>Company name here</label><br/>
