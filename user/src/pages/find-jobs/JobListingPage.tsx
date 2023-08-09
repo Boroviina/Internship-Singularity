@@ -26,16 +26,16 @@ const JobListingPage = () => {
         setShownJob(job);
         setShowDetails(true)
     };
+
     useEffect(() => {
         fetchJobs();
     }, /*filter, search...*/[]);
 
-const fetchJobs = async () => {
-    const jobs = await getJobs();
-    const filteredJobs = filterJobs(jobs, new JobFilters([], [], [], [], []));
-    setJobs(filteredJobs);
-};
-
+    const fetchJobs = async () => {
+        const jobs = await getJobs();
+        const filteredJobs = filterJobs(jobs, new JobFilters([], [], [], [], []));
+        setJobs(filteredJobs);
+    };
 
     let jobsContent = <div>No jobs could be found.</div>;
 
