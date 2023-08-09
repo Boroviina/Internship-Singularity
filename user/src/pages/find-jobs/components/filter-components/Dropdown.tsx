@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FilterGroup} from "./CheckboxGroup";
 
 const Dropdown = ({name, filters}: FilterGroup) => {
+    const [selectedItem, setSelectedItem] = useState(null);
+    const handleChange = (e) => {
+        setSelectedItem(e.target.value);
+    };
     return (
         <div>
             <h5>{name}</h5>
-            <select className="form-select form-select-lg" aria-label={name}>
-                <option selected>...</option>
+            <select className="form-select form-select-lg" aria-label={name} onChange={handleChange}>
+                <option value="" selected>...</option>
                 {filters.map((filter) => {
                     return <option value={filter} key={filter}>{filter}</option>;
                 })}
