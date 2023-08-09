@@ -10,47 +10,12 @@ import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
-
-export class JobFilters {
-    specialization: string[] = [];
-    remote: string[] = [];
-    employmentType: string[] = [];
-    experience: string[] = [];
-    education: string[] = [];
-
-
-    constructor(specialization: string[], remote: string[], employmentType: string[], experienceLevel: string[], educationLevel: string[]) {
-        this.specialization = specialization;
-        this.remote = remote;
-        this.employmentType = employmentType;
-        this.experience = experienceLevel;
-        this.education = educationLevel;
-    }
-}
+import {JobFilters} from "../../shared/models/JobFilters";
 
 export function filterJobs(jobs: JobListing[], filters: JobFilters) {
-    const filteredJobs = jobs.filter(job => (
-        matchesAnyFilter(job.requirements.specialization, filters.specialization)
-        && matchesAnyFilter(job.remote, filters.remote)
-        && matchesAnyFilter(job.employmentType, filters.employmentType)
-        && matchesAnyFilter(job.requirements.experience, filters.experience)
-        && matchesAnyFilter(job.requirements.education, filters.education))
-    );
-    return filteredJobs;
-};
 
-function matchesAnyFilter(jobAttribute: string, filterItems: string[]) {
-    if (filterItems.length === 0) {
-        return true;
-    } else {
-        for (let i = 0; i < filterItems.length; i++) {
-            if (filterItems[i] === jobAttribute) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
+    return jobs.filter(job => (job.matchesFilters(filters)));
+};
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState(null)
@@ -68,17 +33,14 @@ const JobListingPage = () => {
 
 const fetchJobs = async () => {
     const jobs = await getJobs();
-    // const filteredJobs = filterJobs(jobs, new JobFilters([], [], [], [], []));
-    setJobs(jobs);
+    const filteredJobs = filterJobs(jobs, new JobFilters([], [], [], [], []));
+    setJobs(filteredJobs);
 };
 
     let jobsContent = <div>No jobs could be found.</div>;
 
     if (jobs) {
-        jobsContent = jobs.map(job => {
-            console.log(job);
-            return <JobListingCard job={job} showDetails={handleOpen} key={job.id}/>;
-        });
+        jobsContent = jobs.map(job => (<JobListingCard job={job} showDetails={handleOpen} key={job.id}/>));
     }
 
     return (

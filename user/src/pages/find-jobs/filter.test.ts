@@ -1,6 +1,7 @@
 import {JobListing} from "../../shared/models/job-listing.model";
 import {RequirementsModel} from "../../shared/models/requirements.model";
-import {filterJobs, JobFilters} from "./JobListingPage";
+import {filterJobs} from "./JobListingPage";
+import {JobFilters} from "../../shared/models/JobFilters";
 
 describe('Filter jobs', () => {
     test('should return same jobs if no filter', () => {
