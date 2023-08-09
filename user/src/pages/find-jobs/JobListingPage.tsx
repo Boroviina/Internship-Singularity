@@ -59,11 +59,11 @@ const JobListingPage = () => {
 
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
-                                <CheckboxGroup name="Specialization" filters={Object.values(Specialization)}/>
-                                <Dropdown name="Remote" filters={Object.values(Remote)}/>
-                                <CheckboxGroup name="Employment type" filters={Object.values(EmploymentType)}/>
-                                <Dropdown name="Experience level" filters={Object.values(ExperienceLevel)}/>
-                                <Dropdown name="Education level" filters={Object.values(EducationLevel)}/>
+                                <CheckboxGroup name="Specialization" filterItems={Object.values(Specialization)}/>
+                                <Dropdown name="Remote" filterItems={Object.values(Remote)}/>
+                                <CheckboxGroup name="Employment type" filterItems={Object.values(EmploymentType)}/>
+                                <Dropdown name="Experience level" filterItems={Object.values(ExperienceLevel)}/>
+                                <Dropdown name="Education level" filterItems={Object.values(EducationLevel)}/>
                             </Filters>
                         </section>
 

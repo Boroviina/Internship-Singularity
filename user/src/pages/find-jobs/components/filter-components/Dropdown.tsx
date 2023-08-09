@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Filter} from "./CheckboxGroup";
 
-const Dropdown = ({name, filters}: Filter) => {
+const Dropdown = ({name, filterItems}: Filter) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const handleChange = (e) => setSelectedItem(e.target.value);
 
@@ -10,7 +10,7 @@ const Dropdown = ({name, filters}: Filter) => {
             <h5>{name}</h5>
             <select className="form-select form-select-lg" aria-label={name} onChange={handleChange}>
                 <option value="" selected>...</option>
-                {filters.map((filter) => {
+                {filterItems.map((filter) => {
                     return <option value={filter} key={filter}>{filter}</option>;
                 })}
             </select>

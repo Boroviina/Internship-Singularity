@@ -3,26 +3,26 @@ import Checkbox from "./Checkbox";
 
 export interface Filter {
     name: string,
-    filters: string[]
+    filterItems: string[]
     updateFilters?(filters: string[]): void;
 }
 
-const CheckboxGroup = ({name, filters}: Filter) => {
-    const [currentFilters, updateFilters] = useState([]);
+const CheckboxGroup = ({name, filterItems}: Filter) => {
+    const [items, setItems] = useState([]);
 
     const handleFilterItemChanged = (item: string, checked: boolean) => {
-        if(checked && !currentFilters.includes(item)) {
-            updateFilters([...currentFilters, item]);
+        if(checked && !items.includes(item)) {
+            setItems([...items, item]);
         } else {
-            const filterWithoutItem = currentFilters.filter(el => el !== item);
-            updateFilters(filterWithoutItem);
+            const filterWithoutItem = items.filter(el => el !== item);
+            setItems(filterWithoutItem);
         }
     };
 
     return (
         <div>
             <h5>{name}</h5>
-            {filters.map((filter) => {
+            {filterItems.map((filter) => {
                 return <Checkbox key={filter}
                                  name={filter}
                                  id={filter.toLowerCase().replaceAll(" ", "")}
