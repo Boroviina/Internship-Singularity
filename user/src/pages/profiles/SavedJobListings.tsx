@@ -28,7 +28,7 @@ export const SavedJobListings = () => {
             const savedjobs = await getUsersSavedJobs(`${currentUser.id}`);
             setSavedJobs(savedjobs);
 
-        } catch(error) {
+        } catch (error) {
             navigate('/error/500');
         }
         setLoading(false);
@@ -41,9 +41,12 @@ export const SavedJobListings = () => {
     let savedJobsContent = <div className="text-label">No saved job listings.</div>;
 
     if (savedJobs) {
-        savedJobsContent = savedJobs.map(savedJob => (
-            <JobListingCard job={savedJob.job} showDetails={handleOpen} key={savedJob.job.id} update={fetchSavedJobs}/>
-        ))}
+        if (savedJobs.length > 0) {
+            savedJobsContent = savedJobs.map(savedJob => (
+                <JobListingCard job={savedJob.job} showDetails={handleOpen} key={savedJob.job.id} update={fetchSavedJobs}/>
+            ))
+        }
+    }
 
     return (
         <>

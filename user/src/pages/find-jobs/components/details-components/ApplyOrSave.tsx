@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {createSavedJob, deleteSavedJob, getSavedJobsByJobId} from "../../../../shared/services/job-saved.service";
+import {useNavigate} from "react-router-dom";
+import {OverlayTrigger, Tooltip} from "react-bootstrap";
+import {createSavedJob, deleteSavedJob, getUsersSavedJobsByJobId} from "../../../../shared/services/job-saved.service";
 import {JobListing} from "../../../../shared/models/job-listing.model";
+import {useAuth} from "../../../../modules/auth";
 
 interface ApplyOrSaveProps {
     job: JobListing;
@@ -9,18 +12,21 @@ interface ApplyOrSaveProps {
 
 const ApplyOrSave = ({job, update}: ApplyOrSaveProps) => {
     const [saved, setSaved] = useState(false);
+    const navigate = useNavigate();
+    const {currentUser} = useAuth();
+
+    const fetchIsJobSaved = async () => {
+        try {
+            const results = await getUsersSavedJobsByJobId(`${currentUser.id}`, job.id);
+            setSaved(!!results[0])
+        } catch(error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        const fetchIsJobSaved = async () => {
-            try {
-                const results = await getSavedJobsByJobId(job.id);
-                setSaved(!!results[0])
-            } catch(error) {
-                console.log(error)
-            }
-        }
         fetchIsJobSaved();
-    }, [job.id]);
+    }, []);
 
     const onSave = async () => {
         try {
@@ -34,7 +40,7 @@ const ApplyOrSave = ({job, update}: ApplyOrSaveProps) => {
 
     const onUnsave = async () => {
         try {
-            const results = await getSavedJobsByJobId(job.id);
+            const results = await getUsersSavedJobsByJobId(`${currentUser.id}`, job.id);
             await deleteSavedJob(results[0].id);
             update();
             setSaved(false);
@@ -45,15 +51,19 @@ const ApplyOrSave = ({job, update}: ApplyOrSaveProps) => {
 
     return (
         <div className={`d-flex align-items-center gap-2 mt-2 mt-sm-0 mx-3`}>
-            <button type="button" className={`btn btn-pink`}>
+            <button type="button" className={`btn btn-pink`} onClick={() => navigate(`/apply/${job.id}`)}>
                 Apply
             </button>
-            {saved ?
-                // <button type="button" className={`btn btn-white`} onClick={onUnsave}>Unsave</button>
-                <i className="bi bi-heart-fill fs-3 ms-2" style={{color: '#fb246a'}} onClick={onUnsave}></i>
-                :
-                // <button type="button" className={`btn btn-white`} onClick={onSave}>Save</button>
-                <i className="bi bi-heart fs-3 ms-2" style={{color: '#fb246a'}} onClick={onSave}></i>}
+            <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>{saved ? 'Unsave' : 'Save'}</Tooltip>}
+            >
+                <i
+                    className={`bi ${saved ? 'bi-heart-fill' : 'bi-heart'} fs-3 ms-2`}
+                    style={{ color: '#fb246a' }}
+                    onClick={saved ? onUnsave : onSave}
+                />
+            </OverlayTrigger>
         </div>
     );
 };
