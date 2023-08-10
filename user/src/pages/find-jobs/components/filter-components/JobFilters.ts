@@ -1,4 +1,5 @@
 class JobFilters {
+
     specialization: string[] = [];
     remote: string[] = [];
     employmentType: string[] = [];
@@ -19,7 +20,29 @@ class JobFilters {
         this.education = education;
     }
 
+    setSpecialization(value: string[]) {
+        this.specialization = value;
+    }
+
+    setRemote(value: string[]) {
+        this.remote = value;
+    }
+
+    setEmploymentType(value: string[]) {
+        this.employmentType = value;
+    }
+
+    setExperience(value: string[]) {
+        this.experience = value;
+    }
+
+    setEducation(value: string[]) {
+        this.education = value;
+    }
+
 }
+export type FilterProperties = Specialization | EmploymentType | Remote | ExperienceLevel | EducationLevel;
+
 enum Specialization {
     FinanceAndAccounting = "Finance & accounting",
     Legal = "Legal",

@@ -26,6 +26,7 @@ export function filterJobs(jobs: JobListing[], filters: JobFilters) {
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState(null);
+    const [filters, setFilters] = useState<JobFilters>(new JobFilters());
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
 
@@ -34,14 +35,17 @@ const JobListingPage = () => {
         setShownJob(job);
         setShowDetails(true)
     };
+    const handleFiltersChanged = (changedItems: JobFilters) => {
+        setFilters(changedItems);
+    };
 
     useEffect(() => {
         fetchJobs();
-    }, /*filter, search...*/[]);
+    }, [filters]);
 
     const fetchJobs = async () => {
         const jobs = await getJobs();
-        const filteredJobs = filterJobs(jobs, new JobFilters());
+        const filteredJobs = filterJobs(jobs, filters);
         setJobs(filteredJobs);
     };
 
@@ -69,11 +73,16 @@ const JobListingPage = () => {
 
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
-                                <CheckboxGroup name="Specialization" values={Object.values(Specialization)}/>
-                                <Dropdown name="Remote" values={Object.values(Remote)}/>
-                                <CheckboxGroup name="Employment type" values={Object.values(EmploymentType)}/>
-                                <Dropdown name="Experience level" values={Object.values(ExperienceLevel)}/>
-                                <Dropdown name="Education level" values={Object.values(EducationLevel)}/>
+                                <CheckboxGroup name={"Specialization"} values={Object.values(Specialization)}
+                                               updateFilters={handleFiltersChanged}/>
+                                <Dropdown name="Remote" values={Object.values(Remote)}
+                                          updateFilters={handleFiltersChanged}/>
+                                <CheckboxGroup name="Employment type" values={Object.values(EmploymentType)}
+                                               updateFilters={handleFiltersChanged}/>
+                                <Dropdown name="Experience level" values={Object.values(ExperienceLevel)}
+                                          updateFilters={handleFiltersChanged}/>
+                                <Dropdown name="Education level" values={Object.values(EducationLevel)}
+                                          updateFilters={handleFiltersChanged}/>
                             </Filters>
                         </section>
 

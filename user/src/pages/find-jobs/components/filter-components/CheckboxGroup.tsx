@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Checkbox from "./Checkbox";
+import {FilterProperties, JobFilters} from "./JobFilters";
 
 export interface Filter {
-    name: string,
-    values: string[],
-    updateFilters?(filters: string[]): void,
+    name?: string,
+    values?: string[],
+    updateFilters(filters: JobFilters): void,
 }
 
-const CheckboxGroup = ({name, values}: Filter) => {
+const CheckboxGroup = ({name, values, updateFilters}: Filter) => {
     const [selectedItems, setSelectedItems] = useState([]);
 
     const handleSelectionChanged = (item: string, checked: boolean) => {
@@ -18,10 +19,11 @@ const CheckboxGroup = ({name, values}: Filter) => {
             setSelectedItems(itemsWithoutItem);
         }
     };
-    // FOR TESTING
-    // useEffect(() => {
-    //     console.log(selectedItems)
-    // }, [selectedItems]);
+
+    useEffect(() => {
+        console.log(selectedItems);
+        updateFilters(new JobFilters(selectedItems));
+    }, [selectedItems]);
 
     return (
         <div>
