@@ -25,8 +25,8 @@ export class JobListing extends BaseModel {
     }
 
     /**
-     * To be used on a JobListing[] array with the javascript filter function, to reduce the scope of displayed jobs
-     * - filtering them. All Filters must apply for the Job to be considered matching.
+     * To be used on a JobListing[] array with the javascript filter function, to reduce the scope of displayed jobs,
+     * filtering them. All Filters must apply for the Job to be considered matching.
      * @param filters
      */
     matches(filters: JobFilters) {
@@ -43,7 +43,7 @@ export class JobListing extends BaseModel {
      * @param jobAttribute
      * @param filterItems
      */
-    matchesAnyItem(jobAttribute: string, filterItems: string[]) {
+    private matchesAnyItem(jobAttribute: string, filterItems: string[]) {
             if (filterItems.length === 0) {
                 return true;
             }

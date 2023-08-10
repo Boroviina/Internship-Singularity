@@ -41,7 +41,7 @@ const JobListingPage = () => {
 
     const fetchJobs = async () => {
         const jobs = await getJobs();
-        const filteredJobs = filterJobs(jobs, new JobFilters([], [], [], [], []));
+        const filteredJobs = filterJobs(jobs, new JobFilters());
         setJobs(filteredJobs);
     };
 
