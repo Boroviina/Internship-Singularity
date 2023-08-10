@@ -44,7 +44,9 @@ export class JobListing extends BaseModel {
      * @param filterItems
      */
     matchesAnyItem(jobAttribute: string, filterItems: string[]) {
-        return filterItems.length === 0 || filterItems.includes(jobAttribute);
+        // const filterApplied = filterItems.length > 0 ? true : false;
+        return !(jobAttribute === undefined && filterItems.length > 0)
+            && (filterItems.length === 0 || filterItems.includes(jobAttribute));
     }
 }
 

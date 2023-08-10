@@ -55,4 +55,11 @@ describe('Filter jobs', () => {
 
         expect(filterJobs([job], filters)).toEqual([]);
     });
+
+    test('should return empty array if the job attribute being filtered is undefined', () => {
+        const job = new JobListing({remote: undefined, requirements: new RequirementsModel()});
+        const filters = new JobFilters([], ["Remote"], [], [], []);
+
+        expect(filterJobs([job], filters)).toEqual([]);
+    });
 });
