@@ -39,21 +39,12 @@ export class JobListing extends BaseModel {
 
     /**
      * A filter can have multiple filter items within it, and a job is considered matching if it matches at least one
-     * of the items in the group.
+     * of the items in the group. Also, the job is matching if no filters are applied (the filter parameter is empty).
      * @param jobAttribute
      * @param filter
      */
     matchesAnyItem(jobAttribute: string, filter: string[]) {
-        if (filter.length === 0) {
-            return true;
-        } else {
-            for (let i = 0; i < filter.length; i++) {
-                if (filter[i] === jobAttribute) {
-                    return true;
-                }
-            }
-            return false;
-        }
+        return filter.length === 0 || filter.includes(jobAttribute);
     }
 }
 
