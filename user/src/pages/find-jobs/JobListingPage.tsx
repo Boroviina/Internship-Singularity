@@ -35,9 +35,6 @@ const JobListingPage = () => {
         setShownJob(job);
         setShowDetails(true)
     };
-    const handleFiltersChanged = (changedItems: JobFilters) => {
-        setFilters(changedItems);
-    };
 
     useEffect(() => {
         fetchJobs();
@@ -58,6 +55,24 @@ const JobListingPage = () => {
     const handleEmploymentTypeChanged = (employmentType: string[]) => {
         const newFilters = new JobFilters();
         newFilters.setEmploymentType(employmentType);
+        setFilters(newFilters);
+    };
+
+    const handleRemoteChanged = (remote: string[]) => {
+        const newFilters = new JobFilters();
+        newFilters.setRemote(remote);
+        setFilters(newFilters);
+    }
+
+    const handleExperienceLevelChanged = (experienceLevel: string[]) => {
+        const newFilters = new JobFilters();
+        newFilters.setExperience(experienceLevel);
+        setFilters(newFilters);
+    };
+
+    const handleEducationLevelChanged = (educationLevel: string[]) => {
+        const newFilters = new JobFilters();
+        newFilters.setEducation(educationLevel);
         setFilters(newFilters);
     };
 
@@ -89,13 +104,13 @@ const JobListingPage = () => {
                                 <CheckboxGroup name={"Specialization"} values={Object.values(Specialization)}
                                                updateFilters={handleSpecializationChanged}/>
                                 <Dropdown name="Remote" values={Object.values(Remote)}
-                                          updateFilters={filters.setRemote}/>
+                                          updateFilters={handleRemoteChanged}/>
                                 <CheckboxGroup name="Employment type" values={Object.values(EmploymentType)}
                                                updateFilters={handleEmploymentTypeChanged}/>
                                 <Dropdown name="Experience level" values={Object.values(ExperienceLevel)}
-                                          updateFilters={filters.setExperience}/>
+                                          updateFilters={handleExperienceLevelChanged}/>
                                 <Dropdown name="Education level" values={Object.values(EducationLevel)}
-                                          updateFilters={filters.setEducation}/>
+                                          updateFilters={handleEducationLevelChanged}/>
                             </Filters>
                         </section>
 

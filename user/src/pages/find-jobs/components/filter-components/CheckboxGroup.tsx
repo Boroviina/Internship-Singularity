@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Checkbox from "./Checkbox";
 
 export interface Filter {
-    name?: string,
-    values?: string[],
+    name: string,
+    values: string[],
     updateFilters(filters: any[]): void,
 }
 
