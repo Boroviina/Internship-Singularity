@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 interface FilterItem {
     name: string;
     id: string;
-    onChange(item: string, checked: boolean): void;
+    onChange(item: string, selected: boolean): void;
 }
 
 const Checkbox = ({name, id, onChange}: FilterItem) => {

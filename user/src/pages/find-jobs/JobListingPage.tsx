@@ -15,8 +15,9 @@ import {
     EmploymentType,
     ExperienceLevel,
     JobFilters,
-    Remote, sortByCategories,
-    Specialization
+    Remote,
+    Specialization,
+    sortByCategories
 } from "./components/filter-components/JobFilters";
 
 export function filterJobs(jobs: JobListing[], filters: JobFilters) {
@@ -68,11 +69,11 @@ const JobListingPage = () => {
 
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
-                                <CheckboxGroup name="Specialization" filterItems={Object.values(Specialization)}/>
-                                <Dropdown name="Remote" filterItems={Object.values(Remote)}/>
-                                <CheckboxGroup name="Employment type" filterItems={Object.values(EmploymentType)}/>
-                                <Dropdown name="Experience level" filterItems={Object.values(ExperienceLevel)}/>
-                                <Dropdown name="Education level" filterItems={Object.values(EducationLevel)}/>
+                                <CheckboxGroup name="Specialization" values={Object.values(Specialization)}/>
+                                <Dropdown name="Remote" values={Object.values(Remote)}/>
+                                <CheckboxGroup name="Employment type" values={Object.values(EmploymentType)}/>
+                                <Dropdown name="Experience level" values={Object.values(ExperienceLevel)}/>
+                                <Dropdown name="Education level" values={Object.values(EducationLevel)}/>
                             </Filters>
                         </section>
 
