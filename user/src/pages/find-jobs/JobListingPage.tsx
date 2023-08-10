@@ -49,6 +49,19 @@ const JobListingPage = () => {
         setJobs(filteredJobs);
     };
 
+    const handleSpecializationChanged = (specialization : string[]) => {
+        const newFilters = new JobFilters();
+        newFilters.setSpecialization(specialization);
+        setFilters(newFilters);
+    }
+
+    const handleEmploymentTypeChanged = (employmentType: string[]) => {
+        const newFilters = new JobFilters();
+        newFilters.setEmploymentType(employmentType);
+        setFilters(newFilters);
+    };
+
+
     let jobsContent = <div>No jobs could be found.</div>;
 
     if (jobs) {
@@ -74,15 +87,15 @@ const JobListingPage = () => {
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
                                 <CheckboxGroup name={"Specialization"} values={Object.values(Specialization)}
-                                               updateFilters={handleFiltersChanged}/>
+                                               updateFilters={handleSpecializationChanged}/>
                                 <Dropdown name="Remote" values={Object.values(Remote)}
-                                          updateFilters={handleFiltersChanged}/>
+                                          updateFilters={filters.setRemote}/>
                                 <CheckboxGroup name="Employment type" values={Object.values(EmploymentType)}
-                                               updateFilters={handleFiltersChanged}/>
+                                               updateFilters={handleEmploymentTypeChanged}/>
                                 <Dropdown name="Experience level" values={Object.values(ExperienceLevel)}
-                                          updateFilters={handleFiltersChanged}/>
+                                          updateFilters={filters.setExperience}/>
                                 <Dropdown name="Education level" values={Object.values(EducationLevel)}
-                                          updateFilters={handleFiltersChanged}/>
+                                          updateFilters={filters.setEducation}/>
                             </Filters>
                         </section>
 

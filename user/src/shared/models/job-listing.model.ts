@@ -43,7 +43,7 @@ export class JobListing extends BaseModel {
      * @param jobAttribute
      * @param filterItems
      */
-    private matchesAnyItem(jobAttribute: string, filterItems: string[]) {
+    private matchesAnyItem(jobAttribute: string, filterItems: any[]) {
             if (filterItems.length === 0) {
                 return true;
             }

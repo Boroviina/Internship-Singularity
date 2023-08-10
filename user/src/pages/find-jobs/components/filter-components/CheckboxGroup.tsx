@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Checkbox from "./Checkbox";
-import {FilterProperties, JobFilters} from "./JobFilters";
 
 export interface Filter {
     name?: string,
     values?: string[],
-    updateFilters(filters: JobFilters): void,
+    updateFilters(filters: any[]): void,
 }
 
 const CheckboxGroup = ({name, values, updateFilters}: Filter) => {
@@ -20,10 +19,7 @@ const CheckboxGroup = ({name, values, updateFilters}: Filter) => {
         }
     };
 
-    useEffect(() => {
-        console.log(selectedItems);
-        updateFilters(new JobFilters(selectedItems));
-    }, [selectedItems]);
+    useEffect(() => updateFilters(selectedItems), [selectedItems]);
 
     return (
         <div>
