@@ -13,7 +13,7 @@ export const JobApplicationItem: React.FC<JobApplicationItemProps> = (props) => 
     const expired = (new Date(item.job.appDeadline)) < new Date();
 
     return (
-        <div className={`p-3 fs-6 border-end border-bottom card-bg shadow-sm rounded`}>
+        <div className={`p-4 mb-1 fs-6 border-end border-bottom card-bg shadow-sm border-radius card-bg`}>
             <div>
                 {expired ? <span className="d-flex justify-content-between align-items-center">
                     <i className="bi bi-bag-heart text-danger" style={{fontSize: '1.3rem'}}></i>

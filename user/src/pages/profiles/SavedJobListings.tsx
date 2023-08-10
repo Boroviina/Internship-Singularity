@@ -4,12 +4,23 @@ import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {useAuth} from "../../modules/auth";
 import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
+import {JobListing} from "../../shared/models/job-listing.model";
+import JobListingCard from "../find-jobs/JobListingCard";
+import DetailsModal from "../find-jobs/DetailsModal";
 
 export const SavedJobListings = () => {
     const navigate = useNavigate();
     const {currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [savedJobs, setSavedJobs] = useState(null);
+
+    const [shownJob, setShownJob] = useState<JobListing>(null);
+    const [showDetails, setShowDetails] = useState(false);
+    const handleClose = () => setShowDetails(false);
+    const handleOpen = (job: JobListing) => {
+        setShownJob(job);
+        setShowDetails(true)
+    };
 
     useEffect(() => {
         const fetchSavedJobs = async () => {
@@ -30,18 +41,18 @@ export const SavedJobListings = () => {
 
     if (savedJobs) {
         savedJobsContent = savedJobs.map(savedJob => (
-            //add job listing component
-            <div key={savedJob.job.id}>{savedJob.job.jobTitle}</div>
+            <JobListingCard job={savedJob.job} showDetails={handleOpen} key={savedJob.job.id}/>
         ))}
 
     return (
         <>
             <CustomCard width="96%">
-                <HeaderCard title="Saved listings" className="mt-4">Saved job listings</HeaderCard>
-                <CustomCard className="shadow rounded-2 my-4 p-4">
+                <HeaderCard title="Saved listings" className="mt-4">Your saved job listings</HeaderCard>
+                <CustomCard className="shadow border-radius my-4 p-4 card-bg">
                     {savedJobsContent}
                 </CustomCard>
             </CustomCard>
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}/>}
         </>
     )
 }
