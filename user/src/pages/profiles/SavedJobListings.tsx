@@ -22,26 +22,27 @@ export const SavedJobListings = () => {
         setShowDetails(true)
     };
 
-    useEffect(() => {
-        const fetchSavedJobs = async () => {
-            setLoading(true);
-            try {
-                const savedjobs = await getUsersSavedJobs(`${currentUser.id}`);
-                setSavedJobs(savedjobs);
+    const fetchSavedJobs = async () => {
+        setLoading(true);
+        try {
+            const savedjobs = await getUsersSavedJobs(`${currentUser.id}`);
+            setSavedJobs(savedjobs);
 
-            } catch(error) {
-                navigate('/error/500');
-            }
-            setLoading(false);
+        } catch(error) {
+            navigate('/error/500');
         }
-        fetchSavedJobs();
-    }, [currentUser.id]);
+        setLoading(false);
+    }
 
-    let savedJobsContent = <div>No saved job listings.</div>;
+    useEffect(() => {
+        fetchSavedJobs();
+    }, []);
+
+    let savedJobsContent = <div className="text-label">No saved job listings.</div>;
 
     if (savedJobs) {
         savedJobsContent = savedJobs.map(savedJob => (
-            <JobListingCard job={savedJob.job} showDetails={handleOpen} key={savedJob.job.id}/>
+            <JobListingCard job={savedJob.job} showDetails={handleOpen} key={savedJob.job.id} update={fetchSavedJobs}/>
         ))}
 
     return (

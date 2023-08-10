@@ -23,24 +23,26 @@ const JobListingPage = () => {
     };
 
     const [jobs, setJobs] = useState(null);
+
+    const fetchJobs = async () => {
+        try {
+            const jobs = await getJobs();
+            setJobs(jobs);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         fetchJobs();
     }, /*filter, search...*/[]);
 
-const fetchJobs = async () => {
-    try {
-        const jobs = await getJobs();
-        setJobs(jobs);
-    } catch (error) {
-        console.log(error);
-    }
-}
     let jobsContent = <div>No jobs could be found.</div>;
 
     if (jobs) {
         jobsContent = jobs.map(job => {
             console.log(job);
-            return <JobListingCard job={job} showDetails={handleOpen} key={job.id}/>;
+            return <JobListingCard job={job} showDetails={handleOpen} key={job.id} update={fetchJobs}/>;
         });
     }
 
