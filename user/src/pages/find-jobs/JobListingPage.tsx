@@ -88,7 +88,7 @@ const JobListingPage = () => {
             </main>
             </body>
 
-            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}/>}
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={fetchJobs}/>}
         </>
     );
 }

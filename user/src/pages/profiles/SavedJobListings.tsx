@@ -53,7 +53,7 @@ export const SavedJobListings = () => {
                     {savedJobsContent}
                 </CustomCard>
             </CustomCard>
-            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}/>}
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={fetchSavedJobs}/>}
         </>
     )
 }

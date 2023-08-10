@@ -10,11 +10,11 @@ import {JobListing} from "../../shared/models/job-listing.model";
 interface DetailsProps {
     job: JobListing;
     showDetails: boolean;
-
+    update(): void;
     close(): void;
 }
 
-const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
+const DetailsModal = ({job, showDetails, update, close}: DetailsProps) => {
     return (
         <Modal show={showDetails} onHide={close} size="lg">
 
@@ -22,7 +22,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
                 <ModalHeader companyName={job.employer.companyName} jobTitle={job.jobTitle} salary={job.salary + " €"}/>
 
                 <div className={`${styles.positionBtns} d-none d-lg-block`}>
-                    <ApplyOrSave/>
+                    <ApplyOrSave job={job} update={update}/>
                 </div>
                 <button type="button" onClick={close}
                         className={`btn-close ${styles.xClose}`} aria-label="Close">
@@ -92,7 +92,7 @@ const DetailsModal = ({job, showDetails, close}: DetailsProps) => {
             </Modal.Body>
 
             <Modal.Footer className="d-lg-none card-bg sticky-bottom" style={{background: "var(--bs-body-bg)"}}>
-                <ApplyOrSave/>
+                <ApplyOrSave job={job} update={update}/>
             </Modal.Footer>
 
         </Modal>
