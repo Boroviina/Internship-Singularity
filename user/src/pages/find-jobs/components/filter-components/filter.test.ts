@@ -1,7 +1,7 @@
-import {JobListing} from "../../shared/models/job-listing.model";
-import {RequirementsModel} from "../../shared/models/requirements.model";
-import {filterJobs} from "./JobListingPage";
-import {JobFilters} from "../../shared/models/JobFilters";
+import {JobListing} from "../../../../shared/models/job-listing.model";
+import {RequirementsModel} from "../../../../shared/models/requirements.model";
+import {filterJobs} from "../../JobListingPage";
+import {JobFilters} from "./JobFilters";
 
 describe('Filter jobs', () => {
     test('should return same jobs if no filter', () => {

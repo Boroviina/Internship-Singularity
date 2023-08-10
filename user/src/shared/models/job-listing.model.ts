@@ -1,7 +1,7 @@
 import {BaseModel} from "./base.model";
 import {RequirementsModel} from "./requirements.model";
 import {Employer} from "./employer.model";
-import {JobFilters} from "./JobFilters";
+import {JobFilters} from "../../pages/find-jobs/components/filter-components/JobFilters";
 
 export class JobListing extends BaseModel {
     id: string;

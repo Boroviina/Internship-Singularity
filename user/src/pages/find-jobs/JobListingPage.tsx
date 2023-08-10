@@ -10,7 +10,14 @@ import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
-import {JobFilters} from "../../shared/models/JobFilters";
+import {
+    EducationLevel,
+    EmploymentType,
+    ExperienceLevel,
+    JobFilters,
+    Remote, sortByCategories,
+    Specialization
+} from "./components/filter-components/JobFilters";
 
 export function filterJobs(jobs: JobListing[], filters: JobFilters) {
     return jobs.filter(job => (job.matches(filters)));
@@ -40,7 +47,9 @@ const JobListingPage = () => {
     let jobsContent = <div>No jobs could be found.</div>;
 
     if (jobs) {
-        jobsContent = jobs.map(job => (<JobListingCard job={job} showDetails={handleOpen} key={job.id}/>));
+        jobsContent = jobs.map(job => (<JobListingCard job={job}
+                                                       showDetails={handleOpen}
+                                                       key={job.id}/>));
     }
 
     return (
@@ -91,42 +100,3 @@ const JobListingPage = () => {
 }
 
 export default JobListingPage;
-
-enum Specialization {
-    FinanceAndAccounting = "Finance & accounting",
-    Legal = "Legal",
-    Technology = "Technology",
-    AdministrativeAndCustomerSupport = "Administrative & customer support",
-    MarketingAndCreative = "Marketing & creative",
-}
-
-enum EmploymentType {
-    FullTime = "Full time",
-    PartTime = "Part time",
-    Internship = "Internship",
-    Contract = "Contract",
-    Temporary = "Temporary",
-}
-
-enum Remote {
-    Remote = "Remote",
-    Hybrid = "Hybrid",
-}
-
-enum ExperienceLevel {
-    NoExperience = "No experience",
-    EntryLevel = "Entry level",
-    MidLevel = "Mid level",
-    SeniorLevel = "Senior level",
-}
-
-enum EducationLevel {
-    NotRequired = "Not required",
-    College = "College",
-    AssociatesDegree = "Associate's degree",
-    BachelorsDegree = "Bachelor's degree",
-    MastersDegree = "Master's degree",
-    DoctorsDegree = "Doctor's degree",
-}
-
-const sortByCategories = ["Relevance", "Date", "Salary"];
