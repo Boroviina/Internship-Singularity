@@ -11,11 +11,15 @@ describe('Filter jobs', () => {
         expect(filterJobs([job], filters)).toEqual([job]);
     });
 
+    let technologyJob;
+    beforeAll(() => {
+        technologyJob = new JobListing({requirements: new RequirementsModel({specialization: "Technology"})});
+    });
+
     test('should return job if matches filter', () => {
-        const job = new JobListing({requirements: new RequirementsModel({specialization: "Technology"}),});
         const filters = new JobFilters(["Technology"], [], [], [], []);
 
-        expect(filterJobs([job], filters)).toEqual([job]);
+        expect(filterJobs([technologyJob], filters)).toEqual([technologyJob]);
     });
 
     test('should return job that matches specialization and remote', () => {
@@ -23,30 +27,22 @@ describe('Filter jobs', () => {
             requirements: new RequirementsModel({specialization: "Technology"}),
             remote: "Remote"
         });
-        const nonMatchingJob = new JobListing({
-            requirements: new RequirementsModel({specialization: "Technology"})
-        });
         const filters = new JobFilters(["Technology"], ["Remote"], [], [], []);
 
-        expect(filterJobs([matchingJob, nonMatchingJob], filters)).toEqual([matchingJob]);
+        expect(filterJobs([matchingJob, technologyJob], filters)).toEqual([matchingJob]);
     });
 
-    test('should return job that matches specialization and experience', () => {
+    test('should return job that matches specialization and experience (both are requirements)', () => {
         const matchingJob = new JobListing({
             requirements: new RequirementsModel({specialization: "Technology", experience: "High level"}),
         });
-        const nonMatchingJob = new JobListing({
-            requirements: new RequirementsModel({specialization: "Technology"})
-        });
         const filters = new JobFilters(["Technology"], [], [], ["High level"], []);
 
-        expect(filterJobs([matchingJob, nonMatchingJob], filters)).toEqual([matchingJob]);
+        expect(filterJobs([matchingJob, technologyJob], filters)).toEqual([matchingJob]);
     });
 
     test('should return job that matches employmentType', () => {
-        const matchingJob = new JobListing({employmentType: "Full time",
-            requirements: new RequirementsModel(),
-        });
+        const matchingJob = new JobListing({employmentType: "Full time", requirements: new RequirementsModel(),});
         const nonMatchingJob = new JobListing({requirements: new RequirementsModel()});
         const filters = new JobFilters([], [], ["Full time"], [], []);
 
