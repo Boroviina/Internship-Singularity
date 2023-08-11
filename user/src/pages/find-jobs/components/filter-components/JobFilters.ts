@@ -24,7 +24,13 @@ class JobFilters {
             }
         }
     }
+    get(name: string): string[] {
+        return this.filters[name];
+    }
 
+    set(name: string, value: string[]) {
+        this.filters[name] = value;
+    }
 
     get specialization(): string[] {
         return this.filters[Specialization.propName];

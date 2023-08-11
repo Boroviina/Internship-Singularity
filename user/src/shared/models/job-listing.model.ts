@@ -1,7 +1,7 @@
 import {BaseModel} from "./base.model";
 import {RequirementsModel} from "./requirements.model";
 import {Employer} from "./employer.model";
-import {JobFilters} from "../../pages/find-jobs/components/filter-components/JobFilters";
+import {JobFilters, Specialization} from "../../pages/find-jobs/components/filter-components/JobFilters";
 
 export class JobListing extends BaseModel {
     id: string;
@@ -30,7 +30,8 @@ export class JobListing extends BaseModel {
      * @param filters
      */
     matches(filters: JobFilters) {
-        return this.matchesAnyItem(this.requirements.specialization, filters.specialization)
+        //TODO refactor using first example
+        return this.matchesAnyItem(this.requirements[Specialization.propName], filters.get(Specialization.propName))
         && this.matchesAnyItem(this.remote, filters.remote)
         && this.matchesAnyItem(this.employmentType, filters.employmentType)
         && this.matchesAnyItem(this.requirements.experience, filters.experience)
