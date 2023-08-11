@@ -20,6 +20,10 @@ class JobFilters {
         this.education = education;
     }
 
+    /**
+     * Takes a JobFilters and copies it to this instance, without you having to put individual fields in the constructor.
+     * @param filters
+     */
     copy(filters: JobFilters) {
         this.specialization = filters.specialization;
         this.remote = filters.remote;
