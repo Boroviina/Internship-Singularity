@@ -27,26 +27,6 @@ class JobFilters {
         this.experience = filters.experience;
         this.education = filters.education;
     }
-
-    setSpecialization(value: string[]) {
-        this.specialization = value;
-    }
-
-    setRemote(value: string[]) {
-        this.remote = value;
-    }
-
-    setEmploymentType(value: string[]) {
-        this.employmentType = value;
-    }
-
-    setExperience(value: string[]) {
-        this.experience = value;
-    }
-
-    setEducation(value: string[]) {
-        this.education = value;
-    }
 }
 
 abstract class FilterProperties {

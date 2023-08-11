@@ -18,7 +18,7 @@ describe('Filter jobs', () => {
     });
 
     test('should return job if matches filter', () => {
-        filters.setSpecialization(["Technology"]);
+        filters.specialization = ["Technology"];
         expect(filterJobs([technologyJob], filters))
             .toEqual([technologyJob]);
     });
@@ -28,8 +28,8 @@ describe('Filter jobs', () => {
             requirements: new RequirementsModel({specialization: "Technology"}),
             remote: "Remote"
         });
-        filters.setSpecialization(["Technology"]);
-        filters.setRemote(["Remote"]);
+        filters.specialization = ["Technology"];
+        filters.remote = ["Remote"];
 
         expect(filterJobs([matchingJob, technologyJob], filters))
             .toEqual([matchingJob]);
@@ -39,8 +39,8 @@ describe('Filter jobs', () => {
         const matchingJob = new JobListing({
             requirements: new RequirementsModel({specialization: "Technology", experience: "High level"}),
         });
-        filters.setSpecialization(["Technology"]);
-        filters.setExperience(["High level"]);
+        filters.specialization = ["Technology"];
+        filters.experience = ["High level"];
 
         expect(filterJobs([matchingJob, technologyJob], filters))
             .toEqual([matchingJob]);
@@ -49,14 +49,14 @@ describe('Filter jobs', () => {
     test('should return job that matches employmentType', () => {
         const matchingJob = new JobListing({employmentType: "Full time", requirements: new RequirementsModel(),});
         const nonMatchingJob = new JobListing({requirements: new RequirementsModel()});
-        filters.setEmploymentType(["Full time"]);
+        filters.employmentType = ["Full time"];
 
         expect(filterJobs([matchingJob, nonMatchingJob], filters))
             .toEqual([matchingJob]);
     });
 
     test('should return empty array if doesnt match filter', () => {
-        filters.setSpecialization(["Finance"]);
+        filters.specialization = ["Finance"];
 
         expect(filterJobs([technologyJob], filters))
             .toEqual([]);
@@ -64,14 +64,14 @@ describe('Filter jobs', () => {
 
     test('should return empty array if the job attribute being filtered is undefined', () => {
         const job = new JobListing({remote: undefined, requirements: new RequirementsModel()});
-        filters.setRemote(["Remote"]);
+        filters.remote = ["Remote"];
 
         expect(filterJobs([job], filters))
             .toEqual([]);
     });
     test('should return two jobs, with two different specializations, when those two specializations are filtered for', () => {
         const financeJob= new JobListing({requirements: new RequirementsModel({specialization: "Finance"})});
-        filters.setSpecialization(["Finance", "Technology"]);
+        filters.specialization = ["Finance", "Technology"];
 
         expect(filterJobs([technologyJob, financeJob], filters))
             .toEqual([technologyJob, financeJob]);
@@ -80,7 +80,7 @@ describe('Filter jobs', () => {
     test('should exclude job which doesnt match any filters', () => {
         const financeJob= new JobListing({requirements: new RequirementsModel({specialization: "Finance"})});
         const marketingJob = new JobListing({requirements: new RequirementsModel({specialization: "Marketing"})});
-        filters.setSpecialization(["Finance", "Technology"]);
+        filters.specialization = ["Finance", "Technology"];
 
         expect(filterJobs([technologyJob, financeJob, marketingJob], filters))
             .toEqual([technologyJob, financeJob]);
