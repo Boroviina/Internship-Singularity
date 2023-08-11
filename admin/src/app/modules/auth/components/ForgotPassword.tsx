@@ -3,7 +3,10 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {requestPassword} from '../core/_requests'
+import {Alert} from "../../../shared/components/Alert";
+import AuthService from "../../../shared/services/api-client/auth.service";
+
+const authService = new AuthService();
 
 const initialValues = {
   email: 'admin@demo.com',
@@ -27,7 +30,7 @@ export function ForgotPassword() {
       setLoading(true)
       setHasErrors(undefined)
       setTimeout(() => {
-        requestPassword(values.email)
+        authService.forgotPassword(values.email)
           .then(({data: {result}}) => {
             setHasErrors(false)
             setLoading(false)
@@ -62,17 +65,19 @@ export function ForgotPassword() {
 
         {/* begin::Title */}
         {hasErrors === true && (
-          <div className='mb-lg-15 alert alert-danger'>
-            <div className='alert-text font-weight-bold'>
-              Sorry, looks like there are some errors detected, please try again.
-            </div>
-          </div>
+            <Alert state="danger" icon="icons/duotune/general/gen040.svg">Sorry, looks like there are some errors detected, please try again.</Alert>
+          // <div className='mb-lg-15 alert alert-danger'>
+          //   <div className='alert-text font-weight-bold'>
+          //     Sorry, looks like there are some errors detected, please try again.
+          //   </div>
+          // </div>
         )}
 
         {hasErrors === false && (
-          <div className='bg-secondary mb-10 p-8 rounded'>
-            <div className='text-info'>Sent password reset. Please check your email</div>
-          </div>
+            <Alert state="success" icon="icons/duotune/general/gen043.svg">Sent password reset. Please check your email</Alert>
+          // <div className='bg-secondary mb-10 p-8 rounded'>
+          //   <div className='text-info'>Sent password reset. Please check your email</div>
+          // </div>
         )}
         {/* end::Title */}
 
