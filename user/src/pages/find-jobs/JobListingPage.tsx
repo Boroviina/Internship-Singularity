@@ -26,8 +26,8 @@ export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) {
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState<JobListing[]>([]);
-    const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [filters, setFilters] = useState<JobFilters>(new JobFilters());
+    const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
 

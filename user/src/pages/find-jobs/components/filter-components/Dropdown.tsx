@@ -11,12 +11,12 @@ const Dropdown = ({filterInfo, updateFilters}: Filter<any>) => {
         }
     };
 
-    useEffect(() => updateFilters(selectedItems, filterInfo.nameInJob), [selectedItems]);
+    useEffect(() => updateFilters(selectedItems, filterInfo.propName), [selectedItems]);
 
 
     return (
         <div>
-            <h5>{filterInfo.displayName}</h5>
+            <h5 className="text-label">{filterInfo.displayName}</h5>
             <select className="form-select form-select-lg" aria-label={filterInfo.displayName} onChange={handleChange}>
                 <option value="">...</option>
                 {filterInfo.values.map((item) => {

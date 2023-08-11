@@ -1,75 +1,103 @@
 class JobFilters {
 
-    specialization: string[] = [];
-    remote: string[] = [];
-    employmentType: string[] = [];
-    experience: string[] = [];
-    education: string[] = [];
+    filters: {
+        [name: string]: string[]
+    } = {};
 
-    constructor(
-        specialization: string[] = [],
-        remote: string[] = [],
-        employmentType: string[] = [],
-        experience: string[] = [],
-        education: string[] = [],
-    ) {
-        this.specialization = specialization;
-        this.remote = remote;
-        this.employmentType = employmentType;
-        this.experience = experience;
-        this.education = education;
+    constructor() {
+        this.initializeFilters();
     }
 
-    /**
-     * Takes a JobFilters and copies it to this instance, without you having to put individual fields in the constructor.
-     * @param filters
-     */
-    copy(filters: JobFilters) {
-        this.specialization = filters.specialization;
-        this.remote = filters.remote;
-        this.employmentType = filters.employmentType;
-        this.experience = filters.experience;
-        this.education = filters.education;
+    /** If you don't add the filter here, you might get an error! */
+    initializeFilters() {
+        this.filters[Specialization.propName] = [];
+        this.filters[EmploymentType.propName] = [];
+        this.filters[Remote.propName] = [];
+        this.filters[Experience.propName] = [];
+        this.filters[Education.propName] = [];
+    }
+
+    copy(oldFilters: JobFilters) {
+        for (const property in this.filters) {
+            if (property in oldFilters) {
+                this.filters[property] = [...oldFilters.filters[property]];
+            }
+        }
+    }
+
+
+    get specialization(): string[] {
+        return this.filters[Specialization.propName];
+    }
+    set specialization(value: string[]) {
+        this.filters[Specialization.propName] = value;
+    }
+
+    get employmentType(): string[] {
+        return this.filters[EmploymentType.propName];
+    }
+    set employmentType(value: string[]) {
+        this.filters[EmploymentType.propName] = value;
+    }
+
+    get remote(): string[] {
+        return this.filters[Remote.propName];
+    }
+    set remote(value: string[]) {
+        this.filters[Remote.propName] = value;
+    }
+
+    get experience(): string[] {
+        return this.filters[Experience.propName];
+    }
+    set experience(value: string[]) {
+        this.filters[Experience.propName] = value;
+    }
+
+    get education(): string[] {
+        return this.filters[Education.propName];
+    }
+    set education(value: string[]) {
+        this.filters[Education.propName] = value;
     }
 }
 
-abstract class FilterProperties {
+abstract class MyFilter {
     static displayName: string = "";
-    static nameInJob: string = "";
+    static propName: string = "";
     static values: string[] = [];
 }
 
-class Specialization extends  FilterProperties{
+class Specialization extends MyFilter{
     static displayName: string = "Specialization"
-    static nameInJob: string = "specialization";
+    static propName: string = "specialization";
     static values: string[] = ["Finance & accounting", "Legal", "Technology", "Administrative & customer support", "Marketing & creative"];
 }
 
- class EmploymentType extends  FilterProperties{
+ class EmploymentType extends MyFilter{
     static displayName: string = "Employment type";
-    static nameInJob: string = "employmentType";
+    static propName: string = "employmentType";
     static values: string[] = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
 }
 
- class Remote extends  FilterProperties{
+ class Remote extends MyFilter{
     static displayName: string = "Remote";
-    static nameInJob: string = "remote";
+    static propName: string = "remote";
     static values: string[] = ["Remote", "Hybrid"];
 }
 
- class Experience extends  FilterProperties{
+ class Experience extends MyFilter{
     static displayName: string = "Experience level";
-    static nameInJob: string = "experience";
+    static propName: string = "experience";
     static values: string[] = ["No experience", "Entry level", "Mid level", "Senior level"];
 }
 
- class Education extends  FilterProperties{
+ class Education extends MyFilter{
     static displayName: string = "Education level";
-    static nameInJob: string = "education";
+    static propName: string = "education";
     static values: string[] = ["Not required", "College", "Associate's degree", "Bachelor's degree", "Master's degree", "Doctor's degree"];
 }
 
-
 const sortByCategories = ["Relevance", "Date", "Salary"];
 
-export {FilterProperties, Education, Experience, Remote, EmploymentType, Specialization, JobFilters, sortByCategories};
+export {MyFilter, Education, Experience, Remote, EmploymentType, Specialization, JobFilters, sortByCategories};

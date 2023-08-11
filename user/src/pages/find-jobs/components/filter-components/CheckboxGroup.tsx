@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Checkbox from "./Checkbox";
-import {FilterProperties} from "./JobFilters";
+import {MyFilter} from "./JobFilters";
 
-export interface Filter <T extends FilterProperties>{
+export interface Filter <T extends MyFilter>{
     filterInfo: T;
     updateFilters(filter: any[], filterName: string);
 }
@@ -18,7 +18,7 @@ const CheckboxGroup = ({filterInfo, updateFilters}: Filter<any>) => {
             setSelectedItems(itemsWithoutItem);
         }
     };
-    useEffect(() => updateFilters(selectedItems, filterInfo.nameInJob), [selectedItems]);
+    useEffect(() => updateFilters(selectedItems, filterInfo.propName), [selectedItems]);
 
     return (
         <div>
