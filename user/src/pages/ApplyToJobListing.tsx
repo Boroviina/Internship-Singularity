@@ -80,7 +80,7 @@ export const ApplyToJobListing = () => {
 
     const hideModal = () => {
         setShowModal(false);
-        // navigate(`/job-listings/${jobId}`);
+        navigate(`/find-job`);
     }
     const openModal = () => {
         setShowModal(true);

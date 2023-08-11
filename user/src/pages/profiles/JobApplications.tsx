@@ -9,19 +9,16 @@ import {useNavigate} from "react-router-dom";
 export const JobApplications = () => {
     const navigate = useNavigate();
     const {currentUser} = useAuth();
-    const [loading, setLoading] = useState(false);
     const [jobApplications, setJobApplications] = useState(null)
 
     useEffect(() => {
         const fetchJobApplications = async () => {
-            setLoading(true);
             try {
                 const jobApplications = await getUsersJobApplications(`${currentUser.id}`);
                 setJobApplications(jobApplications);
             } catch(error) {
                 navigate('/error/500');
             }
-            setLoading(false);
         }
         fetchJobApplications();
     }, [currentUser.id]);
