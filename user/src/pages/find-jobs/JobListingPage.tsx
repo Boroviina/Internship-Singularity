@@ -46,11 +46,11 @@ const JobListingPage = () => {
         setJobs(filteredJobs);
     };
 
-    const handleFilterChanged = (changedFilter: any[], filterName: string) => {
+    const handleFilterChanged = (changedFilter: any[], name: string) => {
         // TODO dodati konstruktor koji prima samo filters a ne sva njegova polja
         // ali ovo ti govori da i sama klasa treba biti array ovih, a ne ovako ali ok
         const newFilters = new JobFilters(filters.specialization, filters.remote, filters.employmentType, filters.experience, filters.education);
-        newFilters[filterName] = changedFilter;
+        newFilters[name] = changedFilter;
         setFilters(newFilters);
     };
 
@@ -82,15 +82,15 @@ const JobListingPage = () => {
                                 <CheckboxGroup filterInfo={Specialization}
                                                updateFilters={handleFilterChanged}
                                 />
-                                {/*<Dropdown name="Remote" values={Object.values(Remote)}*/}
-                                {/*          updateFilters={handleRemoteChanged}/>*/}
+                                <Dropdown filterInfo={Remote}
+                                          updateFilters={handleFilterChanged}/>
                                 <CheckboxGroup filterInfo={EmploymentType}
                                                updateFilters={handleFilterChanged}
                                 />
-                                {/*<Dropdown name={Experience.nameInJob} values={Experience.values}*/}
-                                {/*          updateFilters={handleExperienceLevelChanged}/>*/}
-                                {/*<Dropdown name="Education level" values={Object.values(Education)}*/}
-                                {/*          updateFilters={handleEducationLevelChanged}/>*/}
+                                <Dropdown filterInfo={Experience}
+                                          updateFilters={handleFilterChanged}/>
+                                <Dropdown filterInfo={Education}
+                                          updateFilters={handleFilterChanged}/>
                             </Filters>
                         </section>
 
