@@ -8,10 +8,11 @@ import {useAuth} from "../../../../modules/auth";
 interface ApplyOrSaveProps {
     job: JobListing;
     update(): void;
+    isJobSaved?: boolean;
 }
 
-const ApplyOrSave = ({job, update}: ApplyOrSaveProps) => {
-    const [saved, setSaved] = useState(false);
+const ApplyOrSave = ({job, update, isJobSaved}: ApplyOrSaveProps) => {
+    const [saved, setSaved] = useState(isJobSaved);
     const navigate = useNavigate();
     const {currentUser} = useAuth();
 
@@ -26,7 +27,7 @@ const ApplyOrSave = ({job, update}: ApplyOrSaveProps) => {
 
     useEffect(() => {
         fetchIsJobSaved();
-    }, []);
+    }, [isJobSaved]);
 
     const onSave = async () => {
         try {

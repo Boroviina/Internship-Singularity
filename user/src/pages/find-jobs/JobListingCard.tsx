@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {JobListing} from "../../shared/models/job-listing.model";
 import TimeAgo from "./components/TimeAgo";
 import ApplyOrSave from "./components/details-components/ApplyOrSave";
@@ -9,9 +9,10 @@ interface JobProps {
     job: JobListing;
     showDetails(job: JobListing): void;
     update(): void;
+    isJobSaved?: boolean;
 }
 
-const JobListingCard = ({job, showDetails, update} : JobProps) => {
+const JobListingCard = ({job, showDetails, update, isJobSaved} : JobProps) => {
 
     const clickHandler = (e) => {
       showDetails(job);
@@ -41,7 +42,7 @@ const JobListingCard = ({job, showDetails, update} : JobProps) => {
                     </span>
                 </div>
             </div>
-            <ApplyOrSave job={job} update={update}/>
+            <ApplyOrSave job={job} update={update} isJobSaved={isJobSaved}/>
         </article>
     );
 };

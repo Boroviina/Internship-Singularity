@@ -12,9 +12,10 @@ interface DetailsProps {
     showDetails: boolean;
     update(): void;
     close(): void;
+    isJobSaved?: boolean;
 }
 
-const DetailsModal = ({job, showDetails, update, close}: DetailsProps) => {
+const DetailsModal = ({job, showDetails, update, close, isJobSaved}: DetailsProps) => {
     return (
         <Modal show={showDetails} onHide={close} size="lg">
 
@@ -22,7 +23,7 @@ const DetailsModal = ({job, showDetails, update, close}: DetailsProps) => {
                 <ModalHeader companyName={job.employer.companyName} jobTitle={job.jobTitle} salary={job.salary + " €"}/>
 
                 <div className={`${styles.positionBtns} d-none d-lg-block`}>
-                    <ApplyOrSave job={job} update={update}/>
+                    <ApplyOrSave job={job} update={update} isJobSaved={isJobSaved}/>
                 </div>
                 <button type="button" onClick={close}
                         className={`btn-close ${styles.xClose}`} aria-label="Close">
@@ -92,7 +93,7 @@ const DetailsModal = ({job, showDetails, update, close}: DetailsProps) => {
             </Modal.Body>
 
             <Modal.Footer className="d-lg-none card-bg sticky-bottom" style={{background: "var(--bs-body-bg)"}}>
-                <ApplyOrSave job={job} update={update}/>
+                <ApplyOrSave job={job} update={update} isJobSaved={isJobSaved}/>
             </Modal.Footer>
 
         </Modal>
