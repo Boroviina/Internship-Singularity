@@ -22,7 +22,7 @@ const CheckboxGroup = ({filterInfo, updateFilters}: Filter<any>) => {
 
     return (
         <div>
-            <h5>{filterInfo.displayName}</h5>
+            <h5 className="text-label">{filterInfo.displayName}</h5>
             {filterInfo.values.map((item) => {
                 return <Checkbox key={item}
                                  name={item}

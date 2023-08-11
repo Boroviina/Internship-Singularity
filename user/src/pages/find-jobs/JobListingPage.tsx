@@ -20,12 +20,13 @@ import {
     sortByCategories
 } from "./components/filter-components/JobFilters";
 
-export function filterJobs(jobs: JobListing[], filters: JobFilters) {
+export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) {
     return jobs.filter(job => (job.matches(filters)));
 };
 
 const JobListingPage = () => {
-    const [jobs, setJobs] = useState(null);
+    const [jobs, setJobs] = useState<JobListing[]>([]);
+    const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [filters, setFilters] = useState<JobFilters>(new JobFilters());
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
@@ -37,13 +38,16 @@ const JobListingPage = () => {
     };
 
     useEffect(() => {
+        setFilteredJobs(getFilteredJobs(jobs, filters));
+    }, [filters, jobs]);
+
+    useEffect(() => {
         fetchJobs();
-    }, [filters]);
+    }, []);
 
     const fetchJobs = async () => {
         const jobs = await getJobs();
-        const filteredJobs = filterJobs(jobs, filters);
-        setJobs(filteredJobs);
+        setJobs(jobs);
     };
 
     const handleFilterChanged = (changedFilter: any[], name: string) => {
@@ -53,18 +57,8 @@ const JobListingPage = () => {
         setFilters(newFilters);
     };
 
-
-    let jobsContent = <div>No jobs could be found.</div>;
-
-    if (jobs) {
-        jobsContent = jobs.map(job => (<JobListingCard job={job}
-                                                       showDetails={handleOpen}
-                                                       key={job.id}/>));
-    }
-
     return (
         <>
-            <body>
 
             <header className={`${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
@@ -101,7 +95,11 @@ const JobListingPage = () => {
                                 <SortBy categories={sortByCategories}/>
                             </div>
                             <div className="jobs my-2">
-                                {jobsContent}
+                                {filteredJobs ? filteredJobs.map(job => (<JobListingCard job={job}
+                                                                  showDetails={handleOpen}
+                                                                  key={job.id}/>))
+                                    : <div>No jobs found.</div>
+                                }
                             </div>
                             <Pagination/>
                         </section>
@@ -109,7 +107,6 @@ const JobListingPage = () => {
                     </div>
                 </div>
             </main>
-            </body>
 
             {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}/>}
         </>

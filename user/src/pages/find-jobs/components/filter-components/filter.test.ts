@@ -1,6 +1,6 @@
 import {JobListing} from "../../../../shared/models/job-listing.model";
 import {RequirementsModel} from "../../../../shared/models/requirements.model";
-import {filterJobs} from "../../JobListingPage";
+import {getFilteredJobs} from "../../JobListingPage";
 import {JobFilters} from "./JobFilters";
 
 describe('Filter jobs', () => {
@@ -13,13 +13,13 @@ describe('Filter jobs', () => {
 
     test('should return same jobs if no filter', () => {
         const job = new JobListing({requirements: new RequirementsModel({})});
-        expect(filterJobs([job], filters))
+        expect(getFilteredJobs([job], filters))
             .toEqual([job]);
     });
 
     test('should return job if matches filter', () => {
         filters.specialization = ["Technology"];
-        expect(filterJobs([technologyJob], filters))
+        expect(getFilteredJobs([technologyJob], filters))
             .toEqual([technologyJob]);
     });
 
@@ -31,7 +31,7 @@ describe('Filter jobs', () => {
         filters.specialization = ["Technology"];
         filters.remote = ["Remote"];
 
-        expect(filterJobs([matchingJob, technologyJob], filters))
+        expect(getFilteredJobs([matchingJob, technologyJob], filters))
             .toEqual([matchingJob]);
     });
 
@@ -42,7 +42,7 @@ describe('Filter jobs', () => {
         filters.specialization = ["Technology"];
         filters.experience = ["High level"];
 
-        expect(filterJobs([matchingJob, technologyJob], filters))
+        expect(getFilteredJobs([matchingJob, technologyJob], filters))
             .toEqual([matchingJob]);
     });
 
@@ -51,14 +51,14 @@ describe('Filter jobs', () => {
         const nonMatchingJob = new JobListing({requirements: new RequirementsModel()});
         filters.employmentType = ["Full time"];
 
-        expect(filterJobs([matchingJob, nonMatchingJob], filters))
+        expect(getFilteredJobs([matchingJob, nonMatchingJob], filters))
             .toEqual([matchingJob]);
     });
 
     test('should return empty array if doesnt match filter', () => {
         filters.specialization = ["Finance"];
 
-        expect(filterJobs([technologyJob], filters))
+        expect(getFilteredJobs([technologyJob], filters))
             .toEqual([]);
     });
 
@@ -66,14 +66,14 @@ describe('Filter jobs', () => {
         const job = new JobListing({remote: undefined, requirements: new RequirementsModel()});
         filters.remote = ["Remote"];
 
-        expect(filterJobs([job], filters))
+        expect(getFilteredJobs([job], filters))
             .toEqual([]);
     });
     test('should return two jobs, with two different specializations, when those two specializations are filtered for', () => {
         const financeJob= new JobListing({requirements: new RequirementsModel({specialization: "Finance"})});
         filters.specialization = ["Finance", "Technology"];
 
-        expect(filterJobs([technologyJob, financeJob], filters))
+        expect(getFilteredJobs([technologyJob, financeJob], filters))
             .toEqual([technologyJob, financeJob]);
     });
 
@@ -82,7 +82,7 @@ describe('Filter jobs', () => {
         const marketingJob = new JobListing({requirements: new RequirementsModel({specialization: "Marketing"})});
         filters.specialization = ["Finance", "Technology"];
 
-        expect(filterJobs([technologyJob, financeJob, marketingJob], filters))
+        expect(getFilteredJobs([technologyJob, financeJob, marketingJob], filters))
             .toEqual([technologyJob, financeJob]);
     });
 });

@@ -18,7 +18,7 @@ const Dropdown = ({filterInfo, updateFilters}: Filter<any>) => {
         <div>
             <h5>{filterInfo.displayName}</h5>
             <select className="form-select form-select-lg" aria-label={filterInfo.displayName} onChange={handleChange}>
-                <option value="" selected>...</option>
+                <option value="">...</option>
                 {filterInfo.values.map((item) => {
                     return <option value={item} key={item}>{item}</option>;
                 })}

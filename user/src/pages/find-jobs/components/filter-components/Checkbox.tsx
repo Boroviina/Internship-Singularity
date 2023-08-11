@@ -16,7 +16,7 @@ const Checkbox = ({name, id, onChange}: FilterItem) => {
         <div className="form-check d-flex align-items-center">
             <input className="form-check-input check flex-shrink-0" type="checkbox" id={id}
                    value={name} onChange={onSelect} checked={checked} />
-            <label style={{userSelect: "none"}} className="form-check-label fs-5 ms-2" htmlFor={id}>
+            <label style={{userSelect: "none"}} className="form-check-label fs-5 ms-2 text-label" htmlFor={id}>
                 {name}
             </label>
         </div>
