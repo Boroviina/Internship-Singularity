@@ -95,9 +95,10 @@ const JobListingPage = () => {
                                 <SortBy categories={sortByCategories}/>
                             </div>
                             <div className="jobs my-2">
-                                {filteredJobs ? filteredJobs.map(job => (<JobListingCard job={job}
-                                                                  showDetails={handleOpen}
-                                                                  key={job.id}/>))
+                                {filteredJobs ? filteredJobs.map
+                                    (job => (<JobListingCard job={job}
+                                                             showDetails={handleOpen}
+                                                             key={job.id}/>))
                                     : <div>No jobs found.</div>
                                 }
                             </div>
