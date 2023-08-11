@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Checkbox from "./Checkbox";
+import {FilterProperties} from "./JobFilters";
 
-export interface Filter {
-    name: string,
-    values: string[],
-    updateFilters(filters: any[]): void,
+export interface Filter <T extends FilterProperties>{
+    filterInfo: T;
+    updateFilters(filters: any[], filterName: string);
 }
 
-const CheckboxGroup = ({name, values, updateFilters}: Filter) => {
+const CheckboxGroup = ({filterInfo, updateFilters}: Filter<any>) => {
     const [selectedItems, setSelectedItems] = useState([]);
 
     const handleSelectionChanged = (item: string, checked: boolean) => {
@@ -18,13 +18,13 @@ const CheckboxGroup = ({name, values, updateFilters}: Filter) => {
             setSelectedItems(itemsWithoutItem);
         }
     };
-
-    useEffect(() => updateFilters(selectedItems), [selectedItems]);
+    // zbog ovoga je potrebno refaktorisati da bude enum. ali ne moze enum, jer oni ne funkcionisu tako.
+    useEffect(() => updateFilters(selectedItems, filterInfo.nameInJob), [selectedItems]);
 
     return (
         <div>
-            <h5>{name}</h5>
-            {values.map((filter) => {
+            <h5>{filterInfo.displayName}</h5>
+            {filterInfo.values.map((filter) => {
                 return <Checkbox key={filter}
                                  name={filter}
                                  id={filter.toLowerCase().replaceAll(" ", "")}

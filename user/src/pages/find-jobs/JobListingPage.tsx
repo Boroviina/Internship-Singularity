@@ -11,9 +11,9 @@ import {JobListing} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
 import {
-    EducationLevel,
+    Education,
     EmploymentType,
-    ExperienceLevel,
+    Experience,
     JobFilters,
     Remote,
     Specialization,
@@ -46,33 +46,11 @@ const JobListingPage = () => {
         setJobs(filteredJobs);
     };
 
-    const handleSpecializationChanged = (specialization : string[]) => {
-        const newFilters = new JobFilters();
-        newFilters.setSpecialization(specialization);
-        setFilters(newFilters);
-    }
-
-    const handleEmploymentTypeChanged = (employmentType: string[]) => {
-        const newFilters = new JobFilters();
-        newFilters.setEmploymentType(employmentType);
-        setFilters(newFilters);
-    };
-
-    const handleRemoteChanged = (remote: string[]) => {
-        const newFilters = new JobFilters();
-        newFilters.setRemote(remote);
-        setFilters(newFilters);
-    }
-
-    const handleExperienceLevelChanged = (experienceLevel: string[]) => {
-        const newFilters = new JobFilters();
-        newFilters.setExperience(experienceLevel);
-        setFilters(newFilters);
-    };
-
-    const handleEducationLevelChanged = (educationLevel: string[]) => {
-        const newFilters = new JobFilters();
-        newFilters.setEducation(educationLevel);
+    const handleFilterChanged = (changedFilter: any[], filterName: string) => {
+        // TODO dodati konstruktor koji prima samo filters a ne sva njegova polja
+        // ali ovo ti govori da i sama klasa treba biti array ovih, a ne ovako ali ok
+        const newFilters = new JobFilters(filters.specialization, filters.remote, filters.employmentType, filters.experience, filters.education);
+        newFilters[filterName] = changedFilter;
         setFilters(newFilters);
     };
 
@@ -101,16 +79,18 @@ const JobListingPage = () => {
 
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
-                                <CheckboxGroup name={"Specialization"} values={Object.values(Specialization)}
-                                               updateFilters={handleSpecializationChanged}/>
-                                <Dropdown name="Remote" values={Object.values(Remote)}
-                                          updateFilters={handleRemoteChanged}/>
-                                <CheckboxGroup name="Employment type" values={Object.values(EmploymentType)}
-                                               updateFilters={handleEmploymentTypeChanged}/>
-                                <Dropdown name="Experience level" values={Object.values(ExperienceLevel)}
-                                          updateFilters={handleExperienceLevelChanged}/>
-                                <Dropdown name="Education level" values={Object.values(EducationLevel)}
-                                          updateFilters={handleEducationLevelChanged}/>
+                                <CheckboxGroup filterInfo={Specialization}
+                                               updateFilters={handleFilterChanged}
+                                />
+                                {/*<Dropdown name="Remote" values={Object.values(Remote)}*/}
+                                {/*          updateFilters={handleRemoteChanged}/>*/}
+                                <CheckboxGroup filterInfo={EmploymentType}
+                                               updateFilters={handleFilterChanged}
+                                />
+                                {/*<Dropdown name={Experience.nameInJob} values={Experience.values}*/}
+                                {/*          updateFilters={handleExperienceLevelChanged}/>*/}
+                                {/*<Dropdown name="Education level" values={Object.values(Education)}*/}
+                                {/*          updateFilters={handleEducationLevelChanged}/>*/}
                             </Filters>
                         </section>
 
