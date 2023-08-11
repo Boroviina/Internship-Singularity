@@ -47,9 +47,8 @@ const JobListingPage = () => {
     };
 
     const handleFilterChanged = (changedFilter: any[], name: string) => {
-        // TODO dodati konstruktor koji prima samo filters a ne sva njegova polja
-        // ali ovo ti govori da i sama klasa treba biti array ovih, a ne ovako ali ok
-        const newFilters = new JobFilters(filters.specialization, filters.remote, filters.employmentType, filters.experience, filters.education);
+        const newFilters = new JobFilters();
+        newFilters.copy(filters);
         newFilters[name] = changedFilter;
         setFilters(newFilters);
     };

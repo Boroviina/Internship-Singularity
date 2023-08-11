@@ -11,13 +11,21 @@ class JobFilters {
         remote: string[] = [],
         employmentType: string[] = [],
         experience: string[] = [],
-        education: string[] = []
+        education: string[] = [],
     ) {
         this.specialization = specialization;
         this.remote = remote;
         this.employmentType = employmentType;
         this.experience = experience;
         this.education = education;
+    }
+
+    copy(filters: JobFilters) {
+        this.specialization = filters.specialization;
+        this.remote = filters.remote;
+        this.employmentType = filters.employmentType;
+        this.experience = filters.experience;
+        this.education = filters.education;
     }
 
     setSpecialization(value: string[]) {
