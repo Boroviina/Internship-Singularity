@@ -26,6 +26,7 @@ export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) {
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState<JobListing[]>([]);
+    const [numOfJobs, setNumOfJobs] = useState(0);
     const [filters, setFilters] = useState<JobFilters>(new JobFilters());
     const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [shownJob, setShownJob] = useState<JobListing>(null);
@@ -38,7 +39,9 @@ const JobListingPage = () => {
     };
 
     useEffect(() => {
-        setFilteredJobs(getFilteredJobs(jobs, filters));
+        const filteredJobs = getFilteredJobs(jobs, filters);
+        setFilteredJobs(filteredJobs);
+        setNumOfJobs(filteredJobs.length);
     }, [filters, jobs]);
 
     useEffect(() => {
@@ -90,7 +93,7 @@ const JobListingPage = () => {
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
                             <div className="d-flex align-items-center justify-content-between px-2">
                                 <div className="text-muted fs-5">
-                                    Results: {24}
+                                    Results: {numOfJobs}
                                 </div>
                                 <SortBy categories={sortByCategories}/>
                             </div>
