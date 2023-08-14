@@ -65,20 +65,10 @@ export function ForgotPassword() {
 
         {/* begin::Title */}
         {hasErrors === true && (
-            <Alert state="danger" icon="icons/duotune/general/gen040.svg">Sorry, looks like there are some errors detected, please try again.</Alert>
-          // <div className='mb-lg-15 alert alert-danger'>
-          //   <div className='alert-text font-weight-bold'>
-          //     Sorry, looks like there are some errors detected, please try again.
-          //   </div>
-          // </div>
-        )}
+            <Alert state="danger" icon="icons/duotune/general/gen040.svg">Sorry, looks like there are some errors detected, please try again.</Alert>)}
 
         {hasErrors === false && (
-            <Alert state="success" icon="icons/duotune/general/gen043.svg">Sent password reset. Please check your email</Alert>
-          // <div className='bg-secondary mb-10 p-8 rounded'>
-          //   <div className='text-info'>Sent password reset. Please check your email</div>
-          // </div>
-        )}
+            <Alert state="success" icon="icons/duotune/general/gen043.svg">Sent password reset. Please check your email</Alert>)}
         {/* end::Title */}
 
         {/* begin::Form group */}
@@ -110,16 +100,17 @@ export function ForgotPassword() {
         {/* begin::Form group */}
         <div className='d-flex flex-wrap justify-content-center pb-lg-0'>
           <button
-            type='submit'
-            id='kt_password_reset_submit'
-            className='btn btn-lg btn-primary fw-bolder me-4'
+              type='submit'
+              id='kt_password_reset_submit'
+              className='btn btn-lg btn-primary fw-bolder me-4'
+              disabled={formik.isSubmitting || !formik.isValid}
           >
-            <span className='indicator-label'>Submit</span>
+            {!loading && <span className='indicator-label'>Submit</span>}
             {loading && (
-              <span className='indicator-progress'>
-                Please wait...
-                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-              </span>
+                <span className='indicator-progress' style={{display: 'block'}}>
+              Please wait...{' '}
+                  <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+            </span>
             )}
           </button>
           <Link to='/auth/login'>

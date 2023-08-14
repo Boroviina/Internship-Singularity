@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import * as Yup from 'yup'
 import clsx from 'clsx'
-import {Link, useSearchParams} from 'react-router-dom'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
 import {useFormik} from 'formik'
 import AuthService from "../../../shared/services/api-client/auth.service";
 import {Alert} from "../../../shared/components/Alert";
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
+import CustomModal from "../../../shared/components/CustomModal";
+import {Button} from "../../../shared/components/form/Button";
 
 const authService = new AuthService();
 
@@ -29,9 +31,11 @@ const resetPasswordSchema = Yup.object().shape({
 
 export function ResetPassword() {
     const [loading, setLoading] = useState(false)
+    const [showModal, setShowModal] = useState(false);
     const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
     const [searchParams] = useSearchParams()
     const token = searchParams.get('token')
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues,
@@ -44,6 +48,7 @@ export function ResetPassword() {
                     .then(({data: {result}}) => {
                         setHasErrors(false)
                         setLoading(false)
+                        openModal();
                     })
                     .catch(() => {
                         setHasErrors(true)
@@ -58,6 +63,14 @@ export function ResetPassword() {
     useEffect(() => {
         PasswordMeterComponent.bootstrap()
     }, [])
+
+    const hideModal = () => {
+        setShowModal(false);
+        navigate('/auth/login');
+    }
+    const openModal = () => {
+        setShowModal(true);
+    };
 
     return (
         <>
@@ -163,13 +176,14 @@ export function ResetPassword() {
                         type='submit'
                         id='kt_password_reset_submit'
                         className='btn btn-lg btn-primary fw-bolder me-4'
+                        disabled={formik.isSubmitting || !formik.isValid}
                     >
-                        <span className='indicator-label'>Submit</span>
+                        {!loading && <span className='indicator-label'>Submit</span>}
                         {loading && (
-                            <span className='indicator-progress'>
-                Please wait...
-                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-              </span>
+                            <span className='indicator-progress' style={{display: 'block'}}>
+              Please wait...{' '}
+                                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+            </span>
                         )}
                     </button>
                     <Link to='/auth/login'>
@@ -185,6 +199,13 @@ export function ResetPassword() {
                 </div>
                 {/* end::Form group */}
             </form>
+            <CustomModal title="Success" show={showModal} onHide={hideModal} footer={
+                <div className="d-flex flex-row">
+                    <Button type="button" onClick={hideModal} state="primary">Continue</Button>
+                </div>
+            }>
+                Password reset was successful! You can now log in!
+            </CustomModal>
         </>
     )
 }

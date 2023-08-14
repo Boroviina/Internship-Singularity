@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import * as Yup from 'yup'
-import {Link, useSearchParams} from 'react-router-dom'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
 import {useFormik} from 'formik'
 import AuthService from "../../../shared/services/api-client/auth.service";
 import {Alert} from "../../../shared/components/Alert";
 import {Input} from "../../../shared/components/form/Input";
+import CustomInfoModal from "../../../shared/components/CustomInfoModal";
 
 const authService = new AuthService();
 
@@ -30,8 +31,10 @@ const resetPasswordSchema = Yup.object().shape({
 export function ResetPassword() {
     const [loading, setLoading] = useState(false)
     const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+    const [showModal, setShowModal] = useState(false);
     const [searchParams] = useSearchParams()
     const token = searchParams.get('token')
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues,
@@ -44,6 +47,7 @@ export function ResetPassword() {
                     .then(({data: {result}}) => {
                         setHasErrors(false)
                         setLoading(false)
+                        openModal();
                     })
                     .catch(() => {
                         setHasErrors(true)
@@ -54,6 +58,14 @@ export function ResetPassword() {
             }, 1000)
         },
     })
+
+    const hideModal = () => {
+        setShowModal(false);
+        navigate('/auth/login');
+    }
+    const openModal = () => {
+        setShowModal(true);
+    };
 
     return (
         <>
@@ -123,6 +135,9 @@ export function ResetPassword() {
                     </Link>{' '}
                 </div>
             </form>
+            <CustomInfoModal title="Success" show={showModal} onHide={hideModal}>
+                Password reset was successful! You can now log in!
+            </CustomInfoModal>
         </>
     )
 }

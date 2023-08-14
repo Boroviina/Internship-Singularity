@@ -81,13 +81,13 @@ export function ForgotPassword() {
                 className='btn btn-lg btn-primary fw-bolder me-4'
                 disabled={formik.isSubmitting || !formik.isValid}
             >
-              <span className='indicator-label'>Submit</span>
-              {loading && (
-                  <span className='indicator-progress'>
-                Please wait...
-                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-              </span>
-              )}
+                {!loading && <span className='indicator-label'>Submit</span>}
+                {loading && (
+                    <span className='indicator-progress' style={{display: 'block'}}>
+              Please wait...
+              <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+            </span>
+                )}
             </button>
             <Link to='/auth/login'>
               <button
