@@ -23,6 +23,7 @@ const forgotPasswordSchema = Yup.object().shape({
 export function ForgotPassword() {
   const [loading, setLoading] = useState(false)
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+
   const formik = useFormik({
     initialValues,
     validationSchema: forgotPasswordSchema,
@@ -94,9 +95,7 @@ export function ForgotPassword() {
                   type='button'
                   id='kt_login_password_reset_form_cancel_button'
                   className='btn btn-lg btn-light-primary fw-bolder'
-              >
-                Cancel
-              </button>
+              >Cancel</button>
             </Link>{' '}
           </div>
         </form>

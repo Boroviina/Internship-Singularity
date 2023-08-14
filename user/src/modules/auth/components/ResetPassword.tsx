@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import * as Yup from 'yup'
-import {Link, useNavigate, useSearchParams} from 'react-router-dom'
+import {useNavigate, useSearchParams} from 'react-router-dom'
 import {useFormik} from 'formik'
 import AuthService from "../../../shared/services/api-client/auth.service";
 import {Alert} from "../../../shared/components/Alert";
@@ -124,15 +124,12 @@ export function ResetPassword() {
             </span>
                         )}
                     </button>
-                    <Link to='/auth/login'>
-                        <button
-                            type='button'
-                            id='kt_login_password_reset_form_cancel_button'
-                            className='btn btn-lg btn-light-primary fw-bolder'
-                        >
-                            Cancel
-                        </button>
-                    </Link>{' '}
+                    <button
+                        type='button'
+                        id='kt_login_password_reset_form_cancel_button'
+                        className='btn btn-lg btn-light-primary fw-bolder'
+                        onClick={() => navigate('/auth/login')}
+                    >Cancel</button>{' '}
                 </div>
             </form>
             <CustomInfoModal title="Success" show={showModal} onHide={hideModal}>
