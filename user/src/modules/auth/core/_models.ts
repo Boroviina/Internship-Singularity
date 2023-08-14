@@ -51,6 +51,7 @@ export interface UserModel {
   username?: string
   password?: string | undefined
   email: string
+  isEmailVerified?: boolean
   first_name?: string
   last_name?: string
   name: string

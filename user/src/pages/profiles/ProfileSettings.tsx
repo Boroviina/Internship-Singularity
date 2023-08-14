@@ -185,7 +185,8 @@ export const ProfileSettings = () => {
                         </div>
                     </form>
                 </CustomCard>
-                <div className="mx-auto shadow overflow-hidden card-bg p-4 my-3 d-flex justify-content-between align-items-center flex-wrap">
+                {!currentUser.isEmailVerified && <div
+                    className="mx-auto shadow overflow-hidden card-bg p-4 my-3 d-flex justify-content-between align-items-center flex-wrap">
                     <p className="fw-bold text-label fs-4 mb-0">Verify your email</p>
                     <Button type="button" width="200px" height="auto" filled={true}
                             onClick={async () => {
@@ -198,7 +199,7 @@ export const ProfileSettings = () => {
                                 }
                             }}
                     >Send verification email</Button>
-                </div>
+                </div>}
             </CustomCard>
             <CustomInfoModal title="Success" show={showModal} onHide={hideModal}>
                 {modalBody}
