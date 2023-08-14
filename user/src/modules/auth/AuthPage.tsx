@@ -5,6 +5,7 @@ import {ForgotPassword} from './components/ForgotPassword'
 import {Login} from './components/Login'
 import {toAbsoluteUrl} from "../../helpers";
 import classes from "./AuthPage.module.css";
+import {ResetPassword} from "./components/ResetPassword";
 
 const AuthLayout = () => {
 
@@ -34,10 +35,11 @@ const AuthLayout = () => {
 const AuthPage = () => (
   <Routes>
     <Route element={<AuthLayout />}>
-      <Route path='login' element={<Login />} />
-      <Route path='registration' element={<Registration />} />
-      <Route path='forgot-password' element={<ForgotPassword />} />
-      <Route index element={<Login />} />
+        <Route path='login' element={<Login />} />
+        <Route path='registration' element={<Registration />} />
+        <Route path='forgot-password' element={<ForgotPassword />} />
+        <Route path='reset-password' element={<ResetPassword/>} />
+        <Route index element={<Login />} />
     </Route>
   </Routes>
 )

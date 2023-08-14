@@ -1,15 +1,17 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link, useSearchParams} from 'react-router-dom'
 import {useFormik} from 'formik'
 import AuthService from "../../../shared/services/api-client/auth.service";
 import {Alert} from "../../../shared/components/Alert";
+import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
 
 const authService = new AuthService();
 
 const initialValues = {
     password: 'password1',
+    changepassword: 'password1',
 }
 
 const resetPasswordSchema = Yup.object().shape({
@@ -17,6 +19,12 @@ const resetPasswordSchema = Yup.object().shape({
         .min(3, 'Minimum 3 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Password is required'),
+    changepassword: Yup.string()
+        .required('Password confirmation is required')
+        .when('password', {
+            is: (val: string) => (val && val.length > 0 ? true : false),
+            then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
+        }),
 })
 
 export function ResetPassword() {
@@ -34,7 +42,6 @@ export function ResetPassword() {
             setTimeout(() => {
                 authService.resetPassword(values.password, token)
                     .then(({data: {result}}) => {
-                        console.log("Success")
                         setHasErrors(false)
                         setLoading(false)
                     })
@@ -47,6 +54,10 @@ export function ResetPassword() {
             }, 1000)
         },
     })
+
+    useEffect(() => {
+        PasswordMeterComponent.bootstrap()
+    }, [])
 
     return (
         <>
@@ -72,42 +83,74 @@ export function ResetPassword() {
                 {hasErrors === false && (
                     <Alert state="success" icon="icons/duotune/general/gen043.svg">Password reset was successful. You can now login</Alert>)}
 
-                {/* begin::Form group */}
-                <div className='fv-row mb-10'>
-                    <div className='d-flex justify-content-between mt-n5'>
-                        <div className='d-flex flex-stack mb-2'>
-                            {/* begin::Label */}
-                            <label className='form-label fw-bolder text-dark fs-6 mb-0'>Password</label>
-                            {/* end::Label */}
-                            {/* begin::Link */}
-                            <Link
-                                to='/auth/forgot-password'
-                                className='link-primary fs-6 fw-bolder'
-                                style={{marginLeft: '5px'}}
-                            >
-                                Forgot Password ?
-                            </Link>
-                            {/* end::Link */}
+                {/* begin::Form group Password */}
+                <div className='mb-7 fv-row' data-kt-password-meter='true'>
+                    <div className='mb-1'>
+                        <label className='form-label fw-bolder text-dark fs-6'>Password</label>
+                        <div className='position-relative mb-3'>
+                            <input
+                                type='password'
+                                placeholder='Password'
+                                autoComplete='off'
+                                {...formik.getFieldProps('password')}
+                                className={clsx(
+                                    'form-control form-control-lg form-control-solid',
+                                    {
+                                        'is-invalid': formik.touched.password && formik.errors.password,
+                                    },
+                                    {
+                                        'is-valid': formik.touched.password && !formik.errors.password,
+                                    }
+                                )}
+                            />
+                            {formik.touched.password && formik.errors.password && (
+                                <div className='fv-plugins-message-container'>
+                                    <div className='fv-help-block'>
+                                        <span role='alert'>{formik.errors.password}</span>
+                                    </div>
+                                </div>
+                            )}
                         </div>
+                        {/* begin::Meter */}
+                        <div
+                            className='d-flex align-items-center mb-3'
+                            data-kt-password-meter-control='highlight'
+                        >
+                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
+                            <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px'></div>
+                        </div>
+                        {/* end::Meter */}
                     </div>
+                    <div className='text-muted'>
+                        Use 8 or more characters with a mix of letters, numbers & symbols.
+                    </div>
+                </div>
+                {/* end::Form group */}
+
+                {/* begin::Form group Confirm password */}
+                <div className='fv-row mb-7'>
+                    <label className='form-label fw-bolder text-dark fs-6'>Confirm Password</label>
                     <input
                         type='password'
+                        placeholder='Password confirmation'
                         autoComplete='off'
-                        {...formik.getFieldProps('password')}
+                        {...formik.getFieldProps('changepassword')}
                         className={clsx(
-                            `form-control form-control-lg form-control-solid`,
+                            'form-control form-control-lg form-control-solid',
                             {
-                                'is-invalid': formik.touched.password && formik.errors.password,
+                                'is-invalid': formik.touched.changepassword && formik.errors.changepassword,
                             },
                             {
-                                'is-valid': formik.touched.password && !formik.errors.password,
+                                'is-valid': formik.touched.changepassword && !formik.errors.changepassword,
                             }
                         )}
                     />
-                    {formik.touched.password && formik.errors.password && (
+                    {formik.touched.changepassword && formik.errors.changepassword && (
                         <div className='fv-plugins-message-container'>
                             <div className='fv-help-block'>
-                                <span role='alert'>{formik.errors.password}</span>
+                                <span role='alert'>{formik.errors.changepassword}</span>
                             </div>
                         </div>
                     )}

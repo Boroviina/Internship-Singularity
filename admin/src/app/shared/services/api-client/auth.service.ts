@@ -36,7 +36,7 @@ class AuthService {
   // reset password
   async forgotPassword(email: string): Promise<any> {
     try {
-      await axios.post(`${API_URL}/${API_VERSION}/auth/forgot-password`, { email });
+      await axios.post(`${API_URL}/${API_VERSION}/auth/forgot-password?role=admin`, { email });
       return {data: {result: true}};
     } catch (error) {
       console.error("Resetting password failed:", error);

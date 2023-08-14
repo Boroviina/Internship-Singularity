@@ -2,6 +2,8 @@ const nodemailer = require('nodemailer');
 const config = require('../config/config');
 const logger = require('../config/logger');
 const Handlebars = require('handlebars');
+const ApiError = require("../utils/ApiError");
+const httpStatus = require("http-status");
 
 const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
@@ -31,9 +33,16 @@ const sendEmail = async (to, subject, text, html = undefined) => {
  * @param {string} token
  * @returns {Promise}
  */
-const sendResetPasswordEmail = async (to, token) => {
+const sendResetPasswordEmail = async (to, token, role) => {
   const subject = 'Reset password';
-  const resetPasswordUrl = `localhost/auth/reset-password?token=${token}`;
+  let resetPasswordUrl = '';
+  if(role === 'admin' || role === 'employer') {
+    resetPasswordUrl = `http://localhost:80/auth/reset-password?token=${token}`;
+  } else if(role === 'user') {
+    resetPasswordUrl = `http://localhost:3456/auth/reset-password?token=${token}`;
+  } else {
+    throw new ApiError(httpStatus.FORBIDDEN, 'No this user type found');
+  }
   const text = `Dear user,
 To reset your password, click on this link: ${resetPasswordUrl}
 If you did not request any password resets, then ignore this email.`;
