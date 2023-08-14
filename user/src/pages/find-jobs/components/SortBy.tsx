@@ -7,11 +7,7 @@ export function getSortedBySalaryDescending(jobs: JobListing[]) {
 
 const SortBy = ({categories, sortBy}) => {
     const handleChange = (e) => {
-        if(e.target.value === "Salary") {
-            sortBy(e.target.value);
-        } else if (e.target.value === "Relevance") {
-            sortBy(e.target.value);
-        }
+        sortBy(e.target.value);
     };
     return (
         <div className="sortBy">
