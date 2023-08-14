@@ -44,7 +44,7 @@ class AuthService {
     }
   }
 
-  // reset password
+  // forgot password
   async forgotPassword(email: string): Promise<any> {
     try {
       await axios.post(`${API_URL}/${API_VERSION}/auth/forgot-password?role=user`, { email });
@@ -63,6 +63,26 @@ class AuthService {
     } catch (error) {
       console.error("Resetting password failed:", error);
       return null;
+    }
+  }
+
+  // send verification email
+  async sendVerificationEmail(): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/send-verification-email`);
+      return {data: {result: true}};
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  // verify email
+  async verifyEmail(token: string): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/verify-email?token=${token}`);
+      return {data: {result: true}};
+    } catch (error) {
+      throw new Error(error);
     }
   }
 

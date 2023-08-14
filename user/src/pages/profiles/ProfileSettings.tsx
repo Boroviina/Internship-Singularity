@@ -12,6 +12,9 @@ import CustomInfoModal from "../../shared/components/CustomInfoModal";
 import {useAuth} from "../../modules/auth";
 import {updateUser} from "../../shared/services/user.service";
 import {Language} from "../../shared/enums/languages.enum";
+import AuthService from "../../shared/services/api-client/auth.service";
+
+const authService = new AuthService();
 
 const editProfileSchema = Yup.object().shape({
     name: Yup.string()
@@ -39,6 +42,7 @@ export const ProfileSettings = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [modalBody, setModalBody] = useState("");
 
     const initialValues = {
         name: currentUser.name,
@@ -59,6 +63,7 @@ export const ProfileSettings = () => {
             try {
                 const updatedUser = await updateUser(`${currentUser.id}`, values)
                 setCurrentUser(updatedUser)
+                setModalBody("You successfully updated your profile!")
                 openModal()
             } catch (error) {
                 setStatus('Profile detail is invalid')
@@ -180,9 +185,23 @@ export const ProfileSettings = () => {
                         </div>
                     </form>
                 </CustomCard>
+                <div className="mx-auto shadow overflow-hidden card-bg p-4 my-3 d-flex justify-content-between align-items-center flex-wrap">
+                    <p className="fw-bold text-label fs-4 mb-0">Verify your email</p>
+                    <Button type="button" width="200px" height="auto" filled={true}
+                            onClick={async () => {
+                                try {
+                                    await authService.sendVerificationEmail();
+                                    setModalBody("Verification email is sent. You can now check your inbox")
+                                    openModal()
+                                } catch (error) {
+                                    console.log(error)
+                                }
+                            }}
+                    >Send verification email</Button>
+                </div>
             </CustomCard>
             <CustomInfoModal title="Success" show={showModal} onHide={hideModal}>
-                You successfully updated your profile!
+                {modalBody}
             </CustomInfoModal>
         </>
     )
