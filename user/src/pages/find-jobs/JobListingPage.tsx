@@ -3,7 +3,7 @@ import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
 import Search from "./components/Search";
-import SortBy from "./components/SortBy";
+import SortBy, {getSortedBySalaryDescending} from "./components/SortBy";
 import Pagination from "./components/Pagination";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
@@ -20,17 +20,18 @@ import {
     sortByCategories
 } from "./components/filter-components/JobFilters";
 
-export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) {
+export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     return jobs.filter(job => (job.matches(filters)));
 };
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState<JobListing[]>([]);
-    const [numOfJobs, setNumOfJobs] = useState(0);
-    const [filters, setFilters] = useState<JobFilters>(new JobFilters());
-    const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
+    const [filters, setFilters] = useState<JobFilters>(new JobFilters());
+    const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
+    const [numOfJobs, setNumOfJobs] = useState(0);
+    const [sortingFunction, setSortingFunction] = useState("Relevance");
 
     const handleClose = () => setShowDetails(false);
     const handleOpen = (job: JobListing) => {
@@ -38,11 +39,19 @@ const JobListingPage = () => {
         setShowDetails(true)
     };
 
+    const handleSort = (sort) => {
+        setSortingFunction(sort);
+    };
+
     useEffect(() => {
-        const filteredJobs = getFilteredJobs(jobs, filters);
-        setFilteredJobs(filteredJobs);
+        const filteredJobs  = getFilteredJobs(jobs, filters);
         setNumOfJobs(filteredJobs.length);
-    }, [filters, jobs]);
+        if(sortingFunction === "Salary") {
+            setFilteredJobs(getSortedBySalaryDescending(filteredJobs));
+        } else {
+            setFilteredJobs(filteredJobs);
+        }
+    }, [jobs, filters, sortingFunction]);
 
     useEffect(() => {
         fetchJobs();
@@ -76,13 +85,11 @@ const JobListingPage = () => {
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
                                 <CheckboxGroup filterInfo={Specialization}
-                                               updateFilters={handleFilterChanged}
-                                />
+                                               updateFilters={handleFilterChanged}/>
                                 <Dropdown filterInfo={Remote}
                                           updateFilters={handleFilterChanged}/>
                                 <CheckboxGroup filterInfo={EmploymentType}
-                                               updateFilters={handleFilterChanged}
-                                />
+                                               updateFilters={handleFilterChanged}/>
                                 <Dropdown filterInfo={Experience}
                                           updateFilters={handleFilterChanged}/>
                                 <Dropdown filterInfo={Education}
@@ -95,7 +102,7 @@ const JobListingPage = () => {
                                 <div className="text-muted fs-5">
                                     Results: {numOfJobs}
                                 </div>
-                                <SortBy categories={sortByCategories}/>
+                                <SortBy categories={sortByCategories} sortBy={handleSort}/>
                             </div>
                             <div className="jobs my-2">
                                 {filteredJobs ? filteredJobs.map

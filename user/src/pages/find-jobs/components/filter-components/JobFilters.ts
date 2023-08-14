@@ -104,6 +104,6 @@ class Specialization extends MyFilter{
     static values: string[] = ["Not required", "College", "Associate's degree", "Bachelor's degree", "Master's degree", "Doctor's degree"];
 }
 
-const sortByCategories = ["Relevance", "Date", "Salary"];
+const sortByCategories = ["Relevance", "Salary"];
 
 export {MyFilter, Education, Experience, Remote, EmploymentType, Specialization, JobFilters, sortByCategories};
