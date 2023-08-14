@@ -61,7 +61,8 @@ const jobSchema = mongoose.Schema(
         positionsNum: {
             type: Number,
             min: [1, 'Minimal number of position is 1'],
-            max: [10, 'Maximal positions number is 10']
+            max: [10, 'Maximal positions number is 10'],
+            required: [true, "The fild must be filled"],
         },
         cv: {
             type: Boolean

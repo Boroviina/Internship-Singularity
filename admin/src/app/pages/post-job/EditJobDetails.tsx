@@ -1,35 +1,58 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from 'react';
+import {JobDetailsForm} from "./JobDetailsForm";
+import {changeJob, getJob} from '../../shared/services/job.service';
+import {useParams} from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from 'yup';
-import {createJob} from "../../shared/services/job.service";
-import {JobDetailsForm} from "./JobDetailsForm";
 
-export function JobPosting() {
-    const [loading, setLoading] = useState(false)
+export function EditJobDetails() {
+    const [existingJobDetails, setExistingJobDetails] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const {id} = useParams();
+
+    useEffect(() => {
+        const fetchExistingJob = async () => {
+            try {
+                setLoading(true);
+                const jobData = await getJob(id);
+                console.log("Fetched job data:", jobData);
+                setExistingJobDetails(jobData);
+                setLoading(false);
+
+            } catch (error) {
+                console.log("Error fetching job details:", error);
+                setLoading(false);
+            }
+        }
+        fetchExistingJob();
+    }, [id]);
+
+    useEffect(() => {
+    }, [existingJobDetails]);
+
     const formik = useFormik({
-        initialValues: {
-            jobTitle: '',
+        initialValues:  {
+            jobTitle: existingJobDetails?.jobTitle || '',
             requirements: {
-                specialization: '',
-                experience: '',
-                education: '',
-                skills: '',
-                language: '',
-                drivingLicense: false,
+                specialization: existingJobDetails?.requirements.specialization,
+                experience: existingJobDetails?.requirements.experience,
+                education: existingJobDetails?.requirements.education,
+                skills: existingJobDetails?.requirements.skills,
+                language: existingJobDetails?.requirements.language,
+                drivingLicense: existingJobDetails?.requirements.drivingLicense,
             },
-            location: '',
-            salary: '',
-            employmentType: '',
-            description: '',
-            appDeadline: '',
-            appInstructions: '',
-            positionsNum: '',
-            remote: '',
-            cv: false,
-            coverLetter: false,
+            location: existingJobDetails?.location,
+            salary: existingJobDetails?.salary,
+            employmentType: existingJobDetails?.employmentType,
+            description: existingJobDetails?.description,
+            appDeadline: existingJobDetails?.appDeadline,
+            appInstructions: existingJobDetails?.appInstructions,
+            positionsNum: existingJobDetails?.positionsNum,
+            remote: existingJobDetails?.remote,
+            cv: existingJobDetails?.cv,
+            coverLetter: existingJobDetails?.coverLetter,
         },
         validationSchema: Yup.object({
-
             jobTitle: Yup.string()
                 .max(100, 'Must be 100 characters or less')
                 .required('Required'),
@@ -71,8 +94,7 @@ export function JobPosting() {
             setLoading(true)
             try {
                 setSubmitting(false);
-                console.log(values);
-                await createJob(values);
+                await changeJob(id, values);
                 setLoading(false);
             } catch (error) {
                 setStatus('Check if all inputs are filled');
@@ -82,7 +104,17 @@ export function JobPosting() {
             resetForm();
         },
     });
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!existingJobDetails) {
+        return <div>Error loading job details</div>;
+    }
+
+
     return <>
-        <JobDetailsForm formik={formik} title={"Insert Job Features"} loading={loading}/>
+        <JobDetailsForm formik={formik} title={existingJobDetails.jobTitle} loading={loading}/>
     </>
 }

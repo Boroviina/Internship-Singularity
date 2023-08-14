@@ -33,7 +33,15 @@ const queryJobs = async (filter, options) => {
  * @param {ObjectId} id
  * @return {Promise<Job>}
  */
-const getJobById = async (id) => {
+const getJobById = async (id, populate) => {
+
+  const populateBy=[];
+  if(populate){
+    populate.split(',').forEach((populateOption)=>{
+      populateBy.push(populateOption);
+    })
+    return Job.findById(id).populate(populateBy).exec();
+  }
   return Job.findById(id);
 };
 
