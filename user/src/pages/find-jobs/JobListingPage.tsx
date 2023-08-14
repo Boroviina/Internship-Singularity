@@ -21,7 +21,7 @@ import {
 } from "./components/filter-components/JobFilters";
 
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
-    return jobs.filter(job => (job.matches(filters)));
+    return jobs.filter(job => job.matches(filters));
 };
 
 const JobListingPage = () => {
