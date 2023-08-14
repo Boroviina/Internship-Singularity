@@ -16,7 +16,6 @@ export function JobDetailsForm(props){
                                formikFieldProps={props.formik.getFieldProps('jobTitle')}
                                formikTouched={props.formik.touched.jobTitle}
                                formikErrors={props.formik.errors.jobTitle}
-                               value={props.formik.values.jobTitle}
                 />
             </div>
             <div className={`fv-row mb-10`}>

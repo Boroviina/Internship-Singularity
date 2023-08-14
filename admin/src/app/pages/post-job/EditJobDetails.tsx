@@ -52,6 +52,7 @@ export function EditJobDetails() {
             cv: existingJobDetails?.cv,
             coverLetter: existingJobDetails?.coverLetter,
         },
+        enableReinitialize:true,
         validationSchema: Yup.object({
             jobTitle: Yup.string()
                 .max(100, 'Must be 100 characters or less')
