@@ -34,12 +34,12 @@ export function EditJobDetails() {
         initialValues:  {
             jobTitle: existingJobDetails?.jobTitle || '',
             requirements: {
-                specialization: existingJobDetails?.requirements.specialization,
-                experience: existingJobDetails?.requirements.experience,
-                education: existingJobDetails?.requirements.education,
-                skills: existingJobDetails?.requirements.skills,
-                language: existingJobDetails?.requirements.language,
-                drivingLicense: existingJobDetails?.requirements.drivingLicense,
+                specialization: existingJobDetails?.requirements?.specialization,
+                experience: existingJobDetails?.requirements?.experience,
+                education: existingJobDetails?.requirements?.education,
+                skills: existingJobDetails?.requirements?.skills,
+                language: existingJobDetails?.requirements?.language,
+                drivingLicense: existingJobDetails?.requirements?.drivingLicense,
             },
             location: existingJobDetails?.location,
             salary: existingJobDetails?.salary,
@@ -95,6 +95,7 @@ export function EditJobDetails() {
             setLoading(true)
             try {
                 setSubmitting(false);
+                console.log(values);
                 await changeJob(id, values);
                 setLoading(false);
             } catch (error) {

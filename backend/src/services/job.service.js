@@ -1,6 +1,8 @@
 const httpStatus = require('http-status');
 const {Job} = require('../models');
 const ApiError = require('../utils/ApiError');
+const {requirementsService}=require('../services');
+const {getReqById, updateRequirementById} = require("./requirements.service");
 
 
 /**
@@ -34,7 +36,7 @@ const queryJobs = async (filter, options) => {
  * @return {Promise<Job>}
  */
 const getJobById = async (id, populate) => {
-
+  console.log('Populate:', populate);
   const populateBy=[];
   if(populate){
     populate.split(',').forEach((populateOption)=>{
@@ -52,12 +54,17 @@ const getJobById = async (id, populate) => {
  * @return {Promise<Job>}
  */
 const updateJobById = async (jobId, updateJob) => {
-  const job = await getJobById(jobId);
+  const job = await getJobById(jobId, `requirements`);
+  // const requ= await getReqById(job.requirements._id);
+  //console.log(updateJob);
+  const {requirements,...rest}=updateJob;
+  console.log(requirements);
   if (!job) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
   }
-  Object.assign(job, updateJob);
+  Object.assign(job, rest);
   await job.save();
+  console.log("Edited job: ",job);
   return job;
 };
 
