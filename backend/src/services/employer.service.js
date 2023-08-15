@@ -35,6 +35,16 @@ const getEmployerById = async (id) => {
   return Employer.findById(id);
 };
 
+const updateEmployerById = async (employerId, updateBody) => {
+  const employer = await getEmployerById(employerId);
+  if (!employer) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employer not found');
+  }
+  Object.assign(employer, updateBody);
+  await employer.save();
+  return employer;
+};
+
 const deleteEmployerById = async (employerId) => {
   const employer = await getEmployerById(employerId);
   if (!employer) {
@@ -48,6 +58,7 @@ module.exports = {
   createEmployer,
   queryEmployers,
   getEmployerById,
+  updateEmployerById,
   deleteEmployerById
 };
 

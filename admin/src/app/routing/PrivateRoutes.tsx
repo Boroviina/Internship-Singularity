@@ -9,6 +9,7 @@ import {JobPosting} from "../pages/post-job/JobPosting";
 import {JobListings} from "../pages/jobs/JobListings";
 import {Users} from "../pages/users/Users";
 import {Profile} from "../pages/users/profiles/Profile";
+import {ProfileSettings} from "../pages/users/profiles/ProfileSettings";
 
 const PrivateRoutes = () => {
     //const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
@@ -24,6 +25,7 @@ const PrivateRoutes = () => {
                 <Route path='/job-listings' element={<JobListings/>}/>
                 <Route path='/users' element={<Users/>}/>
                 <Route path='/users/:userId' element={<Profile/>}/>
+                <Route path='/profile/settings' element={<ProfileSettings/>}/>
                 {/*<Route path='/about' element={<About/>}/>*/}
                 {/* Lazy Modules */}
                 {/*<Route

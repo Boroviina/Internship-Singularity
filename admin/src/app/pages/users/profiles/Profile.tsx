@@ -92,8 +92,11 @@ export const Profile = () => {
                             <p className="text-label">{user.email}</p>
                         </div>
                     </div>
+                    <div className="ms-auto">
+                        <Button type="button" onClick={() => navigate('/profile/settings')}>Settings</Button>
+                    </div>
                 </div>
-                {currentUser.role === Role.admin && <div className="row border-top">
+                {currentUser.role === Role.admin && currentUser.id !== user.id && <div className="row border-top">
                     <div onClick={openActivationModal}
                          className="d-flex flex-wrap align-items-center justify-content-center col-6 p-2 fs-6 border-end cursor-pointer">
                         {user.active ?
