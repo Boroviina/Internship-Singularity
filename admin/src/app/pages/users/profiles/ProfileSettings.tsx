@@ -8,6 +8,7 @@ import {Employer} from "../../../shared/models/employer.model";
 import {UserInfoSettings} from "./UserInfoSettings";
 import {Role} from "../../../shared/enums/roles.enum";
 import {CompanyInfoSettings} from "./CompanyInfoSettings";
+import CustomModal from "../../../shared/components/CustomModal";
 
 const authService = new AuthService();
 
@@ -57,7 +58,7 @@ export const ProfileSettings = () => {
                     <Button type="button"
                             onClick={async () => {
                                 try {
-                                    //await authService.sendVerificationEmail();
+                                    await authService.sendVerificationEmail();
                                     setModalBody("Verification email is sent. You can now check your inbox")
                                     openModal()
                                 } catch (error) {
@@ -66,9 +67,9 @@ export const ProfileSettings = () => {
                             }}
                     >Send verification email</Button>
                 </div>}
-            {/*<CustomModal title="Success" show={showModal} onHide={hideModal} footer={<Button state="success" onClick={hideModal}>Continue</Button>}>*/}
-            {/*    {modalBody}*/}
-            {/*</CustomModal>*/}
+            <CustomModal title="Success" show={showModal} onHide={hideModal} footer={<Button state="success" onClick={hideModal}>Continue</Button>}>
+                {modalBody}
+            </CustomModal>
         </>
     )
 }

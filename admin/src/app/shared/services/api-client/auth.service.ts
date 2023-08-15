@@ -55,6 +55,26 @@ class AuthService {
     }
   }
 
+  // send verification email
+  async sendVerificationEmail(): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/send-verification-email`);
+      return {data: {result: true}};
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  // verify email
+  async verifyEmail(token: string): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/verify-email?token=${token}`);
+      return {data: {result: true}};
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   // Save the JWT token in localStorage
   saveToken(token: string): void {
     localStorage.setItem("token", token);
