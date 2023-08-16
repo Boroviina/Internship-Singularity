@@ -1,8 +1,8 @@
 const httpStatus = require('http-status');
 const {Job} = require('../models');
 const ApiError = require('../utils/ApiError');
-const {requirementsService}=require('../services');
-const {getReqById, updateRequirementById} = require("./requirements.service");
+const {requirementsService} = require('../services');
+const {getReqById, updateRequirementById, deleteRequirementById} = require("./requirements.service");
 
 
 /**
@@ -12,7 +12,7 @@ const {getReqById, updateRequirementById} = require("./requirements.service");
  */
 
 const createJob = async (job) => {
-  return Job.create(job);
+    return Job.create(job);
 };
 
 
@@ -26,8 +26,8 @@ const createJob = async (job) => {
  * @return {Promise<QueryResult>}
  */
 const queryJobs = async (filter, options) => {
-  const jobs = await Job.paginate(filter, options);
-  return jobs;
+    const jobs = await Job.paginate(filter, options);
+    return jobs;
 };
 
 /**
@@ -36,15 +36,14 @@ const queryJobs = async (filter, options) => {
  * @return {Promise<Job>}
  */
 const getJobById = async (id, populate) => {
-  console.log('Populate:', populate);
-  const populateBy=[];
-  if(populate){
-    populate.split(',').forEach((populateOption)=>{
-      populateBy.push(populateOption);
-    })
-    return Job.findById(id).populate(populateBy).exec();
-  }
-  return Job.findById(id);
+    const populateBy = [];
+    if (populate) {
+        populate.split(',').forEach((populateOption) => {
+            populateBy.push(populateOption);
+        })
+        return Job.findById(id).populate(populateBy).exec();
+    }
+    return Job.findById(id);
 };
 
 /**
@@ -54,19 +53,15 @@ const getJobById = async (id, populate) => {
  * @return {Promise<Job>}
  */
 const updateJobById = async (jobId, updateJob) => {
-  const job = await getJobById(jobId, `requirements`);
-  //console.log(updateJob);
-  const {requirements,...rest}=updateJob;
-  console.log(requirements);
-  console.log("ID: ",job.requirements._id);
-  const requ= await updateRequirementById(job.requirements._id, requirements);
-  if (!job) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
-  }
-  Object.assign(job, rest);
-  await job.save();
-  console.log("Edited job: ",job);
-  return job;
+    const job = await getJobById(jobId, `requirements`);
+    const {requirements, ...rest} = updateJob;
+    const requ = await updateRequirementById(job.requirements._id, requirements);
+    if (!job) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
+    }
+    Object.assign(job, rest);
+    await job.save();
+    return job;
 };
 
 /**
@@ -75,18 +70,21 @@ const updateJobById = async (jobId, updateJob) => {
  * @return {Promise<Job>}
  */
 const deleteJobById = async (jobId) => {
-  const job = await getJobById(jobId);
-  if (!job) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
-  }
-  await job.remove();
-  return job;
+    const job = await getJobById(jobId);
+    console.log("ID: ", job.requirements._id);
+    await deleteRequirementById(job.requirements._id);
+
+    if (!job) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
+    }
+    await job.remove();
+    return job;
 }
 
-module.exports={
-  deleteJobById,
-  updateJobById,
-  getJobById,
-  queryJobs,
-  createJob
+module.exports = {
+    deleteJobById,
+    updateJobById,
+    getJobById,
+    queryJobs,
+    createJob
 };

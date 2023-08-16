@@ -5,9 +5,12 @@ import {JobListing} from "../../shared/models/job-listing.model";
 import {JobListingsDetails} from "./JobListingDetails";
 import {useIntl} from "react-intl";
 import {useNavigate} from "react-router-dom";
+import {Button} from 'react-bootstrap';
+import {DeleteJobModal} from "../post-job/DeleteJobModal";
 
 type JobListingItemProps = {
-    item: JobListing
+    item: JobListing,
+    update: () => {}
 }
 
 export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
@@ -30,6 +33,7 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                     <button className={'btn btn-primary m-5'}
                             onClick={() => navigate(`/edit-job/${props.item.id}`)}>Edit job details
                     </button>
+                    <DeleteJobModal update={props.update} jobId={props.item.id}/>
                 </div>
             </div>
             <div className="card-body">

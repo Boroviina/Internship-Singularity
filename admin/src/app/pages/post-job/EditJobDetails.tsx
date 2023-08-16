@@ -4,11 +4,13 @@ import {changeJob, getJob} from '../../shared/services/job.service';
 import {useParams} from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from 'yup';
+import {useNavigate} from 'react-router-dom';
 
 export function EditJobDetails() {
     const [existingJobDetails, setExistingJobDetails] = useState(null);
     const [loading, setLoading] = useState(false);
     const {id} = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchExistingJob = async () => {
@@ -31,7 +33,7 @@ export function EditJobDetails() {
     }, [existingJobDetails]);
 
     const formik = useFormik({
-        initialValues:  {
+        initialValues: {
             jobTitle: existingJobDetails?.jobTitle || '',
             requirements: {
                 specialization: existingJobDetails?.requirements?.specialization,
@@ -52,7 +54,7 @@ export function EditJobDetails() {
             cv: existingJobDetails?.cv,
             coverLetter: existingJobDetails?.coverLetter,
         },
-        enableReinitialize:true,
+        enableReinitialize: true,
         validationSchema: Yup.object({
             jobTitle: Yup.string()
                 .max(100, 'Must be 100 characters or less')
@@ -98,6 +100,7 @@ export function EditJobDetails() {
                 console.log(values);
                 await changeJob(id, values);
                 setLoading(false);
+                navigate('/job-listings');
             } catch (error) {
                 setStatus('Check if all inputs are filled');
                 setSubmitting(false);

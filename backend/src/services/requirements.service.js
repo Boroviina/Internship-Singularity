@@ -35,10 +35,19 @@ const updateRequirementById =async (reqId, updateReq)=>{
   await  requirement.save();
   return requirement;
 }
+const deleteRequirementById=async (reqId)=>{
+  const requirement=await  getReqById(reqId);
+  if(!requirement){
+    throw new ApiError(httpStatus.NOT_FOUND, "Requirement not found");
+  }
+  await  requirement.remove();
+  return requirement;
+}
 
   module.exports = {
     createRequirements,
     getRequirements,
     getReqById,
-    updateRequirementById
+    updateRequirementById,
+    deleteRequirementById
   };
