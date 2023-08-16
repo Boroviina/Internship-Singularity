@@ -5,14 +5,9 @@ import * as Yup from "yup";
 import {Input} from "../../../shared/components/form/Input";
 import {Button} from "../../../shared/components/form/Button";
 import {useAuth} from "../../../modules/auth";
-import AuthService from "../../../shared/services/api-client/auth.service";
 import {getEmployers, updateEmployer} from "../../../shared/services/employer.service";
 import {Employer} from "../../../shared/models/employer.model";
 import CustomModal from "../../../shared/components/CustomModal";
-import {UserInfoSettings} from "./UserInfoSettings";
-import {Role} from "../../../shared/enums/roles.enum";
-
-const authService = new AuthService();
 
 const editEmployerInfoSchema = Yup.object().shape({
     companyName: Yup.string()
@@ -49,7 +44,7 @@ const editEmployerInfoSchema = Yup.object().shape({
 })
 
 export const CompanyInfoSettings = () => {
-    const {currentUser, setCurrentUser} = useAuth()
+    const {currentUser} = useAuth()
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -100,8 +95,6 @@ export const CompanyInfoSettings = () => {
         onSubmit: async (values, { setStatus, setSubmitting }) => {
             setLoading(true);
             try {
-                // Update employer logic here
-
                 const updatedEmployer = await updateEmployer(employer.id, values)
                 setEmployer(updatedEmployer)
                 setModalBody("You successfully updated your profile!")
@@ -116,7 +109,6 @@ export const CompanyInfoSettings = () => {
 
     const hideModal = () => {
         setShowModal(false);
-        // navigate('/profile')
     }
     const openModal = () => {
         setShowModal(true);

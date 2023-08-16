@@ -30,26 +30,28 @@ const VerifyEmail: FC = () => {
     return (
         <>
             <div className='d-flex flex-column align-items-center justify-content-center vh-100'>
-                <div className="fs-1 text-center text-label">Verify your email address</div>
-                <h2 className="fs-2 text-center text-label">Last step. If you want to verify your email click button below</h2>
-                <h3 className="fs-3 fw-bolder mb-5 text-label">{currentUser.email}</h3>
+                <div className="fs-1 text-center text-muted">Verify your email address</div>
+                <h2 className="fs-2 text-center text-muted">Last step. If you want to verify your email click button below</h2>
+                <h3 className="fs-3 fw-bolder mb-5">{currentUser.email}</h3>
 
                 <div className="text-center">
-                    <Button onClick={async () => {
-                        setError(null);
-                        try {
-                            await authService.verifyEmail(token);
-                            currentUser.isEmailVerified = true;
-                            setCurrentUser(currentUser);
-                            setModalBody(`Email verification was successful. Your email ${currentUser.email} is now verified.`);
-                        } catch (error) {
-                            setError(error)
-                            setModalBody("Email verification failed. Please, try again later.")
-                            console.log(error);
-                        }
-                        openModal();
-                    }}>Verify email</Button>{' '}
-                    <Button onClick={() => navigate('/home')}>Cancel</Button>
+                    <Button
+                        state="success"
+                        onClick={async () => {
+                            setError(null);
+                            try {
+                                await authService.verifyEmail(token);
+                                currentUser.isEmailVerified = true;
+                                setCurrentUser(currentUser);
+                                setModalBody(`Email verification was successful. Your email ${currentUser.email} is now verified.`);
+                            } catch (error) {
+                                setError(error)
+                                setModalBody("Email verification failed. Please, try again later.")
+                                console.log(error);
+                            }
+                            openModal();
+                        }}>Verify email</Button>{' '}
+                    <Button onClick={() => navigate('/')}>Cancel</Button>
                 </div>
             </div>
             <CustomModal title={error ? "Error" : "Success"} show={showModal} onHide={error ? hideModal : hideModalAndGoToProfile}

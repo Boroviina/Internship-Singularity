@@ -13,36 +13,35 @@ import CustomModal from "../../../shared/components/CustomModal";
 const authService = new AuthService();
 
 export const ProfileSettings = () => {
-    const {currentUser, setCurrentUser} = useAuth()
+    const {currentUser} = useAuth()
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [modalBody, setModalBody] = useState("");
     const [employer, setEmployer] = useState<Employer>(null);
 
-    const fetchEmployer = async () => {
-        try {
-            const employers = await getEmployers(`${currentUser.id}`);
-            if (employers[0]) {
-                setEmployer(employers[0]);
-            } else {
-                throw new Error("This employer does not exist");
-            }
-        } catch (error) {
-            console.log(error);
-            navigate("/error/404");
-        }
-    };
-
-    useEffect(() => {
-        if(currentUser.role === Role.employer) {
-            fetchEmployer();
-        }
-    }, []);
+    // const fetchEmployer = async () => {
+    //     try {
+    //         const employers = await getEmployers(`${currentUser.id}`);
+    //         if (employers[0]) {
+    //             setEmployer(employers[0]);
+    //         } else {
+    //             throw new Error("This employer does not exist");
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //         navigate("/error/404");
+    //     }
+    // };
+    //
+    // useEffect(() => {
+    //     if(currentUser.role === Role.employer) {
+    //         fetchEmployer();
+    //     }
+    // }, []);
 
     const hideModal = () => {
         setShowModal(false);
-        // navigate('/profile')
     }
     const openModal = () => {
         setShowModal(true);
@@ -52,22 +51,25 @@ export const ProfileSettings = () => {
         <>
             <UserInfoSettings/>
             {currentUser.role === Role.employer && <CompanyInfoSettings/>}
-                {!currentUser.isEmailVerified && <div
-                    className="mx-auto shadow overflow-hidden card-bg p-4 my-3 d-flex justify-content-between align-items-center flex-wrap">
+            {!currentUser.isEmailVerified &&
+                <div className="mx-auto shadow-lg rounded overflow-hidden bg-body p-4 my-3 d-flex justify-content-between align-items-center flex-wrap">
                     <p className="fw-bold text-label fs-4 mb-0">Verify your email</p>
                     <Button type="button"
                             onClick={async () => {
+                                setError(null)
                                 try {
                                     await authService.sendVerificationEmail();
                                     setModalBody("Verification email is sent. You can now check your inbox")
                                     openModal()
                                 } catch (error) {
                                     console.log(error)
+                                    setError("Error while sending verification email")
+                                    setModalBody("There was an error. Verification email was not sent. Please try again")
                                 }
                             }}
                     >Send verification email</Button>
                 </div>}
-            <CustomModal title="Success" show={showModal} onHide={hideModal} footer={<Button state="success" onClick={hideModal}>Continue</Button>}>
+            <CustomModal title={error ? 'Error' : 'Success'} show={showModal} onHide={hideModal} footer={<Button state="success" onClick={hideModal}>Continue</Button>}>
                 {modalBody}
             </CustomModal>
         </>

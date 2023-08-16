@@ -10,7 +10,6 @@ import {JobListings} from "../pages/jobs/JobListings";
 import {Users} from "../pages/users/Users";
 import {Profile} from "../pages/users/profiles/Profile";
 import {ProfileSettings} from "../pages/users/profiles/ProfileSettings";
-import {VerifyEmail} from "../modules/email-verification/VerifyEmail";
 
 const PrivateRoutes = () => {
     //const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
@@ -27,7 +26,7 @@ const PrivateRoutes = () => {
                 <Route path='/users' element={<Users/>}/>
                 <Route path='/users/:userId' element={<Profile/>}/>
                 <Route path='/profile/settings' element={<ProfileSettings/>}/>
-                <Route path='/verify-email' element={<VerifyEmail/>}/>
+
                 {/*<Route path='/about' element={<About/>}/>*/}
                 {/* Lazy Modules */}
                 {/*<Route
