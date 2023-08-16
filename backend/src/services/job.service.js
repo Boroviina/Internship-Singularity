@@ -55,10 +55,11 @@ const getJobById = async (id, populate) => {
  */
 const updateJobById = async (jobId, updateJob) => {
   const job = await getJobById(jobId, `requirements`);
-  // const requ= await getReqById(job.requirements._id);
   //console.log(updateJob);
   const {requirements,...rest}=updateJob;
   console.log(requirements);
+  console.log("ID: ",job.requirements._id);
+  const requ= await updateRequirementById(job.requirements._id, requirements);
   if (!job) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
   }
