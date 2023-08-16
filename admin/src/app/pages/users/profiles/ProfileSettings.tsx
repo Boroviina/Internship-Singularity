@@ -1,10 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, {useState} from "react";
 import {Button} from "../../../shared/components/form/Button";
 import {useAuth} from "../../../modules/auth";
 import AuthService from "../../../shared/services/api-client/auth.service";
-import {getEmployers} from "../../../shared/services/employer.service";
-import {Employer} from "../../../shared/models/employer.model";
 import {UserInfoSettings} from "./UserInfoSettings";
 import {Role} from "../../../shared/enums/roles.enum";
 import {CompanyInfoSettings} from "./CompanyInfoSettings";
@@ -14,31 +11,9 @@ const authService = new AuthService();
 
 export const ProfileSettings = () => {
     const {currentUser} = useAuth()
-    const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [modalBody, setModalBody] = useState("");
-    const [employer, setEmployer] = useState<Employer>(null);
-
-    // const fetchEmployer = async () => {
-    //     try {
-    //         const employers = await getEmployers(`${currentUser.id}`);
-    //         if (employers[0]) {
-    //             setEmployer(employers[0]);
-    //         } else {
-    //             throw new Error("This employer does not exist");
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //         navigate("/error/404");
-    //     }
-    // };
-    //
-    // useEffect(() => {
-    //     if(currentUser.role === Role.employer) {
-    //         fetchEmployer();
-    //     }
-    // }, []);
 
     const hideModal = () => {
         setShowModal(false);

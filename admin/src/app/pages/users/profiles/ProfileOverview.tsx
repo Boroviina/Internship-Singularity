@@ -18,12 +18,11 @@ export const ProfileOverview: React.FC<ProfileOverviewProps> = (props) => {
             <div className="mx-auto shadow-lg rounded overflow-hidden pt-3 mb-3 border bg-body">
                     <div className="fs-4 border-bottom p-3 fw-bold mb-3 text-label">User details</div>
                     <ProfileOverviewItem label='Full name'>{user.name}</ProfileOverviewItem>
-                    <ProfileOverviewItem label='Email'>{user.email}</ProfileOverviewItem>
                     <ProfileOverviewItem label='Email'>
                         {user.email}{' '}
                         <OverlayTrigger
                             placement="top"
-                            overlay={<Tooltip>{user.isEmailVerified ? 'Your email is verified' : 'Please verify your email'}</Tooltip>}
+                            overlay={<Tooltip>{user.isEmailVerified ? 'Email is verified' : 'Email is not verified'}</Tooltip>}
                         >
                             <i className={`bi ${user.isEmailVerified ? 'bi-check-circle text-success' : 'bi-exclamation-circle text-danger'}`}/>
                         </OverlayTrigger>

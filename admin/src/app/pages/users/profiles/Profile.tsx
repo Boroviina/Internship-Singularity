@@ -8,9 +8,11 @@ import CustomModal from "../../../shared/components/CustomModal";
 import {Button} from "../../../shared/components/form/Button";
 import {ProfileOverview} from "./ProfileOverview";
 import {EmployerDetails} from "./EmployerDetails";
+import {EmployerJobListingHistory} from "./EmployerJobListingHistory";
 
 export const Profile = () => {
     const [user, setUser] = useState(null);
+    const [employer, setEmployer] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showActivationModal, setShowActivationModal] = useState(false);
@@ -23,12 +25,26 @@ export const Profile = () => {
             const result = await getUser(userId);
             if(result) {
                 setUser(result);
+                if(result.role === Role.employer) {
+                    fetchEmployer()
+                }
             } else {
                 throw new Error("This user does not exist")
             }
         } catch(error) {
             console.log(error);
             navigate('/error/404')
+        }
+    }
+
+    const fetchEmployer = async () => {
+        try {
+            const employer = await getEmployers(userId);
+            if(employer[0]) {
+                setEmployer(employer[0])
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -92,9 +108,9 @@ export const Profile = () => {
                             <p className="text-label">{user.email}</p>
                         </div>
                     </div>
-                    <div className="ms-auto">
+                    {user.id === currentUser.id && <div className="ms-auto">
                         <Button type="button" onClick={() => navigate('/profile/settings')}>Settings</Button>
-                    </div>
+                    </div>}
                 </div>
                 {currentUser.role === Role.admin && currentUser.id !== user.id && <div className="row border-top">
                     <div onClick={openActivationModal}
@@ -118,7 +134,8 @@ export const Profile = () => {
                 </div>}
             </div>
             <ProfileOverview user={user}/>
-            {user.role === Role.employer && <EmployerDetails user={user}/>}
+            {user.role === Role.employer && <EmployerDetails employer={employer} userName={user.name}/>}
+            {user.role === Role.employer && employer && <EmployerJobListingHistory employer={employer}/>}
             <CustomModal
                 show={showDeleteModal}
                 onHide={hideDeleteModal}
