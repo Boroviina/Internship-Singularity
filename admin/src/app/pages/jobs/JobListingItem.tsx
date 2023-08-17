@@ -26,7 +26,7 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
     console.log(props.item);
     return (
         <div className={`card card-custom mb-3 `}>
-            <div className={`card-header d-flex ${classes['hover-card']}`} onClick={clickHandler}>
+            <div className={`card-header d-flex `} >
                 <div className={'d-flex flex-column flex-md-row justify-context-md-start align-items-md-center align-items-start'}>
                     <JobDeactivation date={props.item.appDeadline}/>
                     <h3 className="card-title fw-bolder text-dark mx-4">{props.item.jobTitle}</h3>
@@ -46,7 +46,7 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                     <MenuToggleButton id={props.item.id}/>
                 </div>
             </div>
-            <div className="card-body">
+            <div className={`card-body ${classes['hover-card']}`} onClick={clickHandler}>
                 <label className='form-label fw-bolder text-dark fs-6 mb-2'>Company name here</label><br/>
                 <div className="fv-row">
                     <span className="me-2">
