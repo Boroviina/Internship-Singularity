@@ -4,6 +4,7 @@ import {getJobs} from "../../shared/services/job.service";
 import {Alert} from "../../shared/components/Alert";
 import {Spinner} from "react-bootstrap";
 import {useIntl} from "react-intl";
+import {useAuth} from "../../modules/auth";
 
 export const JobListings = () => {
     const intl = useIntl();
@@ -11,7 +12,7 @@ export const JobListings = () => {
     const [jobListings, setJobListings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
+    const {currentUser} = useAuth();
 
     const fetchJobListings = async () => {
         setLoading(true);
@@ -19,7 +20,8 @@ export const JobListings = () => {
         try {
             const jobs = await getJobs();
             setJobListings(jobs);
-        } catch(error) {
+
+        } catch (error) {
             setError("Error while getting job listings.");
         }
         setLoading(false);
@@ -28,10 +30,14 @@ export const JobListings = () => {
         fetchJobListings();
     }, []);
 
-    let jobListingsContent = <Alert state="primary" icon="icons/duotune/general/gen021.svg">{intl.formatMessage({id: 'JOB_LISTING.MESSAGE.NO_JOB_LISTINGS'})}</Alert>;
+    let jobListingsContent = <Alert state="primary"
+                                    icon="icons/duotune/general/gen021.svg">{intl.formatMessage({id: 'JOB_LISTING.MESSAGE.NO_JOB_LISTINGS'})}</Alert>;
 
     if (jobListings) {
-        const currentJobListings = jobListings.map(jobListing => (
+        const filteredJobs = jobListings.filter(job => {
+            return job.employer.adminUser === currentUser.id;
+        })
+        const currentJobListings = filteredJobs.map(jobListing => (
             <JobListingItem
                 key={jobListing.id}
                 item={jobListing}
@@ -43,7 +49,7 @@ export const JobListings = () => {
 
     return (
         <>
-            {loading &&  <div className="d-flex align-items-center justify-content-center" style={{ height: '100%' }}>
+            {loading && <div className="d-flex align-items-center justify-content-center" style={{height: '100%'}}>
                 <div className="text-center">
                     <Spinner animation="border"></Spinner>
                 </div>

@@ -3,7 +3,7 @@ import {UserModel} from "./user.model";
 
 export class Employer extends BaseModel {
     id?: string;
-    user: UserModel;
+    adminUser: UserModel;
     companyName: string;
     industry: string;
     users: [UserModel];
