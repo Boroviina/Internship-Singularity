@@ -6,7 +6,7 @@ import InputField from "./InputField";
 import {PasswordMeterComponent} from "../../../../_metronic/assets/ts/components";
 import {registerEmployer} from "../../../shared/services/employer.service";
 import {Alert} from "../../../shared/components/Alert";
-import {Employer, User} from "../../../shared/models/employer.model";
+import {Employer} from "../../../shared/models/employer.model";
 import {UserModel} from "../../../shared/models/user.model";
 
 const initialValues = {

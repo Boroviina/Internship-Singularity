@@ -6,7 +6,7 @@ export class UserModel extends BaseModel {
   name: string;
   email: string;
   role: string;
-  isEmailVerified: string;
+  isEmailVerified?: boolean
   occupation?: string;
   companyName?: string;
   phone?: string;
@@ -21,5 +21,19 @@ export class UserModel extends BaseModel {
   constructor(attributes?: any) {
     super();
     this.setAttributes(attributes);
+  }
+}
+
+export class UsersResponse extends BaseModel {
+  results: UserModel[];
+  page: number;
+  limit: number;
+  totalPages: number;
+  totalResults: number;
+
+  constructor(attributes?: any) {
+    super();
+    this.setAttributes(attributes);
+    this.results = attributes.results.map(user => new UserModel(user));
   }
 }

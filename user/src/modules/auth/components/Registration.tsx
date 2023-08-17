@@ -63,7 +63,8 @@ export function Registration() {
             {
               name: `${values.firstname} ${values.lastname}`,
               email: values.email,
-              password: values.password
+              password: values.password,
+              active: true,
             }
         )
         openModal()

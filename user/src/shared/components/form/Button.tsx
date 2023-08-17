@@ -1,6 +1,5 @@
 import React from 'react';
 import {WithChildren} from "../../../helpers";
-import classes from './Button.module.css';
 
 type ButtonProps = {
     type: "button" | "submit" | "reset"
@@ -9,6 +8,8 @@ type ButtonProps = {
     loading?: boolean
     filled?: boolean
     onClick?: () => void
+    width?: string
+    height?: string
 }
 
 export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
@@ -19,6 +20,8 @@ export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
         loading,
         filled,
         onClick,
+        width='150px',
+        height='60px',
         children,
     } = props
 
@@ -27,7 +30,7 @@ export const Button: React.FC<ButtonProps & WithChildren> = (props) => {
             type={type}
             id={id}
             className={`${filled ? `btn btn-white` : `btn btn-pink`}`}
-            style={{width:'150px', height: '60px'}}
+            style={{width: width, height: height}}
             disabled={disabled}
             onClick={onClick ? onClick : undefined}
         >

@@ -4,6 +4,8 @@
  * @returns {Promise<Employer>}
  */
 const {Employer} = require("../models");
+const ApiError = require("../utils/ApiError");
+const httpStatus = require("http-status");
 
 
 const createEmployer = async (employerBody) => {
@@ -33,9 +35,30 @@ const getEmployerById = async (id) => {
   return Employer.findById(id);
 };
 
+const updateEmployerById = async (employerId, updateBody) => {
+  const employer = await getEmployerById(employerId);
+  if (!employer) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employer not found');
+  }
+  Object.assign(employer, updateBody);
+  await employer.save();
+  return employer;
+};
+
+const deleteEmployerById = async (employerId) => {
+  const employer = await getEmployerById(employerId);
+  if (!employer) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Employer not found');
+  }
+  await employer.remove();
+  return employer;
+};
+
 module.exports = {
   createEmployer,
   queryEmployers,
-  getEmployerById
+  getEmployerById,
+  updateEmployerById,
+  deleteEmployerById
 };
 

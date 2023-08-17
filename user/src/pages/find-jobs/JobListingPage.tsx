@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
@@ -9,49 +9,59 @@ import Pagination from "./components/Pagination";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
-import {RequirementsModel} from "../../shared/models/requirements.model";
+import {getJobs} from "../../shared/services/job.service";
+import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
+import {useAuth} from "../../modules/auth";
 
 const JobListingPage = () => {
+    const [shownJob, setShownJob] = useState<JobListing>(null);
     const [showDetails, setShowDetails] = useState(false);
     const handleClose = () => setShowDetails(false);
-    const handleOpen = () => setShowDetails(true);
+    const handleOpen = (job: JobListing) => {
+        setShownJob(job);
+        setShowDetails(true)
+    };
 
-    const specialization = ["Finance and accounting", "Legal", "Technology",
-        "Administrative & customer support", "Marketing & creative"];
-    const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
-    const remote = ["Remote", "Hybrid"];
-    const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
-    const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
-        "Master's degree", "Doctor's degree"];
-    const sortByCategories = ["Relevance", "Date", "Salary"];
-    const job1: JobListing = new JobListing({
-        //companyLogo: ...
-        jobTitle: "Backend developer",
-        companyName: "Amazon",
-        location: "Sydney - Australia",
-        salary: "4000 $",
-        employmentType: "Full Time",
-        description: DESCRIPTION,
-        remote: "Remote",
-        datePosted: new Date(2023, 6, 12), // MJESECE BROJI OD 0 DO 11
+    const [jobs, setJobs] = useState(null);
+    const [savedJobs, setSavedJobs] = useState<string[]>([]);
+    const {currentUser} = useAuth();
 
-        requirementsModel: new RequirementsModel({
-            specialization: "Technology",
-            experience: "Mid level",
-            education: "College",
-            skills: "Problem solving, Communication", // ovo bi mogao biti niz
-            language: "English, German",
-            driverLicence: true
-        }),
+    const fetchJobs = async () => {
+        try {
+            const jobs = await getJobs();
+            setJobs(jobs);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-        appDeadline: new Date(2023, 8, 23),
-        positionsNum: 7,
-        cv: true,
-        coverLetter: true,
-        appInstructions: "Please submit your thing into the proper channel and" +
-            "discuss without the necessary preconditions of your applications. We will" +
-            "contact you shortly!",
-    });
+    const fetchUsersSavedJobs = async () => {
+        try {
+            const results = await getUsersSavedJobs(`${currentUser.id}`);
+            const savedjobs = [];
+            if(results || results.length > 0) {
+                results.map(savedJob => savedjobs.push(savedJob.job.id))
+            }
+            setSavedJobs(savedjobs)
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchJobs();
+        fetchUsersSavedJobs();
+    }, /*filter, search...*/[]);
+
+    let jobsContent = <div>No jobs could be found.</div>;
+
+    if (jobs) {
+        jobsContent = jobs.map(job => {
+            // console.log(job);
+            return <JobListingCard job={job} showDetails={handleOpen} key={job.id} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(job.id)}/>;
+        });
+    }
+
     return (
         <>
             <body>
@@ -84,11 +94,7 @@ const JobListingPage = () => {
                                 <SortBy categories={sortByCategories}/>
                             </div>
                             <div className="jobs my-2">
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
-                                <JobListingCard job={job1} showDetails={handleOpen}/>
+                                {jobsContent}
                             </div>
                             <Pagination/>
                         </section>
@@ -98,13 +104,21 @@ const JobListingPage = () => {
             </main>
             </body>
 
-            <DetailsModal job={job1} showDetails={showDetails} close={handleClose}/>
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
         </>
     );
 }
 
 export default JobListingPage;
 
+const specialization = ["Finance and accounting", "Legal", "Technology",
+    "Administrative & customer support", "Marketing & creative"];
+const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
+const remote = ["Remote", "Hybrid"];
+const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
+const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
+    "Master's degree", "Doctor's degree"];
+const sortByCategories = ["Relevance", "Date", "Salary"];
 
 const DESCRIPTION = "     We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
     "            aliquam\n" +

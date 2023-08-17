@@ -12,7 +12,7 @@ class AuthService {
   // Login user and retrieve JWT token
   async login(email: string, password: string): Promise<LoginResponse | null> {
     try {
-      const response = await axios.post<LoginResponse>(`${API_URL}/${API_VERSION}/auth/login`, { email, password });
+      const response = await axios.post<LoginResponse>(`${API_URL}/${API_VERSION}/auth/login-user`, { email, password });
       this.saveToken(response.data.tokens.access.token);
       return response.data;
     } catch (error) {
@@ -41,6 +41,48 @@ class AuthService {
     } catch (error) {
       console.error("Logout failed:", error);
       return null;
+    }
+  }
+
+  // forgot password
+  async forgotPassword(email: string): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/forgot-password?role=user`, { email });
+      return {data: {result: true}};
+    } catch (error) {
+      console.error("Resetting password failed:", error);
+      return null;
+    }
+  }
+
+  // reset password
+  async resetPassword(password: string, token: string): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/reset-password?token=${token}`, { password });
+      return {data: {result: true}};
+    } catch (error) {
+      console.error("Resetting password failed:", error);
+      return null;
+    }
+  }
+
+  // send verification email
+  async sendVerificationEmail(): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/send-verification-email`);
+      return {data: {result: true}};
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  // verify email
+  async verifyEmail(token: string): Promise<any> {
+    try {
+      await axios.post(`${API_URL}/${API_VERSION}/auth/verify-email?token=${token}`);
+      return {data: {result: true}};
+    } catch (error) {
+      throw new Error(error);
     }
   }
 

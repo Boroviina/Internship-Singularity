@@ -1,5 +1,6 @@
 import {Token} from "../../../shared/interfaces/login-response.interface";
 import {Language} from "../../../shared/enums/languages.enum";
+import {Role} from "../../../shared/enums/roles.enum";
 
 export interface AuthModel {
   access: Token
@@ -51,6 +52,7 @@ export interface UserModel {
   username?: string
   password?: string | undefined
   email: string
+  isEmailVerified?: boolean
   first_name?: string
   last_name?: string
   name: string
@@ -58,6 +60,7 @@ export interface UserModel {
   companyName?: string
   phone?: string
   roles?: Array<number>
+  role?: string
   pic?: string
   language?: Language
   timeZone?: string

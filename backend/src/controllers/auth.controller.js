@@ -2,7 +2,6 @@ const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService } = require('../services');
 const employerService = require("../services/employer.service");
-const {roles} = require("../config/roles");
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -12,11 +11,18 @@ const register = catchAsync(async (req, res) => {
 
 const registerEmployer = catchAsync(async (req, res) => {
   const user = await userService.createUser({role: 'employer', ...req.body.user});
-  const employer = await employerService.createEmployer({adminUser: user.id, ...req.body});
+  const employer = await employerService.createEmployer({adminUser: user, ...req.body});
   res.status(httpStatus.CREATED).send(employer);
 });
 
 const login = catchAsync(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await authService.loginAdminWithEmailAndPassword(email, password);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.send({ user, tokens });
+});
+
+const loginUser = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
@@ -35,7 +41,7 @@ const refreshTokens = catchAsync(async (req, res) => {
 
 const forgotPassword = catchAsync(async (req, res) => {
   const resetPasswordToken = await tokenService.generateResetPasswordToken(req.body.email);
-  await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
+  await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken, req.query.role);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
@@ -46,7 +52,7 @@ const resetPassword = catchAsync(async (req, res) => {
 
 const sendVerificationEmail = catchAsync(async (req, res) => {
   const verifyEmailToken = await tokenService.generateVerifyEmailToken(req.user);
-  await emailService.sendVerificationEmail(req.user.email, verifyEmailToken);
+  await emailService.sendVerificationEmail(req.user.email, verifyEmailToken, req.user.role);
   res.status(httpStatus.NO_CONTENT).send();
 });
 
@@ -59,6 +65,7 @@ module.exports = {
   register,
   registerEmployer,
   login,
+  loginUser,
   logout,
   refreshTokens,
   forgotPassword,

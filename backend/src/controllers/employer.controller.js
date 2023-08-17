@@ -6,7 +6,7 @@ const {employerService} = require("../services");
 
 
 const getEmployers = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['industry', 'numOfEmployees']);
+  const filter = pick(req.query, ['industry', 'numOfEmployees', 'adminUser']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await employerService.queryEmployers(filter, options);
   res.send(result);
@@ -20,7 +20,19 @@ const getEmployer = catchAsync(async (req, res) => {
   res.send(employer);
 });
 
+const updateEmployer = catchAsync(async (req, res) => {
+  const employer = await employerService.updateEmployerById(req.params.employerId, req.body);
+  res.send(employer);
+});
+
+const deleteEmployer = catchAsync(async (req, res) => {
+  await employerService.deleteEmployerById(req.params.employerId);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
 module.exports = {
   getEmployers,
-  getEmployer
+  getEmployer,
+  updateEmployer,
+  deleteEmployer,
 };

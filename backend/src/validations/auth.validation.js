@@ -6,6 +6,7 @@ const register = {
     email: Joi.string().required().email(),
     password: Joi.string().required().custom(password),
     name: Joi.string().required(),
+    active: Joi.boolean(),
   }),
 };
 
@@ -47,6 +48,9 @@ const refreshTokens = {
 };
 
 const forgotPassword = {
+  query: Joi.object().keys({
+    role: Joi.string().required(),
+  }),
   body: Joi.object().keys({
     email: Joi.string().email().required(),
   }),
