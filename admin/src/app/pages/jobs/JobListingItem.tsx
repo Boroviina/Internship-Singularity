@@ -7,6 +7,7 @@ import {useIntl} from "react-intl";
 import {useNavigate} from "react-router-dom";
 import {DeleteJobModal} from "../post-job/DeleteJobModal";
 import {MenuToggleButton} from "./MenuToggleButton";
+import {JobDeactivation} from "./JobDeactivation";
 
 
 type JobListingItemProps = {
@@ -26,8 +27,12 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
     return (
         <div className={`card card-custom mb-3 `}>
             <div className={`card-header d-flex ${classes['hover-card']}`} onClick={clickHandler}>
-                <h3 className="card-title fw-bolder text-dark">{props.item.jobTitle}</h3>
+                <div className={'d-flex flex-column flex-md-row justify-context-md-start align-items-md-center align-items-start'}>
+                    <JobDeactivation date={props.item.appDeadline}/>
+                    <h3 className="card-title fw-bolder text-dark mx-4">{props.item.jobTitle}</h3>
+                </div>
                 <div className={'d-none d-xl-flex align-items-center'}>
+
                     <button className={'btn btn-primary m-5'}
                             onClick={() => navigate(`/applications-review/${props.item.id}`)}> See applications
                     </button>
@@ -36,7 +41,7 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                     </button>
                     <DeleteJobModal update={props.update} jobId={props.item.id}/>
                 </div>
-                <div className={'d-flex d-xl-none align-items-center justify-content-between'}>
+                <div className={'d-flex d-xl-none align-items-center justify-content-end'}>
                     <DeleteJobModal update={props.update} jobId={props.item.id}/>
                     <MenuToggleButton id={props.item.id}/>
                 </div>
