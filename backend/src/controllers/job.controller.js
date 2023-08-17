@@ -39,7 +39,7 @@ const getJobs = catchAsync(async (req, res) => {
 });
 
 const getJob = catchAsync(async (req, res) => {
-  const job = await jobService.getJobById(req.params.jobId);
+  const job = await jobService.getJobById(req.params.jobId, req.query.populate);
   if (!job) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
   }

@@ -39,16 +39,24 @@ const updateJob = {
   body: Joi.object()
     .keys({
       jobTitle:Joi.string(),
+      requirements: Joi.object().keys({
+        specialization: Joi.string(),
+        experience: Joi.string(),
+        education: Joi.string(),
+        skills: Joi.string(),
+        language: Joi.string(),
+        drivingLicense: Joi.bolean().optional()
+      }),
+      location: Joi.string(),
+      salary: Joi.string(),
+      employmentType: Joi.string(),
       description:Joi.string(),
-      education:Joi.string(),
-      skills:Joi.string(),
-      languages:Joi.string(),
       appDeadline:Joi.date(),
       appInstructions:Joi.string(),
       numPosition:Joi.number(),
+      remote: Joi.string(),
       cv:Joi.boolean(),
       coverLetter:Joi.boolean(),
-      driverLicense:Joi.boolean(),
     })
     .min(1),
 };
