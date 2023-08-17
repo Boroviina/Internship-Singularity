@@ -10,29 +10,29 @@ const express = require('express');
 
 
 const app = express();
-const processDownload = () => {
-    app.get('/download/:filename', async (req, res) => {
-        try {
-            const filename = req.params.filename;
-            const currentFileURL = import.meta.url;
-            const currentDir = path.dirname(new URL(currentFileURL).pathname);
-            const filePath = path.join(currentDir, '../../public/uploads', filename);
-
-            if (fs.existsSync(filePath)) {
-                res.download(filePath, 'cv.txt', (err) => {
-                    if (err) {
-                        res.status(404).send('File not found');
-                    }
-                });
-            } else {
-                res.status(404).send('File not found');
-            }
-        } catch
-            (error) {
-            res.status(500).send('Internal server error');
-        }
-    });
-}
+// const processDownload = () => {
+//     app.get('/download/:filename', async (req, res) => {
+//         try {
+//             const filename = req.params.filename;
+//             // const currentFileURL = import.meta.url;
+//             const currentDir = path.dirname(new URL(currentFileURL).pathname);
+//             const filePath = path.join(currentDir, '../../public/uploads', filename);
+//
+//             if (fs.existsSync(filePath)) {
+//                 res.download(filePath, 'cv.txt', (err) => {
+//                     if (err) {
+//                         res.status(404).send('File not found');
+//                     }
+//                 });
+//             } else {
+//                 res.status(404).send('File not found');
+//             }
+//         } catch
+//             (error) {
+//             res.status(500).send('Internal server error');
+//         }
+//     });
+// }
     const createFile = async (fileBody) => {
         return File.create(fileBody);
     };
@@ -88,5 +88,5 @@ const processDownload = () => {
     module.exports = {
         processUpload,
         uploadFiles,
-        processDownload,
+       // processDownload,
     };
