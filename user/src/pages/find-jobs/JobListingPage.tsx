@@ -9,9 +9,9 @@ import Pagination from "./components/Pagination";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
-import {RequirementsModel} from "../../shared/models/requirements.model";
-import {Employer} from "../../shared/models/employer.model";
 import {getJobs} from "../../shared/services/job.service";
+import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
+import {useAuth} from "../../modules/auth";
 
 const JobListingPage = () => {
     const [shownJob, setShownJob] = useState<JobListing>(null);
@@ -23,24 +23,42 @@ const JobListingPage = () => {
     };
 
     const [jobs, setJobs] = useState(null);
+    const [savedJobs, setSavedJobs] = useState<string[]>([]);
+    const {currentUser} = useAuth();
+
+    const fetchJobs = async () => {
+        try {
+            const jobs = await getJobs();
+            setJobs(jobs);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const fetchUsersSavedJobs = async () => {
+        try {
+            const results = await getUsersSavedJobs(`${currentUser.id}`);
+            const savedjobs = [];
+            if(results || results.length > 0) {
+                results.map(savedJob => savedjobs.push(savedJob.job.id))
+            }
+            setSavedJobs(savedjobs)
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         fetchJobs();
+        fetchUsersSavedJobs();
     }, /*filter, search...*/[]);
 
-const fetchJobs = async () => {
-    try {
-        const jobs = await getJobs();
-        setJobs(jobs);
-    } catch (error) {
-        console.log(error);
-    }
-}
     let jobsContent = <div>No jobs could be found.</div>;
 
     if (jobs) {
         jobsContent = jobs.map(job => {
-            console.log(job);
-            return <JobListingCard job={job} showDetails={handleOpen} key={job.id}/>;
+            // console.log(job);
+            return <JobListingCard job={job} showDetails={handleOpen} key={job.id} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(job.id)}/>;
         });
     }
 
@@ -86,7 +104,7 @@ const fetchJobs = async () => {
             </main>
             </body>
 
-            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}/>}
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
         </>
     );
 }

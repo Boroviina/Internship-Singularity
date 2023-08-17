@@ -59,7 +59,6 @@ export const ProfileSettings = () => {
             try {
                 const updatedUser = await updateUser(`${currentUser.id}`, values)
                 setCurrentUser(updatedUser)
-
                 openModal()
             } catch (error) {
                 setStatus('Profile detail is invalid')
