@@ -12,4 +12,9 @@ const getApplicationsPerJob = (jobId: string): Promise<JobApplication[] | null> 
         .then(data => data.results.map(jobApplication => new JobApplication(jobApplication)))
 }
 
-export {getApplicationsPerJob}
+const getJobApplicationsPerJob = (jobId: string): Promise<number | any> => {
+    return ApiClient.get(JOB_APP_ENDPOINT, `job=${jobId}`)
+        .then(response => response.data.totalResults)
+}
+
+export {getApplicationsPerJob, getJobApplicationsPerJob}
