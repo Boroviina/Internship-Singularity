@@ -6,6 +6,7 @@ import {Logout, AuthPage, useAuth} from '../modules/auth'
 import {App} from '../App'
 import {Home} from "../pages/Home/Home";
 import {MasterLayout} from "../layout/MasterLayout";
+import {VerifyEmail} from "../modules/email-verification/VerifyEmail";
 
 const {PUBLIC_URL} = process.env
 
@@ -23,6 +24,7 @@ const AppRoutes: FC = () => {
                                 <Route path='/*' element={<PrivateRoutes/>}/>
                                 <Route index element={<Home/>}/>
                             </Route>
+                            <Route path="verify-email" element={<VerifyEmail/>}/>
                         </>
                     ) : (
                         <>

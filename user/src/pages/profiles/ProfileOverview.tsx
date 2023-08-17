@@ -4,6 +4,7 @@ import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {useAuth} from "../../modules/auth";
 import {ProfileOverviewItem} from "./ProfileOverviewItem";
 import {Language} from "../../shared/enums/languages.enum";
+import {OverlayTrigger, Tooltip} from "react-bootstrap";
 
 export const ProfileOverview = () => {
     const {currentUser} = useAuth();
@@ -15,7 +16,15 @@ export const ProfileOverview = () => {
                 <CustomCard className="shadow card-bg border-radius mb-4">
                     <div className="fs-4 border-bottom p-3 fw-bold mb-3 text-label">Profile details</div>
                     <ProfileOverviewItem label='Full name'>{currentUser.name}</ProfileOverviewItem>
-                    <ProfileOverviewItem label='Email'>{currentUser.email}</ProfileOverviewItem>
+                    <ProfileOverviewItem label='Email'>
+                        {currentUser.email}{' '}
+                        <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip>{currentUser.isEmailVerified ? 'Your email is verified' : 'Please verify your email'}</Tooltip>}
+                        >
+                            <i className={`bi ${currentUser.isEmailVerified ? 'bi-check-circle text-success' : 'bi-exclamation-circle text-danger'}`}/>
+                        </OverlayTrigger>
+                    </ProfileOverviewItem>
                     <ProfileOverviewItem label='Contact phone'>{currentUser.phone}</ProfileOverviewItem>
                     {currentUser.birthDate && <ProfileOverviewItem
                         label='Date of birth'>{(new Date(currentUser.birthDate)).toLocaleString('en-US', {
