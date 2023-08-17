@@ -1,6 +1,8 @@
 const httpStatus = require('http-status');
 const {Job} = require('../models');
 const ApiError = require('../utils/ApiError');
+const {requirementsService} = require('../services');
+const {getReqById, updateRequirementById, deleteRequirementById} = require("./requirements.service");
 
 
 /**
@@ -10,7 +12,7 @@ const ApiError = require('../utils/ApiError');
  */
 
 const createJob = async (job) => {
-  return Job.create(job);
+    return Job.create(job);
 };
 
 
@@ -24,8 +26,8 @@ const createJob = async (job) => {
  * @return {Promise<QueryResult>}
  */
 const queryJobs = async (filter, options) => {
-  const jobs = await Job.paginate(filter, options);
-  return jobs;
+    const jobs = await Job.paginate(filter, options);
+    return jobs;
 };
 
 /**
@@ -33,8 +35,15 @@ const queryJobs = async (filter, options) => {
  * @param {ObjectId} id
  * @return {Promise<Job>}
  */
-const getJobById = async (id) => {
-  return Job.findById(id);
+const getJobById = async (id, populate) => {
+    const populateBy = [];
+    if (populate) {
+        populate.split(',').forEach((populateOption) => {
+            populateBy.push(populateOption);
+        })
+        return Job.findById(id).populate(populateBy).exec();
+    }
+    return Job.findById(id);
 };
 
 /**
@@ -44,13 +53,15 @@ const getJobById = async (id) => {
  * @return {Promise<Job>}
  */
 const updateJobById = async (jobId, updateJob) => {
-  const job = await getJobById(jobId);
-  if (!job) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
-  }
-  Object.assign(job, updateJob);
-  await job.save();
-  return job;
+    const job = await getJobById(jobId, `requirements`);
+    const {requirements, ...rest} = updateJob;
+    const requ = await updateRequirementById(job.requirements._id, requirements);
+    if (!job) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
+    }
+    Object.assign(job, rest);
+    await job.save();
+    return job;
 };
 
 /**
@@ -59,18 +70,21 @@ const updateJobById = async (jobId, updateJob) => {
  * @return {Promise<Job>}
  */
 const deleteJobById = async (jobId) => {
-  const job = await getJobById(jobId);
-  if (!job) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
-  }
-  await job.remove();
-  return job;
+    const job = await getJobById(jobId);
+    console.log("ID: ", job.requirements._id);
+    await deleteRequirementById(job.requirements._id);
+
+    if (!job) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
+    }
+    await job.remove();
+    return job;
 }
 
-module.exports={
-  deleteJobById,
-  updateJobById,
-  getJobById,
-  queryJobs,
-  createJob
+module.exports = {
+    deleteJobById,
+    updateJobById,
+    getJobById,
+    queryJobs,
+    createJob
 };

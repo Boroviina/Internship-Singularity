@@ -20,20 +20,24 @@ export const JobListingsDetails: React.FC<JobListingDetailsProps> = (props) => {
             <div>{props.jobListing.description}</div><hr/>
 
             {/*Requirement model*/}
-            <div className="d-flex flex-column">
+            {props.jobListing.requirements && <div className="d-flex flex-column">
                 <li className="d-flex align-items-center py-2">
-                    <span className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.EDUCATION'})}: {props.jobListing.education}
+                    <span
+                        className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.EDUCATION'})}: {props.jobListing.requirements.education}
                 </li>
                 <li className="d-flex align-items-center py-2">
-                    <span className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.SKILLS'})}: {props.jobListing.skills}
+                    <span
+                        className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.SKILLS'})}: {props.jobListing.requirements.skills}
                 </li>
                 <li className="d-flex align-items-center py-2">
-                    <span className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.LANGUAGES'})}: {props.jobListing.language}
+                    <span
+                        className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.LANGUAGES'})}: {props.jobListing.requirements.language}
                 </li>
-                {props.jobListing.driverLicence && <li className="d-flex align-items-center py-2">
-                    <span className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.DRIVER_LICENSE'})}
+                {props.jobListing.requirements.drivingLicense && <li className="d-flex align-items-center py-2">
+                    <span
+                        className="bullet bg-primary me-5"></span>{intl.formatMessage({id: 'JOB_LISTING.LABEL.DRIVER_LICENSE'})}
                 </li>}
-            </div><hr/>
+            </div>}<hr/>
             {/*End of requirement model*/}
 
             <div>

@@ -35,7 +35,7 @@ export function ApplicationsReview() {
     let jobAppContent=<div className={'display-2 text-dark'}>No job apps</div>
     if(jobApplications){
         jobAppContent=jobApplications.map(jobApplication=>
-           ( <ReviewItem item={jobApplication}
+           (<ReviewItem item={jobApplication}
             key={jobApplication.id}/>)
         );
     }
