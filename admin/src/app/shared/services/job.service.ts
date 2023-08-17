@@ -5,7 +5,7 @@ import {UsersResponse} from "../models/user.model";
 const JOBS_ENDPOINT = '/jobs';
 
 const getJobs = (): Promise<JobListing[] | null> => {
-    return ApiClient.get(JOBS_ENDPOINT)
+    return ApiClient.get(JOBS_ENDPOINT, '&populate=requirements,employer')
         .then(response => response.data)
         .then(data => data.results.map(job => new JobListing(job)))
 }

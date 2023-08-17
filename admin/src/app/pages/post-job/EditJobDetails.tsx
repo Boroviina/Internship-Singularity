@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom';
 import {useFormik} from "formik";
 import * as Yup from 'yup';
 import {useNavigate} from 'react-router-dom';
+import {format} from "date-fns";
 
 export function EditJobDetails() {
     const [existingJobDetails, setExistingJobDetails] = useState(null);
@@ -47,7 +48,7 @@ export function EditJobDetails() {
             salary: existingJobDetails?.salary,
             employmentType: existingJobDetails?.employmentType,
             description: existingJobDetails?.description,
-            appDeadline: existingJobDetails?.appDeadline,
+            appDeadline: existingJobDetails?.appDeadline ? format(new Date(existingJobDetails?.appDeadline), "yyyy-MM-dd"): '',
             appInstructions: existingJobDetails?.appInstructions,
             positionsNum: existingJobDetails?.positionsNum,
             remote: existingJobDetails?.remote,
