@@ -20,6 +20,11 @@ const getEmployer = catchAsync(async (req, res) => {
   res.send(employer);
 });
 
+const updateEmployer = catchAsync(async (req, res) => {
+  const employer = await employerService.updateEmployerById(req.params.employerId, req.body);
+  res.send(employer);
+});
+
 const deleteEmployer = catchAsync(async (req, res) => {
   await employerService.deleteEmployerById(req.params.employerId);
   res.status(httpStatus.NO_CONTENT).send();
@@ -28,5 +33,6 @@ const deleteEmployer = catchAsync(async (req, res) => {
 module.exports = {
   getEmployers,
   getEmployer,
+  updateEmployer,
   deleteEmployer,
 };

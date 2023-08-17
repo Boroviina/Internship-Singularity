@@ -1,7 +1,7 @@
 import ApiClient from "./api-client/api-client";
 import {Employer} from "../models/employer.model";
 
-const REGISTER_EMPLOYER_ENDPOINT = '/employers';
+const EMPLOYER_ENDPOINT = '/employers';
 
 const registerEmployer = (employer: object): Promise<Employer | null> => {
     console.log(employer);
@@ -10,14 +10,20 @@ const registerEmployer = (employer: object): Promise<Employer | null> => {
 }
 
 const deleteEmployer = (employerId: string): Promise<any> => {
-    return ApiClient.remove(`${REGISTER_EMPLOYER_ENDPOINT}/${employerId}`)
+    return ApiClient.remove(`${EMPLOYER_ENDPOINT}/${employerId}`)
         .then(response => response.data)
 }
 
-const getEmployers = (userId: string): Promise<Employer | null> => {
-    return ApiClient.get(REGISTER_EMPLOYER_ENDPOINT, `adminUser=${userId}`)
+const getEmployers = (userId: string): Promise<Employer[] | null> => {
+    return ApiClient.get(EMPLOYER_ENDPOINT, `adminUser=${userId}`)
         .then(response => response.data)
         .then(data => data.results.map(employer => new Employer(employer)))
 }
 
-export {registerEmployer, deleteEmployer, getEmployers};
+const updateEmployer = (employerId: string, employer): Promise<Employer | null> => {
+    return ApiClient.patch(`${EMPLOYER_ENDPOINT}/${employerId}`, employer)
+        .then(response => response.data)
+        .then(data => new Employer(data))
+}
+
+export {registerEmployer, deleteEmployer, getEmployers, updateEmployer};
