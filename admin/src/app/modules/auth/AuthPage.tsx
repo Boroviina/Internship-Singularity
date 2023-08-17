@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useEffect, useState} from 'react'
 import {Link, Outlet, Route, Routes} from 'react-router-dom'
-import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
@@ -9,7 +8,7 @@ import EmployerRegistration from "./components/EmployerRegistration";
 import {About} from './Additional information pages/About'
 import {Contact} from './Additional information pages/Contact'
 import {Alert} from "../../shared/components/Alert";
-
+import {ResetPassword} from "./components/ResetPassword";
 
 const AuthLayout = () => {
     const [registered, setRegistered] = useState(false);
@@ -84,6 +83,7 @@ const AuthPage = () => (
       <Route path='login' element={<Login />} />
       <Route path='registration' element={<EmployerRegistration />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
+      <Route path='reset-password' element={<ResetPassword/>} />
       <Route path='about' element={<About/>}/>
       <Route path='contact' element={<Contact/>}/>
       <Route index element={<Login />} />

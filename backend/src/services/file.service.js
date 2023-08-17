@@ -14,7 +14,7 @@ const app = express();
 //     app.get('/download/:filename', async (req, res) => {
 //         try {
 //             const filename = req.params.filename;
-//             //const currentFileURL = import.meta.url;
+//             // const currentFileURL = import.meta.url;
 //             const currentDir = path.dirname(new URL(currentFileURL).pathname);
 //             const filePath = path.join(currentDir, '../../public/uploads', filename);
 //

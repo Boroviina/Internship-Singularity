@@ -11,7 +11,6 @@ import {ProfileOverview} from "./ProfileOverview";
 import {SavedJobListings} from "./SavedJobListings";
 
 const ProfileLayout = () => {
-    const [loading, setLoading] = useState(false);
     const [jobApplicationsNumber, setJobApplicationNumber] = useState(0);
     const [savedJobsNumber, setSavedJobsNumber] = useState(0);
     const navigate = useNavigate();
@@ -19,7 +18,6 @@ const ProfileLayout = () => {
 
     useEffect(() => {
         const fetchJobApplicationsAndSavedJobs = async () => {
-            setLoading(true);
             try {
                 const jobApplications = await getUsersJobApplications(`${currentUser.id}`);
                 setJobApplicationNumber(jobApplications.length);
@@ -28,7 +26,6 @@ const ProfileLayout = () => {
             } catch (error) {
                 navigate('/error/500');
             }
-            setLoading(false);
         }
         fetchJobApplicationsAndSavedJobs();
     }, [currentUser.id]);

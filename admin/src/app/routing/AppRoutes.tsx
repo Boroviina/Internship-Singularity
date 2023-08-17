@@ -11,6 +11,7 @@ import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Logout, AuthPage, useAuth} from '../modules/auth'
 import {App} from '../App'
+import {VerifyEmail} from "../modules/email-verification/VerifyEmail";
 
 /**
  * Base URL of the website.
@@ -30,6 +31,7 @@ const AppRoutes: FC = () => {
                     {currentUser ? (
                         <>
                             <Route path='/*' element={<PrivateRoutes/>}/>
+                            <Route path='/verify-email' element={<VerifyEmail/>}/>
                             <Route index element={<Navigate to='/dashboard'/>}/>
                         </>
                     ) : (
