@@ -1,14 +1,21 @@
-import React, {useState } from 'react';
+import React, {useState} from 'react';
 import {JobInputField, JobTextareaField} from "./JobInputField";
+import {KTSVG} from "../../../_metronic/helpers";
+import {useNavigate} from "react-router-dom";
 
-export function JobDetailsForm(props){
+export function JobDetailsForm(props) {
 
+    const navigate = useNavigate();
 
     return <div className={`w-lg-1024px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto fade-in-up`}>
         <form action=""
               className={`form`}
               onSubmit={props.formik.handleSubmit}>
-            <div className={`row mb-10  my-3`}>
+            <div className={` mb-10 my-3 d-flex justify-content-start align-items-center`}>
+                <button className={'btn btn-light-dark col-1 m-5'} onClick={() => navigate('/job-listings')}>
+                    <KTSVG path={`/media/icons/duotune/arrows/arr021.svg`}
+                           className={'svg-icon svg-icon-2x  svg-icon-'}/>
+                </button>
                 <h1 className={'display-6'}>{props.title}</h1>
             </div>
             <div className={`fv-row mb-10`}>
@@ -162,7 +169,7 @@ export function JobDetailsForm(props){
                     className='btn btn-lg btn-primary w-100 w-md-50 w-lg-25 '
                     disabled={props.formik.isSubmitting || !props.formik.isValid}
                 >
-                    {!props.loading && <span className='indicator-label'>Post job</span>}
+                    {!props.loading && <span className='indicator-label'>{props.command}</span>}
                     {props.loading && (
                         <span className='indicator-progress' style={{display: 'block'}}>
                           Please wait...

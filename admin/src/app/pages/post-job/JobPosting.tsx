@@ -86,6 +86,6 @@ export function JobPosting() {
         },
     });
     return <>
-        <JobDetailsForm formik={formik} title={"Insert Job Features"} loading={loading}/>
+        <JobDetailsForm formik={formik} title={"Insert Job Features"} loading={loading} command={"Post job"}/>
     </>
 }
