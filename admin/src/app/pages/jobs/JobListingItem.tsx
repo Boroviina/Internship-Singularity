@@ -23,7 +23,6 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
     const clickHandler = () => {
         setDetailsShown(!detailsShown);
     }
-    console.log(props.item);
     return (
         <div className={`card card-custom mb-3 `}>
             <div className={`card-header d-flex `} >
@@ -47,11 +46,11 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
                 </div>
             </div>
             <div className={`card-body ${classes['hover-card']}`} onClick={clickHandler}>
-                <label className='form-label fw-bolder text-dark fs-6 mb-2'>Company name here</label><br/>
+                <label className='form-label fw-bolder text-dark fs-6 mb-2'>{props.item.employer.companyName}</label><br/>
                 <div className="fv-row">
                     <span className="me-2">
                         <KTSVG path="/media/icons/duotune/maps/map008.svg" className="svg-icon-2 svg-icon-primary"/>
-                        <span className="mx-1">Location here
+                        <span className="mx-1">{props.item.location}
                         </span>
                     </span>
                     <span>

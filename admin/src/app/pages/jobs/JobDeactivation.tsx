@@ -7,8 +7,6 @@ export function JobDeactivation(props) {
 
     useEffect(() => {
         const currentDate = new Date();
-        console.log("Current date", currentDate);
-        console.log("App deadline", props.date);
         const appDeadline=new Date(props.date);
         if (currentDate < appDeadline)
             setBadgeActive(true);
