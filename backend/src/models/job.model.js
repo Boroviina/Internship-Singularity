@@ -29,7 +29,7 @@ const jobSchema = mongoose.Schema(
         salary: {
             type: String,
             trim: true,
-            maxLength: [20, 'The field must be less than 20 characters long'],
+            maxLength: [100, 'The field must be less than 100 characters long'],
             required: true
         },
         employmentType: {

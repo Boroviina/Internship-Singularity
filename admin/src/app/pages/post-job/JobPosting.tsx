@@ -3,9 +3,11 @@ import {useFormik} from "formik";
 import * as Yup from 'yup';
 import {createJob} from "../../shared/services/job.service";
 import {JobDetailsForm} from "./JobDetailsForm";
+import {useNavigate} from "react-router-dom";
 
 export function JobPosting() {
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             jobTitle: '',
@@ -44,10 +46,10 @@ export function JobPosting() {
                 skills: Yup.string()
                     .max(100, 'Must be 100 characters or less'),
                 language: Yup.string()
-                    .max(30, 'Must be 30 characters or less'),
+                    .max(100, 'Must be 100 characters or less'),
             }),
             location: Yup.string().max(100, 'Must be 100 characters or less'),
-            salary: Yup.string().max(20, 'Must be 20 characters or less').required('Required'),
+            salary: Yup.string().max(100, 'Must be 100 characters or less').required('Required'),
             employmentType: Yup.string().max(30, 'Must be 30 characters or less'),
             remote: Yup.string().max(30, 'Must be 30 characters or less'),
             description: Yup.string()
@@ -74,6 +76,7 @@ export function JobPosting() {
                 console.log(values);
                 await createJob(values);
                 setLoading(false);
+                navigate('/job-listings');
             } catch (error) {
                 setStatus('Check if all inputs are filled');
                 setSubmitting(false);
