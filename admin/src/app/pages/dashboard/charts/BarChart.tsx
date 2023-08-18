@@ -2,21 +2,23 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 interface BarChartProps {
-    data: number[];
+    datasets: {
+        data: number[];
+        label: string;
+        backgroundColor: string;
+    }[];
     labels: string[];
-    title: string;
+    title?: string;
 }
 
-const BarChart: React.FC<BarChartProps> = ({ data, labels, title }) => {
+const BarChart: React.FC<BarChartProps> = ({ datasets, labels, title }) => {
     const chartData = {
         labels,
-        datasets: [
-            {
-                label: title,
-                data,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)', // Bar color
-            },
-        ],
+        datasets: datasets.map((dataset) => ({
+            label: dataset.label,
+            data: dataset.data,
+            backgroundColor: dataset.backgroundColor,
+        })),
     };
 
     return <Bar data={chartData} />;
