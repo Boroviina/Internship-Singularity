@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PieChart from "./charts/PieChart";
+import LineChart from "./charts/LineChart";
 // import {getNumberOfAdmins, getNumberOfEmployers, getNumberOfUsers} from "../../shared/services/user.service";
 import {getJobsWithoutLimit} from "../../shared/services/job.service";
 import {getJobApplicationsPerJob} from "../../shared/services/job-application.service";
@@ -7,17 +8,9 @@ import {getSavedJobsPerJob} from "../../shared/services/api-client/job-saved.ser
 import {JobTypes} from "../../shared/enums/job-types.enum";
 
 export function Dashboard() {
-
-    // const [users, setUsers] = useState(0);
-    // const [employers, setEmployers] = useState(0);
-    // const [admins, setAdmins] = useState(0);
     const [jobs, setJobs] = useState([]);
-    // const [activeJobs, setActiveJobs] = useState(10);
-    // const [inactiveJobs, setInactiveJobs] = useState(3);
     const [jobApplicationsPerJob, setJobApplicationsPerJob] = useState<number[]>([]);
     const [savedJobsPerJob, setSavedJobsPerJob] = useState<number[]>([]);
-    // const [page, setPage] = useState(1);
-    // const [totalPages, setTotalPages] = useState(1);
     const [jobTypes, setJobTypes] = useState([]);
 
     useEffect(() => {
@@ -57,7 +50,7 @@ export function Dashboard() {
 
     const getJobTypes = () => {
         const types = [];
-        jobs.map(job => {
+        jobs.forEach(job => {
             if(!types.includes(job.jobType)) {
                 types.push(job.jobType)
             }
@@ -80,7 +73,7 @@ export function Dashboard() {
 
     const getNumberOfJobsPerJobType = (jobType): number => {
         let number = 0;
-        jobs.map(job => {
+        jobs.forEach(job => {
             if(job.jobType === jobType) {
                 number++;
             }
@@ -90,7 +83,7 @@ export function Dashboard() {
 
     const getNumberOfJobApplicationsPerJobType = (jobType): number => {
         let number = 0;
-        jobs.map((job, index)=> {
+        jobs.forEach((job, index) => {
             if(job.jobType === jobType) {
                 number += jobApplicationsPerJob[index]
             }
@@ -100,7 +93,7 @@ export function Dashboard() {
 
     const getNumberOfSavedJobListingsPerJobType = (jobType): number => {
         let number = 0;
-        jobs.map((job, index)=> {
+        jobs.forEach((job, index)=> {
             if(job.jobType === jobType) {
                 number += savedJobsPerJob[index]
             }
@@ -108,9 +101,18 @@ export function Dashboard() {
         return number;
     }
 
+    const getNumberOfJobListingsPerMonthInAYear = (): number[] => {
+        const jobsPerMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        jobs.forEach(job => {
+            const month = (new Date(job.createdAt)).getMonth();
+            jobsPerMonth[month]++;
+        })
+        return jobsPerMonth;
+    }
+
     return (
         <div>
-            <div className="row">
+            <div className="row mt-10">
                 <div className="col-md-4">
                     <h2>Number of job listings per type of job</h2>
                     {jobTypes.length > 0 && <PieChart
@@ -132,6 +134,19 @@ export function Dashboard() {
                         labels={jobTypes.map((jobType) => (JobTypes[jobType]))}
                     />
                 </div>
+            </div>
+            <div className="row mt-10">
+                <LineChart
+                    labels={['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']}
+                    datasets={[
+                        {
+                            label: 'Job listings',
+                            data: getNumberOfJobListingsPerMonthInAYear(),
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            fill: false,
+                        },
+                    ]}
+                />
             </div>
         </div>
     );

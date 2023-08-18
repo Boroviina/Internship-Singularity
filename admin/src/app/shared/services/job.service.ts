@@ -16,7 +16,7 @@ const getJobsByEmployerId = (employerId: string): Promise<JobListing[] | null> =
 }
 
 const getJobsWithoutLimit = (): Promise<JobResponse | null> => {
-    return ApiClient.get(JOBS_ENDPOINT, `limit=0`)
+    return ApiClient.get(JOBS_ENDPOINT, `limit=0&populate=requirements,employer`)
         .then(response => new JobResponse(response.data))
 }
 
