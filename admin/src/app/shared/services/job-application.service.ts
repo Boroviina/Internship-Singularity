@@ -13,7 +13,7 @@ const getApplicationsPerJob = (jobId: string): Promise<JobApplication[] | null> 
 }
 
 const getJobApplicationsPerJob = (jobId: string): Promise<number | any> => {
-    return ApiClient.get(JOB_APP_ENDPOINT, `job=${jobId}`)
+    return ApiClient.get(JOB_APP_ENDPOINT, `job=${jobId}&limit=1`)
         .then(response => response.data.totalResults)
 }
 

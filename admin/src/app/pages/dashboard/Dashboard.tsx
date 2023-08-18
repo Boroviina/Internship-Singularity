@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
-import BarChart from "./charts/BarChart";
-import DoughnutChart from "./charts/DoughnutChart";
 import PieChart from "./charts/PieChart";
-import {getNumberOfAdmins, getNumberOfEmployers, getNumberOfUsers} from "../../shared/services/user.service";
+// import {getNumberOfAdmins, getNumberOfEmployers, getNumberOfUsers} from "../../shared/services/user.service";
 import {getJobsWithoutLimit} from "../../shared/services/job.service";
 import {getJobApplicationsPerJob} from "../../shared/services/job-application.service";
 import {getSavedJobsPerJob} from "../../shared/services/api-client/job-saved.service";
@@ -22,33 +20,50 @@ export function Dashboard() {
     // const [totalPages, setTotalPages] = useState(1);
     const [jobTypes, setJobTypes] = useState([]);
 
+    useEffect(() => {
+        // fetchUsers()
+        fetchJobs()
+            .then(() => getJobTypes());
+    }, [jobs.length]);
+
     const fetchJobs = async () => {
         try {
             const response = await getJobsWithoutLimit();
-            const {results} = response;
             setJobs(response.results);
 
-            results.map(async job => {
-                try {
-                    const numberOfJobApplications = await getJobApplicationsPerJob(job.id);
-                    const numberOfSavedJobs = await getSavedJobsPerJob(job.id);
-                    setJobApplicationsPerJob((previousState) => [...previousState, numberOfJobApplications])
-                    setSavedJobsPerJob((previousState) => [...previousState, numberOfSavedJobs])
-                } catch (error) {
-                    console.log(error)
-                }
-            })
+            const applicationPromises = [];
+            const savedJobPromises = [];
+
+            response.results.forEach(job => {
+                const jobAppPromise = getJobApplicationsPerJob(job.id);
+                const savedJobPromise = getSavedJobsPerJob(job.id);
+
+                applicationPromises.push(jobAppPromise);
+                savedJobPromises.push(savedJobPromise);
+            });
+
+            const applicationResults = await Promise.all(applicationPromises);
+            const savedJobResults = await Promise.all(savedJobPromises);
+
+            const applications = applicationResults.map(result => result);
+            const savedJobs = savedJobResults.map(result => result);
+
+            setJobApplicationsPerJob(applications);
+            setSavedJobsPerJob(savedJobs);
         } catch(error) {
             console.log("Error while getting jobs.");
         }
     }
 
-    useEffect(() => {
-        // fetchUsers()
-        fetchJobs()
-        getJobTypes();
-    }, []);
-
+    const getJobTypes = () => {
+        const types = [];
+        jobs.map(job => {
+            if(!types.includes(job.jobType)) {
+                types.push(job.jobType)
+            }
+        })
+        setJobTypes(types)
+    }
 
     // const fetchUsers = async () => {
     //     try {
@@ -62,16 +77,6 @@ export function Dashboard() {
     //         console.log("Error while getting users.");
     //     }
     // }
-
-    const getJobTypes = () => {
-        const types = [];
-        jobs.map(job => {
-            if(!types.includes(job.jobType)) {
-                types.push(job.jobType)
-            }
-        })
-        setJobTypes(types)
-    }
 
     const getNumberOfJobsPerJobType = (jobType): number => {
         let number = 0;
@@ -108,10 +113,10 @@ export function Dashboard() {
             <div className="row">
                 <div className="col-md-4">
                     <h2>Number of job listings per type of job</h2>
-                    <PieChart
+                    {jobTypes.length > 0 && <PieChart
                         data={jobTypes.map((jobType) => (getNumberOfJobsPerJobType(jobType)))}
                         labels={jobTypes.map((jobType) => (JobTypes[jobType]))}
-                    />
+                    />}
                 </div>
                 <div className="col-md-4">
                     <h2>Number of job applications per type of job</h2>
@@ -128,16 +133,6 @@ export function Dashboard() {
                     />
                 </div>
             </div>
-            {/*<div className="row mt-10">*/}
-            {/*    <div className="col-md-6">*/}
-            {/*        <h1>Job portal users</h1>*/}
-            {/*        <DoughnutChart data={[users, employers]} labels={['Job seekers', 'Employers']} />*/}
-            {/*    </div>*/}
-            {/*    <div className="col-md-6">*/}
-            {/*        <h1>All Job Radar users</h1>*/}
-            {/*        <DoughnutChart data={[users, employers, admins]} labels={['Job seekers', 'Employers', 'Admins']} />*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </div>
     );
 }
