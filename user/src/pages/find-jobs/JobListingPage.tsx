@@ -71,6 +71,11 @@ const JobListingPage = () => {
         setJobs(jobs);
     };
 
+    const searchJobs = async (search: string, filter: string) => {
+        const jobs = await getJobs(search, filter);
+        setJobs(jobs);
+    };
+
     const fetchUsersSavedJobs = async () => {
         try {
             const results = await getUsersSavedJobs(`${currentUser.id}`);
