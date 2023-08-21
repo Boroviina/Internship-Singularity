@@ -63,7 +63,7 @@ const JobListingPage = () => {
     }, [jobs, filters, sortingFunction]);
 
     useEffect(() => {
-        fetchJobs(/*title, location*/);
+        fetchJobs(/*paramTitle, paramLocation*/);
         fetchSavedJobs();
     }, []);
 
