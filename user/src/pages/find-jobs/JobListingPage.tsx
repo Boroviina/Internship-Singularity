@@ -58,9 +58,13 @@ const JobListingPage = () => {
     }, [jobs, filters, sortingFunction]);
 
     useEffect(() => {
+        fetchAllJobsAndSavedJobs();
+    }, []);
+
+    const fetchAllJobsAndSavedJobs = () => {
         fetchJobs();
         fetchUsersSavedJobs();
-    }, []);
+    };
 
     const fetchJobs = async () => {
         const jobs = await getJobs();
@@ -126,7 +130,8 @@ const JobListingPage = () => {
                                 {filteredJobs ? filteredJobs.map
                                     (job => (<JobListingCard job={job}
                                                              showDetails={handleOpen}
-                                                             key={job.id}/>))
+                                                             key={job.id}
+                                                             update={fetchAllJobsAndSavedJobs}/>))
                                     : <div>No jobs found.</div>
                                 }
                             </div>
@@ -137,7 +142,7 @@ const JobListingPage = () => {
                 </div>
             </main>
 
-            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={() => {fetchAllJobsAndSavedJobs()}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
         </>
     );
 }
