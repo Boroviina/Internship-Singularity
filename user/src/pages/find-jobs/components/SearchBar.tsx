@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 
-const SearchBar = ({search}) => {
+const SearchBar = ({onSearch}) => {
     const [title, setTitle] = useState("");
     const [location, setLocation] = useState("");
 
     const onTitleChanged = (e) => setTitle(e.target.value);
     const onLocationChanged = (e) => setLocation(e.target.value);
 
-    const submit = () => search(title, location);
+    const submit = () => onSearch(title, location);
 
     return (
         <div className="input-group input-group-lg d-flex flex-column flex-sm-row flex-nowrap mt-4">
