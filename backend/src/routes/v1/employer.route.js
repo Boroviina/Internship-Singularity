@@ -11,6 +11,7 @@ router.route('/')
 
 router.route('/:employerId')
   .get(employerController.getEmployer)
+  .patch(auth('manageEmployers'), validate(employerValidation.updateEmployer), employerController.updateEmployer)
   .delete(auth('manageEmployers'), validate(employerValidation.deleteEmployer), employerController.deleteEmployer);
 
 module.exports = router;

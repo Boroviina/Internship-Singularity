@@ -12,18 +12,19 @@ export const JobListings = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchJobListings = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const jobs = await getJobs();
-                setJobListings(jobs);
-            } catch(error) {
-                setError("Error while getting job listings.");
-            }
-            setLoading(false);
+
+    const fetchJobListings = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const jobs = await getJobs();
+            setJobListings(jobs);
+        } catch(error) {
+            setError("Error while getting job listings.");
         }
+        setLoading(false);
+    }
+    useEffect(() => {
         fetchJobListings();
     }, []);
 
@@ -34,6 +35,7 @@ export const JobListings = () => {
             <JobListingItem
                 key={jobListing.id}
                 item={jobListing}
+                update={fetchJobListings}
             />
         ));
         jobListingsContent = <div>{currentJobListings}</div>;

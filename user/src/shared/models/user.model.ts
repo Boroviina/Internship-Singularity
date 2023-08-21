@@ -6,7 +6,7 @@ export class UserModel extends BaseModel {
   name: string;
   email: string;
   role: string;
-  isEmailVerified: string;
+  isEmailVerified: boolean;
   occupation?: string;
   phone?: string;
   language?: Language;

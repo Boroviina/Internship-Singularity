@@ -23,6 +23,8 @@ import {
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     return jobs.filter(job => job.matches(filters));
 };
+import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
+import {useAuth} from "../../modules/auth";
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState<JobListing[]>([]);
@@ -32,6 +34,8 @@ const JobListingPage = () => {
     const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [numOfJobs, setNumOfJobs] = useState(0);
     const [sortingFunction, setSortingFunction] = useState("Relevance");
+    const [savedJobs, setSavedJobs] = useState<string[]>([]);
+    const {currentUser} = useAuth();
 
     const handleClose = () => setShowDetails(false);
     const handleOpen = (job: JobListing) => {
@@ -55,12 +59,26 @@ const JobListingPage = () => {
 
     useEffect(() => {
         fetchJobs();
+        fetchUsersSavedJobs();
     }, []);
 
     const fetchJobs = async () => {
         const jobs = await getJobs();
         setJobs(jobs);
     };
+
+    const fetchUsersSavedJobs = async () => {
+        try {
+            const results = await getUsersSavedJobs(`${currentUser.id}`);
+            const savedjobs = [];
+            if(results || results.length > 0) {
+                results.map(savedJob => savedjobs.push(savedJob.job.id))
+            }
+            setSavedJobs(savedjobs)
+        } catch(error) {
+            console.log(error)
+        }
+    }
 
     const handleFilterChanged = (changedFilter: any[], name: string) => {
         const newFilters = new JobFilters();
@@ -119,7 +137,7 @@ const JobListingPage = () => {
                 </div>
             </main>
 
-            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}/>}
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
         </>
     );
 }

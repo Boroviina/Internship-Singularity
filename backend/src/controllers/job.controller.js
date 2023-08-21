@@ -9,9 +9,9 @@ const mongoose = require("mongoose");
 
 const createJob = catchAsync(async (req, res) => {
   const session = await mongoose.startSession();
-  // because if some data is incorrect, we don't want requirements to get created
-  // as a side effect
   session.startTransaction();
+  // because if some data is incorrect, we dont want requirements to get created
+  // as a side effect
   try {
     const {requirements, ...jobData} = req.body;
     const requirementsInstance = await requirementsService.createRequirements(requirements);
@@ -32,15 +32,14 @@ const createJob = catchAsync(async (req, res) => {
 });
 
 const getJobs = catchAsync(async (req, res) => {
-  // specialization, remote, employment type, experience level, education level
-  const filter = pick(req.query, ['title', 'location', 'employmentType', 'remote']);
+  const filter = pick(req.query, ['title', 'location', 'employmentType', 'remote', 'appDeadline', 'employer']);
   const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate']);
   const result = await jobService.queryJobs(filter, options);
   res.send(result);
 });
 
 const getJob = catchAsync(async (req, res) => {
-  const job = await jobService.getJobById(req.params.jobId);
+  const job = await jobService.getJobById(req.params.jobId, req.query.populate);
   if (!job) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Job not found');
   }

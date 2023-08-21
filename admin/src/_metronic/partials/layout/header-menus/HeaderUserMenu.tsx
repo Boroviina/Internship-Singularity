@@ -33,6 +33,12 @@ const HeaderUserMenu: FC = () => {
             <div className='separator my-2'></div>
 
             <div className='menu-item px-5'>
+                <Link to={`/users/${currentUser.id}`} className='menu-link px-5'>
+                    My profile
+                </Link>
+            </div>
+
+            <div className='menu-item px-5'>
                 <a onClick={logout} className='menu-link px-5'>
                     Sign Out
                 </a>
