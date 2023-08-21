@@ -21,7 +21,7 @@ export function ApplicationsReview() {
             try{
                 const job= await getJob(id);
                 const jobApps=await getApplicationsPerJob(id);
-                setJobTitle(job.jobTitle);
+                setJobTitle(job.title);
                 setJobApplications(jobApps);
             }catch (error){
                 setError("Error while trying to review applications");

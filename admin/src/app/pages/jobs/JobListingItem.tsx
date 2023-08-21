@@ -28,7 +28,7 @@ export const JobListingItem: React.FC<JobListingItemProps> = (props) => {
             <div className={`card-header d-flex `} >
                 <div className={'d-flex flex-column flex-md-row justify-context-md-start align-items-md-center align-items-start'}>
                     <JobDeactivation date={props.item.appDeadline}/>
-                    <h3 className="card-title fw-bolder text-dark mx-4">{props.item.jobTitle}</h3>
+                    <h3 className="card-title fw-bolder text-dark mx-4">{props.item.title}</h3>
                 </div>
                 <div className={'d-none d-xl-flex align-items-center'}>
 

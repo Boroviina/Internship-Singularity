@@ -10,6 +10,8 @@ import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
+import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
+import {useAuth} from "../../modules/auth";
 import {
     Education,
     EmploymentType,
@@ -23,8 +25,6 @@ import {
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     return jobs.filter(job => job.matches(filters));
 };
-import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
-import {useAuth} from "../../modules/auth";
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState<JobListing[]>([]);

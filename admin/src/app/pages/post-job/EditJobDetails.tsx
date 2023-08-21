@@ -35,7 +35,7 @@ export function EditJobDetails() {
 
     const formik = useFormik({
         initialValues: {
-            jobTitle: existingJobDetails?.jobTitle || '',
+            jobTitle: existingJobDetails?.title || '',
             requirements: {
                 specialization: existingJobDetails?.requirements?.specialization,
                 experience: existingJobDetails?.requirements?.experience,
@@ -121,6 +121,6 @@ export function EditJobDetails() {
 
 
     return <>
-        <JobDetailsForm formik={formik} title={existingJobDetails.jobTitle} loading={loading}/>
+        <JobDetailsForm formik={formik} title={existingJobDetails.title} loading={loading}/>
     </>
 }

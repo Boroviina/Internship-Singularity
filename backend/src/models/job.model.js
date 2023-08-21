@@ -6,7 +6,7 @@ const {toJSON, paginate} = require('./plugins');
 
 const jobSchema = mongoose.Schema(
     {
-        jobTitle: {
+        title: {
             type: String,
             required: [true, 'The field must be filled'],
             trim: true,
