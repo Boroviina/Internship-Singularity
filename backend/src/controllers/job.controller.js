@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const {jobService, requirementsService, employerService} = require('../services');
+const {jobService, requirementsService} = require('../services');
 const {Employer} = require("../models");
 const mongoose = require("mongoose");
 
@@ -35,17 +35,20 @@ const getJobs = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['title', 'appDeadline', 'employer', 'jobType']);
   const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate']);
 
+  if(req.query.status === 'active') {
+    filter.appDeadline = {$lt: new Date()}
+  } else if(req.query.status === 'expired') {
+    filter.appDeadline = {$gt: new Date()}
+  }
+
   if(req.query.startDate) {
-    let dateRange = {$gte: req.query.startDate}
-    filter.appDeadline = dateRange
+    filter.createdAt = {$gte: req.query.startDate}
   }
   if(req.query.endDate) {
-    let dateRange = {$lt: req.query.endDate}
-    filter.appDeadline = dateRange
+    filter.createdAt = {$lt: req.query.endDate}
   }
   if(req.query.startDate && req.query.endDate) {
-    const dateRange = {$gte: req.query.startDate, $lt: req.query.endDate}
-    filter.appDeadline = dateRange
+    filter.createdAt = {$gte: req.query.startDate, $lt: req.query.endDate}
   }
 
   const result = await jobService.queryJobs(filter, options);

@@ -1,53 +1,24 @@
 import React, {useEffect, useState} from "react";
 import {getFilteredJobsWithPages} from "../../../shared/services/job.service";
 import {JobListingsCardItem} from "./JobListingsCardItem";
-// import {getFilteredUsersWithPages} from "../../shared/services/user.service";
-// import {UserItem} from "./UserItem";
-// import CustomModal from "../../shared/components/CustomModal";
 import {Pagination} from "../../../shared/components/Pagination";
 import {FilterJobListings} from "./FilterJobListings";
 import {CustomDropdown} from "../../../shared/components/CustomDropdown";
 import {DatePickerForJobListings} from "./DatePickerForJobListings";
-// import {FilterUsers} from "./FilterUsers";
-// import {AddUser} from "./AddUser";
 
 export const JobListingsCard = () => {
     const [jobs, setJobs] = useState([]);
-    // const [newUser, setNewUser] = useState(null);
-    const [showModal, setShowModal] = useState(false);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [jobTypeFilter, setJobTypeFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
-    const [limit, setLimit] = useState(5);
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     const fetchJobs = async () => {
         try {
-            const response = await getFilteredJobsWithPages(page, {jobType: jobTypeFilter}, limit);
-            let {results, totalPages, totalResults} = response;
-
-            if (startDate && endDate) {
-                results = results.filter(job => {
-                    const jobDate = new Date(job.createdAt);
-                    return jobDate >= startDate && jobDate <= endDate;
-                });
-                totalResults = results.length;
-                totalPages = Math.ceil(totalResults / limit);
-            }
-
-            if(statusFilter === 'active') {
-                const jobListings = results.filter(job => (new Date(job.appDeadline)) < new Date())
-                results = jobListings
-                totalResults -= jobListings.length;
-                totalPages = Math.ceil(totalResults/limit)
-            } else if(statusFilter === 'expired') {
-                const jobListings = results.filter(job => (new Date(job.appDeadline)) >= new Date())
-                results = jobListings
-                totalResults -= jobListings.length;
-                totalPages = Math.ceil(totalResults/limit)
-            }
+            const response = await getFilteredJobsWithPages(page, {jobType: jobTypeFilter, status: statusFilter, startDate: startDate, endDate: endDate});
+            const {results, totalPages} = response;
             setJobs(results);
             setTotalPages(totalPages);
         } catch(error) {
@@ -57,18 +28,10 @@ export const JobListingsCard = () => {
 
     useEffect(() => {
         fetchJobs()
-    }, [page, jobTypeFilter, statusFilter]); //add filter
-
-    const hideModal = () => {
-        setShowModal(false);
-    }
-    const openModal = () => {
-        setShowModal(true);
-    };
+    }, [page, jobTypeFilter, statusFilter, startDate, endDate]);
 
     return (
         <>
-
             <div className="d-flex flex-row justify-content-between align-items-center mb-2">
                 <div className="fs-1 d-none d-sm-block">Job listings</div>
                 <div className="d-flex flex-row">
@@ -90,15 +53,13 @@ export const JobListingsCard = () => {
                         <thead>
                         <tr className="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
                             <th>Job title</th>
-                            {/*<th>ID</th>*/}
                             <th>Job type</th>
                             <th>Created at</th>
                             <th>Status</th>
-                            {/*<th>Actions</th>*/}
                         </tr>
                         </thead>
                         <tbody>
-                        {jobs && jobs.map(job => (<JobListingsCardItem key={job.id} job={job} update={fetchJobs}></JobListingsCardItem>))}
+                        {jobs && jobs.map(job => (<JobListingsCardItem key={job.id} job={job}></JobListingsCardItem>))}
                         </tbody>
                     </table>
                     <Pagination
@@ -108,15 +69,6 @@ export const JobListingsCard = () => {
                     />
                 </div>
             </div>
-
-
-            {/*<CustomModal*/}
-            {/*    title="Add user"*/}
-            {/*    show={showModal}*/}
-            {/*    onHide={hideModal}*/}
-            {/*>*/}
-            {/*    <AddUser setNewUser={setNewUser} hideModal={hideModal}/>*/}
-            {/*</CustomModal>*/}
         </>
     );
 }

@@ -61,7 +61,6 @@ export const DatePickerForJobListings: React.FC<DatePickerForJobListingsProps> =
                 name="startDate"
                 id="startDate"
                 type="date"
-                required={true}
             />
             <Input
                 label="End date"
@@ -71,7 +70,6 @@ export const DatePickerForJobListings: React.FC<DatePickerForJobListingsProps> =
                 name="endDate"
                 id="endDate"
                 type="date"
-                required={true}
             />
 
             <div className='text-center mt-4 d-grid'>
