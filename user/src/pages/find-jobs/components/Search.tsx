@@ -14,7 +14,13 @@ const Search = ({search}) => {
     };
 
     const submit = () => {
-        const searchString = "&searchTitle=" + title + "&searchLocation=" + location;
+        let searchString = "";
+        if(title) {
+            searchString += "&searchTitle=" + title;
+        }
+        if(location) {
+            searchString += "&searchLocation=" + location;
+        }
         search(searchString);
     };
 

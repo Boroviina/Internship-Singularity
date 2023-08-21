@@ -23,18 +23,23 @@ import {
 } from "./components/filter-components/JobFilters";
 
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
-    return jobs.filter(job => job.matches(filters));
+    if(jobs != null) {
+        return jobs.filter(job => job.matches(filters));
+    } else {
+        return null;
+    }
 };
 
 const JobListingPage = () => {
     const [jobs, setJobs] = useState<JobListing[]>([]);
-    const [shownJob, setShownJob] = useState<JobListing>(null);
-    const [showDetails, setShowDetails] = useState(false);
     const [filters, setFilters] = useState<JobFilters>(new JobFilters());
     const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [numOfJobs, setNumOfJobs] = useState(0);
     const [sortingFunction, setSortingFunction] = useState("Relevance");
     const [savedJobs, setSavedJobs] = useState<string[]>([]);
+
+    const [showDetails, setShowDetails] = useState(false);
+    const [shownJob, setShownJob] = useState<JobListing>(null);
     const {currentUser} = useAuth();
 
     const handleClose = () => setShowDetails(false);
@@ -63,7 +68,7 @@ const JobListingPage = () => {
 
     const fetchAllJobsAndSavedJobs = () => {
         fetchJobs();
-        fetchUsersSavedJobs();
+        fetchSavedJobs();
     };
 
     const fetchJobs = async () => {
@@ -72,12 +77,11 @@ const JobListingPage = () => {
     };
 
     const searchJobs = async (search: string) => {
-        // TODO add current filters
         const jobs = await getJobs(search);
         setJobs(jobs);
     };
 
-    const fetchUsersSavedJobs = async () => {
+    const fetchSavedJobs = async () => {
         try {
             const results = await getUsersSavedJobs(`${currentUser.id}`);
             const savedjobs = [];
@@ -96,6 +100,13 @@ const JobListingPage = () => {
         newFilters[name] = changedFilter;
         setFilters(newFilters);
     };
+
+    const jobsContent = (filteredJobs && filteredJobs.length > 0) ? filteredJobs.map
+        (job => (<JobListingCard job={job}
+                                 showDetails={handleOpen}
+                                 key={job.id}
+                                 update={fetchAllJobsAndSavedJobs}/>))
+        : <h3 className="text-label ms-1">No jobs found.</h3>;
 
     return (
         <>
@@ -133,13 +144,7 @@ const JobListingPage = () => {
                                 <SortBy categories={sortByCategories} sortBy={handleSort}/>
                             </div>
                             <div className="jobs my-2">
-                                {filteredJobs ? filteredJobs.map
-                                    (job => (<JobListingCard job={job}
-                                                             showDetails={handleOpen}
-                                                             key={job.id}
-                                                             update={fetchAllJobsAndSavedJobs}/>))
-                                    : <div>No jobs found.</div>
-                                }
+                                {jobsContent}
                             </div>
                             <Pagination/>
                         </section>
