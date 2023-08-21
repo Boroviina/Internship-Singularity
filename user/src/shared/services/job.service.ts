@@ -4,7 +4,14 @@ import {JobListing} from "../models/job-listing.model";
 const JOBS_ENDPOINT = '/jobs';
 
  const getJobs = (search?: string, filter?: string): Promise<JobListing[] | null> => {
-     return ApiClient.get(JOBS_ENDPOINT, '&populate=employer,requirements' + search + filter)
+     let query: string = '&populate=employer,requirements';
+     if(search) {
+         query += search;
+     }
+     if(filter) {
+         query += filter;
+     }
+     return ApiClient.get(JOBS_ENDPOINT, query)
          .then(response => response.data)
          .then(data => {
              return data.results.map(job => new JobListing(job));

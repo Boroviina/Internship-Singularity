@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
-const Search = () => {
+
+const Search = ({search}) => {
     const [title, setTitle] = useState("");
     const [location, setLocation] = useState("");
 
@@ -10,6 +11,11 @@ const Search = () => {
 
     const onLocationChanged = (e) => {
         setLocation(e.target.value);
+    };
+
+    const submit = () => {
+        const searchString = "&searchTitle=" + title + "&searchLocation=" + location;
+        search(searchString);
     };
 
     return (
@@ -28,7 +34,7 @@ const Search = () => {
                            placeholder="Address, city or country" aria-label="Location search" value={location} onChange={onLocationChanged}/>
                     <label htmlFor="locationSearch">Country, city or region</label>
                 </div>
-                <button className={'btn btn-pink d-inline-block overflow-visible'}>Search</button>
+                <button className={'btn btn-pink d-inline-block overflow-visible'} onClick={submit}>Search</button>
             </div>
         </div>
     );

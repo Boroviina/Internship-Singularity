@@ -71,8 +71,9 @@ const JobListingPage = () => {
         setJobs(jobs);
     };
 
-    const searchJobs = async (search: string, filter: string) => {
-        const jobs = await getJobs(search, filter);
+    const searchJobs = async (search: string) => {
+        // TODO add current filters
+        const jobs = await getJobs(search);
         setJobs(jobs);
     };
 
@@ -101,7 +102,7 @@ const JobListingPage = () => {
 
             <header className={`${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
-                    <Search/>
+                    <Search search={searchJobs}/>
                 </div>
             </header>
 
