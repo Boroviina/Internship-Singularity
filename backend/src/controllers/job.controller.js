@@ -34,6 +34,20 @@ const createJob = catchAsync(async (req, res) => {
 const getJobs = catchAsync(async (req, res) => {
   const filter = pick(req.query, ['title', 'appDeadline', 'employer', 'jobType']);
   const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate']);
+
+  if(req.query.startDate) {
+    let dateRange = {$gte: req.query.startDate}
+    filter.appDeadline = dateRange
+  }
+  if(req.query.endDate) {
+    let dateRange = {$lt: req.query.endDate}
+    filter.appDeadline = dateRange
+  }
+  if(req.query.startDate && req.query.endDate) {
+    const dateRange = {$gte: req.query.startDate, $lt: req.query.endDate}
+    filter.appDeadline = dateRange
+  }
+
   const result = await jobService.queryJobs(filter, options);
   res.send(result);
 });
