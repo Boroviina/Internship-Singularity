@@ -24,7 +24,7 @@ const createJob = catchAsync(async (req, res) => {
   } catch (error) {
     await session.abortTransaction();
     console.error('Error creating job:', error);
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({error: 'Error creating job'});
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({error: 'Error creating job' + error});
   } finally {
     session.endSession();
   }
