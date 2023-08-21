@@ -25,9 +25,12 @@ const createJob = async (job) => {
  * @param {number} [options.page] -Current page (default = 1)
  * @return {Promise<QueryResult>}
  */
-const queryJobs = async (filter, options, search) => {
-    if(search) {
-      filter.jobTitle = {$regex: search, $options: 'i'};
+const queryJobs = async (filter, options, searchTitle, searchLocation) => {
+    if(searchTitle) {
+      filter.title = {$regex: searchTitle, $options: 'i'};
+    }
+    if(searchLocation) {
+      filter.location = {$regex: searchLocation, $options: 'i'};
     }
     const jobs = await Job.paginate(filter, options);
     return jobs;
