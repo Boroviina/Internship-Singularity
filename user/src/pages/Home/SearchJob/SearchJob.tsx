@@ -4,6 +4,7 @@ import styles from '../ResponsiveControl.module.css'
 import btnStyle from '../GeneralButton.module.css'
 import {useAuth} from "../../../modules/auth";
 import {useNavigate} from "react-router-dom";
+import Search from "../../find-jobs/components/Search";
 
 export function SearchJob() {
     const {currentUser, logout} = useAuth()
@@ -21,6 +22,7 @@ export function SearchJob() {
                 <div className={'col'}>
                     <div className={' row'}>
                         <div className={'col-xl-8'}>
+                            <Search search={() => {}}/>
                             <form action="" className={'input-group d-flex flex-column flex-md-row mt-5'}>
                                 <input type="text" placeholder={'Job title or keyword'} tabIndex={0}
                                        className={'form-control w-auto my-1  mt-md-0 col-md-4 col-12 '}/>

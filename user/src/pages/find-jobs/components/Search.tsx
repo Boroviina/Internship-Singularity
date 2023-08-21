@@ -5,24 +5,10 @@ const Search = ({search}) => {
     const [title, setTitle] = useState("");
     const [location, setLocation] = useState("");
 
-    const onTitleChanged = (e) => {
-        setTitle(e.target.value);
-    };
+    const onTitleChanged = (e) => setTitle(e.target.value);
+    const onLocationChanged = (e) => setLocation(e.target.value);
 
-    const onLocationChanged = (e) => {
-        setLocation(e.target.value);
-    };
-
-    const submit = () => {
-        let searchString = "";
-        if(title) {
-            searchString += "&searchTitle=" + title;
-        }
-        if(location) {
-            searchString += "&searchLocation=" + location;
-        }
-        search(searchString);
-    };
+    const submit = () => search(title, location);
 
     return (
         <div className="container">

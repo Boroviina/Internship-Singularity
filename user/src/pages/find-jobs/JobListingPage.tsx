@@ -63,21 +63,12 @@ const JobListingPage = () => {
     }, [jobs, filters, sortingFunction]);
 
     useEffect(() => {
-        fetchAllJobsAndSavedJobs();
+        fetchJobs(/*title, location*/);
+        fetchSavedJobs();
     }, []);
 
-    const fetchAllJobsAndSavedJobs = () => {
-        fetchJobs();
-        fetchSavedJobs();
-    };
-
-    const fetchJobs = async () => {
-        const jobs = await getJobs();
-        setJobs(jobs);
-    };
-
-    const searchJobs = async (search: string) => {
-        const jobs = await getJobs(search);
+    const fetchJobs = async (title?: string, location?: string) => {
+        const jobs = await getJobs(title, location);
         setJobs(jobs);
     };
 
@@ -105,7 +96,7 @@ const JobListingPage = () => {
         (job => (<JobListingCard job={job}
                                  showDetails={handleOpen}
                                  key={job.id}
-                                 update={fetchAllJobsAndSavedJobs}/>))
+                                 update={() => {fetchJobs();fetchSavedJobs();}}/>))
         : <h3 className="text-label ms-1">No jobs found.</h3>;
 
     return (
@@ -113,7 +104,7 @@ const JobListingPage = () => {
 
             <header className={`${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
-                    <Search search={searchJobs}/>
+                    <Search search={fetchJobs}/>
                 </div>
             </header>
 
@@ -153,7 +144,8 @@ const JobListingPage = () => {
                 </div>
             </main>
 
-            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={() => {fetchAllJobsAndSavedJobs()}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}
+                                       update={() => {fetchJobs();fetchSavedJobs();}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
         </>
     );
 }
