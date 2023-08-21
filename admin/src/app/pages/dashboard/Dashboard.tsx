@@ -6,6 +6,7 @@ import {getJobsWithoutLimit} from "../../shared/services/job.service";
 import {getJobApplicationsPerJob} from "../../shared/services/job-application.service";
 import {getSavedJobsPerJob} from "../../shared/services/api-client/job-saved.service";
 import {JobTypes} from "../../shared/enums/job-types.enum";
+import {JobListingsCard} from "./job-listings/JobListingsCard";
 
 export function Dashboard() {
     const [jobs, setJobs] = useState([]);
@@ -112,6 +113,9 @@ export function Dashboard() {
 
     return (
         <div>
+            <div className="row">
+                <JobListingsCard/>
+            </div>
             <div className="row mt-10">
                 <div className="col-md-4">
                     <h2>Number of job listings per type of job</h2>

@@ -20,6 +20,17 @@ const getJobsWithoutLimit = (): Promise<JobResponse | null> => {
         .then(response => new JobResponse(response.data))
 }
 
+const getFilteredJobsWithPages = (page: number, filter, limit = 5): Promise<JobResponse | null> => {
+    let query = '';
+    for (const key in filter) {
+        if (filter[key] !== '') {
+            query += `&${key}=${filter[key]}`
+        }
+    }
+    return ApiClient.get(JOBS_ENDPOINT, `limit=${limit}&page=${page}${query}`)
+        .then(response => new JobResponse(response.data))
+}
+
 const getJob = (jobId: string): Promise<JobListing | null> => {
     return ApiClient.get(`${JOBS_ENDPOINT}/${jobId}`, `job=${jobId}&populate=requirements`).then(response => response.data)
 }
@@ -34,5 +45,5 @@ const changeJob = (jobId: string,  updatedJob: object): Promise<JobListing | nul
 const removeJob = (jobId): Promise<JobListing | null>  => {
     return ApiClient.remove(`${JOBS_ENDPOINT}/${jobId}`).then(response => response.data);
 }
-export {getJobs,getJob, getJobsByEmployerId, getJobsWithoutLimit, createJob, changeJob, removeJob}
+export {getJobs,getJob, getJobsByEmployerId, getJobsWithoutLimit, getFilteredJobsWithPages, createJob, changeJob, removeJob}
 
