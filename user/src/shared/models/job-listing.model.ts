@@ -55,3 +55,17 @@ export class JobListing extends BaseModel {
     }
 }
 
+export class JobResponse extends BaseModel {
+    results: JobListing[];
+    page: number;
+    limit: number;
+    totalPages: number;
+    totalResults: number;
+
+    constructor(attributes?: any) {
+        super();
+        this.setAttributes(attributes);
+        this.results = attributes.results.map(job => new JobListing(job));
+    }
+}
+

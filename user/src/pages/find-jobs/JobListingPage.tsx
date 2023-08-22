@@ -6,7 +6,7 @@ import Search from "./components/Search";
 import SortBy, {getSortedBySalaryDescending} from "./components/SortBy";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
-import {JobListing} from "../../shared/models/job-listing.model";
+import {JobListing, JobResponse} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
 import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
@@ -22,7 +22,6 @@ import {
 } from "./components/filter-components/JobFilters";
 import {useLocation} from "react-router-dom";
 import {Pagination} from "./components/Pagination";
-
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     if(jobs != null) {
         return jobs.filter(job => job.matches(filters));
@@ -49,6 +48,7 @@ const JobListingPage = () => {
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const {currentUser} = useAuth();
 
+    const [response, setResponse] = useState<JobResponse>(null);
     const [currentPage, setCurrentPage] = useState(1);
 
     const handleClose = () => setShowDetails(false);
@@ -77,8 +77,10 @@ const JobListingPage = () => {
     }, []);
 
     const fetchJobs = async (title?: string, location?: string) => {
-        const jobs = await getJobs(title, location);
-        setJobs(jobs);
+        const jobResponse = await getJobs(title, location);
+        console.log(jobResponse);
+        setResponse(jobResponse);
+        setJobs(jobResponse.results);
     };
 
     const fetchSavedJobs = async () => {
@@ -139,14 +141,14 @@ const JobListingPage = () => {
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
                             <div className="d-flex align-items-center justify-content-between px-2">
                                 <div className="text-muted fs-5">
-                                    Results: {numOfJobs}
+                                    Results: {response ? response.totalResults : 0}
                                 </div>
                                 <SortBy categories={sortByCategories} sortBy={handleSort}/>
                             </div>
                             <div className="jobs my-2">
                                 {jobsContent}
                             </div>
-                            <Pagination page={currentPage} totalPages={10} onPageChange={(p) => {setCurrentPage(p)}} />
+                            <Pagination page={currentPage} totalPages={response ? response.totalPages : 0} onPageChange={(p) => {setCurrentPage(p)}} />
                         </section>
 
                     </div>

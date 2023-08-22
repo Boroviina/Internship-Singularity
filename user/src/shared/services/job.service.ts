@@ -1,19 +1,20 @@
  import ApiClient from "./api-client/api-client";
-import {JobListing} from "../models/job-listing.model";
+import {JobListing, JobResponse} from "../models/job-listing.model";
 
 const JOBS_ENDPOINT = '/jobs';
 
- const getJobs = (title?: string, location?: string, filter?: string): Promise<JobListing[] | null> => {
+ const getJobs = (title?: string, location?: string, filter?: string): Promise<JobResponse | null> => {
      let query: string = '&populate=employer,requirements';
      if(title) {query += "&searchTitle=" + title;}
      if(location) {query += "&searchLocation=" + location;}
      return ApiClient.get(JOBS_ENDPOINT, query)
          .then(response => response.data)
          .then(data => {
-             return data.results.map(job => new JobListing(job));
+             return new JobResponse(data);
          })
          .catch((err) => {
              console.log(err);
+             return null;
          });
  };
 
