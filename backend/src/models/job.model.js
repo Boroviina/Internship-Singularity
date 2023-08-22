@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const {toJSON, paginate} = require('./plugins');
+const {jobTypes} = require('./../config/job-types')
 
 
 const jobSchema = mongoose.Schema(
@@ -11,6 +12,10 @@ const jobSchema = mongoose.Schema(
             required: [true, 'The field must be filled'],
             trim: true,
             maxLength: [100, 'The field must have less than or equal to 100 characters']
+        },
+        jobType: {
+          type: String,
+          enum: jobTypes,
         },
         employer: {
             required: [true, 'The field must be filled'],

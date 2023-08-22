@@ -16,18 +16,7 @@ const getSavedJob = (savedJobId: string): Promise<SavedJob | null> => {
 }
 
 const getUsersSavedJobs = (userId: string): Promise<SavedJob[] | null> => {
-    return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}&populate=job,job.requirements`)
-        .then(response => response.data)
-        .then(data => data.results.map(savedJob => new SavedJob(savedJob)))
-}
-
-const getUsersSavedJobsWithEmployer = (userId: string): Promise<SavedJob[] | null> => {
-    return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}&populate=job,job.employer`)
-        .then(response => response.data)
-        .then(data => data.results.map(savedJob => new SavedJob(savedJob)))
-}
-const getUsersSavedJobsWithRequirements = (userId: string): Promise<SavedJob[] | null> => {
-    return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}&populate=job,job.requirements`)
+    return ApiClient.get(SAVED_JOB_ENDPOINT, `user=${userId}&populate=job.requirements,job.employer`)
         .then(response => response.data)
         .then(data => data.results.map(savedJob => new SavedJob(savedJob)))
 }
@@ -43,4 +32,4 @@ const deleteSavedJob = (savedJobId: string): Promise<any> => {
         .then(response => response.data)
 }
 
-export {createSavedJob, getSavedJob, getUsersSavedJobs, getUsersSavedJobsByJobId, deleteSavedJob, getUsersSavedJobsWithEmployer, getUsersSavedJobsWithRequirements}
+export {createSavedJob, getSavedJob, getUsersSavedJobs, getUsersSavedJobsByJobId, deleteSavedJob}

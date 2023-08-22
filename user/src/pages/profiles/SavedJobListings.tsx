@@ -3,11 +3,10 @@ import {useNavigate} from "react-router-dom";
 import {HeaderCard} from "../../shared/components/HeaderCard";
 import {CustomCard} from "../../shared/components/layout/CustomCard";
 import {useAuth} from "../../modules/auth";
-import {getUsersSavedJobsWithEmployer, getUsersSavedJobsWithRequirements} from "../../shared/services/job-saved.service";
+import {getUsersSavedJobs,} from "../../shared/services/job-saved.service";
 import {JobListing} from "../../shared/models/job-listing.model";
 import JobListingCard from "../find-jobs/JobListingCard";
 import DetailsModal from "../find-jobs/DetailsModal";
-import {RequirementsModel} from "../../shared/models/requirements.model";
 
 export const SavedJobListings = () => {
     const navigate = useNavigate();
@@ -24,9 +23,7 @@ export const SavedJobListings = () => {
 
     const fetchSavedJobs = async () => {
         try {
-            const savedjobs = await getUsersSavedJobsWithEmployer(`${currentUser.id}`);
-            const savedJobsWithReq = await getUsersSavedJobsWithRequirements(`${currentUser.id}`);
-            savedjobs.map((savedJob, index) => savedJob.job.requirements = new RequirementsModel(savedJobsWithReq[index].job.requirements));
+            const savedjobs = await getUsersSavedJobs(`${currentUser.id}`);
             setSavedJobs(savedjobs);
         } catch (error) {
             navigate('/error/500');

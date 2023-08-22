@@ -32,12 +32,29 @@ const createJob = catchAsync(async (req, res) => {
 });
 
 const getJobs = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['title', 'location', 'employmentType', 'remote', 'appDeadline', 'employer']);
+  const filter = pick(req.query, ['title', 'location', 'employmentType', 'remote', 'appDeadline', 'employer', 'jobType']);
   const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate']);
   const searchTitle = req.query.searchTitle;
   const searchLocation = req.query.searchLocation;
+
+  if(req.query.status === 'active') {
+    filter.appDeadline = {$lt: new Date()}
+  } else if(req.query.status === 'expired') {
+    filter.appDeadline = {$gt: new Date()}
+  }
+
+  if(req.query.startDate) {
+    filter.createdAt = {$gte: req.query.startDate}
+  }
+  if(req.query.endDate) {
+    filter.createdAt = {$lt: req.query.endDate}
+  }
+  if(req.query.startDate && req.query.endDate) {
+    filter.createdAt = {$gte: req.query.startDate, $lt: req.query.endDate}
+  }
+
   const result = await jobService.queryJobs(filter, options, searchTitle, searchLocation);
-  res.send(result);
+  res.send(result);g
 });
 
 const getJob = catchAsync(async (req, res) => {

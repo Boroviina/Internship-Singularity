@@ -50,7 +50,7 @@ export const Profile = () => {
 
     useEffect(() => {
         fetchUser()
-    }, []);
+    }, [userId]);
 
     const confirmRemovingUser = async () => {
         setLoading(true)

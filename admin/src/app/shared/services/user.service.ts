@@ -10,6 +10,21 @@ export const getUsers = (): Promise<UserModel[] | null> => {
         .then(data => data.results.map(user => new UserModel(user)))
 }
 
+export const getNumberOfEmployers = (): Promise<number | null> => {
+    return ApiClient.get(USERS_ENDPOINT, 'role=employer')
+        .then(response => response.data.totalResults)
+}
+
+export const getNumberOfUsers = (): Promise<number | null> => {
+    return ApiClient.get(USERS_ENDPOINT, 'role=user')
+        .then(response => response.data.totalResults)
+}
+
+export const getNumberOfAdmins = (): Promise<number | null> => {
+    return ApiClient.get(USERS_ENDPOINT, 'role=admin')
+        .then(response => response.data.totalResults)
+}
+
 export const getUsersWithPages = (page: number): Promise<UsersResponse | null> => {
     return ApiClient.get(USERS_ENDPOINT, `page=${page}`)
         .then(response => new UsersResponse(response.data))

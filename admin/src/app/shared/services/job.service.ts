@@ -1,5 +1,5 @@
 import ApiClient from "./api-client/api-client";
-import {JobListing} from "../models/job-listing.model";
+import {JobListing, JobResponse} from "../models/job-listing.model";
 
 const JOBS_ENDPOINT = '/jobs';
 
@@ -13,6 +13,22 @@ const getJobsByEmployerId = (employerId: string): Promise<JobListing[] | null> =
     return ApiClient.get(JOBS_ENDPOINT, `employer=${employerId}`)
         .then(response => response.data)
         .then(data => data.results.map(job => new JobListing(job)))
+}
+
+const getJobsWithoutLimit = (): Promise<JobResponse | null> => {
+    return ApiClient.get(JOBS_ENDPOINT, `limit=0&populate=requirements,employer`)
+        .then(response => new JobResponse(response.data))
+}
+
+const getFilteredJobsWithPages = (page: number, filter, limit = 5): Promise<JobResponse | null> => {
+    let query = '';
+    for (const key in filter) {
+        if (filter[key] !== '') {
+            query += `&${key}=${filter[key]}`
+        }
+    }
+    return ApiClient.get(JOBS_ENDPOINT, `limit=${limit}&page=${page}${query}`)
+        .then(response => new JobResponse(response.data))
 }
 
 const getJob = (jobId: string): Promise<JobListing | null> => {
@@ -29,5 +45,5 @@ const changeJob = (jobId: string,  updatedJob: object): Promise<JobListing | nul
 const removeJob = (jobId): Promise<JobListing | null>  => {
     return ApiClient.remove(`${JOBS_ENDPOINT}/${jobId}`).then(response => response.data);
 }
-export {getJobs,getJob, getJobsByEmployerId, createJob, changeJob, removeJob}
+export {getJobs,getJob, getJobsByEmployerId, getJobsWithoutLimit, getFilteredJobsWithPages, createJob, changeJob, removeJob}
 
