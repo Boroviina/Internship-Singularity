@@ -14,7 +14,7 @@ export function SearchJob() {
         if(location) {navString += '/' + location;}
         navigate(navString);
     };
-
+    // if logged in, go to FindJob page, otherwise, go to login
     const submitAction = currentUser ? FindJobClickHandle : () => {navigate('/auth/login')};
 
     return <div className={'card position-relative  '}>
