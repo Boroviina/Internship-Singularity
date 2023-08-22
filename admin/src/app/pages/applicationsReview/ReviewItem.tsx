@@ -24,7 +24,7 @@ export function ReviewItem(props) {
                 <span className={'me-2 col-4'}>
                             <KTSVG path={'/media/icons/duotune/electronics/elc002.svg'}
                                    className={'svg-icon-2x svg-icon-dark'}/>
-                            <span className={'mx-2'}>{props.item.user.phone}</span>
+                            <span className={'mx-2'}>{props.item.user.phoneNumber}</span>
                         </span>
                 <button className={'btn btn-light-dark col-4 w-25'}>
                     <a href={`mailto:${props.item.user.email}`}>Contact by E-mail</a>

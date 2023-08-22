@@ -3,25 +3,24 @@ import {KTSVG} from "../../../_metronic/helpers";
 
 export function DownloadButton(props) {
 
-    const handleDownload = () => {
-        fetch(`http://localhost:3000/download/${props.filename}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("File not found");
-                }
-                return response.blob();
-            }).then((blob) => {
+    const handleDownload = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/download/${props.filename}`);
+
+            if (!response.ok) {
+                throw new Error("File not found");
+            }
+
+            const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${props.filename}`;
-            document.body.appendChild(a);
+            a.download = props.filename;
             a.click();
-            a.remove();
             window.URL.revokeObjectURL(url);
-        }).catch((error) => {
-            console.error('Error downloading file: ', error);
-        });
+        } catch (error) {
+            console.error('Error downloading file:', error);
+        }
     }
 
     return <button onClick={handleDownload} className={'btn btn-light-dark m-1'}>
