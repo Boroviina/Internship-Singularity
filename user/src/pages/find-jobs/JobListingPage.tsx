@@ -78,8 +78,8 @@ const JobListingPage = () => {
 
     const fetchJobs = async (title?: string, location?: string) => {
         const jobResponse = await getJobs(title, location);
-        console.log(jobResponse);
         setResponse(jobResponse);
+        setCurrentPage(jobResponse.page);
         setJobs(jobResponse.results);
     };
 
@@ -103,12 +103,23 @@ const JobListingPage = () => {
         setFilters(newFilters);
     };
 
-    const jobsContent = (filteredJobs && filteredJobs.length > 0) ? filteredJobs.map
-        (job => (<JobListingCard job={job}
-                                 showDetails={handleOpen}
-                                 key={job.id}
-                                 update={() => {fetchJobs();fetchSavedJobs();}}/>))
+    const displayJobs = (filteredJobs: JobListing[]) => {
+        const startIndex = response.limit * (currentPage - 1);
+        const endIndex = startIndex + response.limit;
+        const shownJobs = filteredJobs.slice(startIndex, endIndex);
+        console.log(filteredJobs.length)
+        // console.log(filteredJobs);
+        // console.log(shownJobs);
+        return shownJobs.map(job => (<JobListingCard job={job}
+                                                        showDetails={handleOpen}
+                                                        key={job.id}
+                                                        update={() => {fetchJobs();fetchSavedJobs();}}/>));
+    };
+
+    const jobsContent = (filteredJobs && filteredJobs.length > 0)
+        ? displayJobs(filteredJobs)
         : <h3 className="text-label ms-1">No jobs found.</h3>;
+
 
     return (
         <>
