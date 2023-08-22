@@ -10,6 +10,8 @@ type Option = {
 
 type CustomDropdownProps = {
     options: Option[];
+    buttonTitle?: string
+    icon?: string
 };
 
 export const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
@@ -27,10 +29,10 @@ export const CustomDropdown: React.FC<CustomDropdownProps> = (props) => {
                 id="custom-dropdown-toggle"
             >
                 <KTSVG
-                    path="/media/icons/duotune/general/gen031.svg"
+                    path={props.icon}
                     className="svg-icon-muted svg-icon"
                 />
-                Filter
+                {props.buttonTitle ? props.buttonTitle : 'Filter'}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
