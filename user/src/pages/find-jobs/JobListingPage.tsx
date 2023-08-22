@@ -4,7 +4,6 @@ import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
 import Search from "./components/Search";
 import SortBy, {getSortedBySalaryDescending} from "./components/SortBy";
-import Pagination from "./components/Pagination";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
@@ -22,6 +21,7 @@ import {
     sortByCategories
 } from "./components/filter-components/JobFilters";
 import {useLocation} from "react-router-dom";
+import {Pagination} from "./components/Pagination";
 
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     if(jobs != null) {
@@ -48,6 +48,8 @@ const JobListingPage = () => {
     const [showDetails, setShowDetails] = useState(false);
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const {currentUser} = useAuth();
+
+    const [currentPage, setCurrentPage] = useState(1);
 
     const handleClose = () => setShowDetails(false);
     const handleOpen = (job: JobListing) => {
@@ -144,7 +146,7 @@ const JobListingPage = () => {
                             <div className="jobs my-2">
                                 {jobsContent}
                             </div>
-                            <Pagination/>
+                            <Pagination page={currentPage} totalPages={10} onPageChange={(p) => {setCurrentPage(p)}} />
                         </section>
 
                     </div>

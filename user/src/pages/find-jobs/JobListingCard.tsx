@@ -1,6 +1,5 @@
 import React from 'react';
 import {JobListing} from "../../shared/models/job-listing.model";
-import TimeAgo from "./components/TimeAgo";
 import ApplyOrSave from "./components/details-components/ApplyOrSave";
 
 const logo = require('./img/logo-fb.jpg');
