@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PieChart from "./charts/PieChart";
 import LineChart from "./charts/LineChart";
-// import {getNumberOfAdmins, getNumberOfEmployers, getNumberOfUsers} from "../../shared/services/user.service";
 import {getJobsWithoutLimit} from "../../shared/services/job.service";
 import {getJobApplicationsPerJob} from "../../shared/services/job-application.service";
 import {getSavedJobsPerJob} from "../../shared/services/api-client/job-saved.service";
@@ -15,7 +14,6 @@ export function Dashboard() {
     const [jobTypes, setJobTypes] = useState([]);
 
     useEffect(() => {
-        // fetchUsers()
         fetchJobs()
             .then(() => getJobTypes());
     }, [jobs.length]);
@@ -45,7 +43,7 @@ export function Dashboard() {
             setJobApplicationsPerJob(applications);
             setSavedJobsPerJob(savedJobs);
         } catch(error) {
-            console.log("Error while getting jobs.");
+            console.log("Error while getting jobs:", error);
         }
     }
 
@@ -58,19 +56,6 @@ export function Dashboard() {
         })
         setJobTypes(types)
     }
-
-    // const fetchUsers = async () => {
-    //     try {
-    //         const numberOfEmployers = await getNumberOfEmployers();
-    //         const numberOfUsers = await getNumberOfUsers();
-    //         const numberOfAdmins = await getNumberOfAdmins();
-    //         setEmployers(numberOfEmployers)
-    //         setUsers(numberOfUsers);
-    //         setAdmins(numberOfAdmins);
-    //     } catch(error) {
-    //         console.log("Error while getting users.");
-    //     }
-    // }
 
     const getNumberOfJobsPerJobType = (jobType): number => {
         let number = 0;

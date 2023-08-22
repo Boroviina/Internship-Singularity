@@ -12,12 +12,13 @@ export const JobListingsCard = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [jobTypeFilter, setJobTypeFilter] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
+    const [limit, setLimit] = useState(5);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
     const fetchJobs = async () => {
         try {
-            const response = await getFilteredJobsWithPages(page, {jobType: jobTypeFilter, status: statusFilter, startDate: startDate, endDate: endDate});
+            const response = await getFilteredJobsWithPages(page, {jobType: jobTypeFilter, status: statusFilter, startDate: startDate, endDate: endDate}, limit);
             const {results, totalPages} = response;
             setJobs(results);
             setTotalPages(totalPages);
