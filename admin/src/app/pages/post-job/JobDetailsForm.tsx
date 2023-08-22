@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {JobInputField, JobTextareaField} from "./JobInputField";
 import {KTSVG} from "../../../_metronic/helpers";
 import {useNavigate} from "react-router-dom";
+import clsx from "clsx";
+import {JobTypes} from "../../shared/enums/job-types.enum";
 
 export function JobDetailsForm(props) {
 
@@ -19,11 +21,30 @@ export function JobDetailsForm(props) {
                 <h1 className={'display-6'}>{props.title}</h1>
             </div>
             <div className={`fv-row mb-10`}>
-                <JobInputField placeholder='Inster job title...' type="text" name="Job Title"
+                <JobInputField placeholder='Instert job title...' type="text" name="Job Title"
                                formikFieldProps={props.formik.getFieldProps('jobTitle')}
                                formikTouched={props.formik.touched.jobTitle}
                                formikErrors={props.formik.errors.jobTitle}
                 />
+            </div>
+            <div className={'my-4'}>
+                <label htmlFor="" className={'form-label text-dark fw-bold fs-6 '}>Job type</label>
+                <select name="jobType" id="jobType"
+                        {...props.formik.getFieldProps('jobType')}
+                        className={clsx(
+                            `form-control form-control-solid mb-3`,
+                            {'is-invalid': props.formik.touched.jobType && props.formik.errors.jobType && props.formik.getFieldProps('jobType').value.trim().length !== 0},
+                            {'is-valid': props.formik.touched.jobType && !props.formik.errors.jobType && props.formik.getFieldProps('jobType').value.trim().length !== 0}
+                        )}
+
+                >
+                    <option value=""></option>
+                    {Object.entries(JobTypes).map(([key, value]) => (
+                        <option value={key} key={key}>{value}</option>
+                    ))}
+                </select>
+                {props.formik.touched.jobType && props.formik.errors.jobType ? (
+                    <div className={'text-danger fs-6 italic'}>{props.formik.errors.jobType}</div>) : null}
             </div>
             <div className={`fv-row mb-10`}>
                 <JobTextareaField placeholder='Type description...' name="Description"

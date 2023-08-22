@@ -32,4 +32,5 @@ export enum JobTypes {
     retail = "Retail",
     hospitality = "Hospitality",
     realEstate = "Real Estate",
+    culinary = "Culinary",
 }

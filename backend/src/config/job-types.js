@@ -32,6 +32,7 @@ const jobTypes = [
   "retail",
   "hospitality",
   "realEstate",
+  "culinary",
 ];
 
 module.exports = {
