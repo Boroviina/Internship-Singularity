@@ -21,7 +21,7 @@ import {
     Specialization,
     sortByCategories
 } from "./components/filter-components/JobFilters";
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     if(jobs != null) {
@@ -70,8 +70,7 @@ const JobListingPage = () => {
     }, [jobs, filters, sortingFunction]);
 
     useEffect(() => {
-        console.log(titleParam + locationParam);
-        fetchJobs(titleParam,locationParam);
+        fetchJobs(titleParam, locationParam);
         fetchSavedJobs();
     }, []);
 
