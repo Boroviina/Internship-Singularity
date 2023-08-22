@@ -9,7 +9,7 @@ const Filters = ({children}) => {
             <div className="align-items-center mb-2">
                 <FontAwesomeIcon icon={faFilter}
                                  style={{color: "#fb246a", height: 30}}/>
-                <h5 className="d-inline align-baseline">Filter jobs</h5>
+                <h5 className="d-inline align-baseline text-label">Filter jobs</h5>
             </div>
             <div className={`container d-flex flex-column gap-3 p-3 filter ${styles.filter}`}>
                 {children}

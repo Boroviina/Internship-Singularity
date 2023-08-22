@@ -3,28 +3,28 @@ import {JobListing} from "../models/job-listing.model";
 
 const JOBS_ENDPOINT = '/jobs';
 
-const getJobs = (): Promise<JobListing[] | null> => {
-    return ApiClient.get(JOBS_ENDPOINT, '&populate=employer,requirements')
-        .then(response => response.data)
-        .then(data => data.results.map(job => new JobListing(job)))
-}
+ const getJobs = (title?: string, location?: string, filter?: string): Promise<JobListing[] | null> => {
+     let query: string = '&populate=employer,requirements';
+     if(title) {query += "&searchTitle=" + title;}
+     if(location) {query += "&searchLocation=" + location;}
+     return ApiClient.get(JOBS_ENDPOINT, query)
+         .then(response => response.data)
+         .then(data => {
+             return data.results.map(job => new JobListing(job));
+         })
+         .catch((err) => {
+             console.log(err);
+         });
+ };
 
 const getJob = (jobId: string): Promise<JobListing | null> => {
     return ApiClient.get(`${JOBS_ENDPOINT}/${jobId}`)
         .then(response => response.data)
-        .then(data => new JobListing(data))
-}
-
-const createJob = (job: object): Promise<JobListing | null> => {
-    return ApiClient.post(JOBS_ENDPOINT, job)
-        .then(response => response.data)
-}
-const changeJob = (jobId: string): Promise<JobListing | null> => {
-    return ApiClient.put(JOBS_ENDPOINT, jobId).then(response => response.data);
-}
+        .then(data => new JobListing(data));
+};
 
 const removeJob = (jobId): Promise<JobListing | null>  => {
     return ApiClient.remove(JOBS_ENDPOINT, jobId).then(response => response.data);
-}
-export {getJob, getJobs, createJob, changeJob, removeJob}
+};
+export {getJob, getJobs, removeJob}
 

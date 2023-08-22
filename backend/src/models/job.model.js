@@ -7,7 +7,7 @@ const {jobTypes} = require('./../config/job-types')
 
 const jobSchema = mongoose.Schema(
     {
-        jobTitle: {
+        title: {
             type: String,
             required: [true, 'The field must be filled'],
             trim: true,

@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const {jobService, requirementsService} = require('../services');
+const {jobService, requirementsService, employerService} = require('../services');
 const {Employer} = require("../models");
 const mongoose = require("mongoose");
 
@@ -24,7 +24,7 @@ const createJob = catchAsync(async (req, res) => {
   } catch (error) {
     await session.abortTransaction();
     console.error('Error creating job:', error);
-    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({error: 'Error creating job'});
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({error: 'Error creating job' + error});
   } finally {
     session.endSession();
   }
@@ -32,8 +32,10 @@ const createJob = catchAsync(async (req, res) => {
 });
 
 const getJobs = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['title', 'appDeadline', 'employer', 'jobType']);
+  const filter = pick(req.query, ['title', 'location', 'employmentType', 'remote', 'appDeadline', 'employer', 'jobType']);
   const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate']);
+  const searchTitle = req.query.searchTitle;
+  const searchLocation = req.query.searchLocation;
 
   if(req.query.status === 'active') {
     filter.appDeadline = {$lt: new Date()}
@@ -51,8 +53,8 @@ const getJobs = catchAsync(async (req, res) => {
     filter.createdAt = {$gte: req.query.startDate, $lt: req.query.endDate}
   }
 
-  const result = await jobService.queryJobs(filter, options);
-  res.send(result);
+  const result = await jobService.queryJobs(filter, options, searchTitle, searchLocation);
+  res.send(result);g
 });
 
 const getJob = catchAsync(async (req, res) => {

@@ -14,8 +14,8 @@ export function JobDetailsForm(props){
             <div className={`fv-row mb-10`}>
                 <JobInputField placeholder='Inster job title...' type="text" name="Job Title"
                                formikFieldProps={props.formik.getFieldProps('jobTitle')}
-                               formikTouched={props.formik.touched.jobTitle}
-                               formikErrors={props.formik.errors.jobTitle}
+                               formikTouched={props.formik.touched.title}
+                               formikErrors={props.formik.errors.title}
                 />
             </div>
             <div className={`fv-row mb-10`}>

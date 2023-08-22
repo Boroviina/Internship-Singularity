@@ -89,7 +89,7 @@ export const ApplyToJobListing = () => {
     return (
         <>
             <CustomCard width="96%">
-                <HeaderCard title="Apply for a job">Apply for a {jobListing && jobListing.jobTitle} position</HeaderCard>
+                <HeaderCard title="Apply for a job">Apply for a {jobListing && jobListing.title} position</HeaderCard>
                 <CustomCard className="shadow rounded-2 ">
                     <form
                         className={`form w-100 my-4 p-4`}
