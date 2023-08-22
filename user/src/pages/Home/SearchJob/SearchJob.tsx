@@ -5,17 +5,31 @@ import {useAuth} from "../../../modules/auth";
 import {useNavigate} from "react-router-dom";
 import SearchBar from "../../find-jobs/components/SearchBar";
 
+export const navWithSearchParams = (page: string, title: string, location: string): string => {
+    const queryParams = [];
+
+    if (title) {queryParams.push(`title=${title}`);}
+    if (location) {queryParams.push(`location=${location}`);}
+
+    return queryParams.length > 0 ? `${page}?${queryParams.join('&')}` : page;
+};
+
 export function SearchJob() {
     const {currentUser, logout} = useAuth()
     const navigate = useNavigate();
-    const FindJobClickHandle = (title, location) => {
+
+    const searchJobs = (title, location) => {
         let navString = '/find-job';
-        if(title) {navString += '/' + title;}
-        if(location) {navString += '/' + location;}
+        if(title || location) {
+            navString += '?'
+            if(title) {navString += 'title=' + title;}
+            if(location) {navString += 'location=' + location;}
+        };
         navigate(navString);
     };
+
     // if logged in, go to FindJob page, otherwise, go to login
-    const submitAction = currentUser ? FindJobClickHandle : () => {navigate('/auth/login')};
+    const submitAction = currentUser ? searchJobs : () => {navigate('/auth/login')};
 
     return <div className={'card position-relative  '}>
         <div className={`bgi-no-repeat bgi-position-center d-flex justify-content-end ${styles.jobSearchHeigh}`}

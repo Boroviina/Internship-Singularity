@@ -21,6 +21,7 @@ import {
     Specialization,
     sortByCategories
 } from "./components/filter-components/JobFilters";
+import {useLocation, useParams} from "react-router-dom";
 
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     if(jobs != null) {
@@ -31,8 +32,14 @@ export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobLi
 };
 
 const JobListingPage = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const titleParam = queryParams.get('title');
+    const locationParam = queryParams.get('location');
+
     const [jobs, setJobs] = useState<JobListing[]>([]);
-    const [filters, setFilters] = useState<JobFilters>(new JobFilters());
+    const [filters, setFilters] = useState(new JobFilters());
     const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
     const [numOfJobs, setNumOfJobs] = useState(0);
     const [sortingFunction, setSortingFunction] = useState("Relevance");
@@ -63,7 +70,8 @@ const JobListingPage = () => {
     }, [jobs, filters, sortingFunction]);
 
     useEffect(() => {
-        fetchJobs(/*paramTitle, paramLocation*/);
+        console.log(titleParam + locationParam);
+        fetchJobs(titleParam,locationParam);
         fetchSavedJobs();
     }, []);
 
@@ -79,9 +87,9 @@ const JobListingPage = () => {
             if(results || results.length > 0) {
                 results.map(savedJob => savedjobs.push(savedJob.job.id))
             }
-            setSavedJobs(savedjobs)
+            setSavedJobs(savedjobs);
         } catch(error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
