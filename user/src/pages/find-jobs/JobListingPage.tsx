@@ -30,6 +30,8 @@ export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobLi
     }
 };
 
+const JOBS_PER_PAGE = 10;
+
 const JobListingPage = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -104,12 +106,9 @@ const JobListingPage = () => {
     };
 
     const displayJobs = (filteredJobs: JobListing[]) => {
-        const startIndex = response.limit * (currentPage - 1);
-        const endIndex = startIndex + response.limit;
+        const startIndex = JOBS_PER_PAGE * (currentPage - 1);
+        const endIndex = startIndex + JOBS_PER_PAGE;
         const shownJobs = filteredJobs.slice(startIndex, endIndex);
-        console.log(filteredJobs.length)
-        // console.log(filteredJobs);
-        // console.log(shownJobs);
         return shownJobs.map(job => (<JobListingCard job={job}
                                                         showDetails={handleOpen}
                                                         key={job.id}
@@ -159,7 +158,7 @@ const JobListingPage = () => {
                             <div className="jobs my-2">
                                 {jobsContent}
                             </div>
-                            <Pagination page={currentPage} totalPages={response ? response.totalPages : 0} onPageChange={(p) => {setCurrentPage(p)}} />
+                            <Pagination page={currentPage} totalPages={response ? Math.ceil(response.totalResults / JOBS_PER_PAGE) : 0} onPageChange={(p) => {setCurrentPage(p)}} />
                         </section>
 
                     </div>

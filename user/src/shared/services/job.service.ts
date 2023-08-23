@@ -4,7 +4,8 @@ import {JobListing, JobResponse} from "../models/job-listing.model";
 const JOBS_ENDPOINT = '/jobs';
 
  const getJobs = (title?: string, location?: string, filter?: string): Promise<JobResponse | null> => {
-     let query: string = '&populate=employer,requirements';
+     const LIMIT = 999;
+     let query: string = `&populate=employer,requirements&limit=${LIMIT}`;
      if(title) {query += "&searchTitle=" + title;}
      if(location) {query += "&searchLocation=" + location;}
      return ApiClient.get(JOBS_ENDPOINT, query)
