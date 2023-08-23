@@ -25,7 +25,7 @@ const JobListingCard = ({job, showDetails, update, isJobSaved} : JobProps) => {
     };
 
     return (
-        <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 mb-1 card`}>
+        <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 mb-1 card`} style={{maxWidth: "1200px"}}>
             <div className="d-flex align-items-center">
                 <a className="me-3" href="#">
                     <img src={logo} className={`p-1`}
