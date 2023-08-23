@@ -23,6 +23,7 @@ export function ApplicationsReview() {
                 const jobApps=await getApplicationsPerJob(id);
                 setJobTitle(job.jobTitle);
                 setJobApplications(jobApps);
+                console.log("Job applications:", jobApps);
             }catch (error){
                 setError("Error while trying to review applications");
                 navigate('/error');

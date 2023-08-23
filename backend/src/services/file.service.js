@@ -6,33 +6,12 @@ const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require("../utils/catchAsync");
 const {File} = require('../models');
-const express = require('express');
-const cors = require('cors');
 
-// const app = express();
-// app.use(cors());
-// const filesDirectory = path.join(__dirname, 'path/to/your/files');
-//
-// app.get('/download/:filename', (req, res) => {
-//   const { filename } = req.params;
-//   const filePath = path.join(filesDirectory, filename);
-//
-//   // Use 'res.download' to initiate the file download
-//   res.download(filePath, filename, err => {
-//     if (err) {
-//       console.error('Error downloading file:', err);
-//       res.status(500).send('Error downloading the file.');
-//     }
-//   });
-// });
-//
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
 
-const
-createFile = async (fileBody) => {
+const getFileByID = async (fileID) => {
+  return File.findById(fileID);
+}
+const createFile = async (fileBody) => {
   return File.create(fileBody);
 };
 
@@ -87,5 +66,5 @@ const processUpload = catchAsync(async (req, res, next) => {
 module.exports = {
   processUpload,
   uploadFiles,
-  // processDownload,
+  getFileByID
 };

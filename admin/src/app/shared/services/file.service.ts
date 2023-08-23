@@ -1,12 +1,12 @@
 import ApiClient from "./api-client/api-client";
-import {JobListing} from "../models/job-listing.model";
+import {FileModel} from "../models/file.model";
 
 const FILES_ENDPOINT = '/files';
 
-const getFile = (userId: string)=> {
-    return ApiClient.get(`${FILES_ENDPOINT}/${userId}`).then(response => {
+const getFileDetails = (fileID: string)=> {
+    return ApiClient.get(`${FILES_ENDPOINT}/${fileID}`).then(response => {
         return response.data;
     })
 }
 
-export {getFile};
+export {getFileDetails};

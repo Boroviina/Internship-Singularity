@@ -5,19 +5,19 @@ export function DownloadButton(props) {
 
     const handleDownload = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/download/${props.filename}`);
-
-            if (!response.ok) {
-                throw new Error("File not found");
-            }
-
-            const blob = await response.blob();
+            const blob=new Blob([props.filename], {type: props.filename.mimetype});
             const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = props.filename;
-            a.click();
+
+            const link=document.createElement('a');
+            link.href=url;
+            link.download=props.filename.originalname;
+
+            document.body.appendChild(link);
+            link.click();
+
             window.URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+
         } catch (error) {
             console.error('Error downloading file:', error);
         }
