@@ -30,7 +30,7 @@ export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobLi
     }
 };
 
-const JOBS_PER_PAGE = 7;
+const JOBS_PER_PAGE = 8;
 
 const JobListingPage = () => {
     const location = useLocation();
@@ -158,7 +158,8 @@ const JobListingPage = () => {
                             <div className="jobs my-2">
                                 {jobsContent}
                             </div>
-                            <Pagination page={currentPage} totalPages={response ? Math.ceil(response.totalResults / JOBS_PER_PAGE) : 0}
+                            <Pagination className="justify-content-center"
+                                page={currentPage} totalPages={response ? Math.ceil(response.totalResults / JOBS_PER_PAGE) : 0}
                                         onPageChange={onPageChange} />
                         </section>
 
