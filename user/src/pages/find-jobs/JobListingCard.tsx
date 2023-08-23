@@ -14,14 +14,10 @@ interface JobProps {
 
 const JobListingCard = ({job, showDetails, update, isJobSaved} : JobProps) => {
 
-    const clickHandler = (e) => {
-      showDetails(job);
-    };
+    const clickHandler = (e) => showDetails(job);
 
     const writeCardInfo = (args: any[]) => {
-        return (args.map((el) => {
-            return <span key={Math.random().toString()}>{el && ' \u2022 ' + el}</span>;
-        }));
+        return args.map((el) => <span key={Math.random().toString()}>{el && ' \u2022 ' + el}</span>);
     };
 
     return (
