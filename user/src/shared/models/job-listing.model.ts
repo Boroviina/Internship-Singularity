@@ -18,6 +18,7 @@ export class JobListing extends BaseModel {
     positionsNum: number;
     cv: boolean;
     coverLetter: boolean;
+    createdAt: string;
 
     constructor(attributes?: any) {
         super();

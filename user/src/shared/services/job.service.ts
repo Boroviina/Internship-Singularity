@@ -11,6 +11,7 @@ const JOBS_ENDPOINT = '/jobs';
      return ApiClient.get(JOBS_ENDPOINT, query)
          .then(response => response.data)
          .then(data => {
+             console.log(typeof (new JobResponse(data).results[1].createdAt));
              return new JobResponse(data);
          })
          .catch((err) => {

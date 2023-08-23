@@ -1,6 +1,7 @@
 import React from 'react';
 import {JobListing} from "../../shared/models/job-listing.model";
 import ApplyOrSave from "./components/details-components/ApplyOrSave";
+import TimeAgo from "./components/TimeAgo";
 
 const logo = require('./img/logo-fb.jpg');
 
@@ -36,7 +37,7 @@ const JobListingCard = ({job, showDetails, update, isJobSaved} : JobProps) => {
                     <span className="fw-semibold">
                         <span>{job.employer.companyName}</span>
                         <span className="text-black-50">
-                            {writeCardInfo([job.location, job.salary + " €", job.employmentType])}
+                            {writeCardInfo([job.location, job.salary + " €", job.employmentType, TimeAgo(job.createdAt)])}
                         </span>
                     </span>
                 </div>
