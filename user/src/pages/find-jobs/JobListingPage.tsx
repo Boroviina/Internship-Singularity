@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
@@ -30,7 +30,7 @@ export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobLi
     }
 };
 
-const JOBS_PER_PAGE = 10;
+const JOBS_PER_PAGE = 7;
 
 const JobListingPage = () => {
     const location = useLocation();
@@ -59,9 +59,7 @@ const JobListingPage = () => {
         setShowDetails(true)
     };
 
-    const handleSort = (sort) => {
-        setSortingFunction(sort);
-    };
+    const handleSort = (sort) => {setSortingFunction(sort);};
 
     useEffect(() => {
         const filteredJobs  = getFilteredJobs(jobs, filters);
@@ -119,6 +117,8 @@ const JobListingPage = () => {
         ? displayJobs(filteredJobs)
         : <h3 className="text-label ms-1">No jobs found.</h3>;
 
+    const onPageChange = (page) => {setCurrentPage(page);};
+
 
     return (
         <>
@@ -158,7 +158,8 @@ const JobListingPage = () => {
                             <div className="jobs my-2">
                                 {jobsContent}
                             </div>
-                            <Pagination page={currentPage} totalPages={response ? Math.ceil(response.totalResults / JOBS_PER_PAGE) : 0} onPageChange={(p) => {setCurrentPage(p)}} />
+                            <Pagination page={currentPage} totalPages={response ? Math.ceil(response.totalResults / JOBS_PER_PAGE) : 0}
+                                        onPageChange={onPageChange} />
                         </section>
 
                     </div>
