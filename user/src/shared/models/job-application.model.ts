@@ -19,3 +19,17 @@ export class JobApplication extends BaseModel {
     }
 }
 
+export class JobApplicationResponse extends BaseModel{
+    results: JobApplication[];
+    page: number;
+    limit:number;
+    totalPages: number;
+    totalResults:number;
+
+    constructor(attributes?: any) {
+        super();
+        this.setAttributes(attributes)
+        this.results=attributes.results.map(application=>new JobApplication(application));
+    }
+}
+

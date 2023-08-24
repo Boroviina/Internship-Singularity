@@ -4,7 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ReviewItem} from "./ReviewItem";
 import {getJob} from '../../shared/services/job.service';
 import {getApplicationsPerJob} from "../../shared/services/job-application.service";
-
+import {Pagination} from '../../shared/components/Pagination';
 
 export function ApplicationsReview() {
     const navigate = useNavigate();
@@ -13,22 +13,27 @@ export function ApplicationsReview() {
     const [jobTitle, setJobTitle] = useState(null);
     const [jobApplications, setJobApplications]=useState(null);
     const {id} = useParams();
-
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(8);
+    const [totalPages, setTotalPages] = useState(1);
     useEffect(() => {
         const fetchJobAppsDetails = async () => {
             setLoading(true);
             setError(null);
             try{
                 const job= await getJob(id);
-                const jobApps=await getApplicationsPerJob(id);
+                const jobApps=await getApplicationsPerJob(page,id, limit);
+                const {results, totalPages}=jobApps;
                 setJobTitle(job.jobTitle);
-                setJobApplications(jobApps);
+                setJobApplications(results);
+                setTotalPages(totalPages);
                 console.log("Job applications:", jobApps);
             }catch (error){
                 setError("Error while trying to review applications");
                 navigate('/error');
             }
             setLoading(false);
+
         }
         fetchJobAppsDetails();
     }, [id]);
@@ -54,5 +59,10 @@ export function ApplicationsReview() {
         <div className={'container d-flex flex-column mt-5'}>
             {jobAppContent}
         </div>
+        <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={newPage=>setPage(newPage)}
+        />
     </div>;
 }

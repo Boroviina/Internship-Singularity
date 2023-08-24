@@ -6,65 +6,79 @@ const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require("../utils/catchAsync");
 const {File} = require('../models');
-
+const util = require('util');
 
 const getFileByID = async (fileID) => {
-  return File.findById(fileID);
+    const file = await File.findById(fileID);
+    readFileContent(file.filename);
+    return file;
+}
+const readFileContent = (fileName, callback) => {
+    const filePath = path.join(__dirname, '..', '..', 'public', 'uploads', fileName);
+    const readFileAsync = util.promisify(fs.readFile);
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+            console.error(("Error readinf file: ", err));
+            return;
+        }
+        console.log("File content: ", data);
+        callback(data);
+    })
 }
 const createFile = async (fileBody) => {
-  return File.create(fileBody);
+    return File.create(fileBody);
 };
 
 const upload = multer({
-  storage: multer.memoryStorage(),
-  fileFilter: (req, file, cb) => {
-    cb(null, true);
-  }
+    storage: multer.memoryStorage(),
+    fileFilter: (req, file, cb) => {
+        cb(null, true);
+    }
 });
 
 const uploadFiles = (fields) => upload.fields(fields);
 
 const processUpload = catchAsync(async (req, res, next) => {
-  if (!req.files) return next();
+    if (!req.files) return next();
 
-  for (const field in req.files) {
-    let files = [];
+    for (const field in req.files) {
+        let files = [];
 
-    const filePromises = req.files[field].map(async (file) => {
+        const filePromises = req.files[field].map(async (file) => {
 
-      const {buffer, ...fileBody} = file;
-      const extension = path.extname(fileBody.originalname);
-      const filename = uuidv4() + extension;
-      fileBody.filename = filename;
+            const {buffer, ...fileBody} = file;
+            const extension = path.extname(fileBody.originalname);
+            const filename = uuidv4() + extension;
+            fileBody.filename = filename;
 
-      const newFile = await createFile(fileBody);
+            const newFile = await createFile(fileBody);
 
-      try {
-        await fs.promises.mkdir(`/${__dirname}/../../public/uploads/`, {recursive: true});
-        await fs.promises.writeFile(`/${__dirname}/../../public/uploads/${filename}`, buffer);
-      } catch (err) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while uploading file.');
-      }
+            try {
+                await fs.promises.mkdir(`/${__dirname}/../../public/uploads/`, {recursive: true});
+                await fs.promises.writeFile(`/${__dirname}/../../public/uploads/${filename}`, buffer);
+            } catch (err) {
+                throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error while uploading file.');
+            }
 
-      return newFile._id;
-    });
+            return newFile._id;
+        });
 
-    const fileId = await Promise.all(filePromises);
-    files.push(...fileId);
+        const fileId = await Promise.all(filePromises);
+        files.push(...fileId);
 
-    if (files.length === 1) {
-      req.body[field] = files[0];
-    } else {
-      req.body[field] = files;
+        if (files.length === 1) {
+            req.body[field] = files[0];
+        } else {
+            req.body[field] = files;
+        }
     }
-  }
 
-  next();
+    next();
 });
 
 
 module.exports = {
-  processUpload,
-  uploadFiles,
-  getFileByID
+    processUpload,
+    uploadFiles,
+    getFileByID
 };

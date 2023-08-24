@@ -22,6 +22,7 @@ export const JobListingsCard = () => {
             const {results, totalPages} = response;
             setJobs(results);
             setTotalPages(totalPages);
+            console.log("Jobs", response);
         } catch(error) {
             console.log("Error while getting job listings.");
         }

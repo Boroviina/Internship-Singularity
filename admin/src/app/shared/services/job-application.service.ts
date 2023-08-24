@@ -1,5 +1,5 @@
 import ApiClient from './api-client/api-client';
-import {JobApplication} from "../models/job-application.model";
+import {JobApplication, JobApplicationResponse} from "../models/job-application.model";
 
 const JOB_APP_ENDPOINT = '/job-applications';
 
@@ -7,9 +7,9 @@ const JOB_APP_ENDPOINT = '/job-applications';
 //     return ApiClient.post(USERS_ENDPOINT, {jobApplication})
 // }
 
-const getApplicationsPerJob = (jobId: string): Promise<JobApplication[] | null> => {
-    return ApiClient.get(JOB_APP_ENDPOINT, `job=${jobId}&populate=user,files`).then(response => response.data)
-        .then(data => data.results.map(jobApplication => new JobApplication(jobApplication)))
+const getApplicationsPerJob = (page, jobId: string, limit = 8): Promise<JobApplicationResponse | null> => {
+    return ApiClient.get(JOB_APP_ENDPOINT, `job=${jobId}&populate=user,files&limit=${limit}&page=${page}`)
+        .then(response => new JobApplicationResponse(response.data))
 }
 
 const getJobApplicationsPerJob = (jobId: string): Promise<number | any> => {
