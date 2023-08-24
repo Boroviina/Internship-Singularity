@@ -1,9 +1,9 @@
 import React from "react";
-import {JobListing} from "../../../shared/models/job-listing.model";
+import {Jobs} from "../../../shared/models/job-listing.model";
 import {JobTypes} from "../../../shared/enums/job-types.enum";
 
 type JobListingsCardItemProps = {
-    job: JobListing;
+    job: Jobs;
 }
 
 export const JobListingsCardItem: React.FC<JobListingsCardItemProps> = (props) => {
