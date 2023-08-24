@@ -1,10 +1,10 @@
 import React from "react";
-import {JobListing} from "../../shared/models/job-listing.model";
+import {Jobs} from "../../shared/models/job-listing.model";
 import {KTSVG} from "../../../_metronic/helpers";
 import {useIntl} from "react-intl";
 
 type JobListingDetailsProps = {
-    jobListing: JobListing
+    jobListing: Jobs
 }
 
 export const JobListingsDetails: React.FC<JobListingDetailsProps> = (props) => {

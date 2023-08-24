@@ -16,8 +16,6 @@ export function JobDeactivation(props) {
 
 
     return <>
-
         {badgeActive ? <Badge bg="success">Active</Badge> : <Badge bg="danger">Expired</Badge>}
-
     </>
 }

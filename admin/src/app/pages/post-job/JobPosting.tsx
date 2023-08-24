@@ -11,6 +11,7 @@ export function JobPosting() {
     const formik = useFormik({
         initialValues: {
             jobTitle: '',
+            jobType: '',
             requirements: {
                 specialization: '',
                 experience: '',
@@ -28,14 +29,14 @@ export function JobPosting() {
             positionsNum: '',
             remote: '',
             cv: false,
-            coverLetter: false,
+            coverLetter: false
         },
         validationSchema: Yup.object({
 
             jobTitle: Yup.string()
                 .max(100, 'Must be 100 characters or less')
                 .required('Required'),
-
+            jobType: Yup.string().required('Required'),
             requirements: Yup.object().shape({
                 specialization: Yup.string()
                     .max(100, 'Must be 100 characters or less'),
@@ -73,7 +74,6 @@ export function JobPosting() {
             setLoading(true)
             try {
                 setSubmitting(false);
-                console.log(values);
                 await createJob(values);
                 setLoading(false);
                 navigate('/job-listings');
@@ -86,6 +86,6 @@ export function JobPosting() {
         },
     });
     return <>
-        <JobDetailsForm formik={formik} title={"Insert Job Features"} loading={loading}/>
+        <JobDetailsForm formik={formik} title={"Insert Job Features"} loading={loading} command={"Post job"}/>
     </>
 }

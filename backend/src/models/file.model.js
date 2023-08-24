@@ -33,6 +33,6 @@ const fileSchema = mongoose.Schema(
 fileSchema.plugin(toJSON);
 fileSchema.plugin(paginate);
 
-const File = mongoose.model('File', fileSchema);
+const Files = mongoose.model('Files', fileSchema);
 
-module.exports = File;
+module.exports = Files;

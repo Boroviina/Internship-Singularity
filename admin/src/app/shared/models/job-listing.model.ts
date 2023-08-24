@@ -3,7 +3,7 @@ import {RequirementsModel} from "./requirements.model";
 import {Employer} from "./employer.model";
 import {JobTypes} from "../enums/job-types.enum";
 
-export class JobListing extends BaseModel {
+export class Jobs extends BaseModel {
     id: string;
     title: string;
     jobType: JobTypes;
@@ -30,7 +30,7 @@ export class JobListing extends BaseModel {
 }
 
 export class JobResponse extends BaseModel {
-    results: JobListing[];
+    results: Jobs[];
     page: number;
     limit: number;
     totalPages: number;
@@ -39,6 +39,6 @@ export class JobResponse extends BaseModel {
     constructor(attributes?: any) {
         super();
         this.setAttributes(attributes);
-        this.results = attributes.results.map(job => new JobListing(job));
+        this.results = attributes.results.map(job => new Jobs(job));
     }
 }

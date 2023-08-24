@@ -3,25 +3,43 @@ import {KTSVG} from "../../../_metronic/helpers";
 
 export function DownloadButton(props) {
 
-    const handleDownload = () => {
-        fetch(`http://localhost:3000/download/${props.filename}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("File not found");
-                }
-                return response.blob();
-            }).then((blob) => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${props.filename}`;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
+    const handleDownload = async () => {
+        try {
+            console.log("This is json body",props.filename);
+
+            const filename = props.filename.filename;
+            const filePath=`../../../../backend/public/uploads/${filename}`;
+            console.log("This is filepath",filePath);
+
+            const response=await  fetch(filePath);
+            console.log("This is response",response);
+
+
+            const buffer=await response.arrayBuffer();
+            console.log("this is buffer", buffer);
+
+            // const blob = new Blob([buffer], {type:props.filename.mimetype});
+            // console.log("Blob", blob);
+
+            const file=new File([buffer], props.filename.originalname,{type: props.filename.mimetype});
+            console.log("File:", file);
+
+            const url = window.URL.createObjectURL(file);
+            console.log("This is url: ", url);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = props.filename.originalname;
+
+            document.body.appendChild(link);
+            link.click();
+
             window.URL.revokeObjectURL(url);
-        }).catch((error) => {
-            console.error('Error downloading file: ', error);
-        });
+            document.body.removeChild(link);
+
+        } catch (error) {
+            console.error('Error downloading file:', error);
+        }
     }
 
     return <button onClick={handleDownload} className={'btn btn-light-dark m-1'}>

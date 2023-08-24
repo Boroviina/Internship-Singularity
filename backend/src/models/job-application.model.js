@@ -24,15 +24,15 @@ const jobApplicationSchema = mongoose.Schema(
     },
     cv: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'File',
+      ref: 'Files',
     },
     coverLetter: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'File',
+      ref: 'Files',
     },
     additionalDocument: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'File',
+      ref: 'Files',
     },
   },
   {

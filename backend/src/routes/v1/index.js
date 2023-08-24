@@ -5,6 +5,7 @@ const jobApplicationRoute = require('./job-application.route');
 const jobRoute=require('./job.route');
 const employerRoute = require('./employer.route');
 const savedJobRoute = require('./job-saved.route');
+const fileRoute=require('./file.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -34,6 +35,10 @@ const defaultRoutes = [
   {
     path:'/saved-jobs',
     route: savedJobRoute,
+  },
+  {
+    path: '/files',
+    route: fileRoute,
   }
 ];
 

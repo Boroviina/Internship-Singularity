@@ -1,11 +1,11 @@
 import {BaseModel} from "./base.model";
 import {UserModel} from "./user.model";
-import {JobListing} from "./job-listing.model";
+import {Jobs} from "./job-listing.model";
 
 export class JobApplication extends BaseModel {
     id: string;
     user: UserModel;
-    job: JobListing;
+    job: Jobs;
     phoneNumber: string;
     cv: string;
     coverLetter: string;
@@ -16,4 +16,16 @@ export class JobApplication extends BaseModel {
         this.setAttributes(attributes);
     }
 }
+export class JobApplicationRes extends BaseModel{
+    results: JobApplication[];
+    page: number;
+    limit: number;
+    totalPages: number;
+    totalResult: number;
 
+    constructor(attributes?:any) {
+        super();
+        this.setAttributes(attributes);
+        this.results=attributes.results.map(app=>new JobApplication(app));
+    }
+}

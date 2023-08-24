@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import classes from './JobListingItem.module.css';
 import {KTSVG} from "../../../_metronic/helpers";
-import {JobListing} from "../../shared/models/job-listing.model";
+import {Jobs} from "../../shared/models/job-listing.model";
 import {JobListingsDetails} from "./JobListingDetails";
 import {useIntl} from "react-intl";
 import {useNavigate} from "react-router-dom";
@@ -11,7 +11,7 @@ import {JobDeactivation} from "./JobDeactivation";
 
 
 type JobListingItemProps = {
-    item: JobListing,
+    item: Jobs,
     update: () => {}
 }
 

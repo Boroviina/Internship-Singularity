@@ -4,39 +4,46 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ReviewItem} from "./ReviewItem";
 import {getJob} from '../../shared/services/job.service';
 import {getApplicationsPerJob} from "../../shared/services/job-application.service";
-
+import {Pagination} from '../../shared/components/Pagination';
 
 export function ApplicationsReview() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [jobTitle, setJobTitle] = useState(null);
-    const [jobApplications, setJobApplications]=useState(null);
+    const [jobApplications, setJobApplications] = useState(null);
     const {id} = useParams();
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(4);
+    const [totalPages, setTotalPages] = useState(1);
+
+    const fetchJobAppsDetails = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const job = await getJob(id);
+            const jobApps = await getApplicationsPerJob(page, id, limit);
+            const {results, totalPages} = jobApps;
+            setJobTitle(job.title);
+            setJobApplications(results);
+            setTotalPages(totalPages);
+            console.log("Job applications:", jobApps);
+        } catch (error) {
+            setError("Error while trying to review applications");
+            navigate('/error');
+        }
+        setLoading(false);
+    }
 
     useEffect(() => {
-        const fetchJobAppsDetails = async () => {
-            setLoading(true);
-            setError(null);
-            try{
-                const job= await getJob(id);
-                const jobApps=await getApplicationsPerJob(id);
-                setJobTitle(job.title);
-                setJobApplications(jobApps);
-            }catch (error){
-                setError("Error while trying to review applications");
-                navigate('/error');
-            }
-            setLoading(false);
-        }
         fetchJobAppsDetails();
-    }, [id]);
+    }, [id, page]);
 
-    let jobAppContent=<div className={'display-2 text-dark'}>No job apps</div>
-    if(jobApplications){
-        jobAppContent=jobApplications.map(jobApplication=>
-           (<ReviewItem item={jobApplication}
-            key={jobApplication.id}/>)
+    let jobAppContent = <div className={'display-2 text-dark'}>No job apps</div>
+    if (jobApplications) {
+        jobAppContent = jobApplications.map(jobApplication =>
+            (<ReviewItem item={jobApplication}
+                         key={jobApplication.id}/>)
         );
     }
     return <div className={'container'}>
@@ -53,5 +60,10 @@ export function ApplicationsReview() {
         <div className={'container d-flex flex-column mt-5'}>
             {jobAppContent}
         </div>
+        <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={newPage => setPage(newPage)}
+        />
     </div>;
 }

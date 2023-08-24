@@ -121,6 +121,6 @@ export function EditJobDetails() {
 
 
     return <>
-        <JobDetailsForm formik={formik} title={existingJobDetails.title} loading={loading}/>
+        <JobDetailsForm formik={formik} title={existingJobDetails.title} loading={loading} command={"Edit job details"}/>
     </>
 }
