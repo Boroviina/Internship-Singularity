@@ -24,8 +24,9 @@ export const JobListings = () => {
         try {
             const response = await getJobsPaginated(page, limit);
             const {results, totalPages} = response;
-            setTotalPages(totalPages);
+            console.log("Jobs", response)
             setJobListings(results);
+            setTotalPages(totalPages);
 
         } catch (error) {
             setError("Error while getting job listings.");
@@ -61,10 +62,14 @@ export const JobListings = () => {
                     <Spinner animation="border"></Spinner>
                 </div>
             </div>}
-            {!loading && error && <Alert state="danger" icon="icons/duotune/general/gen040.svg">{error}</Alert>}
-            {!loading && !error && jobListingsContent}
-
-            <Pagination page={page} totalPages={totalPages} onPageChange={newPage=>setPage(newPage)}/>
+            <div>
+                {!loading && error && <Alert state="danger" icon="icons/duotune/general/gen040.svg">{error}</Alert>}
+                {!loading && !error && jobListingsContent}
+            </div>
+            <Pagination
+                page={page}
+                totalPages={totalPages}
+                onPageChange={newPage => setPage(newPage)}/>
         </>
     );
 }

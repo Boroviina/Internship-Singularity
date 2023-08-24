@@ -2,7 +2,7 @@ import ApiClient from "./api-client/api-client";
 import {Jobs, JobResponse} from "../models/job-listing.model";
 
 const JOBS_ENDPOINT = '/jobs';
-
+const JOB_LISTING_ENDPOINT = '/job-listings';
 const getJobs = (): Promise<Jobs[] | null> => {
     return ApiClient.get(JOBS_ENDPOINT, '&populate=requirements,employer')
         .then(response => response.data)
@@ -32,7 +32,7 @@ const getFilteredJobsWithPages = (page: number, filter, limit = 5): Promise<JobR
 }
 
 const getJobsPaginated = (page, limit = 5): Promise<JobResponse | null> => {
-    return ApiClient.get(JOBS_ENDPOINT, `&populate=requirements,employer&limit=${limit}$page=${page}`)
+    return ApiClient.get(JOBS_ENDPOINT, `&populate=requirements,employer&limit=${limit}&page=${page}`)
         .then(response => new JobResponse(response.data));
 }
 
