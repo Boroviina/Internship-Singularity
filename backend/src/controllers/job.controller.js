@@ -54,7 +54,7 @@ const getJobs = catchAsync(async (req, res) => {
   }
 
   const result = await jobService.queryJobs(filter, options, searchTitle, searchLocation);
-  res.send(result);g
+  res.send(result);
 });
 
 const getJob = catchAsync(async (req, res) => {

@@ -1,8 +1,9 @@
-function TimeAgo(postDate: Date) {
-    if(postDate === null || postDate === undefined) {
+function TimeAgo(postDateString: string) {
+    if(postDateString === null || postDateString === undefined) {
         return null;
     }
     const currentTime = new Date();
+    const postDate = new Date(postDateString);
     const timeDifference = currentTime.getTime() - postDate.getTime();
 
     const oneMinute = 60 * 1000;

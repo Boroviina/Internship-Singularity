@@ -1,12 +1,13 @@
 import React from 'react';
 
 type PaginationProps = {
+    className?: string;
     page: number;
     totalPages: number;
     onPageChange: (newPage: number) => void;
 };
 
-export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPageChange }) => {
+export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPageChange, className }) => {
     const handlePageChange = (newPage: number) => {
         if (newPage >= 1 && newPage <= totalPages) {
             onPageChange(newPage);
@@ -14,7 +15,7 @@ export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPage
     };
 
     return (
-        <div className="d-flex justify-content-end">
+        <div className={`d-flex justify-content-end ${className}`}>
             <ul className="pagination mt-5">
                 <li className={`page-item previous ${page === 1 && 'disabled'}`}>
                     <button onClick={() => handlePageChange(page - 1)} className="page-link">
