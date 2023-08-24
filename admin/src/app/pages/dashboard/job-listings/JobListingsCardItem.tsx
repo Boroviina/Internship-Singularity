@@ -15,7 +15,7 @@ export const JobListingsCardItem: React.FC<JobListingsCardItemProps> = (props) =
 
     return (
         <tr className="fw-semibold text-gray-800 align-middle">
-            <td>{job.jobTitle}</td>
+            <td>{job.title}</td>
             <td>{JobTypes[job.jobType]}</td>
             <td>
                 {job.createdAt && (new Date(job.createdAt)).toLocaleString('en-US', {
