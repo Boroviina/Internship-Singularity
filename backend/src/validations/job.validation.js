@@ -3,7 +3,7 @@ const {objectId}=require('./custom.validation');
 
 const  createJob={
   body: Joi.object().keys({
-    jobTitle:Joi.string().required().max(100),
+    title:Joi.string().required().max(100),
     description:Joi.string().required().max(1000),
     requirements: Joi.object().keys({
       specialization: Joi.string(),
@@ -16,7 +16,6 @@ const  createJob={
     location: Joi.string(),
     salary: Joi.string(),
     employmentType: Joi.string(),
-    description:Joi.string(),
     appDeadline:Joi.date(),
     appInstructions:Joi.string(),
     numPosition:Joi.number(),
@@ -28,7 +27,7 @@ const  createJob={
 
 const getJobs={
   query:Joi.object().keys({
-    jobTitle: Joi.string(),
+    title: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -47,7 +46,7 @@ const updateJob = {
   }),
   body: Joi.object()
     .keys({
-      jobTitle:Joi.string(),
+      title:Joi.string(),
       requirements: Joi.object().keys({
         specialization: Joi.string(),
         experience: Joi.string(),

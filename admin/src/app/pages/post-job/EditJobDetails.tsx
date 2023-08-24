@@ -35,7 +35,7 @@ export function EditJobDetails() {
 
     const formik = useFormik({
         initialValues: {
-            jobTitle: existingJobDetails?.title || '',
+            title: existingJobDetails?.title || '',
             requirements: {
                 specialization: existingJobDetails?.requirements?.specialization,
                 experience: existingJobDetails?.requirements?.experience,
@@ -57,7 +57,7 @@ export function EditJobDetails() {
         },
         enableReinitialize: true,
         validationSchema: Yup.object({
-            jobTitle: Yup.string()
+            title: Yup.string()
                 .max(100, 'Must be 100 characters or less')
                 .required('Required'),
 
