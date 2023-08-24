@@ -19,6 +19,7 @@ export class JobListing extends BaseModel {
     cv: boolean;
     coverLetter: boolean;
     createdAt: string;
+    // logo: FileModel;
 
     constructor(attributes?: any) {
         super();
