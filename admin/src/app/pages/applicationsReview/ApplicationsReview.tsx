@@ -24,7 +24,7 @@ export function ApplicationsReview() {
             const job = await getJob(id);
             const jobApps = await getApplicationsPerJob(page, id, limit);
             const {results, totalPages} = jobApps;
-            setJobTitle(job.jobTitle);
+            setJobTitle(job.title);
             setJobApplications(results);
             setTotalPages(totalPages);
             console.log("Job applications:", jobApps);

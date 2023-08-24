@@ -3,72 +3,117 @@ import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
 import Search from "./components/Search";
-import Filters from "./components/filter-components/Filters";
-import SortBy from "./components/SortBy";
-import Pagination from "./components/Pagination";
+import SortBy, {getSortedBySalaryDescending} from "./components/SortBy";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
 import {JobListing} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
+import Filters from "./components/filter-components/Filters";
 import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
 import {useAuth} from "../../modules/auth";
+import {
+    Education,
+    EmploymentType,
+    Experience,
+    JobFilters,
+    Remote,
+    Specialization,
+    sortByCategories
+} from "./components/filter-components/JobFilters";
+import {useLocation} from "react-router-dom";
+import {Pagination} from "./components/Pagination";
+
+export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
+    if(jobs != null) {
+        return jobs.filter(job => job.matches(filters));
+    } else {
+        return null;
+    }
+};
 
 const JobListingPage = () => {
-    const [shownJob, setShownJob] = useState<JobListing>(null);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const titleParam = queryParams.get('title');
+    const locationParam = queryParams.get('location');
+
+    const [jobs, setJobs] = useState<JobListing[]>([]);
+    const [filters, setFilters] = useState(new JobFilters());
+    const [filteredJobs, setFilteredJobs] = useState<JobListing[]>([]);
+    const [numOfJobs, setNumOfJobs] = useState(0);
+    const [sortingFunction, setSortingFunction] = useState("Relevance");
+    const [savedJobs, setSavedJobs] = useState<string[]>([]);
+
     const [showDetails, setShowDetails] = useState(false);
+    const [shownJob, setShownJob] = useState<JobListing>(null);
+    const {currentUser} = useAuth();
+
+    const [currentPage, setCurrentPage] = useState(1);
+
     const handleClose = () => setShowDetails(false);
     const handleOpen = (job: JobListing) => {
         setShownJob(job);
         setShowDetails(true)
     };
 
-    const [jobs, setJobs] = useState(null);
-    const [savedJobs, setSavedJobs] = useState<string[]>([]);
-    const {currentUser} = useAuth();
+    const handleSort = (sort) => {
+        setSortingFunction(sort);
+    };
 
-    const fetchJobs = async () => {
-        try {
-            const jobs = await getJobs();
-            setJobs(jobs);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        const filteredJobs  = getFilteredJobs(jobs, filters);
+        setNumOfJobs(filteredJobs.length);
+        if(sortingFunction === "Salary") {
+            setFilteredJobs(getSortedBySalaryDescending(filteredJobs));
+        } else {
+            setFilteredJobs(filteredJobs);
         }
-    }
+    }, [jobs, filters, sortingFunction]);
 
-    const fetchUsersSavedJobs = async () => {
+    useEffect(() => {
+        fetchJobs(titleParam, locationParam);
+        fetchSavedJobs();
+    }, []);
+
+    const fetchJobs = async (title?: string, location?: string) => {
+        const jobs = await getJobs(title, location);
+        setJobs(jobs);
+    };
+
+    const fetchSavedJobs = async () => {
         try {
             const results = await getUsersSavedJobs(`${currentUser.id}`);
             const savedjobs = [];
             if(results || results.length > 0) {
                 results.map(savedJob => savedjobs.push(savedJob.job.id))
             }
-            setSavedJobs(savedjobs)
+            setSavedJobs(savedjobs);
         } catch(error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
-    useEffect(() => {
-        fetchJobs();
-        fetchUsersSavedJobs();
-    }, /*filter, search...*/[]);
+    const handleFilterChanged = (changedFilter: any[], name: string) => {
+        const newFilters = new JobFilters();
+        newFilters.copy(filters);
+        newFilters[name] = changedFilter;
+        setFilters(newFilters);
+    };
 
-    let jobsContent = <div>No jobs could be found.</div>;
-
-    if (jobs) {
-        jobsContent = jobs.map(job => {
-            // console.log(job);
-            return <JobListingCard job={job} showDetails={handleOpen} key={job.id} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(job.id)}/>;
-        });
-    }
+    const jobsContent = (filteredJobs && filteredJobs.length > 0) ? filteredJobs.map
+        (job => (<JobListingCard job={job}
+                                 showDetails={handleOpen}
+                                 key={job.id}
+                                 update={() => {fetchJobs();fetchSavedJobs();}}/>))
+        : <h3 className="text-label ms-1">No jobs found.</h3>;
 
     return (
         <>
-            <body>
 
             <header className={`${styles.hero}`}>
                 <div className={`text-center ${styles.overlay}`}>
-                    <Search/>
+                    <Search search={fetchJobs}/>
                 </div>
             </header>
 
@@ -78,69 +123,40 @@ const JobListingPage = () => {
 
                         <section className="col-lg-3 col-md-4 order-2 order-md-1">
                             <Filters>
-                                <CheckboxGroup name="Specialization" filters={specialization}/>
-                                <Dropdown name="Remote" filters={remote}/>
-                                <CheckboxGroup name="Employment type" filters={employmentType}/>
-                                <Dropdown name="Experience level" filters={experienceLevel}/>
-                                <Dropdown name="Education level" filters={educationLevel}/>
+                                <CheckboxGroup filterInfo={Specialization}
+                                               updateFilters={handleFilterChanged}/>
+                                <Dropdown filterInfo={Remote}
+                                          updateFilters={handleFilterChanged}/>
+                                <CheckboxGroup filterInfo={EmploymentType}
+                                               updateFilters={handleFilterChanged}/>
+                                <Dropdown filterInfo={Experience}
+                                          updateFilters={handleFilterChanged}/>
+                                <Dropdown filterInfo={Education}
+                                          updateFilters={handleFilterChanged}/>
                             </Filters>
                         </section>
 
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
                             <div className="d-flex align-items-center justify-content-between px-2">
                                 <div className="text-muted fs-5">
-                                    Results: {24}
+                                    Results: {numOfJobs}
                                 </div>
-                                <SortBy categories={sortByCategories}/>
+                                <SortBy categories={sortByCategories} sortBy={handleSort}/>
                             </div>
                             <div className="jobs my-2">
                                 {jobsContent}
                             </div>
-                            <Pagination/>
+                            <Pagination page={currentPage} totalPages={10} onPageChange={(p) => {setCurrentPage(p)}} />
                         </section>
 
                     </div>
                 </div>
             </main>
-            </body>
 
-            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose} update={() => {fetchJobs(); fetchUsersSavedJobs()}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
+            {shownJob && <DetailsModal job={shownJob} showDetails={showDetails} close={handleClose}
+                                       update={() => {fetchJobs();fetchSavedJobs();}} isJobSaved={savedJobs.includes(shownJob.id)}/>}
         </>
     );
 }
 
 export default JobListingPage;
-
-const specialization = ["Finance and accounting", "Legal", "Technology",
-    "Administrative & customer support", "Marketing & creative"];
-const employmentType = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
-const remote = ["Remote", "Hybrid"];
-const experienceLevel = ["No experience", "Entry level", "Mid level", "Senior level"];
-const educationLevel = ["Not required", "College", "Associate's degree", "Bachelor's degree",
-    "Master's degree", "Doctor's degree"];
-const sortByCategories = ["Relevance", "Date", "Salary"];
-
-const DESCRIPTION = "     We offer Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad adipisci\n" +
-    "            aliquam\n" +
-    "            asperiores autem beatae consectetur culpa deleniti deserunt doloremque doloribus, excepturi\n" +
-    "            harum\n" +
-    "            impedit ipsa iure iusto laborum laudantium libero magni maxime minima nam nisi nulla omnis\n" +
-    "            optio,\n" +
-    "            perspiciatis porro quaerat quam quod reiciendis tempore ullam obey voluptatum! Aperiam,\n" +
-    "            illo?\n" +
-    "            <br/><br/>\n" +
-    "            As well as Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid deleniti deserunt\n" +
-    "            distinctio, doloribus harum pariatur quas recusandae repellendus repudiandae sunt.\n" +
-    "            <br/>\n" +
-    "            <ul>\n" +
-    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, unde!</li>\n" +
-    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem!</li>\n" +
-    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>\n" +
-    "                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores beatae error nam\n" +
-    "                    quas\n" +
-    "                    quod?\n" +
-    "                </li>\n" +
-    "            </ul>\n" +
-    "            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque praesentium, quaerat? Amet\n" +
-    "            aperiam\n" +
-    "            delectus eum exercitationem nemo. Dolorem odit, saepe!\n";

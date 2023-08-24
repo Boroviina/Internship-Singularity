@@ -5,7 +5,7 @@ import {JobTypes} from "../enums/job-types.enum";
 
 export class Jobs extends BaseModel {
     id: string;
-    jobTitle: string;
+    title: string;
     jobType: JobTypes;
     employer: Employer;
     requirements: RequirementsModel;

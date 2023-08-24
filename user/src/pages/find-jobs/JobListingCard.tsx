@@ -1,6 +1,5 @@
 import React from 'react';
 import {JobListing} from "../../shared/models/job-listing.model";
-import TimeAgo from "./components/TimeAgo";
 import ApplyOrSave from "./components/details-components/ApplyOrSave";
 
 const logo = require('./img/logo-fb.jpg');
@@ -27,17 +26,17 @@ const JobListingCard = ({job, showDetails, update, isJobSaved} : JobProps) => {
     return (
         <article className={`d-flex justify-content-between flex-column flex-sm-row w-100 p-3 mb-1 card`}>
             <div className="d-flex align-items-center">
-                <a className="me-3" href="src/pages/find-jobs/JobListing#">
+                <a className="me-3" href="#">
                     <img src={logo} className={`p-1`}
                          style={{height: "4rem"}}
                          alt={"Company Logo"}/>
                 </a>
                 <div onClick={clickHandler} className={`pointer flex-grow-1`}>
-                        <h4 className={`label`}>{job.jobTitle}</h4>
+                        <h4 className={`label`}>{job.title}</h4>
                     <span className="fw-semibold">
                         <span>{job.employer.companyName}</span>
                         <span className="text-black-50">
-                            {writeCardInfo([job.location, job.salary, job.employmentType])}
+                            {writeCardInfo([job.location, job.salary + " €", job.employmentType])}
                         </span>
                     </span>
                 </div>

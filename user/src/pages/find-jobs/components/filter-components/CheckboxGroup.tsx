@@ -1,19 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Checkbox from "./Checkbox";
+import {MyFilter} from "./JobFilters";
 
-export interface FilterGroup {
-    name: string,
-    filters: string[]
+export interface Filter <T extends MyFilter>{
+    filterInfo: T;
+    updateFilters(filter: any[], filterName: string);
 }
 
-const CheckboxGroup = ({name, filters}: FilterGroup) => {
+const CheckboxGroup = ({filterInfo, updateFilters}: Filter<any>) => {
+    const [selectedItems, setSelectedItems] = useState([]);
+
+    const handleSelectionChanged = (item: string, checked: boolean) => {
+        if(checked && !selectedItems.includes(item)) {
+            setSelectedItems([...selectedItems, item]);
+        } else {
+            const itemsWithoutItem = selectedItems.filter(el => el !== item);
+            setSelectedItems(itemsWithoutItem);
+        }
+    };
+    useEffect(() => updateFilters(selectedItems, filterInfo.propName), [selectedItems]);
+
     return (
         <div>
-            <h5>{name}</h5>
-            {filters.map((filter) => {
-                return <Checkbox key={filter}
-                                 name={filter}
-                                 id={filter.toLowerCase().replaceAll(" ", "")}/>;
+            <h5 className="text-label">{filterInfo.displayName}</h5>
+            {filterInfo.values.map((item) => {
+                return <Checkbox key={item}
+                                 name={item}
+                                 id={item.toLowerCase().replaceAll(" ", "")}
+                                 onChange={handleSelectionChanged}/>;
             })}
         </div>
     );
