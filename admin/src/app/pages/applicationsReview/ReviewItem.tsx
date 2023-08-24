@@ -4,13 +4,15 @@ import {UserListingDetails} from "./UserListingDetails";
 import {getFileDetails} from "../../shared/services/file.service";
 import {useNavigate, useParams} from "react-router-dom";
 
+
 export function ReviewItem(props) {
     const [detailsShown, setDetailsShown] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const[cv, setCv]=useState(null);
-    const[coverLetter, setCoverLetter]=useState(null);
+    const [cv, setCv] = useState(null);
+    const [coverLetter, setCoverLetter] = useState(null);
+    const [modalOpen, setModalOpen]=useState(false);
     const fetchCVDetails = async () => {
         try {
             const cv = await getFileDetails(props.item.cv);
@@ -38,11 +40,25 @@ export function ReviewItem(props) {
         fetchCVDetails();
         fetchCoverLetterDetails();
     }
+    const openModalHandler=()=>{
+        if(modalOpen)
+            setModalOpen(false);
+        else
+            setModalOpen(true);
+    }
+
     return <div className={'card card-custom mb-3'}>
-        <div className={'card-header cursor-pointer  d-flex justify-content-start align-items-center'}
-             onClick={clickHandler}>
-            <h3 className="card-title fw-bolder text-dark ">{props.item.user.name}</h3>
-            <h3 className="card-title fw-bolder text-dark mx-5"> {props.item.user.occupation}</h3>
+        <div className={'d-flex justify-content-between card-header '}>
+            <div className={' cursor-pointer  d-flex justify-content-start align-items-center'}
+                 onClick={clickHandler}>
+
+                <h3 className="card-title fw-bolder text-dark ">{props.item.user.name}</h3>
+                <h3 className="card-title fw-bolder text-dark mx-5"> {props.item.user.occupation}</h3>
+            </div>
+                <button className={'btn btn-light-dark   m-5'} onClick={openModalHandler}>
+                    Change Phase
+                </button>
+
         </div>
         {detailsShown && <UserListingDetails item={props.item} cv={cv} coverLetter={coverLetter}/>}
         <div className={'card-body'}>
