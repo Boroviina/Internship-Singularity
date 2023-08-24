@@ -18,6 +18,8 @@ export class JobListing extends BaseModel {
     positionsNum: number;
     cv: boolean;
     coverLetter: boolean;
+    createdAt: string;
+    // logo: FileModel;
 
     constructor(attributes?: any) {
         super();
@@ -52,6 +54,20 @@ export class JobListing extends BaseModel {
                 return filterItems.includes(jobAttribute);
             }
             return false;
+    }
+}
+
+export class JobResponse extends BaseModel {
+    results: JobListing[];
+    page: number;
+    limit: number;
+    totalPages: number;
+    totalResults: number;
+
+    constructor(attributes?: any) {
+        super();
+        this.setAttributes(attributes);
+        this.results = attributes.results.map(job => new JobListing(job));
     }
 }
 

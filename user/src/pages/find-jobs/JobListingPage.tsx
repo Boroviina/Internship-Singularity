@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './JobListingPage.module.css';
 import CheckboxGroup from "./components/filter-components/CheckboxGroup";
 import Dropdown from "./components/filter-components/Dropdown";
@@ -6,7 +6,7 @@ import Search from "./components/Search";
 import SortBy, {getSortedBySalaryDescending} from "./components/SortBy";
 import JobListingCard from "./JobListingCard";
 import DetailsModal from "./DetailsModal";
-import {JobListing} from "../../shared/models/job-listing.model";
+import {JobListing, JobResponse} from "../../shared/models/job-listing.model";
 import {getJobs} from "../../shared/services/job.service";
 import Filters from "./components/filter-components/Filters";
 import {getUsersSavedJobs} from "../../shared/services/job-saved.service";
@@ -22,7 +22,6 @@ import {
 } from "./components/filter-components/JobFilters";
 import {useLocation} from "react-router-dom";
 import {Pagination} from "./components/Pagination";
-
 export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobListing[]{
     if(jobs != null) {
         return jobs.filter(job => job.matches(filters));
@@ -30,6 +29,8 @@ export function getFilteredJobs(jobs: JobListing[], filters: JobFilters) : JobLi
         return null;
     }
 };
+
+const JOBS_PER_PAGE = 8;
 
 const JobListingPage = () => {
     const location = useLocation();
@@ -49,6 +50,7 @@ const JobListingPage = () => {
     const [shownJob, setShownJob] = useState<JobListing>(null);
     const {currentUser} = useAuth();
 
+    const [response, setResponse] = useState<JobResponse>(null);
     const [currentPage, setCurrentPage] = useState(1);
 
     const handleClose = () => setShowDetails(false);
@@ -57,9 +59,7 @@ const JobListingPage = () => {
         setShowDetails(true)
     };
 
-    const handleSort = (sort) => {
-        setSortingFunction(sort);
-    };
+    const handleSort = (sort) => {setSortingFunction(sort);};
 
     useEffect(() => {
         const filteredJobs  = getFilteredJobs(jobs, filters);
@@ -77,8 +77,10 @@ const JobListingPage = () => {
     }, []);
 
     const fetchJobs = async (title?: string, location?: string) => {
-        const jobs = await getJobs(title, location);
-        setJobs(jobs);
+        const jobResponse = await getJobs(title, location);
+        setResponse(jobResponse);
+        setCurrentPage(jobResponse.page);
+        setJobs(jobResponse.results);
     };
 
     const fetchSavedJobs = async () => {
@@ -101,12 +103,22 @@ const JobListingPage = () => {
         setFilters(newFilters);
     };
 
-    const jobsContent = (filteredJobs && filteredJobs.length > 0) ? filteredJobs.map
-        (job => (<JobListingCard job={job}
-                                 showDetails={handleOpen}
-                                 key={job.id}
-                                 update={() => {fetchJobs();fetchSavedJobs();}}/>))
+    const displayJobs = (filteredJobs: JobListing[]) => {
+        const startIndex = JOBS_PER_PAGE * (currentPage - 1);
+        const endIndex = startIndex + JOBS_PER_PAGE;
+        const shownJobs = filteredJobs.slice(startIndex, endIndex);
+        return shownJobs.map(job => (<JobListingCard job={job}
+                                                        showDetails={handleOpen}
+                                                        key={job.id}
+                                                        update={() => {fetchJobs();fetchSavedJobs();}}/>));
+    };
+
+    const jobsContent = (filteredJobs && filteredJobs.length > 0)
+        ? displayJobs(filteredJobs)
         : <h3 className="text-label ms-1">No jobs found.</h3>;
+
+    const onPageChange = (page) => {setCurrentPage(page);};
+
 
     return (
         <>
@@ -139,14 +151,16 @@ const JobListingPage = () => {
                         <section className="col-lg-9 col-md-8 order-1 order-md-2">
                             <div className="d-flex align-items-center justify-content-between px-2">
                                 <div className="text-muted fs-5">
-                                    Results: {numOfJobs}
+                                    Results: {response ? response.totalResults : 0}
                                 </div>
                                 <SortBy categories={sortByCategories} sortBy={handleSort}/>
                             </div>
                             <div className="jobs my-2">
                                 {jobsContent}
                             </div>
-                            <Pagination page={currentPage} totalPages={10} onPageChange={(p) => {setCurrentPage(p)}} />
+                            <Pagination className="justify-content-center"
+                                page={currentPage} totalPages={response ? Math.ceil(response.totalResults / JOBS_PER_PAGE) : 0}
+                                        onPageChange={onPageChange} />
                         </section>
 
                     </div>
