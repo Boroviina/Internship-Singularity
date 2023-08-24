@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 const validator = require("validator");
+const stream = require("stream");
+const {applicationPhases} = require("../config/application-phases");
 
 const jobApplicationSchema = mongoose.Schema(
   {
@@ -34,6 +36,10 @@ const jobApplicationSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Files',
     },
+    applicationPhase: {
+      type: String,
+      enum: applicationPhases,
+    }
   },
   {
     timestamps: true,
