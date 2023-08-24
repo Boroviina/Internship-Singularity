@@ -27,14 +27,14 @@ export function JobDetailsForm(props) {
                                formikErrors={props.formik.errors.jobTitle}
                 />
             </div>
-            <div className={'my-4'}>
+            <div className={'fv-row mb-10'}>
                 <label htmlFor="" className={'form-label text-dark fw-bold fs-6 '}>Job type</label>
                 <select name="jobType" id="jobType"
                         {...props.formik.getFieldProps('jobType')}
                         className={clsx(
-                            `form-control form-control-solid mb-3`,
-                            {'is-invalid': props.formik.touched.jobType && props.formik.errors.jobType && props.formik.getFieldProps('jobType').value.trim().length !== 0},
-                            {'is-valid': props.formik.touched.jobType && !props.formik.errors.jobType && props.formik.getFieldProps('jobType').value.trim().length !== 0}
+                            `form-control form-control-solid `,
+                            {'is-invalid': props.formik.touched.jobType && props.formik.errors.jobType},
+                            {'is-valid': props.formik.touched.jobType && !props.formik.errors.jobType }
                         )}
 
                 >
@@ -44,7 +44,7 @@ export function JobDetailsForm(props) {
                     ))}
                 </select>
                 {props.formik.touched.jobType && props.formik.errors.jobType ? (
-                    <div className={'text-danger fs-6 italic'}>{props.formik.errors.jobType}</div>) : null}
+                    <div className={'text-danger mt-1 fs-6 italic'}>{props.formik.errors.jobType}</div>) : null}
             </div>
             <div className={`fv-row mb-10`}>
                 <JobTextareaField placeholder='Type description...' name="Description"
