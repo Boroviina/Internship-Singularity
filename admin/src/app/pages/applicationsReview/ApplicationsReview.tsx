@@ -11,38 +11,39 @@ export function ApplicationsReview() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [jobTitle, setJobTitle] = useState(null);
-    const [jobApplications, setJobApplications]=useState(null);
+    const [jobApplications, setJobApplications] = useState(null);
     const {id} = useParams();
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(8);
+    const [limit, setLimit] = useState(4);
     const [totalPages, setTotalPages] = useState(1);
-    useEffect(() => {
-        const fetchJobAppsDetails = async () => {
-            setLoading(true);
-            setError(null);
-            try{
-                const job= await getJob(id);
-                const jobApps=await getApplicationsPerJob(page,id, limit);
-                const {results, totalPages}=jobApps;
-                setJobTitle(job.jobTitle);
-                setJobApplications(results);
-                setTotalPages(totalPages);
-                console.log("Job applications:", jobApps);
-            }catch (error){
-                setError("Error while trying to review applications");
-                navigate('/error');
-            }
-            setLoading(false);
 
+    const fetchJobAppsDetails = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const job = await getJob(id);
+            const jobApps = await getApplicationsPerJob(page, id, limit);
+            const {results, totalPages} = jobApps;
+            setJobTitle(job.jobTitle);
+            setJobApplications(results);
+            setTotalPages(totalPages);
+            console.log("Job applications:", jobApps);
+        } catch (error) {
+            setError("Error while trying to review applications");
+            navigate('/error');
         }
-        fetchJobAppsDetails();
-    }, [id]);
+        setLoading(false);
+    }
 
-    let jobAppContent=<div className={'display-2 text-dark'}>No job apps</div>
-    if(jobApplications){
-        jobAppContent=jobApplications.map(jobApplication=>
-           (<ReviewItem item={jobApplication}
-            key={jobApplication.id}/>)
+    useEffect(() => {
+        fetchJobAppsDetails();
+    }, [id, page]);
+
+    let jobAppContent = <div className={'display-2 text-dark'}>No job apps</div>
+    if (jobApplications) {
+        jobAppContent = jobApplications.map(jobApplication =>
+            (<ReviewItem item={jobApplication}
+                         key={jobApplication.id}/>)
         );
     }
     return <div className={'container'}>
@@ -62,7 +63,7 @@ export function ApplicationsReview() {
         <Pagination
             page={page}
             totalPages={totalPages}
-            onPageChange={newPage=>setPage(newPage)}
+            onPageChange={newPage => setPage(newPage)}
         />
     </div>;
 }

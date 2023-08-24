@@ -16,4 +16,16 @@ export class JobApplication extends BaseModel {
         this.setAttributes(attributes);
     }
 }
+export class JobApplicationRes extends BaseModel{
+    results: JobApplication[];
+    page: number;
+    limit: number;
+    totalPages: number;
+    totalResult: number;
 
+    constructor(attributes?:any) {
+        super();
+        this.setAttributes(attributes);
+        this.results=attributes.results.map(app=>new JobApplication(app));
+    }
+}
