@@ -3,7 +3,7 @@ import {JobListing} from "../../shared/models/job-listing.model";
 import ApplyOrSave from "./components/details-components/ApplyOrSave";
 import TimeAgo from "./components/TimeAgo";
 
-const logo = require('./img/company-logo.jpg');
+import logo from "./img/company-logo.jpg";
 
 interface JobProps {
     job: JobListing;
