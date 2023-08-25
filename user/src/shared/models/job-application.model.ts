@@ -1,8 +1,9 @@
 import {BaseModel} from "./base.model";
 import {UserModel} from "./user.model";
 import {JobListing} from "./job-listing.model";
+import {ApplicationPhases} from "../enums/application-phases";
 
- export class JobApplication extends BaseModel {
+export class JobApplication extends BaseModel {
     id: string;
     user: UserModel;
     job: JobListing;
@@ -10,6 +11,7 @@ import {JobListing} from "./job-listing.model";
     cv: string;
     coverLetter: string;
     additionalDocument: string;
+    applicationPhase: ApplicationPhases;
 
     constructor(attributes?: any) {
         super();

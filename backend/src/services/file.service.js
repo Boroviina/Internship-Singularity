@@ -10,21 +10,20 @@ const util = require('util');
 
 const getFileByID = async (fileID) => {
     const file = await File.findById(fileID);
-    readFileContent(file.filename);
+    // readFileContent(file.filename);
     return file;
 }
-const readFileContent = (fileName, callback) => {
-    const filePath = path.join(__dirname, '..', '..', 'public', 'uploads', fileName);
-    const readFileAsync = util.promisify(fs.readFile);
-    fs.readFile(filePath, 'utf-8', (err, data) => {
-        if (err) {
-            console.error(("Error readinf file: ", err));
-            return;
-        }
-        console.log("File content: ", data);
-        callback(data);
-    })
-}
+// const readFileContent = (fileName) => {
+//     const filePath = path.join(__dirname, '..', '..', 'public', 'uploads', fileName);
+//     const readFileAsync = util.promisify(fs.readFile);
+//     fs.readFile(filePath, 'utf-8', (err, data) => {
+//         if (err) {
+//             console.error(("Error readinf file: ", err));
+//             return;
+//         }
+//         console.log("File content: ", data);
+//     })
+// }
 const createFile = async (fileBody) => {
     return File.create(fileBody);
 };
