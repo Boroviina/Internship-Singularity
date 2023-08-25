@@ -33,7 +33,7 @@ const getJobApplication = {
 
 const updateJobApplication = {
   params: Joi.object().keys({
-    jobApplicationId: Joi.required().custom(objectId),
+    jobApplicationId: Joi.custom(objectId),
   }),
   body: Joi.object()
     .keys({
@@ -41,6 +41,7 @@ const updateJobApplication = {
       cv: Joi.string(),
       coverLetter: Joi.string(),
       additionalDocument: Joi.string(),
+      applicationPhase: Joi.string(),
     })
     .min(1),
 };
