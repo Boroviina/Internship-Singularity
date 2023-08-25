@@ -77,10 +77,15 @@ const JobListingPage = () => {
     }, []);
 
     const fetchJobs = async (title?: string, location?: string) => {
+        queryParams.set('title', title);
+        queryParams.set('location', location);
         const jobResponse = await getJobs(title, location);
+
         setResponse(jobResponse);
         setCurrentPage(jobResponse.page);
-        setJobs(jobResponse.results);
+
+        const nonExpiredJobs = jobResponse.results.filter((job) => new Date(job.appDeadline) > new Date());
+        setJobs(nonExpiredJobs);
     };
 
     const fetchSavedJobs = async () => {
