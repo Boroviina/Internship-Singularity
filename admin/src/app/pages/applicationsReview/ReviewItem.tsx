@@ -55,24 +55,36 @@ export function ReviewItem(props) {
         </div>
         {detailsShown && <UserListingDetails item={props.item} cv={cv} coverLetter={coverLetter}/>}
         <div className={'card-body'}>
-            <div className={'fw-row d-flex justify-content-start align-items-center'}>
-                    <span className={'me-2 col-4'}>
+            <div className={'fw-row d-flex justify-content-between align-items-center'}>
+                <div className={'d-flex justify-content-between align-items-center'}>
+                    <span className={'me-2 '}>
                         <KTSVG path={'/media/icons/duotune/communication/com002.svg'}
                                className={'svg-icon-2x svg-icon-dark'}/>
                         <span className={'mx-2'}>{props.item.user.email}</span>
                     </span>
-
-                <span className={'me-2 col-4'}>
+                    <span className={'me-2 '}>
                             <KTSVG path={'/media/icons/duotune/electronics/elc002.svg'}
                                    className={'svg-icon-2x svg-icon-dark'}/>
                             <span className={'mx-2'}>{props.item.phoneNumber}</span>
-                        </span>
-                <button className={'btn btn-light-dark col-4 w-25'}>
-                    <a href={`mailto:${props.item.user.email}`}>Contact by E-mail</a>
-                </button>
+                    </span>
+                </div>
+                <div className={'d-flex justify-content-between align-items-center'}>
+                    <button className={'btn btn-light-dark mx-3'} title='Contact by e-mail'>
+                        <a href={`mailto:${props.item.user.email}`}>
+                            <KTSVG path={'/media/icons/duotune/communication/com002.svg'}
+                                   className={'svg-icon-2x svg-icon-dark'}/>
+                        </a>
+                    </button>
+                    <button className={'btn btn-light-dark '} title='Contact by phone'>
+                        <a href={`tel:${props.item.phoneNumber}`}>
+                            <KTSVG path={'/media/icons/duotune/electronics/elc002.svg'}
+                                   className={'svg-icon-2x svg-icon-dark'}/>
+                        </a>
+                    </button>
+                </div>
             </div>
             <hr/>
-            <div className={'d-flex justify-content-between align-items-center'}>
+            <div className={'d-flex justify-content-between align-items-center  '}>
                 <div>
                     <label htmlFor="" className={'label fw-bold'}>Application phase:</label> &emsp;
                     <label htmlFor="" className={'label'}>{ApplicationPhases[props.item.applicationPhase]}</label>
