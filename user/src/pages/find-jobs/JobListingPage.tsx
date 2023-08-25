@@ -83,6 +83,7 @@ const JobListingPage = () => {
 
         setResponse(jobResponse);
         setCurrentPage(jobResponse.page);
+
         const nonExpiredJobs = jobResponse.results.filter((job) => new Date(job.appDeadline) > new Date());
         setJobs(nonExpiredJobs);
     };
