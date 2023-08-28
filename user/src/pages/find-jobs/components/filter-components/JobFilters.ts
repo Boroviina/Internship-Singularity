@@ -1,3 +1,5 @@
+import {ExperienceLevel, EmplType, Specialisation, RemoteType, EduLevel} from "../../../../shared/enums/experienceLevel";
+
 class JobFilters {
 
     filters: {
@@ -6,6 +8,8 @@ class JobFilters {
 
     constructor() {
         this.initializeFilters();
+
+        console.log("ExpL", Object.values(ExperienceLevel));
     }
 
     /** If you don't add the filter here, you might get an error! */
@@ -77,31 +81,31 @@ abstract class MyFilter {
 class Specialization extends MyFilter{
     static displayName: string = "Specialization"
     static propName: string = "specialization";
-    static values: string[] = ["Finance & accounting", "Legal", "Technology", "Administrative & customer support", "Marketing & creative"];
+    static values: string[] = Object.values(Specialisation);
 }
 
  class EmploymentType extends MyFilter{
     static displayName: string = "Employment type";
     static propName: string = "employmentType";
-    static values: string[] = ["Full time", "Part time", "Internship", "Contract", "Temporary"];
+    static values: string[] = Object.values(EmplType);
 }
 
  class Remote extends MyFilter{
     static displayName: string = "Remote";
     static propName: string = "remote";
-    static values: string[] = ["Remote", "Hybrid"];
+    static values: string[] = Object.values(RemoteType);
 }
 
  class Experience extends MyFilter{
     static displayName: string = "Experience level";
     static propName: string = "experience";
-    static values: string[] = ["No experience", "Entry level", "Mid level", "Senior level"];
+    static values: string[] = Object.values(ExperienceLevel);
 }
 
  class Education extends MyFilter{
     static displayName: string = "Education level";
     static propName: string = "education";
-    static values: string[] = ["Not required", "College", "Associate's degree", "Bachelor's degree", "Master's degree", "Doctor's degree"];
+    static values: string[] = Object.values(EduLevel);
 }
 
 const sortByCategories = ["Relevance", "Salary"];

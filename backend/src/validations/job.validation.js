@@ -4,6 +4,7 @@ const {objectId}=require('./custom.validation');
 const  createJob={
   body: Joi.object().keys({
     title:Joi.string().required().max(100),
+    jobType:Joi.string().required(),
     description:Joi.string().required().max(1000),
     requirements: Joi.object().keys({
       specialization: Joi.string(),
@@ -47,6 +48,7 @@ const updateJob = {
   body: Joi.object()
     .keys({
       title:Joi.string(),
+      jobType:Joi.string().required(),
       requirements: Joi.object().keys({
         specialization: Joi.string(),
         experience: Joi.string(),

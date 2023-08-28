@@ -2,6 +2,7 @@ import {BaseModel} from "./base.model";
 import {RequirementsModel} from "./requirements.model";
 import {Employer} from "./employer.model";
 import {JobTypes} from "../enums/job-types.enum";
+import { EmplType, RemoteType} from "../enums/job-filters";
 
 export class Jobs extends BaseModel {
     id: string;
@@ -11,10 +12,10 @@ export class Jobs extends BaseModel {
     requirements: RequirementsModel;
     location: string;
     salary: number;
-    employmentType: string;
+    employmentType: EmplType;
     description: string;
     appDeadline: string;
-    remote: string;
+    remote: RemoteType;
     appInstructions: string;
     positionsNum: number;
     cv: boolean;

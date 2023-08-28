@@ -1,5 +1,6 @@
 import {BaseModel} from "./base.model";
 
+
 export class RequirementsModel extends BaseModel {
     specialization: string;
     experience: string;
