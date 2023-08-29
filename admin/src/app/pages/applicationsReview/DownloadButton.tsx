@@ -5,27 +5,13 @@ export function DownloadButton(props) {
 
     const handleDownload = async () => {
         try {
-            console.log("This is json body",props.filename);
-
             const filename = props.filename.filename;
-            const filePath=`../../../../backend/public/uploads/${filename}`;
-            console.log("This is filepath",filePath);
+            const filePath=`/uploads/${filename}`;
 
             const response=await  fetch(filePath);
-            console.log("This is response",response);
+            const blob = await response.blob();
 
-
-            const buffer=await response.arrayBuffer();
-            console.log("this is buffer", buffer);
-
-            // const blob = new Blob([buffer], {type:props.filename.mimetype});
-            // console.log("Blob", blob);
-
-            const file=new File([buffer], props.filename.originalname,{type: props.filename.mimetype});
-            console.log("File:", file);
-
-            const url = window.URL.createObjectURL(file);
-            console.log("This is url: ", url);
+            const url = window.URL.createObjectURL(blob);
 
             const link = document.createElement('a');
             link.href = url;

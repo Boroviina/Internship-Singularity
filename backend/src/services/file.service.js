@@ -7,23 +7,18 @@ const ApiError = require('../utils/ApiError');
 const catchAsync = require("../utils/catchAsync");
 const {File} = require('../models');
 const util = require('util');
+const app=require('../app');
+const cors =require('cors');
 
+
+const adminAppOrigin='http://localhost'
 const getFileByID = async (fileID) => {
     const file = await File.findById(fileID);
     // readFileContent(file.filename);
     return file;
 }
-// const readFileContent = (fileName) => {
-//     const filePath = path.join(__dirname, '..', '..', 'public', 'uploads', fileName);
-//     const readFileAsync = util.promisify(fs.readFile);
-//     fs.readFile(filePath, 'utf-8', (err, data) => {
-//         if (err) {
-//             console.error(("Error readinf file: ", err));
-//             return;
-//         }
-//         console.log("File content: ", data);
-//     })
-// }
+
+
 const createFile = async (fileBody) => {
     return File.create(fileBody);
 };
@@ -74,6 +69,7 @@ const processUpload = catchAsync(async (req, res, next) => {
 
     next();
 });
+
 
 
 module.exports = {

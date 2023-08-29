@@ -110,4 +110,4 @@ class Specialization extends MyFilter{
 
 const sortByCategories = ["Relevance", "Salary"];
 
-export {MyFilter, Education, Experience, Remote, EmploymentType, Specialization, JobFilters, sortByCategories};
+export {MyFilter, Specialization, Education, Experience, Remote, EmploymentType, JobFilters, sortByCategories};
