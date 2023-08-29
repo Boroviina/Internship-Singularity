@@ -17,6 +17,7 @@ To install this project follow the steps bellow:
 
 1. Run `npm run start` from `admin` folder
 2. Run `yarn docker:dev` from `backend` folder
+3. Run `npm start` from `user` folder
 
 
 ## API Structure
