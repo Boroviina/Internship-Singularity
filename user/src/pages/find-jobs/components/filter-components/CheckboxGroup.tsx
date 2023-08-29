@@ -8,6 +8,7 @@ export interface Filter <T extends MyFilter>{
 }
 
 const CheckboxGroup = ({filterInfo, updateFilters}: Filter<any>) => {
+
     const [selectedItems, setSelectedItems] = useState([]);
 
     const handleSelectionChanged = (item: string, checked: boolean) => {
@@ -18,7 +19,8 @@ const CheckboxGroup = ({filterInfo, updateFilters}: Filter<any>) => {
             setSelectedItems(itemsWithoutItem);
         }
     };
-    useEffect(() => updateFilters(selectedItems, filterInfo.propName), [selectedItems]);
+    useEffect(() => {updateFilters(selectedItems, filterInfo.propName)
+        console.log("Filtered info", filterInfo)}, [selectedItems]);
 
     return (
         <div>
@@ -26,7 +28,7 @@ const CheckboxGroup = ({filterInfo, updateFilters}: Filter<any>) => {
             {filterInfo.values.map((item) => {
                 return <Checkbox key={item}
                                  name={item}
-                                 id={item.toLowerCase().replaceAll(" ", "")}
+                                 id={item}
                                  onChange={handleSelectionChanged}/>;
             })}
         </div>

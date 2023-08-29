@@ -4,6 +4,8 @@ import {KTSVG} from "../../../_metronic/helpers";
 import {useNavigate} from "react-router-dom";
 import clsx from "clsx";
 import {JobTypes} from "../../shared/enums/job-types.enum";
+import {JobSelectField} from "./JobSelectField";
+import {EmplType, RemoteType} from "../../shared/enums/job-filters";
 
 export function JobDetailsForm(props) {
 
@@ -27,24 +29,15 @@ export function JobDetailsForm(props) {
                                formikErrors={props.formik.errors.title}
                 />
             </div>
-            <div className={'fv-row mb-10'}>
-                <label htmlFor="" className={'form-label text-dark fw-bold fs-6 '}>Job type</label>
-                <select name="jobType" id="jobType"
-                        {...props.formik.getFieldProps('jobType')}
-                        className={clsx(
-                            `form-control form-control-solid `,
-                            {'is-invalid': props.formik.touched.jobType && props.formik.errors.jobType},
-                            {'is-valid': props.formik.touched.jobType && !props.formik.errors.jobType }
-                        )}
 
-                >
-                    <option value=""></option>
-                    {Object.entries(JobTypes).map(([key, value]) => (
-                        <option value={key} key={key}>{value}</option>
-                    ))}
-                </select>
-                {props.formik.touched.jobType && props.formik.errors.jobType ? (
-                    <div className={'text-danger mt-1 fs-6 italic'}>{props.formik.errors.jobType}</div>) : null}
+            <div className={'fv-row mb-10'}>
+                <JobSelectField label={"Job Type"}
+                                name={'jobType'}
+                                formikFieldProps={props.formik.getFieldProps('jobType')}
+                                formikTouched={props.formik.touched.jobType}
+                                formikErrors={props.formik.errors.jobType}
+                                options={Object.entries(JobTypes).map(([key, value]) => ({value: key, label: value,}))}
+                />
             </div>
             <div className={`fv-row mb-10`}>
                 <JobTextareaField placeholder='Type description...' name="Description"
@@ -57,10 +50,13 @@ export function JobDetailsForm(props) {
                 <div className={`card card-bordered h-auto mb-10 p-5 d-flex`}>
                     <div className={`row  d-flex justify-content-md-between flex-column flex-md-row mb-5`}>
                         <div className={`col-12 col-md-6 mb-5`}>
-                            <JobInputField placeholder='Input required education...' type="text" name="Education"
-                                           formikFieldProps={props.formik.getFieldProps('requirements.education')}
-                                           formikTouched={props.formik.touched.requirements && props.formik.touched.requirements.education}
-                                           formikErrors={props.formik.errors.requirements && props.formik.errors.requirements.education}/>
+                            <JobInputField name="Education" type="text "placeholder={"Insert required education level"}
+                                            formikFieldProps={props.formik.getFieldProps('requirements.education')}
+                                            formikTouched={props.formik.touched.requirements && props.formik.touched.requirements.education}
+                                            formikErrors={props.formik.errors.requirements && props.formik.errors.requirements.education}
+
+                            />
+
                         </div>
                         <div className={`col-12 col-md-6`}>
                             <JobInputField placeholder='Type specific skills...' type="text" name="Skills"
@@ -96,13 +92,14 @@ export function JobDetailsForm(props) {
                                            name="Specialization"
                                            formikFieldProps={props.formik.getFieldProps('requirements.specialization')}
                                            formikTouched={props.formik.touched.requirements && props.formik.touched.requirements.specialization}
-                                           formikErrors={props.formik.errors.requirements && props.formik.errors.requirements.specialization}/>
+                                           formikErrors={props.formik.errors.requirements && props.formik.errors.requirements.specialization}
+                            />
                         </div>
                     </div>
                     <div
                         className={`row d-flex justify-content-between align-items-center flex-column flex-md-row mb-5`}>
                         <div className={"col-12 mb-5 "}>
-                            <JobInputField placeholder='Insert required specialization...' type="text" name="Experience"
+                            <JobInputField placeholder='Insert required experience...' type="text" name="Experience"
                                            formikFieldProps={props.formik.getFieldProps('requirements.experience')}
                                            formikTouched={props.formik.touched.requirements && props.formik.touched.requirements.experience}
                                            formikErrors={props.formik.errors.requirements && props.formik.errors.requirements.experience}/>
@@ -132,16 +129,26 @@ export function JobDetailsForm(props) {
             </div>
             <div className={`row  d-flex justify-content-md-between flex-column flex-md-row mb-5`}>
                 <div className={`fv-row col-12 col-md-6 mb-10`}>
-                    <JobInputField placeholder='Input employment type' type="text" name="Employment type"
-                                   formikFieldProps={props.formik.getFieldProps('employmentType')}
-                                   formikTouched={props.formik.touched.employmentType}
-                                   formikErrors={props.formik.errors.employmentType}/>
+                    <JobSelectField name="employmentType" label="Employment type"
+                                    formikFieldProps={props.formik.getFieldProps('employmentType')}
+                                    formikTouched={props.formik.touched.employmentType}
+                                    formikErrors={props.formik.errors.employmentType}
+                                    options={Object.entries(EmplType).map(([key, value]) => ({
+                                        value: key,
+                                        label: value
+                                    }))}
+                    />
                 </div>
                 <div className={`fv-row col-12 col-md-6 mb-10`}>
-                    <JobInputField placeholder='Input job type' type="text" name="Remote"
-                                   formikFieldProps={props.formik.getFieldProps('remote')}
-                                   formikTouched={props.formik.touched.remote}
-                                   formikErrors={props.formik.errors.remote}/>
+                    <JobSelectField name="remote" label={"Remote"}
+                                    formikFieldProps={props.formik.getFieldProps('remote')}
+                                    formikTouched={props.formik.touched.remote}
+                                    formikErrors={props.formik.errors.remote}
+                                    options={Object.entries(RemoteType).map(([key, value]) => ({
+                                        value: key,
+                                        label: value
+                                    }))}
+                    />
                 </div>
             </div>
             <div className={`fv-row col-12 mb-10`}>

@@ -3,6 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const {toJSON, paginate} = require('./plugins');
 const {jobTypes} = require('./../config/job-types')
+const {remoteType, employmentType} = require("../config/job-filters");
 
 
 const jobSchema = mongoose.Schema(
@@ -38,9 +39,8 @@ const jobSchema = mongoose.Schema(
             required: true
         },
         employmentType: {
-            type: String,
-            trim: true,
-            maxLength: [30, 'The field must be less than 30 characters long']
+          type: String,
+          enum: employmentType,
         },
         description: {
             type: String,
@@ -53,9 +53,8 @@ const jobSchema = mongoose.Schema(
             required: true
         },
         remote: {
-            type: String,
-            trim: true,
-            maxLength: [30, 'The field must be less than 10,000 characters long']
+          type: String,
+          enum: remoteType,
         },
         appInstructions: {
             type: String,

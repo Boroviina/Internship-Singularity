@@ -6,6 +6,7 @@ import {useFormik} from "formik";
 import * as Yup from 'yup';
 import {useNavigate} from 'react-router-dom';
 import {format} from "date-fns";
+import {JobTypes} from "../../shared/enums/job-types.enum";
 
 export function EditJobDetails() {
     const [existingJobDetails, setExistingJobDetails] = useState(null);
@@ -36,6 +37,7 @@ export function EditJobDetails() {
     const formik = useFormik({
         initialValues: {
             title: existingJobDetails?.title || '',
+            jobType: existingJobDetails?.jobType,
             requirements: {
                 specialization: existingJobDetails?.requirements?.specialization,
                 experience: existingJobDetails?.requirements?.experience,
@@ -60,7 +62,7 @@ export function EditJobDetails() {
             title: Yup.string()
                 .max(100, 'Must be 100 characters or less')
                 .required('Required'),
-
+            jobType: Yup.string().required(),
             requirements: Yup.object().shape({
                 specialization: Yup.string()
                     .max(100, 'Must be 100 characters or less'),

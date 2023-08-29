@@ -11,7 +11,7 @@ export const JobListingsCardItem: React.FC<JobListingsCardItemProps> = (props) =
         job,
     } = props
 
-    const expired = (new Date(job.appDeadline)) < new Date();
+    const expired = (new Date(job.appDeadline)) > new Date();
 
     return (
         <tr className="fw-semibold text-gray-800 align-middle">
