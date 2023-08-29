@@ -17,8 +17,8 @@ const initialValues = {
 }
 
 const resetPasswordSchema = Yup.object().shape({
-    password: Yup.string()
-        .min(3, 'Minimum 3 symbols')
+    password:Yup.string()
+        .min(8, 'Minimum 8 symbols')
         .max(50, 'Maximum 50 symbols')
         .required('Password is required'),
     changepassword: Yup.string()
